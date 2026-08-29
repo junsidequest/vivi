@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivi Chen 陳盈臻｜AI 陪跑教練 · 企業內訓講師</title>
+<meta name="description" content="嗨，我是 Vivi 陳盈臻，也有人叫我大師姐。我幫不懂技術的團隊把 AI 真的用起來。AI 陪跑教練、企業內訓、AI 自動化課程與一對一陪跑。">
+<meta property="og:title" content="Vivi Chen 陳盈臻｜AI 陪跑教練">
+<meta property="og:description" content="我幫不懂技術的團隊，把 AI 真的用起來。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vivichen.ai/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Sigmar&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "陳盈臻",
+  "alternateName": ["Vivi Chen", "大師姐"],
+  "url": "https://vivichen.ai/",
+  "jobTitle": "AI 陪跑教練",
+  "description": "AI 陪跑教練與企業內訓講師，幫非技術背景的團隊導入 AI 與自動化流程。",
+  "sameAs": ["https://www.facebook.com/vivi.chen.12979/"]
+}
+</script>
+<style>
+/* ══════════════════════════════════════════════
+   animal-island-ui design tokens
+   (docs/design-system/css-variables.md)
+   ══════════════════════════════════════════════ */
+:root{
+  --animal-font:Nunito,"Noto Sans TC","Noto Sans SC",-apple-system,"PingFang TC","PingFang SC","Hiragino Sans GB",sans-serif;
+
+  --animal-primary:#19c8b9;
+  --animal-primary-hover:#3dd4c6;
+  --animal-primary-active:#11a89b;
+  --animal-primary-bg:#e6f9f6;
+
+  --animal-text:#794f27;
+  --animal-text-body:#725d42;
+  --animal-text-secondary:#9f927d;
+  --animal-text-muted:#8a7b66;
+  --animal-text-disabled:#c4b89e;
+
+  --animal-bg:#f6f1e3;
+  --animal-bg-content:rgb(247,243,223);
+  --animal-bg-disabled:#f0ece2;
+
+  --animal-border:#c4b89e;
+  --animal-border-hover:#a89878;
+
+  --animal-radius-sm:12px;
+  --animal-radius:18px;
+  --animal-radius-lg:24px;
+  --animal-radius-pill:50px;
+
+  --animal-shadow-btn:#bdaea0;
+  --animal-shadow-input:#d4c9b4;
+
+  --animal-focus-yellow:#ffcc00;
+  --animal-focus-yellow-d:#e0b800;
+
+  --animal-success:#6fba2c;
+  --animal-warning:#f5c31c;
+  --animal-error:#e05a5a;
+
+  --animal-ease:cubic-bezier(.4,0,.2,1);
+  --animal-duration-fast:.15s;
+  --animal-duration:.25s;
+  --animal-duration-slow:.35s;
+
+  /* 場景插畫用（草丘 / 天空，取自 success 色系與暖色天空） */
+  --scene-sky-top:#8fd8f0;
+  --scene-sky-mid:#bde8f5;
+  --scene-sky-low:#e9f6ea;
+  --scene-grass:#8fce56;
+  --scene-grass-dark:#6fba2c;
+  --scene-grass-deep:#5a9e1e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--animal-font);
+  font-weight:500;
+  color:var(--animal-text-body);
+  background:var(--animal-bg);
+  letter-spacing:.01em;
+  overflow-x:clip;   /* 不用 hidden：那會建立捲動容器，讓服務流程的 sticky 失效 */
+}
+img{max-width:100%;display:block}
+
+/* ══ 導覽列（藥丸浮條） ══ */
+.nav{
+  position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;
+  display:flex;align-items:center;gap:4px;
+  background:rgba(248,248,240,.94);backdrop-filter:blur(8px);
+  border:2px solid var(--animal-bg-content);
+  border-radius:var(--animal-radius-pill);padding:7px 8px 7px 18px;
+  box-shadow:0 3px 10px 0 rgba(61,52,40,.10);
+  white-space:nowrap;max-width:calc(100vw - 24px);
+}
+.nav-logo{
+  font-weight:800;font-size:16px;color:var(--animal-text);
+  text-decoration:none;margin-right:8px;
+}
+.nav-logo span{color:var(--animal-primary)}
+.nav a.nav-link{
+  font-size:14px;font-weight:600;color:var(--animal-text-muted);text-decoration:none;
+  padding:7px 14px;border-radius:var(--animal-radius-pill);
+  transition:all var(--animal-duration) var(--animal-ease);
+}
+.nav a.nav-link:hover{background:var(--animal-primary-bg);color:var(--animal-primary-active)}
+.nav a.nav-link:focus-visible{outline:2px solid var(--animal-primary);outline-offset:2px}
+.nav a.nav-cta{
+  font-size:14px;font-weight:700;color:#fff;text-decoration:none;
+  background:var(--animal-primary);border-radius:var(--animal-radius-pill);
+  padding:8px 16px;box-shadow:0 3px 0 0 var(--animal-primary-active);
+  transition:all var(--animal-duration-fast) var(--animal-ease);
+}
+.nav a.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 0 0 var(--animal-primary-active)}
+.nav a.nav-cta:active{transform:translateY(2px);box-shadow:0 1px 0 0 var(--animal-primary-active)}
+.nav a.nav-cta:focus-visible{outline:2px solid var(--animal-primary);outline-offset:2px}
+
+/* ══ 按鈕（animal-island-ui Button middle：45px 高、50px 藥丸、2px 邊框） ══ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:45px;padding:0 24px;font-size:15px;line-height:1;
+  font-family:inherit;font-weight:600;letter-spacing:.02em;
+  border-radius:var(--animal-radius-pill);border:2px solid transparent;
+  cursor:pointer;text-decoration:none;
+  transition:all var(--animal-duration-fast) var(--animal-ease);
+}
+.btn:focus-visible{outline:2px solid var(--animal-primary);outline-offset:2px}
+/* primary：奶油底 + 3D 疊層厚陰影（只有 primary 能用這組陰影） */
+.btn-primary{
+  color:var(--animal-text);background:var(--animal-bg);border-color:var(--animal-bg);
+  box-shadow:0 5px 0 0 var(--animal-shadow-btn);
+}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 0 0 var(--animal-shadow-btn)}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 1px 0 0 var(--animal-shadow-btn)}
+/* pink：粉紅版 3D 按鈕（沿用 v0 的粉紅） */
+.btn-pink{
+  color:#fff;background:#f0608d;border-color:#f0608d;
+  box-shadow:0 5px 0 0 #c74870;
+}
+.btn-pink:hover{transform:translateY(-1px);background:#f97ba1;border-color:#f97ba1;box-shadow:0 6px 0 0 #c74870}
+.btn-pink:active{transform:translateY(2px);box-shadow:0 1px 0 0 #c74870}
+/* teal-primary：主色版 3D 按鈕 */
+.btn-teal{
+  color:#fff;background:var(--animal-primary);border-color:var(--animal-primary);
+  box-shadow:0 5px 0 0 var(--animal-primary-active);
+}
+.btn-teal:hover{transform:translateY(-1px);background:var(--animal-primary-hover);border-color:var(--animal-primary-hover);box-shadow:0 6px 0 0 var(--animal-primary-active)}
+.btn-teal:active{transform:translateY(2px);box-shadow:0 1px 0 0 var(--animal-primary-active)}
+/* default：軟陰影，hover 轉薄荷綠 */
+.btn-default{
+  color:var(--animal-text);background:var(--animal-bg);border-color:var(--animal-border);
+  box-shadow:0 2px 4px 0 rgba(61,52,40,.06);
+}
+.btn-default:hover{
+  color:var(--animal-primary);border-color:var(--animal-primary);
+  box-shadow:0 3px 10px 0 rgba(61,52,40,.10);transform:translateY(-1px);
+}
+.btn-default:active{color:var(--animal-primary-active);border-color:var(--animal-primary-active);transform:translateY(0);box-shadow:0 2px 4px 0 rgba(61,52,40,.06)}
+
+/* ══ 燕尾緞帶標題（animal-island-ui Title） ══ */
+.ribbon{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  height:2em;padding:0 1.6em;font-weight:800;letter-spacing:.04em;
+  filter:drop-shadow(0 .08em .12em rgba(0,0,0,.05));
+  --rf:#27d039;--rb:#20992a;--rk:#115017;--rt:#fff;
+}
+.ribbon-back{position:absolute;width:1.7em;height:1.7em;bottom:-.4em;background:var(--rb)}
+.ribbon-back.l{left:-.85em;clip-path:polygon(100% 0%,100% 100%,0% 100%,30% 50%,0% 0%)}
+.ribbon-back.r{right:-.85em;clip-path:polygon(0% 0%,100% 0%,70% 50%,100% 100%,0% 100%)}
+.ribbon-fold{position:absolute;width:0;height:0;border-style:solid;bottom:-.32em}
+.ribbon-fold.l{left:.02em;border-width:0 .95em .45em 0;border-color:transparent var(--rk) transparent transparent}
+.ribbon-fold.r{right:.02em;border-width:0 0 .45em .95em;border-color:transparent transparent transparent var(--rk)}
+.ribbon-front{position:absolute;inset:0 .1em;background:var(--rf);border-radius:.2em;transform:perspective(11.5em) rotateX(3deg)}
+.ribbon-text{position:relative;z-index:1;font-weight:900;padding-top:.11em;color:var(--rt)}
+.ribbon.color-app-teal{--rf:#2ad4c5;--rb:#11a89b;--rk:#0a6b62;--rt:#fff}
+.ribbon.color-app-yellow{--rf:#f7cd67;--rb:#d4a030;--rk:#8a6010;--rt:#725d42}
+.ribbon.color-app-pink{--rf:#f8a6b2;--rb:#d97a8a;--rk:#8f4550;--rt:#fff}
+.ribbon.color-app-green{--rf:#8fce56;--rb:#6fba2c;--rk:#3f7a12;--rt:#fff}
+
+/* ══ 卡片（Card：20px 圓角、無 box-shadow、hover 只上浮） ══ */
+.card{
+  border-radius:20px;background:var(--animal-bg-content);
+  padding:24px 24px;color:var(--animal-text-body);font-weight:500;
+  transition:all var(--animal-duration) var(--animal-ease);
+}
+.card.hoverable{cursor:pointer}
+.card.hoverable:hover{transform:translateY(-2px)}
+.card-dashed{
+  border:2px dashed #e8dcc8;background:rgb(250,248,242);border-radius:20px;
+  padding:24px;color:var(--animal-text-secondary);
+  transition:border-color var(--animal-duration) var(--animal-ease);
+}
+.card-dashed:hover{border-color:#d4c4a8}
+/* pattern 波點壁紙卡（同色系 1.5px 邊框 + 兩層 radial-gradient 波點） */
+.card-pattern{border-radius:20px;padding:26px 24px;transition:transform var(--animal-duration) var(--animal-ease)}
+.card-pattern:hover{transform:translateY(-2px)}
+.pattern-teal{
+  background:
+    radial-gradient(circle,rgba(25,200,185,.16) 1.5px,transparent 1.5px) 0 0/28px 28px,
+    radial-gradient(circle,rgba(61,212,198,.12) 1px,transparent 1px) 7px 7px/14px 14px,
+    #e6f9f6;
+  border:1.5px solid #7adfd4;color:#0f7d73;
+}
+.pattern-yellow{
+  background:
+    radial-gradient(circle,rgba(245,195,28,.18) 1.5px,transparent 1.5px) 0 0/28px 28px,
+    radial-gradient(circle,rgba(247,205,103,.14) 1px,transparent 1px) 7px 7px/14px 14px,
+    #fdf3d8;
+  border:1.5px solid #ecc95e;color:#8a6010;
+}
+.pattern-pink{
+  background:
+    radial-gradient(circle,rgba(248,166,178,.18) 1.5px,transparent 1.5px) 0 0/28px 28px,
+    radial-gradient(circle,rgba(255,200,210,.12) 1px,transparent 1px) 7px 7px/14px 14px,
+    #fde4e8;
+  border:1.5px solid #f8a6b2;color:#a85565;
+}
+
+/* ══ 標籤（Tag：藥丸、暖色系） ══ */
+.tag{
+  display:inline-flex;align-items:center;height:32px;padding:0 16px;
+  border-radius:var(--animal-radius-pill);font-size:13px;font-weight:700;
+  background:var(--animal-bg-content);color:var(--animal-text);
+  border:2px solid var(--animal-border);
+}
+.tag-teal{background:var(--animal-primary-bg);color:var(--animal-primary-active);border-color:#7adfd4}
+.tag-yellow{background:#fdf3d8;color:#8a6010;border-color:#ecc95e}
+
+/* ══ 分隔線（Divider：純 CSS 波點虛線） ══ */
+.divider{
+  width:min(560px,72vw);height:12px;margin:0 auto;
+  background:radial-gradient(circle,var(--animal-border) 2.4px,transparent 2.6px) center/22px 12px space;
+  opacity:.55;
+}
+
+/* ══ Hero 場景 ══ */
+.hero{
+  position:relative;min-height:100svh;
+  background:linear-gradient(var(--scene-sky-top),var(--scene-sky-mid) 55%,var(--scene-sky-low) 80%);
+  overflow:hidden;
+}
+.sun{
+  position:absolute;top:9%;right:12%;width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,#fde9a8,var(--animal-warning) 70%);
+  box-shadow:0 0 70px 28px rgba(245,195,28,.4);
+  animation:sunPulse 6s var(--animal-ease) infinite;
+}
+@keyframes sunPulse{50%{box-shadow:0 0 90px 36px rgba(245,195,28,.55)}}
+
+/* 動森風扁平雲（animal-island-ui 形狀語言：純白色塊、圓弧鼓包、平底圓角） */
+.cloud{position:absolute;filter:drop-shadow(0 6px 10px rgba(95,140,180,.18))}
+.cloud svg{display:block;width:100%;height:auto}
+.cloud-1{width:210px;top:15%;left:8%;animation:drift 46s linear infinite}
+.cloud-2{width:140px;top:31%;right:20%;animation:drift 60s linear infinite reverse}
+.cloud-3{width:88px;top:11%;left:52%;opacity:.92;animation:drift 72s linear infinite}
+@keyframes drift{from{transform:translateX(-6vw)}to{transform:translateX(106vw)}}
+
+/* 純 CSS 小亮點（十字星） */
+.spark{position:absolute;width:16px;height:16px;pointer-events:none;
+  animation:twinkle 3s var(--animal-ease) infinite}
+.spark::before,.spark::after{content:"";position:absolute;background:currentColor;border-radius:2px}
+.spark::before{left:50%;top:0;width:3px;height:100%;transform:translateX(-50%)}
+.spark::after{top:50%;left:0;height:3px;width:100%;transform:translateY(-50%)}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:.9;transform:scale(1.15)}}
+
+.hill{position:absolute;border-radius:50%;pointer-events:none}
+.hill-back{width:160vw;height:44vw;min-height:300px;bottom:-26vw;left:-46vw;background:var(--scene-grass-dark)}
+.hill-front{width:170vw;height:46vw;min-height:320px;bottom:-30vw;right:-52vw;background:var(--scene-grass)}
+.hill-deep{width:120vw;height:36vw;min-height:240px;bottom:-26vw;left:22vw;background:var(--scene-grass-deep)}
+
+.hero-inner{
+  position:relative;z-index:5;max-width:1120px;margin:0 auto;
+  min-height:100svh;padding:110px 40px 0;
+  display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:20px;
+}
+.hero-copy .kicker{
+  display:inline-block;background:var(--animal-primary);color:#fff;font-weight:700;
+  font-size:14px;letter-spacing:.14em;padding:7px 18px;border-radius:var(--animal-radius-pill);
+  box-shadow:0 3px 0 0 var(--animal-primary-active);margin-bottom:18px;
+}
+.hero-copy h1{
+  font-size:clamp(38px,4.6vw,58px);font-weight:900;line-height:1.15;
+  color:var(--animal-text);text-shadow:0 3px 0 rgba(255,255,255,.55);
+}
+.hero-copy h1 .en{
+  color:#fff;-webkit-text-stroke:1.5px rgba(121,79,39,.28);
+  text-shadow:0 3px 8px rgba(90,158,30,.25);display:block;font-size:.62em;letter-spacing:.04em;
+}
+.hero-copy .sub{
+  margin-top:10px;font-size:clamp(16px,1.6vw,19px);font-weight:700;color:#3d7d43;
+}
+
+/* 對話框（動森風，改用羊皮紙 token） */
+.dialog{
+  position:relative;margin-top:30px;max-width:460px;
+  background:var(--animal-bg-content);border-radius:var(--animal-radius-lg);
+  padding:26px 24px 20px;box-shadow:0 8px 24px 0 rgba(61,52,40,.14);
+  cursor:pointer;user-select:none;
+}
+.dialog::after{
+  content:"";position:absolute;right:-14px;top:56%;
+  border:14px solid transparent;border-left-color:var(--animal-bg-content);border-right:0;
+}
+.dialog .name-tag{
+  position:absolute;top:-16px;left:18px;
+  background:var(--animal-warning);color:var(--animal-text);
+  font-weight:900;font-size:15px;padding:6px 18px;border-radius:var(--animal-radius-pill);
+  box-shadow:0 3px 0 0 var(--animal-focus-yellow-d);letter-spacing:.06em;
+}
+.dialog .line{
+  font-size:18px;font-weight:500;line-height:1.7;min-height:3.4em;
+  letter-spacing:.02em;color:var(--animal-text-body);
+}
+.dialog .cursor{display:inline-block;width:.55em;text-align:left;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.dialog .next{
+  position:absolute;right:16px;bottom:8px;width:0;height:0;
+  border:8px solid transparent;border-top:10px solid var(--animal-primary);
+  animation:nudge 1.1s var(--animal-ease) infinite;
+}
+@keyframes nudge{50%{transform:translateY(4px)}}
+
+.ctas{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+
+/* 大師姐 */
+.stage{position:relative;display:flex;justify-content:center;align-items:flex-end;height:100%}
+.vivi-wrap{position:relative;margin-bottom:6vh}
+.vivi{
+  width:clamp(240px,26vw,340px);
+  animation:bob 3.4s var(--animal-ease) infinite;
+  filter:drop-shadow(0 4px 6px rgba(90,158,30,.15));
+}
+@keyframes bob{50%{transform:translateY(-14px) rotate(1.2deg)}}
+.vivi-shadow{
+  position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);
+  width:62%;height:26px;border-radius:50%;
+  background:rgba(63,122,18,.28);filter:blur(6px);
+  animation:squash 3.4s var(--animal-ease) infinite;
+}
+@keyframes squash{50%{transform:translateX(-50%) scale(.82);opacity:.7}}
+
+.runner{
+  position:absolute;bottom:4vh;left:-240px;z-index:6;opacity:0;pointer-events:none;
+  display:flex;gap:16px;
+}
+.runner.go{animation:runAcross 11s linear forwards}
+@keyframes runAcross{
+  0%{opacity:0;transform:translateX(0)}
+  4%{opacity:1}
+  96%{opacity:1}
+  100%{opacity:0;transform:translateX(calc(100vw + 380px))}
+}
+/* 工具 icon 徽章隊伍：白色圓角小卡，一顆顆錯拍蹦跳 */
+.runner .chip{
+  width:54px;height:54px;border-radius:16px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 10px 0 rgba(61,52,40,.14);
+  animation:hop .5s var(--animal-ease) infinite alternate;
+}
+.runner .chip img{width:30px;height:30px}
+.runner .chip:nth-child(2){animation-delay:.16s}
+.runner .chip:nth-child(3){animation-delay:.32s}
+@keyframes hop{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-10px) rotate(3deg)}}
+
+.scroll-hint{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:7;
+  color:#fff;font-weight:700;font-size:13px;letter-spacing:.2em;
+  text-shadow:0 1px 4px rgba(63,122,18,.5);animation:nudge 1.4s var(--animal-ease) infinite;
+  cursor:pointer;text-decoration:none;
+}
+
+/* ══ 內容區共用 ══ */
+.section{max-width:1040px;margin:0 auto;padding:96px 32px}
+.section-head{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:48px;text-align:center}
+.section-head .lead{color:var(--animal-text-muted);font-size:16px;line-height:1.9;max-width:560px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity var(--animal-duration-slow) var(--animal-ease),transform var(--animal-duration-slow) var(--animal-ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ── 關於我 ── */
+.about-grid{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center}
+/* 右欄＝文字面板＋Trusted by 直向堆疊 */
+.about-right{display:flex;flex-direction:column;gap:52px;min-width:0}
+/* 擠在右欄裡橫排會沒空間，標題改放上方 */
+.about-right .trust-row{flex-direction:column;align-items:flex-start;gap:14px}
+.about-right .trust-row .v2-en{max-width:none;font-size:clamp(20px,2.1vw,27px)}
+.about-right .mq{width:100%}
+.about-photo{display:flex;flex-direction:column;gap:14px}
+.about-photo .portrait{
+  border-radius:20px;overflow:hidden;background:var(--animal-primary-bg);
+  border:1.5px solid #7adfd4;padding:18px 18px 0;
+}
+.about-photo .portrait img{margin:0 auto;width:58%}
+.about-photo .caption{text-align:center;font-size:13px;color:var(--animal-text-secondary)}
+.about-body h3{font-size:22px;font-weight:900;color:var(--animal-text);margin-bottom:14px}
+.about-body p{line-height:2;margin-bottom:14px}
+.about-body strong{color:var(--animal-text);font-weight:700}
+.about-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+/* ── 服務 ── */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc-card h3{font-size:19px;font-weight:900;margin-bottom:4px}
+.svc-card .en{font-size:12px;font-weight:800;letter-spacing:.08em;opacity:.75;margin-bottom:14px}
+.svc-card p{font-size:14.5px;line-height:1.9;margin-bottom:14px}
+.svc-card ul{list-style:none;font-size:13.5px;line-height:1.7}
+.svc-card li{position:relative;padding-left:18px;margin-bottom:6px}
+.svc-card li::before{
+  content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;
+  border-radius:50%;background:currentColor;opacity:.55;
+}
+.svc-mark{width:44px;height:44px;border-radius:14px;margin-bottom:16px;position:relative}
+.svc-mark::before{content:"";position:absolute;inset:0;margin:auto;border-radius:50%}
+.mark-compass{background:rgba(25,200,185,.18)}
+.mark-compass::before{width:16px;height:16px;border:4px solid #0f7d73}
+.mark-class{background:rgba(245,195,28,.2)}
+.mark-class::before{width:18px;height:12px;border-radius:4px;border:3.5px solid #8a6010;border-top-width:6px}
+.mark-fit{background:rgba(248,166,178,.22)}
+.mark-fit::before{width:16px;height:16px;border-radius:5px;border:4px dashed #a85565}
+.svc-cta{display:flex;justify-content:center;margin-top:40px}
+
+/* ── 實績與媒體 ── */
+.works-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;margin-bottom:22px}
+.works-card h3{font-size:17px;font-weight:900;color:var(--animal-text);margin-bottom:14px}
+.media-list{display:flex;flex-direction:column;gap:12px}
+.media-item{display:flex;align-items:baseline;gap:12px;line-height:1.8}
+.media-item .who{flex-shrink:0;font-weight:900;color:var(--animal-text)}
+.media-item .what{font-size:14.5px;color:var(--animal-text-muted)}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:22px}
+.stat-card{text-align:center;padding:28px 16px}
+.stat-card .num{font-size:34px;font-weight:900;line-height:1.2}
+.stat-card .label{font-size:14px;font-weight:700;margin-top:6px;opacity:.85}
+.quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.quote-card p{font-size:15px;line-height:2;margin-bottom:12px}
+.quote-card .from{font-size:13px;font-weight:700;color:var(--animal-text-secondary)}
+.photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.photo-slot{
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  font-size:13.5px;font-weight:600;text-align:center;padding:12px;
+}
+
+/* ── 找我聊聊 ── */
+.contact-wrap{max-width:640px;margin:0 auto;text-align:center}
+.contact-dialog{
+  position:relative;background:var(--animal-bg-content);border-radius:var(--animal-radius-lg);
+  padding:34px 30px 30px;box-shadow:0 8px 24px 0 rgba(61,52,40,.12);text-align:left;
+}
+.contact-dialog::after{
+  content:"";position:absolute;left:50%;bottom:-13px;transform:translateX(-50%);
+  border:14px solid transparent;border-top-color:var(--animal-bg-content);border-bottom:0;
+}
+.contact-dialog .name-tag{
+  position:absolute;top:-16px;left:22px;
+  background:var(--animal-warning);color:var(--animal-text);
+  font-weight:900;font-size:15px;padding:6px 18px;border-radius:var(--animal-radius-pill);
+  box-shadow:0 3px 0 0 var(--animal-focus-yellow-d);letter-spacing:.06em;
+}
+.contact-dialog p{font-size:17px;line-height:2;color:var(--animal-text-body)}
+.contact-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.contact-note{margin-top:18px;font-size:13.5px;color:var(--animal-text-secondary)}
+
+/* ══ 頁尾（草地收尾） ══ */
+.footer{
+  position:relative;margin-top:80px;padding:120px 24px 36px;overflow:hidden;text-align:center;
+}
+.footer .hill{border-radius:50%}
+.footer .f-hill-1{width:150vw;height:30vw;min-height:200px;bottom:-18vw;left:-40vw;background:var(--scene-grass-dark)}
+.footer .f-hill-2{width:150vw;height:30vw;min-height:200px;bottom:-21vw;right:-45vw;background:var(--scene-grass)}
+.footer-inner{position:relative;z-index:2;color:#fff}
+.footer-inner .logo{font-weight:900;font-size:18px;text-shadow:0 1px 3px rgba(63,122,18,.4)}
+.footer-inner .fine{margin-top:8px;font-size:12.5px;font-weight:600;opacity:.9;text-shadow:0 1px 3px rgba(63,122,18,.4)}
+.backtop{
+  position:fixed;right:22px;bottom:22px;z-index:40;
+  width:48px;height:48px;border-radius:50%;border:2px solid var(--animal-primary);
+  background:var(--animal-primary);cursor:pointer;
+  box-shadow:0 5px 0 0 var(--animal-primary-active);
+  display:none;align-items:center;justify-content:center;
+  transition:all var(--animal-duration-fast) var(--animal-ease);
+}
+.backtop.show{display:flex}
+.backtop:hover{transform:translateY(-1px);background:var(--animal-primary-hover);border-color:var(--animal-primary-hover);box-shadow:0 6px 0 0 var(--animal-primary-active)}
+.backtop:active{transform:translateY(2px);box-shadow:0 1px 0 0 var(--animal-primary-active)}
+.backtop:focus-visible{outline:2px solid var(--animal-focus-yellow);outline-offset:2px}
+.backtop i{
+  width:0;height:0;
+  border-left:9px solid transparent;border-right:9px solid transparent;
+  border-bottom:12px solid #fff;
+}
+
+/* ══ RWD ══ */
+@media (max-width:900px){
+  .nav{padding:6px 7px 6px 13px}
+  .nav-logo{font-size:14px}
+  .nav a.nav-link{padding:6px 9px;font-size:13px}
+  .nav a.nav-cta{padding:7px 12px;font-size:13px}
+  .hero-inner{
+    grid-template-columns:1fr;gap:0;text-align:center;
+    padding:88px 22px 0;align-items:start;
+  }
+  .hero-copy .kicker{font-size:12px;margin-bottom:12px}
+  .hero-copy h1{font-size:34px}
+  .dialog{margin:18px auto 0;text-align:left;padding:22px 20px 18px}
+  .dialog::after{
+    right:auto;left:50%;top:auto;bottom:-13px;transform:translateX(-50%);
+    border:14px solid transparent;border-top-color:var(--animal-bg-content);border-bottom:0;
+  }
+  .dialog .line{font-size:16px;min-height:3.4em}
+  .ctas{justify-content:center;margin-top:18px}
+  .stage{margin-top:6px}
+  .vivi{width:min(44vw,200px)}
+  .vivi-wrap{margin-bottom:4vh}
+  .sun{width:72px;height:72px;top:11%;right:8%}
+  .scroll-hint{display:none}
+  .runner{display:none}
+
+  .section{padding:72px 20px}
+  .about-grid{grid-template-columns:1fr;gap:24px}
+  .about-photo .portrait{max-width:300px;margin:0 auto}
+  .svc-grid,.stat-row,.quote-grid,.works-grid{grid-template-columns:1fr}
+  .photo-strip{grid-template-columns:1fr 1fr}
+  .ribbon{font-size:22px!important}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ══════════════════════════════════════════════
+   黏土 3D 質感（#about 以下所有區塊）
+   三件事讓平面卡片變成「捏出來的」：
+   ① 底部實色厚邊＝黏土塊的側面 ② 暖褐落影＝壓在桌面上的接地
+   ③ 頂端內高光＝受光面。再加不規則圓角與微傾斜，避免電腦畫出來的工整感
+   ══════════════════════════════════════════════ */
+:root{
+  --clay-edge:#e2d3b2;                 /* 預設側面色（比卡片底色深一階） */
+  --clay-cast:rgba(122,96,58,.18);     /* 接地陰影，暖褐不用灰黑 */
+  --clay-hi:rgba(255,255,255,.7);      /* 受光高光 */
+}
+.clay{
+  position:relative;
+  border-radius:32px 26px 30px 28px;   /* 四角不同：手捏的邊 */
+  box-shadow:
+    0 9px 0 var(--edge,var(--clay-edge)),
+    0 18px 26px var(--clay-cast),
+    inset 0 3px 0 var(--clay-hi);
+  transition:transform var(--animal-duration) var(--animal-ease),box-shadow var(--animal-duration) var(--animal-ease);
+}
+.clay:hover{
+  transform:translateY(-4px);
+  box-shadow:
+    0 13px 0 var(--edge,var(--clay-edge)),
+    0 24px 34px var(--clay-cast),
+    inset 0 3px 0 var(--clay-hi);
+}
+.clay-tilt-l{transform:rotate(-.8deg)}
+.clay-tilt-r{transform:rotate(.8deg)}
+.clay-tilt-l:hover,.clay-tilt-r:hover{transform:translateY(-4px) rotate(0deg)}
+/* 各色卡片的側面顏色 */
+.pattern-teal{--edge:#a8ded5}
+.pattern-yellow{--edge:#ebd399}
+.pattern-pink{--edge:#f0bcc6}
+.clay-cream{--edge:#e2d3b2;background:var(--animal-bg-content)}
+
+/* 黏土圓球（服務卡的標記）：球體漸層＋高光點 */
+.clay-ball{
+  width:56px;height:56px;border-radius:50%;margin-bottom:18px;position:relative;
+  box-shadow:0 5px 0 rgba(0,0,0,.12),0 10px 14px rgba(122,96,58,.22),inset 0 -6px 10px rgba(0,0,0,.10);
+}
+.clay-ball::after{
+  content:"";position:absolute;left:24%;top:18%;width:26%;height:20%;
+  border-radius:50%;background:rgba(255,255,255,.75);filter:blur(1px);
+}
+.ball-teal{background:radial-gradient(circle at 34% 30%,#5fe0d0,#17b0a2)}
+.ball-yellow{background:radial-gradient(circle at 34% 30%,#ffd97a,#e8ac26)}
+.ball-pink{background:radial-gradient(circle at 34% 30%,#ffa8b8,#e8687f)}
+
+/* 服務卡：情境引導句 */
+.svc-ask{
+  display:inline-block;margin-bottom:10px;font-size:13.5px;font-weight:800;
+  padding:5px 12px;border-radius:var(--animal-radius-pill);
+  background:rgba(255,255,255,.65);color:inherit;
+}
+
+/* 角色底座：讓 3D 角色像站在黏土圓台上，並輕輕浮動（影子同步縮放＝有重量） */
+.clay-stage{display:flex;flex-direction:column;align-items:center}
+.clay-stage img{position:relative;z-index:1;margin-bottom:-14px;animation:clayBob 3.6s var(--animal-ease) infinite}
+.clay-plinth{
+  width:44%;height:22px;border-radius:50%;
+  background:radial-gradient(50% 60% at 50% 40%,#efe0bd,#d8c092);
+  box-shadow:0 4px 0 #c9ad86,0 8px 14px var(--clay-cast);
+  animation:claySquash 3.6s var(--animal-ease) infinite;
+}
+@keyframes clayBob{50%{transform:translateY(-9px)}}
+@keyframes claySquash{50%{transform:scale(.88);opacity:.78}}
+
+/* 便利貼式回饋：微傾斜＋厚邊 */
+.note-card{padding:26px 24px;background:#fffdf2;--edge:#eadfc4}
+.note-card p{font-size:15.5px;line-height:2;margin-bottom:12px}
+.note-card .from{font-size:13px;font-weight:700;color:var(--animal-text-secondary)}
+
+/* 黏土相框（照片佔位） */
+.clay-frame{
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  padding:14px;text-align:center;font-size:13.5px;font-weight:700;
+  color:var(--animal-text-secondary);background:#f6efdc;--edge:#e0d0ac;
+  border-radius:26px 22px 24px 26px;
+}
+
+/* 數字卡：更像一塊立起來的黏土磚 */
+.stat-card .num{letter-spacing:.02em}
+
+/* ── 標題：木牌（取代原本的平面緞帶，呼應島上的告示牌） ── */
+.signpost{
+  position:relative;display:inline-block;padding:16px 42px 18px;
+  border-radius:22px 18px 20px 24px;
+  background:linear-gradient(#d7a86a,#c08a52);
+  box-shadow:0 8px 0 #9c6d3d,0 16px 22px rgba(122,96,58,.24),inset 0 3px 0 rgba(255,255,255,.35);
+  transform:rotate(-.6deg);
+}
+.signpost h2{
+  margin:0;font-size:26px;font-weight:900;letter-spacing:.06em;color:#fff8e9;
+  text-shadow:0 2px 0 rgba(108,73,38,.55);
+}
+/* 木牌兩側的釘子 */
+.signpost::before,.signpost::after{
+  content:"";position:absolute;top:50%;width:9px;height:9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#f6e3bd,#b8935f);
+  box-shadow:inset 0 -1px 2px rgba(0,0,0,.3);transform:translateY(-50%);
+}
+.signpost::before{left:14px}
+.signpost::after{right:14px}
+.sign-teal{background:linear-gradient(#3ed2c2,#14a99c);box-shadow:0 8px 0 #0d7d74,0 16px 22px rgba(122,96,58,.24),inset 0 3px 0 rgba(255,255,255,.35)}
+.sign-yellow{background:linear-gradient(#f8cf6c,#e0a92a);box-shadow:0 8px 0 #b07f14,0 16px 22px rgba(122,96,58,.24),inset 0 3px 0 rgba(255,255,255,.4)}
+.sign-yellow h2{color:#5c4310;text-shadow:0 2px 0 rgba(255,255,255,.45)}
+.sign-pink{background:linear-gradient(#fba7b6,#e8768c);box-shadow:0 8px 0 #b8546a,0 16px 22px rgba(122,96,58,.24),inset 0 3px 0 rgba(255,255,255,.4)}
+.sign-green{background:linear-gradient(#9ad866,#6fba2c);box-shadow:0 8px 0 #4e8a17,0 16px 22px rgba(122,96,58,.24),inset 0 3px 0 rgba(255,255,255,.4)}
+
+/* ── 頁尾：草原插畫（池塘／鴨子／告示牌呼應小島場景） ── */
+.meadow{
+  position:relative;height:400px;margin-top:90px;overflow:hidden;
+  background:url("img/meadow.jpg") center bottom/cover no-repeat;
+}
+/* 底部壓一層暗，讓白字在亮草地上仍讀得清楚 */
+.meadow::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:150px;
+  background:linear-gradient(transparent,rgba(38,68,28,.62));
+}
+.meadow-inner{position:absolute;left:0;right:0;bottom:30px;text-align:center;color:#fff;z-index:2}
+.meadow-inner .logo{font-weight:900;font-size:19px;text-shadow:0 2px 4px rgba(30,55,20,.6)}
+.meadow-inner .fine{margin-top:8px;font-size:13px;font-weight:600;opacity:.96;text-shadow:0 2px 4px rgba(30,55,20,.6)}
+
+/* ══ embed 模式（?embed=1，小島「關於我」空間以 iframe 嵌入）：
+   隱藏導覽列與 Hero，「關於我」直接成為頁面最上方 ══ */
+body.embed .nav,body.embed .hero{display:none}
+body.embed #about{padding-top:64px}
+
+/* ══════════════════════════════════════════════
+   v2 設計語言：黏土背景 × 硬邊元件
+   背景是「捏出來的」——暖色、霧面、帶顆粒；
+   元件是「切出來的」——斜切角、硬位移陰影、色塊分明、不用圓角。
+   兩者刻意對比，元件才會從背景浮起來；也延續小島「硬 UI 疊在黏土世界上」的邏輯。
+   ══════════════════════════════════════════════ */
+:root{
+  /* 色票直接沿用小島（island/src/styles.css）：深咖啡＋米色為主，木色與黃點綴，
+     這樣走出小島進到這頁時是同一套顏色，不會像換了個網站 */
+  --v2-ink:#3D3229;        /* 深咖啡：框線、文字、硬陰影 */
+  --v2-cream:#FFF8E7;      /* 米色：面板主色 */
+  --v2-cream-d:#F2E4C9;    /* 米色偏深：次級面板 */
+  --v2-wood:#C89B6A;
+  --v2-wood-d:#9A7248;
+  --v2-yellow:#FFD95E;
+  --v2-pink:#F0608D;
+  --v2-en:"Sigmar",var(--animal-font);
+  --v2-zh:"Noto Sans TC",var(--animal-font);
+  --v2-cut:20px;           /* 斜切角大小 */
+
+  /* 小島的像素素材（8×8 SVG，border-image slice 3；一顆像素 = border-width ÷ 3） */
+  /* 小屋剪影（11×10）：尖屋頂→突出屋簷→縮回的牆身→中央門口，取自 island/src/styles.css */
+  --px-icon-island:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='11'%20height='10'%20viewBox='0%200%2011%2010'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M5%200h1v1h-1zM4%201h3v1h-3zM3%202h5v1h-5zM2%203h7v1h-7zM1%204h9v1h-9zM0%205h11v1h-11zM2%206h7v2h-7zM2%208h2v2h-2zM7%208h2v2h-2z'%20fill='%233D3229'/%3E%3C/svg%3E");
+  --px-shadow:rgba(61,50,41,.30);
+  /* 按鈕落在草地／天空上，.30 太淡會糊成一團，實心一點才看得出是硬陰影 */
+  --px-shadow-hard:rgba(61,50,41,.55);
+  --px-frame-cream:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23FFF8E7'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --px-frame-wood:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23C89B6A'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --px-tail-left:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='7'%20height='9'%20viewBox='0%200%207%209'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M5%200h2v9h-2zM4%201h1v7h-1zM3%202h1v5h-1zM2%203h1v3h-1zM1%204h1v1h-1z'%20fill='%23FFF8E7'/%3E%3Cpath%20d='M4%200h1v1h-1zM3%201h1v1h-1zM2%202h1v1h-1zM1%203h1v1h-1zM0%204h1v1h-1zM1%205h1v1h-1zM2%206h1v1h-1zM3%207h1v1h-1zM4%208h1v1h-1z'%20fill='%233D3229'/%3E%3C/svg%3E");
+  --v2-apricot:#F8C978;
+  --px-frame-apricot:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23F8C978'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --v2-butter:#FFE49B;
+  --px-frame-butter:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23FFE49B'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --px-frame-creamd:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23F2E4C9'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --px-frame-wood:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23C89B6A'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --px-frame-woodd:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%239A7248'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --px-frame-yellow:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23FFD95E'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+}
+/* ── 背景：整頁一張黏土牧場場景（直式圖，天空自帶），隨捲動往下推 ──
+   .sky 固定在視窗、裁掉溢出；.sky-inner 比視窗高，捲動時整層往上移，
+   於是畫面由「圖上緣的天空」慢慢推到「圖的下半（草地與池塘）」。
+   不再用 CSS 漸層接天空：場景圖本身夠高，天空直接取自圖面。
+   後備色 #d5f1fd 取自圖片頂端像素，圖載入前不會閃白 */
+/* 捲到底再往下拉（macOS 橡皮筋）時，文件被往上帶、footer 下方就會露出底層。
+   先前試過用一塊絕對定位的補底，但它會讓 scrollHeight 多出一整個視窗高，
+   等於底部憑空多一片要捲的空白。改成直接關掉回彈，並讓 html 底色也是同一個咖啡色 */
+html{background:var(--v2-ink);overscroll-behavior-y:none}
+/* body 必須是透明：一旦 html 有了背景，body 的背景就不再傳播到 canvas、
+   改由 body 自己繪製，而 .sky 是 z-index:-2、會被提升到根層，
+   於是整個被 body 的天空藍蓋掉。天空色本來就由 .sky 自己帶 */
+body{background:transparent;overscroll-behavior-y:none}.sky{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#d5f1fd;pointer-events:none}
+.sky-inner{position:absolute;left:0;right:0;top:0;min-height:100vh;will-change:transform}
+/* min-height + cover：窄螢幕（直式手機）圖的等比高度不足一個視窗時，
+   改成裁掉左右、貼齊下緣鋪滿，場景（池塘草地）永遠壓在畫面底部 */
+.sky-scene{display:block;width:100%;height:auto;min-height:100vh;object-fit:cover;object-position:center bottom}
+/* 圖下方的保險墊：橡皮筋回彈（Safari 不理 overscroll-behavior）把文件往上帶時，
+   圖底下露出的是貼近圖面地面的土黃色，而不是天空藍的後備色。
+   這段高度不能算進視差 travel——place() 以 .sky-scene 的高度為準 */
+.sky-inner::after{content:"";display:block;height:60vh;background:#dcb72b}
+/* 場景圖不加遮罩：可讀性交給元件本身的米色面板處理 */
+
+/* 雲：各自的速度與延遲不同，才不會整排同步平移 */
+/* ── 雲元件 ──
+   一個 class 打天下：位置、大小、速度、飄動幅度、透明度全部用 CSS 變數帶進來，
+   要在哪加一朵就寫一個 <i class="cloud-el" style="--cl:20%;--ct:30vh"> 即可。
+   前綴不用 .cloud：hero 區塊本來就有一組同名元素，會被一起改掉 */
+.cloud-el{
+  position:absolute;display:block;pointer-events:none;
+  left:var(--cl,auto);right:var(--cr,auto);top:var(--ct,12vh);
+  width:var(--cw,clamp(120px,16vw,280px));
+  aspect-ratio:416/260;                       /* 去背後的雲實際比例 */
+  background:url("img/cloud.png") center/contain no-repeat;
+  opacity:var(--co,.9);
+  animation:cloud-drift var(--cdur,26s) ease-in-out var(--cdelay,0s) infinite alternate;
+  will-change:transform;
+}
+@keyframes cloud-drift{
+  from{transform:translateX(calc(var(--camp,4vw) * -1))}
+  to{transform:translateX(var(--camp,4vw))}
+}
+@media (prefers-reduced-motion:reduce){.cloud-el{animation:none}}
+
+/* 區塊不再鋪色帶（會蓋掉場景圖），改由硬邊元件本身區分 */
+.v2-sec{padding:96px max(22px,calc(50vw - 560px))}
+
+/* ── 硬邊面板：左上與右下斜切，drop-shadow 才會跟著切角走（box-shadow 會露出直角）── */
+/* 面板＝小島選單那套像素框：階梯圓角墨邊（border-image slice 3）＋硬位移影子。
+   各色變體一律用 background-color 而非 background 簡寫——簡寫會把下面的
+   background-clip:padding-box 一併重設回 border-box，底色就會鋪到 border 底下、
+   從階梯角的缺口漏出來，看起來像「底色超出框線」。
+   border-width ÷ 3 = 一顆像素，12px → 一格 4px，與 .menu-panel 同尺度。
+   影子必須用 drop-shadow：box-shadow 是矩形，會從階梯角漏出來 */
+.hp{
+  background:var(--v2-cream-d);background-clip:padding-box;
+  border:12px solid transparent;border-image:var(--px-frame-creamd);
+  filter:drop-shadow(6px 7px 0 var(--px-shadow));
+}
+.hp-cream{background-color:var(--v2-cream);border-image:var(--px-frame-cream)}
+.hp-yellow{background-color:var(--v2-yellow);border-image:var(--px-frame-yellow)}
+.hp-wood{background-color:var(--v2-wood);border-image:var(--px-frame-wood)}
+.hp-creamd{background-color:var(--v2-cream-d);border-image:var(--px-frame-creamd)}
+.hp-apricot{background-color:var(--v2-apricot);border-image:var(--px-frame-apricot)}
+.hp-butter{background-color:var(--v2-butter);border-image:var(--px-frame-butter)}
+
+/* 深木底的卡片整組文字翻成米色 */
+.is-dark .step-no,.is-dark h3{color:var(--v2-cream)}
+.is-dark p{color:#f4e9d4}
+.hp-woodd{background-color:var(--v2-wood-d);border-image:var(--px-frame-woodd)}
+
+/* ── 標題 ── */
+.v2-en{
+  font-family:var(--v2-en);font-weight:400;
+  font-size:clamp(30px,4.6vw,58px);line-height:1.02;letter-spacing:-.01em;color:var(--v2-ink);
+}
+.v2-zh{
+  font-family:var(--v2-zh);font-weight:900;
+  font-size:clamp(24px,3.2vw,38px);line-height:1.25;letter-spacing:.02em;color:var(--v2-ink);
+}
+.v2-sub{color:var(--v2-ink);font-size:16px;font-weight:700;margin-top:10px;
+  text-shadow:0 1px 0 var(--v2-cream),1px 0 0 var(--v2-cream),-1px 0 0 var(--v2-cream),0 -1px 0 var(--v2-cream)}
+/* 標題壓在天空／草地上，靠米色描邊拉開對比——背景不加遮罩就得由文字自己扛 */
+.v2-en,.v2-zh{
+  text-shadow:2px 0 0 var(--v2-cream),-2px 0 0 var(--v2-cream),0 2px 0 var(--v2-cream),0 -2px 0 var(--v2-cream),
+              1px 1px 0 var(--v2-cream),-1px -1px 0 var(--v2-cream),1px -1px 0 var(--v2-cream),-1px 1px 0 var(--v2-cream);
+}
+/* 面板內的標題不必描邊（底本來就是米色） */
+.hp .v2-en,.hp .v2-zh,#about .about-body h3{text-shadow:none}
+.v2-head{margin-bottom:38px}
+
+/* ── 捲動浮現（參考 michelle-chen：28px 上浮 + .72s expo-out，--rvd 逐張錯開）── */
+.rv{
+  opacity:0;transform:translate3d(0,28px,0);
+  transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--rvd,0ms);
+}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── hover：硬邊語言的手感是「整塊往左上抬、影子跟著拉長」，不是柔和放大 ── */
+.hp{transition:transform .18s var(--animal-ease),filter .18s var(--animal-ease)}
+/* 便條卡不做 hover：它是可拖曳的滑動列，滑鼠掠過就跳動會干擾拖曳手感 */
+.partner:hover{
+  transform:translate(-3px,-3px);
+  filter:drop-shadow(9px 10px 0 var(--px-shadow));
+}
+
+.htag{transition:transform .16s var(--animal-ease),box-shadow .16s var(--animal-ease)}
+.htag:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--v2-ink)}
+@media (prefers-reduced-motion:reduce){
+  .partner:hover,.htag:hover{transform:none}
+}
+
+/* ── 2. Trusted by：標題固定左、logo 無限橫捲，兩端遮罩淡出 ── */
+/* gap 要大於遮罩的淡出寬度，否則第一個 logo 會半掩在標題旁 */
+.trust-row{display:flex;align-items:center;gap:64px}
+.trust-row .v2-en{flex:0 0 auto;max-width:330px;font-size:clamp(22px,2.5vw,32px)}
+.mq{flex:1 1 auto;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.mq-track{display:flex;gap:52px;width:max-content;animation:mq 30s linear infinite}
+.mq:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq-item{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  height:46px;padding:0 20px;white-space:nowrap;
+  font-family:var(--v2-zh);font-weight:900;font-size:17px;letter-spacing:.04em;
+  /* 底維持不透明米色：半透明底壓在藍天上會讓字整個糊掉。
+     「logo 灰階」的減弱感改用整體 opacity 表現 */
+  color:var(--v2-ink);
+  border:2px solid var(--v2-ink);
+  background:var(--v2-cream);
+  gap:10px;
+}
+.mq-item img{height:26px;width:auto;display:block}
+@media (prefers-reduced-motion:reduce){.mq-track{animation:none}}
+
+/* ── 3. 學員推薦：硬邊便條卡，微傾斜像釘在牆上 ── */
+/* 學員推薦：橫向無限滑動，左右直接吃滿螢幕（不收在 1120px 容器裡）。
+   .v2-sec--full 把 section 的左右 padding 歸零，軌道就能貼到畫面兩緣 */
+.v2-sec--full{padding-left:0;padding-right:0}
+#voices{padding-top:44px;padding-bottom:44px}
+/* 兩區之間的空白是「關於我的下內距＋Trusted 的上內距」相加，
+   只調後者沒用——大頭是前者的 96px */
+#about{padding-bottom:56px}
+#offers{padding-top:36px}
+#partners{padding-top:36px}
+/* 不自動滑動，改由使用者自己左右拖曳／捲動。
+   上下留白給 hover 上浮與硬陰影；左右不留，卡片要能貼到畫面邊緣 */
+.vq{
+  overflow-x:auto;overflow-y:hidden;padding:18px 0 26px;
+  scroll-snap-type:x proximity;
+  scrollbar-width:none;                 /* 捲軸藏起來，靠拖曳與卡片露出半張暗示可滑 */
+  cursor:grab;
+}
+.vq::-webkit-scrollbar{display:none}
+.vq.is-dragging{cursor:grabbing;scroll-snap-type:none}
+.vq-track{display:flex;gap:28px;width:max-content;padding:0 22px}
+/* 嵌在小島裡時左側有固定選單（約 232px），軌道起點要讓開，
+   否則第一張卡一進場就被壓在選單底下 */
+body.embed .vq-track{padding-left:264px}
+.voice{scroll-snap-align:center}
+.voice{
+  flex:0 0 clamp(268px,25vw,350px);
+  padding:14px 15px 12px;position:relative;
+  display:flex;flex-direction:column;
+}
+.voice p{flex:1 1 auto}
+/* 微傾斜：像一張張釘上去的便條，不是整排對齊的表格 */
+.voice:nth-child(3n+1){transform:rotate(-.9deg)}
+.voice:nth-child(3n+3){transform:rotate(.8deg)}
+
+.voice p{font-size:15.5px;line-height:1.95;color:#4a3a28}
+.voice .who{
+  margin-top:16px;padding-top:14px;border-top:2px dashed rgba(63,49,34,.25);
+  font-family:var(--v2-zh);font-weight:900;font-size:13.5px;color:var(--v2-wood-d);letter-spacing:.03em;
+}
+.voice .quote{
+  font-family:var(--v2-en);font-size:40px;line-height:.7;color:var(--v2-ink);opacity:.2;
+  display:block;margin-bottom:6px;
+}
+
+/* ── 4. 服務流程：編號步驟卡，階梯狀往下錯開 ── */
+/* 服務流程：捲動時卡片一張張黏在頂端疊起來（參考 michelle-chen 的 sticky 卡片）。
+   每張的 top 比前一張多 14px，收起來後會露出上一張的頂邊，看得出疊了幾層。
+   注意：任何祖先若有 overflow:hidden 都會讓 sticky 失效——body 已改用 overflow-x:clip */
+/* sticky 的約束矩形是 containing block 的 content box，padding 不算在內。
+   所以「收合完成後還能繼續捲」的餘裕必須是實體元素（.step-spacer），
+   用 padding-bottom 的話最後一張的底部剛好貼齊 content box 底緣、完全推不下去，
+   倒數第二張也會因為可移動距離不足而提前停住 */
+.steps{display:flex;flex-direction:column;gap:40px;max-width:860px;margin:0 auto}
+.step-spacer{flex:0 0 auto;height:190px}
+.step{
+  position:sticky;
+  /* 每張比前一張低 30px：全部收合時五張都露得出框線與一截內容，
+     不會只看到最上面那張 */
+  top:calc(52px + var(--i,0) * 30px);
+
+  padding:16px 18px 18px;
+  display:flex;gap:20px;align-items:flex-start;
+}
+.step-body{flex:1 1 auto}
+@media (max-width:700px){
+  .step{position:static;flex-direction:column;gap:10px;padding:22px 20px 24px}
+}
+.step-no{
+  font-family:var(--v2-en);font-size:38px;line-height:.9;color:var(--v2-ink);
+  flex:0 0 auto;min-width:62px;
+}
+.step h3{font-family:var(--v2-zh);font-weight:900;font-size:19px;color:var(--v2-ink);margin-bottom:9px}
+.step p{font-size:14.5px;line-height:1.85;color:#4a3a28}
+
+/* ── 課程與服務：三張並排的方案卡 ── */
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px}
+.offer{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px}
+/* 照片區：多張疊在一起用 opacity 切換，點一下換下一張 */
+.offer-shots{
+  position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;
+  border:2px solid var(--v2-ink);background:var(--v2-cream-d);
+  margin:-2px 0 4px;
+}
+.offer-shots img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;z-index:1;
+  transition:transform .46s cubic-bezier(.22,1,.36,1),opacity .34s ease;
+}
+.offer-shots img.is-on{opacity:1;z-index:2}
+/* 被換掉的那張浮到最上、往左下滑開並轉一點，像把照片從一疊裡抽走，
+   下一張本來就疊在底下，抽掉就露出來——比單純淡出更有實體感 */
+.offer-shots img.is-out{
+  opacity:0;z-index:3;
+  transform:translate(-17%,8%) rotate(-7deg) scale(1.05);
+}
+@media (prefers-reduced-motion:reduce){
+  .offer-shots img{transition:opacity .2s ease}
+  .offer-shots img.is-out{transform:none}
+}
+.shot-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.shot-dots i{
+  width:8px;height:8px;background:rgba(255,248,231,.6);border:2px solid var(--v2-ink);
+  transition:background .2s;
+}
+.shot-dots i.is-on{background:var(--v2-yellow)}
+.offer-shots:hover .offer-tag{
+  align-self:flex-start;padding:5px 12px;
+  border:2px solid var(--v2-ink);background:var(--v2-cream);
+  font-family:var(--v2-zh);font-weight:900;font-size:12px;letter-spacing:.06em;color:var(--v2-ink);
+}
+.offer h3{font-family:var(--v2-zh);font-weight:900;font-size:20px;color:var(--v2-ink);line-height:1.35}
+.offer p{font-size:14.5px;line-height:1.9;color:#4a3a28;flex:1 1 auto}
+.offer .meta{
+  margin-top:2px;padding-top:12px;border-top:2px dashed rgba(63,49,34,.25);
+  font-family:var(--v2-zh);font-weight:900;font-size:13px;color:var(--v2-wood-d);
+}
+.offer:hover{transform:translate(-3px,-3px);filter:drop-shadow(9px 10px 0 var(--px-shadow))}
+
+/* ── 5. 合作夥伴：profile 卡（頭像色塊＋名稱＋合作內容）── */
+.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+/* 窄螢幕改成一列橫向滑動：三張擠成直排會讓這區變得很長 */
+@media (max-width:720px){
+  .partners{
+    display:flex;grid-template-columns:none;gap:18px;
+    overflow-x:auto;scroll-snap-type:x proximity;
+    scrollbar-width:none;padding:4px 0 10px;
+  }
+  .partners::-webkit-scrollbar{display:none}
+  .partner{flex:0 0 78%;scroll-snap-align:center}
+}
+.partner{padding:14px 15px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:14px}
+.partner-top{display:flex;align-items:center;gap:14px}
+.partner-ava{
+  width:56px;height:56px;flex:0 0 auto;border:2px solid var(--v2-ink);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--v2-en);font-size:22px;color:var(--v2-ink);
+}
+.partner h3{font-family:var(--v2-zh);font-weight:900;font-size:17px;color:var(--v2-ink);line-height:1.3}
+.partner .role{font-size:13px;color:var(--v2-wood-d);font-weight:700;margin-top:3px}
+.partner p{font-size:14.5px;line-height:1.85;color:#4a3a28}
+
+/* ── 6. Let's Connect ── */
+.connect{padding:30px 30px 34px;text-align:center}
+.connect .v2-en{margin-bottom:14px}
+.connect p{font-size:16px;line-height:1.9;color:#4a3a28;max-width:520px;margin:0 auto}
+/* gap 要留得比陰影(5px)寬，否則前一顆的硬陰影會壓在後一顆的邊框上 */
+.connect-ctas{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+/* 按鈕＝小島那套像素鈕：階梯圓角墨框（border-image）＋ drop-shadow，
+   hover 整顆往上浮、影子拉長；按下去往右下沉、影子收短（和 .menu-help 同一組手感）。
+   影子用 drop-shadow 而非 box-shadow——box-shadow 是矩形，會從階梯角漏出來 */
+.hbtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:3px 20px;
+  background:var(--v2-yellow);background-clip:padding-box;
+  border:9px solid transparent;border-image:var(--px-frame-yellow);
+  font-family:var(--v2-zh);font-weight:900;font-size:15px;letter-spacing:.03em;
+  color:var(--v2-ink);text-decoration:none;
+  filter:drop-shadow(4px 5px 0 var(--px-shadow-hard));
+  transition:transform .12s ease,filter .12s ease;
+}
+.hbtn:hover{transform:translateY(-3px);filter:drop-shadow(4px 8px 0 var(--px-shadow-hard))}
+.hbtn:active{transform:translate(2px,2px);filter:drop-shadow(2px 3px 0 var(--px-shadow-hard))}
+/* 木色變體先留著備用（三顆按鈕目前統一黃色）。用它時字要翻成米色：
+   木色底比黃色暗，深咖啡字壓上去對比不夠 */
+.hbtn-wood{background-color:var(--v2-wood);border-image:var(--px-frame-wood);color:var(--v2-cream)}
+
+.v2-rule{display:none}   /* 改用色帶分區，虛線分隔不再需要 */
+
+/* ── 關於我：沿用原本的 grid，元件換成硬邊（原本的圓角 clay 卡跟下面各區不一致）── */
+#about .about-body{padding:20px 22px;position:relative}
+/* 對話框尾巴：尖端朝左指向角色，右緣正好切齊面板外框線的左邊（left:-28px＝自身寬度），
+   不往內覆蓋。一格 4px，與面板 border(12px÷3) 同尺度 */
+#about .about-body::before{
+  content:"";position:absolute;left:-28px;top:58px;
+  width:28px;height:36px;
+  background:var(--px-tail-left) center/contain no-repeat;
+}
+@media (max-width:900px){   /* 與 .about-grid 切單欄同一個斷點，否則 820~900 之間佈局已直式、尾巴還在左邊 */
+  /* 直式排版時角色在正上方，尾巴轉成朝上並置中。
+     rotate 不改變 width/height，只轉視覺：28×36 轉正後看起來是 36 寬 28 高，
+     元素中心不動，所以 top 取 -32px 讓視覺底緣（-14+14）正好切齊面板頂 */
+  #about .about-body::before{
+    left:50%;top:-32px;width:28px;height:36px;
+    transform:translateX(-50%) rotate(90deg);
+  }
+}
+#about .about-body h3{
+  font-family:var(--v2-zh);font-weight:900;font-size:clamp(19px,2.2vw,25px);
+  color:var(--v2-ink);line-height:1.45;margin-bottom:16px;
+}
+#about .about-body p{font-size:15.5px;line-height:2;color:#4a3a28;margin-bottom:14px}
+#about .about-body strong{color:var(--v2-ink);font-weight:900}
+/* 去背人像不放進面板：直接站在場景裡，只在腳下補一道橢圓落影當接地 */
+.portrait-free{display:flex;justify-content:center;align-items:center}
+/* 奔跑姿勢腳不著地，就不補貼地落影（那會看起來像卡在地面）；
+   只留一道柔和的投影交代體積 */
+.portrait-free img{
+  width:min(100%,255px);height:auto;
+  filter:drop-shadow(8px 12px 12px rgba(61,50,41,.26));
+}
+#about .about-chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+/* 硬邊標籤：直角＋實線框＋小硬陰影 */
+.htag{
+  display:inline-flex;align-items:center;padding:7px 14px;
+  border:2px solid var(--v2-ink);background:var(--v2-cream);
+  font-family:var(--v2-zh);font-weight:900;font-size:13px;letter-spacing:.03em;color:var(--v2-ink);
+  box-shadow:3px 3px 0 var(--v2-ink);
+}
+.htag-wood{background:var(--v2-wood)}
+.htag-yellow{background:var(--v2-yellow)}
+
+/* 回到小島：擺在回頂鈕左邊，平時只有 icon，hover 才長出文字。
+   顯示／隱藏跟回頂鈕同一套（捲超過 0.8 螢幕高才出現） */
+.backisland{
+  position:fixed;right:86px;bottom:22px;z-index:40;   /* bottom 與 backtop 對齊 */
+  display:none;align-items:center;gap:0;cursor:pointer;
+  height:48px;padding:0 12px;
+  background:var(--v2-cream);background-clip:padding-box;
+  border:9px solid transparent;border-image:var(--px-frame-cream);
+  filter:drop-shadow(3px 4px 0 var(--px-shadow));
+  opacity:0;pointer-events:none;
+  transition:opacity .25s ease,transform .12s ease,filter .12s ease;
+}
+body.embed .backisland{display:flex}
+.backisland.show{opacity:1;pointer-events:auto}
+.backisland:active{transform:translate(2px,2px);filter:drop-shadow(2px 2px 0 var(--px-shadow))}
+.bi-icon{
+  width:22px;height:20px;flex:0 0 auto;
+  background:var(--px-icon-island) center/contain no-repeat;
+}
+/* 文字用 max-width 收合，才有「長出來」的感覺（width:0 對 inline 內容無效） */
+.bi-label{
+  max-width:0;overflow:hidden;white-space:nowrap;
+  font-family:var(--v2-zh);font-weight:900;font-size:14px;color:var(--v2-ink);
+  transition:max-width .28s cubic-bezier(.22,1,.36,1),margin-left .28s;
+}
+.backisland:hover .bi-label{max-width:90px;margin-left:8px}
+
+/* 回頂鈕：原本是青色圓鈕，改成跟其他按鈕同一套像素鈕 */
+.backtop{
+  border-radius:0!important;
+  border:9px solid transparent!important;border-image:var(--px-frame-yellow)!important;
+  background:var(--v2-yellow)!important;background-clip:padding-box!important;
+  box-shadow:none!important;filter:drop-shadow(3px 4px 0 var(--px-shadow));
+  transition:transform .12s ease,filter .12s ease;
+}
+.backtop:hover{transform:translateY(-3px);filter:drop-shadow(3px 7px 0 var(--px-shadow))}
+.backtop:active{transform:translate(2px,2px);filter:drop-shadow(2px 2px 0 var(--px-shadow))}
+.backtop i{border-bottom-color:var(--v2-ink)!important}
+
+/* ── 頁尾：深色實心收尾，把整頁的暖色壓住 ── */
+/* 頁尾＝壓在場景最底的一條深咖啡細帶，不做成整塊色區 */
+.v2-foot{
+  background:var(--v2-ink);color:var(--v2-cream);
+  padding:13px max(22px,calc(50vw - 560px));
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+.v2-foot-logo{
+  font-family:var(--v2-zh);font-weight:900;font-size:15px;letter-spacing:.05em;
+}
+.v2-foot-logo span{opacity:.45;margin:0 2px}
+.v2-foot p{font-size:12px;line-height:1.6;opacity:.72}
+</style>
+</head>
+<body>
+<script>if(new URLSearchParams(location.search).has("embed"))document.body.classList.add("embed")</script>
+
+<!-- 背景層：直式黏土牧場場景（天空自帶在圖裡），整層隨捲動往上推；雲飄在圖的天空區 -->
+<div class="sky" aria-hidden="true">
+  <div class="sky-inner" id="skyInner">
+    <img class="sky-scene" src="img/scene-bg.webp" alt="">
+    <i class="cloud-el" style="--cl:6%;--ct:13vh;--cdur:22s;--camp:5vw"></i>
+    <i class="cloud-el" style="--cr:9%;--ct:29vh;--cw:clamp(90px,11vw,200px);--co:.8;--cdur:29s;--cdelay:-14s;--camp:4vw"></i>
+    <i class="cloud-el" style="--cl:37%;--ct:51vh;--cw:clamp(70px,8vw,150px);--co:.72;--cdur:35s;--cdelay:-30s;--camp:3vw"></i>
+    <i class="cloud-el" style="--cr:28%;--ct:6vh;--cw:clamp(60px,7vw,130px);--co:.62;--cdur:41s;--cdelay:-45s;--camp:6vw"></i>
+  </div>
+</div>
+
+<nav class="nav">
+  <a class="nav-logo" href="#top">大師姐<span>｜</span>Vivi Chen</a>
+  <a class="nav-link" href="#about">關於我</a>
+  <a class="nav-link" href="#process">服務流程</a>
+  <a class="nav-link" href="#offers">課程與服務</a>
+  <a class="nav-link" href="#partners">合作夥伴</a>
+  <a class="nav-cta" href="#connect">Let&rsquo;s Connect</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="sun"></div>
+  <div class="cloud cloud-1">
+    <svg viewBox="0 0 210 118" aria-hidden="true">
+      <g fill="#dceef8" transform="translate(0,7)">
+        <rect x="6" y="62" width="198" height="42" rx="21"/>
+        <circle cx="52" cy="58" r="30"/>
+        <circle cx="98" cy="44" r="38"/>
+        <circle cx="146" cy="56" r="30"/>
+        <circle cx="178" cy="72" r="20"/>
+      </g>
+      <g fill="#ffffff">
+        <rect x="6" y="62" width="198" height="42" rx="21"/>
+        <circle cx="52" cy="58" r="30"/>
+        <circle cx="98" cy="44" r="38"/>
+        <circle cx="146" cy="56" r="30"/>
+        <circle cx="178" cy="72" r="20"/>
+      </g>
+    </svg>
+  </div>
+  <div class="cloud cloud-2">
+    <svg viewBox="0 0 150 92" aria-hidden="true">
+      <g fill="#dceef8" transform="translate(0,6)">
+        <rect x="4" y="46" width="142" height="32" rx="16"/>
+        <circle cx="42" cy="42" r="24"/>
+        <circle cx="82" cy="34" r="28"/>
+        <circle cx="118" cy="48" r="19"/>
+      </g>
+      <g fill="#ffffff">
+        <rect x="4" y="46" width="142" height="32" rx="16"/>
+        <circle cx="42" cy="42" r="24"/>
+        <circle cx="82" cy="34" r="28"/>
+        <circle cx="118" cy="48" r="19"/>
+      </g>
+    </svg>
+  </div>
+  <div class="cloud cloud-3">
+    <svg viewBox="0 0 96 66" aria-hidden="true">
+      <g fill="#dceef8" transform="translate(0,5)">
+        <rect x="3" y="32" width="90" height="24" rx="12"/>
+        <circle cx="34" cy="30" r="17"/>
+        <circle cx="62" cy="26" r="19"/>
+      </g>
+      <g fill="#ffffff">
+        <rect x="3" y="32" width="90" height="24" rx="12"/>
+        <circle cx="34" cy="30" r="17"/>
+        <circle cx="62" cy="26" r="19"/>
+      </g>
+    </svg>
+  </div>
+  <span class="spark" style="top:22%;left:30%;color:#fde9a8"></span>
+  <span class="spark" style="top:14%;right:34%;color:#ffd1e0;animation-delay:.8s"></span>
+  <span class="spark" style="top:38%;left:14%;color:#fff;animation-delay:1.6s"></span>
+  <div class="hill hill-deep"></div>
+  <div class="hill hill-back"></div>
+  <div class="hill hill-front"></div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="kicker">AI 陪跑教練 × 企業內訓</span>
+      <h1>陳盈臻<span class="en">Vivi Chen</span></h1>
+      <p class="sub">我幫文科與非技術背景的團隊，把 AI 真的用起來。</p>
+
+      <div class="dialog" id="dialog" role="button" aria-label="對話框，點擊看下一句">
+        <span class="name-tag">大師姐</span>
+        <p class="line"><span id="dialogText"></span><span class="cursor" id="dialogCursor">▍</span></p>
+        <span class="next" id="dialogNext" hidden></span>
+      </div>
+
+      <div class="ctas">
+        <a class="btn btn-primary" href="#about">認識我</a>
+        <a class="btn btn-teal" href="#contact">找我聊聊</a>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="vivi-wrap">
+        <img class="vivi" src="img/vivi-cheer.png" alt="大師姐 3D 角色開心歡呼" fetchpriority="high">
+        <div class="vivi-shadow"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="runner" id="runner">
+    <span class="chip"><img src="img/icon-claude.svg" alt="Claude"></span>
+    <span class="chip"><img src="img/icon-openai.svg" alt="OpenAI Codex"></span>
+    <span class="chip"><img src="img/icon-gsheets.svg" alt="Google Sheets"></span>
+  </div>
+  <a class="scroll-hint" href="#about">往下滑 ▼</a>
+</header>
+
+<!-- ══ 關於我 ══ -->
+<section class="v2-sec" id="about">
+  <div class="v2-head rv">
+    <h2 class="v2-zh">關於我</h2>
+    <p class="v2-sub">嗨，我是陳盈臻，也有人叫我大師姐</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-photo rv">
+      <div class="portrait-free">
+        <img src="img/vivi-hero.webp" alt="Vivi 陳盈臻">
+      </div>
+    </div>
+
+    <div class="about-right">
+    <div class="about-body hp hp-cream rv" style="--rvd:90ms">
+      <h3>我不是工程師，這正是我幫得上忙的原因</h3>
+      <p>
+        <strong>超過 16 年媒體與廣告科技的 B2B 業務與整合行銷資歷</strong>——從天下雜誌、關鍵評論網集團到艾迪英特（Ad2iction），
+        服務過 450 家以上的品牌、企業與政府單位。所以我很清楚：多數人的問題從來不是「AI 厲不厲害」，而是
+        <strong>「這跟我每天的工作有什麼關係」</strong>。
+      </p>
+      <p>
+        我到現在都看不懂程式碼，卻用 AI 做出了近百個自動化小工具——LINE Bot、自動寄信、廣告素材檢查——
+        把過去要花七、八個小時的工作縮成幾分鐘。現在我把同一套方法帶進企業，
+        一對一陪跑二十多家企業的中高階主管，<strong>線上加實體學員超過一萬人</strong>。
+      </p>
+      <div class="about-chips">
+        <span class="htag">16 年+ 媒體與廣告科技 B2B</span>
+        <span class="htag htag-wood">服務 450+ 品牌與政府單位</span>
+        <span class="htag htag-yellow">學員人數破萬</span>
+      </div>
+    </div>
+    <div class="trust-row rv" id="trusted">
+        <h2 class="v2-en">Media &amp;<br>Partners</h2>
+        <!-- 兩份相同的清單接在一起，跑到 -50% 剛好接回原點，看不出接縫 -->
+        <div class="mq">
+          <div class="mq-track">
+            <span class="mq-item"><img src="img/logos/bnext.png" alt="數位時代" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/businessweekly.svg" alt="商業周刊" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/inside.svg" alt="INSIDE" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/cheers.png" alt="Cheers 快樂工作人" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/cw.svg" alt="天下雜誌" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/thenewslens.svg" alt="關鍵評論網" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/ad2iction.svg" alt="艾迪英特 Ad2iction" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/shumai.png" alt="燒賣研究所" loading="lazy"></span>
+            <span class="mq-item"><img src="img/logos/yanguo.svg" alt="" loading="lazy">言果學習</span>
+            <span class="mq-item"><img src="img/logos/kvalley.png" alt="智谷網絡" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/bnext.png" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/businessweekly.svg" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/inside.svg" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/cheers.png" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/cw.svg" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/thenewslens.svg" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/ad2iction.svg" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/shumai.png" alt="" loading="lazy"></span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/yanguo.svg" alt="" loading="lazy">言果學習</span>
+            <span class="mq-item" aria-hidden="true"><img src="img/logos/kvalley.png" alt="" loading="lazy"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="v2-rule" role="presentation"></div>
+
+<div class="v2-rule" role="presentation"></div>
+
+<!-- ══ 3. 學員推薦（刻意不下標題、不進選單） ══ -->
+<section class="v2-sec v2-sec--full" id="voices">
+  <div class="vq rv">
+    <div class="vq-track">
+    <blockquote class="voice hp hp-cream">
+      <span class="quote" aria-hidden="true">&ldquo;</span>
+      <p>本來以為又是一堂聽完就忘的課，結果當天下午我就把每週那份報表交給 AI 做掉了，現在固定省下三小時。</p>
+      <div class="who">行銷主管 · 製造業</div>
+    </blockquote>
+    <blockquote class="voice hp hp-cream">
+      <span class="quote" aria-hidden="true">&ldquo;</span>
+      <p>Vivi 不會丟一堆工具名詞給你，她是先問我們平常怎麼做事，再告訴我們哪一段可以交出去。這對非技術團隊差很多。</p>
+      <div class="who">人資經理 · 連鎖零售</div>
+    </blockquote>
+    <blockquote class="voice hp hp-cream">
+      <span class="quote" aria-hidden="true">&ldquo;</span>
+      <p>最有感的是課後那段陪跑。卡住的時候有人可以問，才真的把工具留在團隊裡，而不是課後就沒了。</p>
+      <div class="who">營運副理 · 物流業</div>
+    </blockquote>
+    <blockquote class="voice hp hp-cream">
+      <span class="quote" aria-hidden="true">&ldquo;</span>
+      <p>我完全不懂技術，一開始很怕跟不上。她講的每個例子都是我們公司真的會遇到的狀況，我第一次覺得這件事跟我有關。</p>
+      <div class="who">業務專員 · 金融服務</div>
+    </blockquote>
+    <blockquote class="voice hp hp-cream">
+      <span class="quote" aria-hidden="true">&ldquo;</span>
+      <p>團隊二十幾個人，程度落差很大。她把課拆成不同節奏，最後大家都帶著自己的一個成果離開，這點很不容易。</p>
+      <div class="who">部門主管 · 醫療體系</div>
+    </blockquote>
+    <blockquote class="voice hp hp-cream">
+      <span class="quote" aria-hidden="true">&ldquo;</span>
+      <p>上完課我們內部自己開了一個共用的提示詞庫，現在新人進來直接就能用。這是課程結束後才長出來的東西。</p>
+      <div class="who">專案經理 · 資訊服務</div>
+    </blockquote>
+  
+    </div>
+  </div>
+</section>
+
+<div class="v2-rule" role="presentation"></div>
+
+<!-- ══ 4. 服務流程 ══ -->
+<section class="v2-sec" id="process">
+  <div class="v2-head rv">
+    <h2 class="v2-zh">服務流程</h2>
+    <p class="v2-sub">從第一次聊天到團隊真的用起來，中間會經過這五段</p>
+  </div>
+  <div class="steps">
+    <div class="step hp hp-yellow" style="--i:0"><span class="step-no">01</span>
+      <div class="step-body">
+      <h3>聊聊現況</h3>
+      <p>先聽你們每天怎麼工作、卡在哪裡。不談工具，只談實際發生的事。</p>
+      </div>
+    </div>
+    <div class="step hp hp-cream" style="--i:1"><span class="step-no">02</span>
+      <div class="step-body">
+      <h3>盤點切入點</h3>
+      <p>把工作流程攤開，找出 AI 現在就接得上手、而且省得到時間的環節。</p>
+      </div>
+    </div>
+    <div class="step hp hp-apricot" style="--i:2"><span class="step-no">03</span>
+      <div class="step-body">
+      <h3>客製方案</h3>
+      <p>依照團隊的程度與情境設計課程或導入計畫，例子全部換成你們自己的。</p>
+      </div>
+    </div>
+    <div class="step hp hp-creamd" style="--i:3"><span class="step-no">04</span>
+      <div class="step-body">
+      <h3>陪你動手</h3>
+      <p>不是聽完就結束。當場一起做出第一個成果，帶著它回去用。</p>
+      </div>
+    </div>
+    <div class="step hp hp-butter" style="--i:4"><span class="step-no">05</span>
+      <div class="step-body">
+      <h3>成效回顧</h3>
+      <p>過一段時間再回來看：哪些真的留下來了、哪裡還卡著，需要的話補上第二輪。</p>
+      </div>
+    </div>
+  <div class="step-spacer" aria-hidden="true"></div>
+  </div>
+</section>
+
+<div class="v2-rule" role="presentation"></div>
+
+<!-- ══ 課程與服務 ══ -->
+<section class="v2-sec" id="offers">
+  <div class="v2-head rv">
+    <h2 class="v2-zh">課程與服務</h2>
+    <p class="v2-sub">三種合作方式，看哪一種接得上你現在的狀況</p>
+  </div>
+  <div class="offers">
+    <div class="offer hp hp-cream rv">
+      <div class="offer-shots" data-shot="0">
+        <img class="shot is-on" alt="公開課程 照片 1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23F2E4C9'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E公開課程 照片 1%3C/text%3E%3C/svg%3E">
+        <img class="shot" alt="公開課程 照片 2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23FFE49B'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E公開課程 照片 2%3C/text%3E%3C/svg%3E">
+        <img class="shot" alt="公開課程 照片 3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23F8C978'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E公開課程 照片 3%3C/text%3E%3C/svg%3E">
+        <span class="shot-dots"><i class="is-on"></i><i class=""></i><i class=""></i></span>
+      </div>
+      <span class="offer-tag">公開課程</span>
+      <h3>一個人也能來</h3>
+      <p>對外開放報名的場次，像《AI 自動化入門：打造高效省時工作模式》，帶你從自己的工作場景開始，當天就做出第一個能用的成果。適合想先試試看的個人或小團隊。</p>
+      <div class="meta">半天 / 一天 · 不限產業</div>
+    </div>
+    <div class="offer hp hp-cream rv" style="--rvd:90ms">
+      <div class="offer-shots" data-shot="0">
+        <img class="shot is-on" alt="企業陪跑 照片 1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23FFE49B'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E企業陪跑 照片 1%3C/text%3E%3C/svg%3E">
+        <img class="shot" alt="企業陪跑 照片 2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23F2E4C9'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E企業陪跑 照片 2%3C/text%3E%3C/svg%3E">
+        <img class="shot" alt="企業陪跑 照片 3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23FFD95E'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E企業陪跑 照片 3%3C/text%3E%3C/svg%3E">
+        <span class="shot-dots"><i class="is-on"></i><i class=""></i><i class=""></i></span>
+      </div>
+      <span class="offer-tag">企業陪跑</span>
+      <h3>整個團隊一起動</h3>
+      <p>為單一企業客製，從盤點流程、設計課程到課後陪跑全程參與。例子全部換成你們自己的，不講通用範例。</p>
+      <div class="meta">數週至數月 · 含成效回顧</div>
+    </div>
+    <div class="offer hp hp-cream rv" style="--rvd:180ms">
+      <div class="offer-shots" data-shot="0">
+        <img class="shot is-on" alt="個人諮詢 照片 1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23F8C978'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E個人諮詢 照片 1%3C/text%3E%3C/svg%3E">
+        <img class="shot" alt="個人諮詢 照片 2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23F2E4C9'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E個人諮詢 照片 2%3C/text%3E%3C/svg%3E">
+        <img class="shot" alt="個人諮詢 照片 3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23FFE49B'/%3E%3Ctext x='400' y='310' font-size='34' font-family='sans-serif' fill='%233D3229' text-anchor='middle'%3E個人諮詢 照片 3%3C/text%3E%3C/svg%3E">
+        <span class="shot-dots"><i class="is-on"></i><i class=""></i><i class=""></i></span>
+      </div>
+      <span class="offer-tag">個人諮詢</span>
+      <h3>一對一把問題講清楚</h3>
+      <p>針對你手上的具體情境給建議，包含工具怎麼選、流程怎麼拆、團隊怎麼帶。適合需要有人一起想清楚方向的時候。</p>
+      <div class="meta">單次 60 分鐘 · 線上進行</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. 給力合作夥伴（profile 卡） ══ -->
+<section class="v2-sec" id="partners">
+  <div class="v2-head rv">
+    <h2 class="v2-zh">給力合作夥伴</h2>
+    <p class="v2-sub">一個人做得有限，這些單位讓事情走得更遠</p>
+  </div>
+  <div class="partners">
+    <a class="partner hp hp-cream rv" href="https://www.shumai.com.tw/Vivi" target="_blank" rel="noopener">
+      <div class="partner-top">
+        <div class="partner-ava">燒</div>
+        <div>
+          <h3>燒賣研究所</h3>
+          <div class="role">電商人才學習社群</div>
+        </div>
+      </div>
+      <p>合作開設《FDE AI 架構師實戰學程》，62 小時陪學員做出第一個企業 AI 自動化流程。</p>
+    </a>
+    <a class="partner hp hp-cream rv" href="https://www.kvalley.biz/team-member/%E9%99%B3%E7%9B%88%E8%87%BBvivi/" target="_blank" rel="noopener" style="--rvd:90ms">
+      <div class="partner-top">
+        <div class="partner-ava">智</div>
+        <div>
+          <h3>智谷網絡</h3>
+          <div class="role">企業培訓機構</div>
+        </div>
+      </div>
+      <p>擔任特約講師，把 AI 應用與自動化課程帶進企業內訓現場。</p>
+    </a>
+    <a class="partner hp hp-cream rv" href="https://yanguo.com.tw/" target="_blank" rel="noopener" style="--rvd:180ms">
+      <div class="partner-top">
+        <div class="partner-ava">言</div>
+        <div>
+          <h3>言果學習</h3>
+          <div class="role">企業內訓平台</div>
+        </div>
+      </div>
+      <p>合作講師，為企業團隊設計生成式 AI 導入與實作課程。</p>
+    </a>
+  </div>
+</section>
+
+<div class="v2-rule" role="presentation"></div>
+
+<!-- ══ 6. Let's Connect ══ -->
+<section class="v2-sec" id="connect">
+  <div class="connect hp hp-cream rv">
+    <h2 class="v2-en">Let&rsquo;s Connect</h2>
+    <p>
+      如果你的團隊也卡在「知道 AI 重要，但不知道從哪開始」，那就是我最擅長接手的地方。
+      聊 30 分鐘，我會先聽你們的日常怎麼運作，再告訴你哪裡最值得先動手。
+    </p>
+    <div class="connect-ctas">
+      <a class="hbtn" href="mailto:thevividai@gmail.com">寫信給我</a>
+      <a class="hbtn" href="https://www.facebook.com/vivi.chen.12979/" target="_blank" rel="noopener">Facebook</a>
+      <a class="hbtn" href="https://vivichen.ai/" target="_blank" rel="noopener">官方網站</a>
+    </div>
+  </div>
+</section>
+
+<footer class="v2-foot">
+  <div class="v2-foot-logo">大師姐<span>｜</span>Vivi Chen</div>
+  <p>© 2026 Vivi Chen 陳盈臻｜AI 陪跑教練</p>
+</footer>
+
+<button class="backisland" id="backisland" aria-label="回到小島">
+  <span class="bi-icon" aria-hidden="true"></span><span class="bi-label">回到小島</span>
+</button>
+<button class="backtop" id="backtop" aria-label="回到頁首"><i></i></button>
+
+<script>
+/* ── 對話框打字機 ── */
+const LINES = [
+  "嗨，我是 Vivi！也有人叫我大師姐 ",
+  "我不寫程式出身，但我把 AI 用進了真實的工作裡。",
+  "往下滑，讓我帶你看看我能幫上什麼忙！",
+];
+const textEl = document.getElementById("dialogText");
+const cursorEl = document.getElementById("dialogCursor");
+const nextEl = document.getElementById("dialogNext");
+const dialogEl = document.getElementById("dialog");
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let li = 0, ci = 0, typing = null, autoNext = null;
+
+function typeLine() {
+  clearTimeout(typing); clearTimeout(autoNext);
+  nextEl.hidden = true; cursorEl.hidden = false;
+  const line = LINES[li];
+  if (reduced) { textEl.textContent = line; doneLine(); return; }
+  if (ci <= line.length) {
+    textEl.textContent = line.slice(0, ci);
+    ci++;
+    typing = setTimeout(typeLine, 55);
+  } else doneLine();
+}
+function doneLine() {
+  cursorEl.hidden = true;
+  nextEl.hidden = false;
+  if (li < LINES.length - 1) autoNext = setTimeout(nextLine, 2600);
+}
+function nextLine() {
+  li = (li + 1) % LINES.length;
+  ci = 0;
+  typeLine();
+}
+dialogEl.addEventListener("click", () => {
+  const line = LINES[li];
+  if (ci <= line.length && !reduced) {
+    clearTimeout(typing); ci = line.length + 1;
+    textEl.textContent = line; doneLine();
+  } else nextLine();
+});
+typeLine();
+
+/* ── 路過彩蛋 ── */
+const runner = document.getElementById("runner");
+function runAcross() {
+  runner.classList.remove("go");
+  void runner.offsetWidth;
+  runner.classList.add("go");
+}
+if (!reduced) {
+  setTimeout(runAcross, 6000);
+  setInterval(runAcross, 26000);
+}
+
+/* ── 滑鼠視差 ── */
+if (!reduced && matchMedia("(pointer:fine)").matches) {
+  const clouds = document.querySelectorAll(".cloud");
+  const vivi = document.querySelector(".vivi-wrap");
+  addEventListener("mousemove", (e) => {
+    const dx = (e.clientX / innerWidth - 0.5), dy = (e.clientY / innerHeight - 0.5);
+    clouds.forEach((c, i) => {
+      c.style.marginLeft = dx * (10 + i * 6) + "px";
+      c.style.marginTop = dy * (6 + i * 4) + "px";
+    });
+    vivi.style.marginLeft = dx * -8 + "px";
+  }, { passive: true });
+}
+
+/* ── 捲動進場 ──
+   threshold 0.15 對「比視窗還高」的區塊永遠達不到，那些元素就一直停在起始狀態；
+   改用 rootMargin 讓元素進到視窗下緣 12% 就觸發，並保留 0 門檻 */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+  });
+}, { threshold: 0, rootMargin: "0px 0px -12% 0px" });
+document.querySelectorAll(".reveal, .rv").forEach((el) => io.observe(el));
+
+/* ── 學員推薦：滑鼠按住拖曳橫向捲動（桌機沒有觸控，只靠捲軸太難用）── */
+const vq = document.querySelector(".vq");
+if (vq) {
+  let down = false, startX = 0, startLeft = 0, moved = 0;
+  vq.addEventListener("pointerdown", (e) => {
+    down = true; moved = 0; startX = e.clientX; startLeft = vq.scrollLeft;
+    vq.classList.add("is-dragging");
+  });
+  vq.addEventListener("pointermove", (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    moved = Math.max(moved, Math.abs(dx));
+    if (moved > 3) { vq.scrollLeft = startLeft - dx; e.preventDefault(); }
+  });
+  const end = () => { down = false; vq.classList.remove("is-dragging"); };
+  vq.addEventListener("pointerup", end);
+  vq.addEventListener("pointerleave", end);
+  vq.addEventListener("pointercancel", end);
+  // 不攔直向滾輪：游標停在卡片列上時，上下滾要照常捲動整頁；
+  // 橫向滑動交給瀏覽器對 overflow-x 的原生處理
+}
+
+/* ── 背景視差：整層背景隨捲動比例往上推，捲到底時圖的下緣貼齊 footer 上緣 ──
+   多推一個 footer 的高度：不然圖的最下緣會被咖啡色頁尾細帶蓋住 */
+const skyInner = document.getElementById("skyInner");
+if (skyInner) {
+  const skyFoot = document.querySelector(".v2-foot");
+  const skyScene = document.querySelector(".sky-scene");
+  let ticking = false;
+  const place = () => {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    // travel 以圖高為準（不能用 skyInner.offsetHeight：它含 ::after 補底墊）
+    const sceneH = skyScene ? skyScene.offsetHeight : skyInner.offsetHeight;
+    const travel = sceneH - innerHeight + (skyFoot ? skyFoot.offsetHeight : 0);
+    if (max <= 0 || travel <= 0) { skyInner.style.transform = "translate3d(0,0,0)"; return; }
+    const p = Math.min(1, Math.max(0, scrollY / max));
+    skyInner.style.transform = `translate3d(0,${-(p * travel).toFixed(1)}px,0)`;
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(place); } };
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", place);
+  // 場景圖載入後高度才確定，載完要重算一次
+  if (skyScene && !skyScene.complete) skyScene.addEventListener("load", place, { once: true });
+  place();
+}
+
+/* ── 課程與服務：點照片換下一張 ── */
+document.querySelectorAll(".offer-shots").forEach((box) => {
+  const shots = [...box.querySelectorAll(".shot")];
+  const dots = [...box.querySelectorAll(".shot-dots i")];
+  if (shots.length < 2) return;
+  box.addEventListener("click", () => {
+    if (box.dataset.busy) return;                    // 動畫跑完才接受下一次點擊
+    const cur = +box.dataset.shot;
+    const next = (cur + 1) % shots.length;
+    box.dataset.busy = "1";
+    box.dataset.shot = next;
+    shots[next].classList.add("is-on");              // 下一張先亮在底層
+    shots[cur].classList.add("is-out");              // 這一張滑開
+    dots.forEach((d, i) => d.classList.toggle("is-on", i === next));
+    setTimeout(() => {
+      shots[cur].classList.remove("is-on", "is-out");
+      delete box.dataset.busy;
+    }, 470);
+  });
+});
+
+/* ── BackTop 與回到小島：同一組顯示條件 ── */
+const backtop = document.getElementById("backtop");
+const backisland = document.getElementById("backisland");
+addEventListener("scroll", () => {
+  const on = scrollY > innerHeight * 0.8;
+  backtop.classList.toggle("show", on);
+  backisland.classList.toggle("show", on);
+}, { passive: true });
+backtop.addEventListener("click", () => scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }));
+// 這頁是被小島用 iframe 嵌進去的，回程要請父層執行（島才知道怎麼把角色帶回去）
+backisland.addEventListener("click", () => {
+  if (parent !== window) parent.postMessage({ type: "leave-about" }, location.origin);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Repo-root .gitignore has a case-insensitive `Public/` rule (for another
+# project) that also matches this project's public/ dir on case-insensitive
+# filesystems (macOS). Un-ignore it here so static assets (favicon, models,
+# audio, etc.) actually get committed.
+!public/
+!public/**
+
+# !public/** 會把上面的忽略反轉掉，.DS_Store 得再擋一次
+.DS_Store

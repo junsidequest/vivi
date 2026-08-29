@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+
+# 非核心：舊版頁面與獨立參考專案（留在本機，不上公開 repo）
+/about.html
+/index_v0.html
+/animal-island-ui/
+
+# 素材參考（未被網站引用，且體積大）
+/character ref/
+/bg.png
+/ChatGPT Image*.png
+/Codex 圖像*.png
+
+# 本機工作檔
+/.claude/
+/docs/superpowers/
