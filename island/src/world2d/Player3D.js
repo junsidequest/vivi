@@ -4,7 +4,7 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
-const MODEL_URL = '/island/3d/vivi.glb?v=2'   // ?v= 換資產時遞增，避免瀏覽器沿用舊快取
+const MODEL_URL = '3d/vivi.glb?v=2'   // 相對小島頁 URL，站台掛在子路徑（如 Pages 的 /vivi/）也載得到   // ?v= 換資產時遞增，避免瀏覽器沿用舊快取
 const TURN_SPEED = 14          // 轉身平滑係數
 
 // facing → 模型 Y 轉角。以 ?rot= 實測標定（rot=0 正面、rot=90 面向右）：

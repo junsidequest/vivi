@@ -20,7 +20,8 @@ export function AboutRoom() {
 
   return (
     <div className="about-room">
-      <iframe src={`/index_v1.html?embed=1${section ? `#${section}` : ''}`} title="關於我" />
+      {/* 相對路徑：小島頁掛在 /island/（本機）或 /vivi/island/（Pages），../ 都指回站台根 */}
+      <iframe src={`../index_v1.html?embed=1${section ? `#${section}` : ''}`} title="關於我" />
     </div>
   )
 }

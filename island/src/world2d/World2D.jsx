@@ -10,7 +10,7 @@ import { closeIris, openIris, fadeToInk, fadeFromInk, sleep } from '../ui/iris.j
 
 export const MAP = 948        // 地圖寬（map.png 原寬）
 const MAP_H = 891             // 地圖高：原圖從橋板底緣（y=891）裁掉下面的橋腳與水面
-const BASE = '/island/2d/'
+const BASE = '2d/'   // 相對小島頁 URL，站台掛在子路徑（如 Pages 的 /vivi/）也載得到
 
 // 棋盤式移動：一次一格，格間平滑補間
 // 格距 25px（讓停點貼近牆線）；速度與 50px 時代相同（時間減半）
