@@ -70,13 +70,13 @@
 .arrow--down { border-top: 9px solid var(--key-label); border-bottom: 0; }
 .arrow--left { border-right: 9px solid var(--key-label); border-left: 0; }
 .arrow--right { border-left: 9px solid var(--key-label); border-right: 0; }
-.joy { position: fixed; left: 24px; bottom: 24px; width: 110px; height: 110px;
+.joy { position: fixed; right: 24px; bottom: 24px; width: 110px; height: 110px;
   border-radius: 50%; background: rgba(255,248,231,.4); border: 2px dashed var(--wood);
   touch-action: none; }
 .joy-knob { position: absolute; left: 50%; top: 50%; margin: -24px 0 0 -24px;
   width: 48px; height: 48px; border-radius: 50%; background: var(--cream);
   border: 2px solid var(--wood); }
-.btn-a { position: fixed; right: 28px; bottom: 36px; width: 64px; height: 64px;
+.btn-a { position: fixed; left: 28px; bottom: 36px; width: 64px; height: 64px;
   border-radius: 50%; background: var(--yellow); border: none;
   font-family: "Baloo 2", cursive; font-size: 26px; font-weight: 800;
   touch-action: none; }
@@ -148,7 +148,8 @@
   .menu-burger{
     position:fixed;left:12px;top:12px;z-index:22;
     display:flex;flex-direction:column;justify-content:center;gap:4px;
-    width:44px;height:44px;padding:0 10px;cursor:pointer;
+    /* 三條線要夠寬才讀得出是漢堡選單：48 寬扣掉邊框 12、內距 18，線寬 18px */
+    width:48px;height:48px;padding:0 9px;cursor:pointer;
     background:var(--yellow);background-clip:padding-box;
     border:6px solid transparent;border-image:var(--px-frame-yellow);
     filter:drop-shadow(2px 3px 0 var(--px-shadow));
