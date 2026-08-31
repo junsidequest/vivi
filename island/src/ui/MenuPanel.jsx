@@ -79,7 +79,9 @@ export function MenuPanel() {
         aria-expanded={open}
         onClick={() => { sound.play('pop'); setOpen((v) => !v) }}
       >
-        <i /><i /><i />
+        {/* 三條線包在 span 裡排版：Safari 的 <button> 當 flex 容器時
+            子元素不會 stretch 也常排不正，flex 一律交給內層 span */}
+        <span className="burger-lines"><i /><i /><i /></span>
       </button>
       <div
         className={`menu-panel${active ? ' is-active' : ''}${open ? ' is-open' : ''}`}
