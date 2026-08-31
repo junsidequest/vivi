@@ -64,6 +64,13 @@ export function MenuPanel() {
     return () => window.removeEventListener('keydown', onKey, true)
   }, [active, idx, items.length])
 
+  // 「關於我」頁面捲動時自動收合行動版選單（AboutRoom 轉發 iframe 的捲動訊息）
+  useEffect(() => {
+    const close = () => setOpen(false)
+    window.addEventListener('about-scroll', close)
+    return () => window.removeEventListener('about-scroll', close)
+  }, [])
+
   // 刻意不碰 store 的 movementLocked——那把鎖屬於彈窗，兩邊搶著開關會互相解掉對方的鎖。
   // 這裡只要攔下鍵盤即可（World2D 收不到方向鍵，角色自然不動）；
   // 進場先送一個 blur 讓 World2D 清掉按住中的方向，滑進選單時角色立刻停步。

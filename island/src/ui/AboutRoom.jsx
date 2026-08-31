@@ -13,6 +13,8 @@ export function AboutRoom() {
     const onMsg = (e) => {
       if (e.origin !== location.origin) return          // 只收自己這個站的訊息
       if (e.data?.type === 'leave-about') window.dispatchEvent(new Event('leave-about'))
+      // 頁面捲動中：轉發給 MenuPanel 收合行動版選單
+      if (e.data?.type === 'about-scroll') window.dispatchEvent(new Event('about-scroll'))
     }
     window.addEventListener('message', onMsg)
     return () => window.removeEventListener('message', onMsg)

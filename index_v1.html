@@ -859,6 +859,8 @@ body{background:transparent;overscroll-behavior-y:none}.sky{position:fixed;inset
 /* 嵌在小島裡時左側有固定選單（約 232px），軌道起點要讓開，
    否則第一張卡一進場就被壓在選單底下 */
 body.embed .vq-track{padding-left:264px}
+/* 手機版選單收在漢堡鈕裡，不佔版面，讓開的空間收回來 */
+@media (max-width:720px){ body.embed .vq-track{padding-left:22px} }
 .voice{scroll-snap-align:center}
 .voice{
   flex:0 0 clamp(268px,25vw,350px);
@@ -1643,6 +1645,15 @@ backtop.addEventListener("click", () => scrollTo({ top: 0, behavior: reduced ? "
 backisland.addEventListener("click", () => {
   if (parent !== window) parent.postMessage({ type: "leave-about" }, location.origin);
 });
+// 開始捲動＝要看內容了：通知父層（小島）把行動版選單收合，別擋住畫面
+let lastScrollMsg = 0;
+addEventListener("scroll", () => {
+  if (parent === window) return;
+  const now = Date.now();
+  if (now - lastScrollMsg < 400) return;
+  lastScrollMsg = now;
+  parent.postMessage({ type: "about-scroll" }, location.origin);
+}, { passive: true });
 </script>
 </body>
 </html>
