@@ -15,3 +15,5 @@ node_modules/
 # 本機工作檔
 /.claude/
 /docs/superpowers/
+# docs 裡日期開頭的檔案是本機筆記，不上公開 repo
+/docs/20*-*.md
