@@ -14,7 +14,7 @@ import './mobile-type.css'
 
 const {view,redirect,canonical}=currentRoute
 if(redirect) window.location.replace(canonical)
-document.title=view==='island'?'Vivi 的小島 · 來走走吧':view==='professional'?'Vivi Chen 陳盈臻｜AI 陪跑教練':'Vivi Chen｜選一種方式，認識我'
+document.title='Vivi Chen'
 function Site(){
   const [Page,setPage]=useState(null),[contentReady,setContentReady]=useState(false),[modelReady,setModelReady]=useState(false),[finished,setFinished]=useState(false),[failed,setFailed]=useState(false),[progress,setProgress]=useState(0)
   const loaded=useCallback(()=>setContentReady(true),[])

@@ -2,7 +2,6 @@ import WalkingLoader from './ui/WalkingLoader.jsx'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { currentRoute, resolveRoute, sitePath } from './routes.js'
 
-const titles={welcome:'Vivi Chen｜選一種方式，認識我',island:'Vivi 的小島 · 來走走吧',professional:'Vivi Chen 陳盈臻｜AI 陪跑教練'}
 const loaders={welcome:()=>import('./Welcome.jsx'),island:()=>import('./App.jsx'),professional:()=>import('./Professional.jsx')}
 function PreparedPage({entry,visible,onReady,onError,onProgress}){
   const host=useRef(null)
@@ -39,7 +38,7 @@ export default function MobileSite(){
     if(entry.beforeReveal)await entry.beforeReveal()
     if(entry.id!==latest.current)return
     if(!entry.pop)history.pushState(null,'',entry.url)
-    document.title=titles[entry.view]
+    document.title='Vivi Chen'
     shownRef.current=entry;setShown(entry);setPending(null);setEnteringIsland(false)
     requestAnimationFrame(()=>{
       const hash=new URL(entry.url,location.origin).hash.slice(1)
