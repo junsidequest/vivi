@@ -85,7 +85,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
         if(!disposed)window.location.assign(url)
       }
     }
-    const open=id=>{if(id==='dock'){void enterLanding('offers');return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
+    const open=id=>{if(id==='dock'){void enterLanding(null);return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{
       startOnBridge:fromBridge,
       onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');if(onLoadError)onLoadError();else onLoadReady?.()},
