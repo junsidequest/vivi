@@ -1,3 +1,4 @@
+import { isMobilePresentation } from './mobile.js'
 import { sitePath } from './routes.js'
 import WalkingLoader from './ui/WalkingLoader.jsx'
 import { useEffect, useRef, useState } from 'react'
@@ -44,7 +45,7 @@ function Dialog({ id, onClose, onRead }) {
     {(id === 'duck' || id === 'help') && <button className="primary" onClick={onClose}>{id === 'help' ? '繼續逛逛' : '繼續散步'}<span>→</span></button>}
   </section></div>
 }
-export default function App({externalLoading=false,pageVisible=true,onLoadReady,onLoadProgress}) {
+export default function App({externalLoading=false,pageVisible=true,onLoadReady,onLoadProgress,onLoadError}) {
   const host=useRef(),world=useRef(),speech=useRef(),markers=useRef({}),duck=useRef(),stats=useRef(),hints=useRef()
   const [status,setStatus]=useState('loading'),[route,setRoute]=useState(''),[progress,setProgress]=useState(0)
   const [hint,setHint]=useState({peek:null,approach:null,suppress:null})
@@ -60,17 +61,24 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
       if(transitioning.current)return
       transitioning.current=true;world.current?.setPaused(true)
       useGame.getState().closePopup()
-      world.current?.freezeFrame()
-      const rect=host.current.getBoundingClientRect()
-      const x=Math.max(0,Math.min(innerWidth,playerScreen.current.x+rect.left))
-      const y=Math.max(0,Math.min(innerHeight,playerScreen.current.y+rect.top))
-      await closeIris(x,y,reduced?250:950)
-      if(disposed)return
-      window.location.assign(sitePath(`about/${section ? `#${section}` : ''}`))
+      const beforeReveal=async()=>{
+        world.current?.freezeFrame()
+        const rect=host.current.getBoundingClientRect()
+        const x=Math.max(0,Math.min(innerWidth,playerScreen.current.x+rect.left))
+        const y=Math.max(0,Math.min(innerHeight,playerScreen.current.y+rect.top))
+        await closeIris(x,y,reduced?250:950)
+      }
+      const url=sitePath(`about/${section ? `#${section}` : ''}`)
+      if(isMobilePresentation()){
+        window.dispatchEvent(new CustomEvent('site-navigate',{detail:{url,beforeReveal}}))
+      }else{
+        await beforeReveal()
+        if(!disposed)window.location.assign(url)
+      }
     }
     const open=id=>{if(id==='dock'){void enterLanding('offers');return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{
-      onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');onLoadReady?.()},
+      onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');if(onLoadError)onLoadError();else onLoadReady?.()},
       onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
       onPosition:({avatar,places,x,y,z,dt,moving,autoWalking})=>{
         playerScreen.current=avatar

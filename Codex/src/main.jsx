@@ -1,3 +1,5 @@
+import MobileSite from './MobileSite.jsx'
+import { isMobilePresentation } from './mobile.js'
 import { currentRoute } from './routes.js'
 import React, { useEffect, useState, useCallback } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -37,4 +39,4 @@ function Site(){
     {!finished&&<WalkingLoader theme={view==='professional'?'professional':'island'} progress={progress} error={failed} label={view==='island'?'小島正在準備中':'頁面載入中'} onModelReady={()=>setModelReady(true)}/>}
   </>
 }
-createRoot(document.getElementById('root')).render(<Site/> )
+createRoot(document.getElementById('root')).render(isMobilePresentation()?<MobileSite/>:<Site/> )

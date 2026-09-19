@@ -4,3 +4,9 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .scene canvas:focus{outline:none}.scene canvas:focus-visible{outline:2px solid #cfad72;outline-offset:-3px}.scene canvas{cursor:crosshair}.key-guide{gap:10px;font-size:10px}.route-message:not(:empty){background:#fff0d9e8;padding:9px 15px;border-radius:18px;text-shadow:none;box-shadow:0 3px 18px #59492520}
+
+.mobile-site{height:100%;background:#f1f2f4}
+.mobile-site-page{position:fixed;inset:0;visibility:hidden;pointer-events:none;isolation:isolate}
+.mobile-site-page.is-visible{visibility:visible;pointer-events:auto}
+.mobile-navigation-error{position:fixed;bottom:24px;left:20px;right:20px;z-index:110;background:#fff;color:#111;padding:16px;border-radius:8px;box-shadow:0 2px 16px #0002}
+.mobile-navigation-error button{margin-left:12px}
