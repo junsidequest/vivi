@@ -22,6 +22,7 @@
   .welcome-card-bottom>span{flex-shrink:0}
   .welcome-footer{align-items:flex-start;flex-wrap:wrap;line-height:1.6}
   .pro-header{flex-wrap:wrap;gap:12px;padding:16px 6vw}
+  .professional .pro-header nav a{font-size:16px!important}
   .pro-header nav{order:3;width:100%;flex-wrap:wrap;gap:12px 18px;justify-content:flex-start}
   .pro-header-actions{margin-left:auto}
   .pro-header-actions .pro-contact{padding:10px 12px}
