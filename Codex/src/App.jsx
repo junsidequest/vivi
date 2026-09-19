@@ -33,7 +33,12 @@ function Dialog({ id, onClose, onRead }) {
     return () => { window.removeEventListener('keydown', handler); previous?.focus() }
   }, [onClose])
   return <div className="popup-mask" onClick={onClose}><section className="popup-card" ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="story-title" onClick={e => e.stopPropagation()}>
-    <button className="popup-close" aria-label="關閉對話" onClick={onClose}>×</button><h2 id="story-title">{content.title}</h2>{id==='help'?<div className="help-grid">
+    <button className="popup-close" aria-label="關閉對話" onClick={onClose}>×</button><h2 id="story-title">{content.title}</h2>{id==='help'&&isMobilePresentation()?<div className="help-grid help-grid--mobile">
+      <div className="help-cell help-cell--wide"><strong>點一下，走過去</strong><p>點擊地面或步道，Vivi 就會走到那裡。再點其他位置可以改變方向。</p></div>
+      <div className="help-cell help-cell--wide"><strong>拖動搖桿</strong><p>用左下角搖桿控制方向，往外推遠一點就會跑步。</p></div>
+      <div className="help-cell help-cell--wide"><strong>和小島互動</strong><p>點佈告欄、信箱或小鴨，角色會走過去。也可以靠近物件後按右下角 A。</p></div>
+      <div className="help-cell help-cell--wide"><strong>打開選單</strong><p>點左上角選單可快速前往，點小 i 可以再看一次操作說明。</p></div>
+    </div>:id==='help'?<div className="help-grid">
       <div className="help-cell help-cell--wide"><span>點擊地面移動，或使用鍵盤</span><div className="keypad-pair">
         <div className="keypad"><span className="keycap keycap--key">W</span><div className="keypad-row">{['A','S','D'].map(k=><span key={k} className="keycap keycap--key">{k}</span>)}</div></div>
         <span className="keypad-or">或</span><div className="keypad"><span className="keycap keycap--key"><i className="arrow arrow--up"/></span><div className="keypad-row">{['left','down','right'].map(d=><span key={d} className="keycap keycap--key"><i className={`arrow arrow--${d}`}/></span>)}</div></div>
@@ -110,7 +115,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
   const close=()=>useGame.getState().closePopup()
   const read=section=>window.dispatchEvent(new CustomEvent('enter-about',{detail:{section}}))
   const endTouch=()=>{touch.current.origin=null;world.current?.setJoystick(0,0);if(knob.current)knob.current.style.transform=''}
-  const keyLabel=matchMedia('(pointer:coarse)').matches?'A':'E'
+  const keyLabel=isMobilePresentation()?'A':'E'
   return <main className="island-app">
     <div className="scene" ref={host}/>
     {status==='ready' && room==='island' && <>

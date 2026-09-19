@@ -1,0 +1,48 @@
+/* 參考 junlearning.com 的手機內文層級：正文與操作文字至少 18px。 */
+@media(max-width:640px), (hover:none) and (pointer:coarse){
+  .welcome,.professional,.island-app,.walking-loader,.mobile-navigation-error{font-size:18px!important}
+  .welcome *,.professional *,.island-app *,.walking-loader *,.mobile-navigation-error *{font-size:18px!important}
+  .welcome h1,.professional .pro-hero h1{font-size:44px!important;line-height:1.25}
+  .welcome h1 span,.professional .pro-hero h1 span{font-size:inherit!important}
+  .welcome h2,.professional h3,.island-app h2{font-size:24px!important;line-height:1.5}
+  .professional h2{font-size:32px!important;line-height:1.35}
+  .professional .connect h2{font-size:38px!important}
+  .welcome-brand,.pro-brand{font-size:26px!important}
+  .professional .step-no{font-size:32px!important}
+  .walking-loader-status h1,.walking-loader-status>span{font-size:24px!important}
+  .welcome p,.professional p,.island-app p{line-height:1.8}
+  .welcome-role{max-width:165px;line-height:1.5}
+  .welcome-header{align-items:flex-start;flex-wrap:wrap}
+  .welcome-content{gap:28px}
+  .welcome-card-copy{padding:16px 12px;min-height:0;flex:1}
+  .welcome-card h2{white-space:normal;letter-spacing:-.04em}
+  .welcome-card-copy p{min-height:0}
+  .welcome-card-tag{padding:5px 7px}
+  .welcome-card-bottom{padding:12px 8px;gap:4px}
+  .welcome-card-bottom>span{flex-shrink:0}
+  .welcome-footer{align-items:flex-start;flex-wrap:wrap;line-height:1.6}
+  .pro-header{flex-wrap:wrap;gap:12px;padding:16px 6vw}
+  .pro-header nav{order:3;width:100%;flex-wrap:wrap;gap:12px 18px;justify-content:flex-start}
+  .pro-header-actions{margin-left:auto}
+  .pro-header-actions .pro-contact{padding:10px 12px}
+  .pro-hero-copy>p br{display:none}
+  .professional .vq-track{grid-template-columns:1fr}
+  .professional .career-stop{min-height:140px}
+  .professional .career-stop:last-child{min-height:0}
+  .professional .career-summary{line-height:1.8}
+  .professional .career-label,.professional .career-heading{line-height:1.6}
+  .professional .v2-foot{line-height:1.8}
+  .professional .connect-ctas{gap:12px;padding-bottom:8px;overflow-x:auto}
+  .professional .connect-ctas .hbtn{padding:12px 14px}
+  .professional .mq-item{height:52px}
+  .island-app .menu-item{min-height:48px}
+  .island-app .popup-card{max-height:calc(100dvh - 32px);overflow-y:auto;padding:26px 22px}
+  .island-app .popup-card h2{padding-right:28px}
+  .island-app .help-grid--mobile{display:block}
+  .island-app .help-grid--mobile .help-cell{display:block;margin:20px 0}
+  .island-app .help-grid--mobile p{margin:8px 0 0}
+  .island-app .key,.island-app .keycap{min-width:32px;min-height:32px}
+  .island-app .player-speech,.island-app .duck-say{max-width:min(320px,calc(100vw - 32px));line-height:1.7}
+  .island-app .primary{min-height:48px}
+  .island-app .menu-toggle{font-size:24px!important}
+}

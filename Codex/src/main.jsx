@@ -10,6 +10,7 @@ import './professional.css'
 import './style.css'
 import './ui/ui.css'
 import './ui/pixel.css'
+import './mobile-type.css'
 
 const {view,redirect,canonical}=currentRoute
 if(redirect) window.location.replace(canonical)
