@@ -72,3 +72,7 @@ npm run build
 推送 main 後，由 `.github/workflows/pages.yml` 安裝 Codex 依賴、建置並部署 `Codex/dist`。網站入口為雙卡片選擇頁，不包含舊像素介紹頁。
 
 三個入口各有獨立 HTML，可直接開啟或重新整理。GitHub Pages 專案網址會保留 `/vivi/` 前綴，例如 `/vivi/about/#offers`。舊 `?view=island` 與 `?view=professional` 連結會自動轉向新路徑並保留錨點。
+
+## 手機呈現
+
+螢幕寬度 640px 以下，或以觸控為主且不支援 hover 的裝置，停用入口卡片的懸停／聚焦動畫。手機載入畫面採淺灰背景、黑字與黑色進度條，不建立載入角色的 3D 畫布。小島使用固定在世界座標的柔和接地陰影取代即時陰影貼圖，角色陰影每幀依腳下表面更新；手機繪圖像素倍率上限為 1.5，桌面陰影維持原設定。

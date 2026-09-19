@@ -1,3 +1,5 @@
+import { isMobilePresentation } from '../mobile.js'
+import { createMobileShadows } from './mobileShadows.js'
 import { sitePath } from '../routes.js'
 import * as T from 'three'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
@@ -33,10 +35,12 @@ function disposeTree(root) {
 }
 
 export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition, onRoute, onProgress = () => {} }) {
+  const mobile=isMobilePresentation()
+  let updateMobileShadows
   let renderer
   try { renderer = new T.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' }) }
   catch (error) { onError(error); return { dispose() {}, travel() {}, setJoystick() {}, setPaused() {} } }
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap
+  renderer.shadowMap.enabled = !mobile; renderer.shadowMap.type = T.PCFSoftShadowMap
   renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = .95
   renderer.domElement.tabIndex = 0
   renderer.domElement.setAttribute('aria-label', 'Vivi 的立體庭院，使用方向鍵或 WASD 散步')
@@ -48,7 +52,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   const avatar = new T.Group(); scene.add(avatar)
   const ambient = new T.HemisphereLight('#fff1d9', '#8f9971', 2.15); scene.add(ambient)
   const sun = new T.DirectionalLight('#ffebcd', 1.75)
-  sun.position.set(-6, 12, 7); sun.castShadow = true
+  sun.position.set(-6, 12, 7); sun.castShadow = !mobile
   sun.shadow.mapSize.set(2048, 2048)
   Object.assign(sun.shadow.camera, { left: -10, right: 10, top: 10, bottom: -10, near: .5, far: 35 })
   sun.shadow.bias = -.00015; sun.shadow.normalBias = .015; sun.shadow.radius = 3
@@ -116,6 +120,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     if (disposed) return
     onProgress(.9)
     navigation = createNavigation(map, body)
+    if(mobile)updateMobileShadows=createMobileShadows(scene,map)
     seats=readSeats(map);fitSeatBacks(avatar,seatedPose,seats)
     ready = true; onReady()
   }).catch(error => { if (!disposed) onError(error) })
@@ -145,7 +150,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   function resize() {
     const width = Math.max(1, host.clientWidth), height = Math.max(1, host.clientHeight)
     // Retina 使用原生精度；一般螢幕稍微超採樣，總像素限制避免大螢幕耗用過多 GPU。
-    renderer.setPixelRatio(Math.min(Math.max(window.devicePixelRatio || 1, 1.5), 2.5, Math.sqrt(8000000 / (width * height))))
+    renderer.setPixelRatio(mobile ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(Math.max(window.devicePixelRatio || 1, 1.5), 2.5, Math.sqrt(8000000 / (width * height))))
     const aspect = width / height
     const half = aspect < .8 ? 5.2 : 4.6
     camera.left = -half * aspect; camera.right = half * aspect; camera.top = half; camera.bottom = -half
@@ -352,6 +357,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
       const desired = new T.Vector3(position.x * .8, .6, position.z * .7 - .3)
       target.lerp(desired, reduced ? 1 : 1 - Math.exp(-dt * 4))
     }
+    if(ready)updateMobileShadows?.(avatar,navigation,sitting)
     camera.position.copy(target).add(cameraOffset); camera.lookAt(target)
     if (island && !reduced) {
       const duck = island.getObjectByName('Duck')

@@ -1,3 +1,4 @@
+import { isMobilePresentation } from './mobile.js'
 import { sitePath } from './routes.js'
 import { useState } from 'react'
 import './welcome.css'
@@ -15,7 +16,7 @@ export default function Welcome(){
       <div className="welcome-content">
         <section className="welcome-intro"><span className="welcome-kicker">AI 陪跑教練 · 陳盈臻</span><h1>嗨，我是<br/>Vivi Chen<span>。</span></h1><p>我陪非技術背景的團隊，<br/>把 AI 用進每天的工作。</p></section>
         <div className="welcome-choices" aria-label="選擇瀏覽方式">
-          {choices.map(c=><a key={c.id} href={sitePath(c.id==='island'?'island/':'about/')} className={`welcome-card welcome-card--${c.id} ${active===c.id?'is-active':''}`} onPointerEnter={()=>setActive(c.id)} onPointerLeave={()=>setActive(null)} onFocus={()=>setActive(c.id)} onBlur={()=>setActive(null)} aria-label={c.action}>
+          {choices.map(c=><a key={c.id} href={sitePath(c.id==='island'?'island/':'about/')} className={`welcome-card welcome-card--${c.id} ${active===c.id?'is-active':''}`} onPointerEnter={e=>{if(e.pointerType==='mouse'&&!isMobilePresentation())setActive(c.id)}} onPointerLeave={()=>setActive(null)} onFocus={()=>{if(!isMobilePresentation())setActive(c.id)}} onBlur={()=>setActive(null)} aria-label={c.action}>
             <div className="welcome-card-copy"><span className="welcome-card-tag">{c.label}</span><span className="welcome-card-arrow" aria-hidden="true">↗</span><h2>{c.title}</h2><p>{c.description}</p></div>
             <div className="welcome-portrait"><span className="welcome-orbit" aria-hidden="true"/><img src={sitePath(c.image)} alt={c.alt} fetchPriority="high"/><span className="welcome-card-bottom">{c.action}<span aria-hidden="true">→</span></span></div>
           </a>)}

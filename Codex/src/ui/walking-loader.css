@@ -21,3 +21,10 @@
 .walking-loader--professional .walking-loader-track{background:#ffffff30}
 .walking-loader--professional .walking-loader-track>span{background:#fff}
 .walking-loader--professional .walking-loader-content>button{background:#fff;color:#000}
+
+/* 手機不建立角色畫布，所有頁面統一為淺灰載入畫面。 */
+.walking-loader--mobile{background:#f1f2f4;color:#111;padding:32px}
+.walking-loader--mobile .walking-loader-stage{height:8px}
+.walking-loader--mobile .walking-loader-track{background:#d9dadd}
+.walking-loader--mobile .walking-loader-track>span{background:#111}
+.walking-loader--mobile .walking-loader-content>button{background:#111;color:#fff}
