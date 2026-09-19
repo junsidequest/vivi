@@ -1,0 +1,23 @@
+.walking-loader{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:32px 60px;background:#f5f7f1;color:#344636;font-family:'Noto Sans TC',sans-serif}.walking-loader-content{width:min(100%,380px)}.walking-loader-brand{display:block;text-align:center;font-size:13px;letter-spacing:.16em;color:#6b7767}.walking-loader-stage{height:265px;display:flex;align-items:flex-end}.walking-loader-route{position:relative;width:100%;padding-bottom:0}.walking-loader-avatar{position:absolute;left:var(--progress);bottom:8px;width:96px;height:213px;margin-left:-48px;transition:left .55s cubic-bezier(.22,1,.36,1)}.walking-loader-puppet{position:relative;width:100%;height:100%;animation:loader-body-bob .65s ease-in-out infinite}.walking-loader-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.walker-body{clip-path:inset(0 0 23% 0)}.walker-leg-left{clip-path:inset(76% 50% 0 0);transform-origin:35% 77%;animation:loader-step-left .65s ease-in-out infinite}.walker-leg-right{clip-path:inset(76% 0 0 49%);transform-origin:66% 77%;animation:loader-step-right .65s ease-in-out infinite}.walking-loader-track{height:8px;border-radius:4px;background:#dce3d4;overflow:hidden}.walking-loader-track>span{display:block;height:100%;width:var(--progress);background:#526e48;border-radius:inherit;transition:width .55s cubic-bezier(.22,1,.36,1)}.walking-loader-status{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:26px}.walking-loader-status h1{font-size:16px;font-weight:500;margin:0}.walking-loader-status>span{font-size:12px;font-variant-numeric:tabular-nums}.walking-loader-content>p{font-size:11px;color:#77816f;line-height:1.8;margin:12px 0 0}.walking-loader-content>button{border:0;border-radius:6px;background:#344636;color:white;padding:12px 20px;margin-top:20px;font:inherit;font-size:12px}.walking-loader.is-indeterminate .walking-loader-avatar{left:5%}.walking-loader.is-indeterminate .walking-loader-track>span{width:12%;opacity:.6;animation:loader-preparing 1.5s ease-in-out infinite}.walking-loader.has-error *,.walking-loader.is-complete .walking-loader-puppet,.walking-loader.is-complete .walker-leg{animation:none!important}@keyframes loader-body-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}@keyframes loader-step-left{0%,100%{transform:rotate(7deg)}50%{transform:rotate(-7deg)}}@keyframes loader-step-right{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}@keyframes loader-preparing{50%{opacity:1}}@media(max-width:540px){.walking-loader{padding:30px 54px}.walking-loader-stage{height:240px}.walking-loader-avatar{width:82px;height:182px;margin-left:-41px}.walking-loader-status h1{font-size:14px}}@media(prefers-reduced-motion:reduce){.walking-loader *{animation:none!important;transition:none!important}}
+
+/* 真正的 3D 骨架走路，畫布底線就是進度條表面。 */
+.walking-loader-avatar{width:160px;height:220px;margin-left:-80px;bottom:8px}
+.walking-loader-avatar canvas{display:block;width:100%;height:100%}
+@media(max-width:540px){.walking-loader-avatar{width:140px;height:190px;margin-left:-70px}}
+.site-page{width:100%;height:100%}
+
+.walking-loader-avatar,.walking-loader-track>span{transition-duration:1.2s;transition-timing-function:linear}
+
+/* 載入角色縮為原先畫面的 50%，仍以畫布底線貼齊進度條。 */
+.walking-loader-avatar{width:80px;height:110px;margin-left:-40px}
+.walking-loader-stage{height:170px}
+@media(max-width:540px){.walking-loader-avatar{width:70px;height:95px;margin-left:-35px}.walking-loader-stage{height:155px}}
+
+/* 載入文字僅呈現 loading 與進度。 */
+.walking-loader-status h1,.walking-loader-status>span{font-size:24px;font-weight:500;line-height:1.4}
+
+/* 黑白介紹頁使用同風格載入畫面。 */
+.walking-loader--professional{background:#000;color:#fff}
+.walking-loader--professional .walking-loader-track{background:#ffffff30}
+.walking-loader--professional .walking-loader-track>span{background:#fff}
+.walking-loader--professional .walking-loader-content>button{background:#fff;color:#000}

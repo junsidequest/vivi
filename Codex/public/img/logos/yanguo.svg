@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="clip-言果_favicon">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="言果_favicon" clip-path="url(#clip-言果_favicon)">
+    <g id="favicon" transform="translate(45.45 69.248)">
+      <rect id="Rectangle_2015" data-name="Rectangle 2015" width="512" height="512" transform="translate(-45.45 -69.248)" fill="none"/>
+    </g>
+    <g id="Group_3484" data-name="Group 3484" transform="translate(-119.305 -149.2)">
+      <path id="Union_9" data-name="Union 9" d="M161.756,120.732a42.615,42.615,0,0,0,0-85.229V0a78.119,78.119,0,0,1,0,156.239ZM0,156.235v-35.5H161.756v35.5ZM0,35.5V0H161.756V35.5Z" transform="translate(352.686 234.653)" fill="#f8b616" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Union_4" data-name="Union 4" d="M191.056,282.325a13.314,13.314,0,1,0,0-26.627V220.2a48.816,48.816,0,1,1,0,97.632Zm-29.3,35.5v-35.5h29.3v35.5Zm-80.779,0H48.811a48.818,48.818,0,0,1,0-97.635v35.5a13.315,13.315,0,0,0,0,26.63H80.977a13.332,13.332,0,0,0,13.311-13.314h0V255.7H48.816V220.193H94.291V0h35.5V220.193h61.263V255.7H129.793v13.313h0c0,.164,0,.327,0,.49v4.177h-.219a48.908,48.908,0,0,1-45.969,44.078v.072Z" transform="translate(352.687 257.689)" fill="#f8b616" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Union_3" data-name="Union 3" d="M0,48.816A48.873,48.873,0,0,1,48.818,0H159.767V35.5H48.818v0a13.312,13.312,0,1,0,0,26.625H159.767v35.5H48.818v0A48.874,48.874,0,0,1,0,48.816Z" transform="translate(157.417 477.883)" fill="#f8b616" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Union_5" data-name="Union 5" d="M417.4,97.637H48.822A48.818,48.818,0,1,1,48.822,0V35.505a13.313,13.313,0,1,0,0,26.626H417.4a17.753,17.753,0,0,1,0,35.505h0ZM48.822,35.5V0H159.767V35.5Z" transform="translate(157.414 355.386)" fill="#f8b616" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Union_10" data-name="Union 10" d="M0,17.75A17.752,17.752,0,0,1,17.75,0H159.767V35.5H17.75v0A17.753,17.753,0,0,1,0,17.75Z" transform="translate(157.417 234.652)" fill="#f8b616" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Union_8" data-name="Union 8" d="M357.026,0a17.753,17.753,0,1,1,0,35.505ZM17.75,35.505A17.753,17.753,0,0,1,17.75,0V0H357.026v35.5Z" transform="translate(157.417 295.017)" fill="#f8b616" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

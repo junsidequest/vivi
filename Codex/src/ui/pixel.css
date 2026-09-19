@@ -1,0 +1,172 @@
+:root {
+  --sky: #5FBEF3; --sky-low: #C8ECFF;
+  --grass: #7CC96B; --grass-dark: #5FAF55;
+  --wood: #C89B6A; --wood-dark: #9A7248;
+  --cream: #FFF8E7; --ink: #3D3229;
+  --pink: #F0608D; --yellow: #FFD95E;
+
+  /* —— 像素遊戲風對話框素材 ——
+     8×8 SVG：階梯圓角的墨色外框＋內裡填色，border-image slice 3 可套任意尺寸；
+     像素單位 = border-width ÷ 3（例：border 6px → 一顆像素 2px） */
+  --px-shadow: rgba(61, 50, 41, .30);
+  --px-frame-cream: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23FFF8E7'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  --px-frame-yellow: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h2v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h-1v-2h1v-1h1v-1h1z'%20fill='%23FFD95E'/%3E%3Cpath%20d='M3%200h2v1h-2zM2%201h1v1h-1zM5%201h1v1h-1zM1%202h1v1h-1zM6%202h1v1h-1zM0%203h1v2h-1zM7%203h1v2h-1zM1%205h1v1h-1zM6%205h1v1h-1zM2%206h1v1h-1zM5%206h1v1h-1zM3%207h2v1h-2z'%20fill='%233D3229'/%3E%3C/svg%3E") 3;
+  /* 9×7 像素尾巴貼片（朝下、真三角形）：不是「貼在框下緣」而是「蓋過框線的一整塊」——
+     上 2 列純奶油深入框內合體（藏在框的奶油帶裡），第 3 列在框線上開口，
+     其後每列左右各內收 1 格（45° 斜階）收到 1 格尖端 */
+  --px-tail: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='9'%20height='7'%20viewBox='0%200%209%207'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M0%200h9v2h-9zM1%202h7v1h-7zM2%203h5v1h-5zM3%204h3v1h-3zM4%205h1v1h-1z'%20fill='%23FFF8E7'/%3E%3Cpath%20d='M0%202h1v1h-1zM8%202h1v1h-1zM1%203h1v1h-1zM7%203h1v1h-1zM2%204h1v1h-1zM6%204h1v1h-1zM3%205h1v1h-1zM5%205h1v1h-1zM4%206h1v1h-1z'%20fill='%233D3229'/%3E%3C/svg%3E");
+  --px-font: "Mochiy Pop One", "Noto Sans TC", sans-serif;   /* 遊戲感中文字體 */
+  /* 鍵標專用點陣字（Press Start 2P，Google Fonts／OFL 授權可商用）——只含英數，
+     中文自動 fallback 回 --px-font */
+  --key-font: "Press Start 2P", "Mochiy Pop One", monospace;
+  /* 浮雕按鍵（8×8，border-image slice 3 fill）：墨色外框＋左上高光＋右下陰影＋中間底色，
+     四邊等寬；中間（x2-5, y2-5）純底色可拉伸，同一張圖套方鍵與 Shift 這種長鍵 */
+  --px-keycap: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='8'%20height='8'%20viewBox='0%200%208%208'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M0%200h8v1h-8zM0%207h8v1h-8zM0%201h1v6h-1zM7%201h1v6h-1z'%20fill='%233D3229'/%3E%3Cpath%20d='M1%201h6v1h-6zM1%202h1v4h-1z'%20fill='%23FFFFFF'/%3E%3Cpath%20d='M1%206h6v1h-6zM6%202h1v4h-1z'%20fill='%23A97F52'/%3E%3Cpath%20d='M2%202h4v4h-4z'%20fill='%23F2E4C9'/%3E%3C/svg%3E");
+  --key-label: #3D3229;   /* 鍵帽上的字色：與一般文字同色 */
+  /* 像素 icon（單色墨線，小尺寸才不糊）：佈告欄 9×9、信封 9×7、通知鈴鐺 9×7 */
+  --px-icon-board: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='9'%20height='9'%20viewBox='0%200%209%209'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M0%200h9v1h-9zM0%201h1v1h-1zM8%201h1v1h-1zM0%202h1v1h-1zM2%202h5v1h-5zM8%202h1v1h-1zM0%203h1v1h-1zM8%203h1v1h-1zM0%204h1v1h-1zM2%204h5v1h-5zM8%204h1v1h-1zM0%205h1v1h-1zM8%205h1v1h-1zM0%206h9v1h-9zM2%207h1v2h-1zM6%207h1v2h-1z'%20fill='%233D3229'/%3E%3C/svg%3E");
+  --px-icon-mail: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='9'%20height='7'%20viewBox='0%200%209%207'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M0%200h9v1h-9zM0%201h2v1h-2zM7%201h2v1h-2zM0%202h1v1h-1zM2%202h1v1h-1zM6%202h1v1h-1zM8%202h1v1h-1zM0%203h1v1h-1zM3%203h3v1h-3zM8%203h1v1h-1zM0%204h1v1h-1zM8%204h1v1h-1zM0%205h1v1h-1zM8%205h1v1h-1zM0%206h9v1h-9z'%20fill='%233D3229'/%3E%3C/svg%3E");
+  /* 正面直立的紅色圖釘（11×12）：寬頂蓋→收腰→底盤→灰針。
+     45° 斜放版在 17px 下細節全糊、讀起來像一支筆，改用正面剪影才認得出來。
+     寬度取奇數格，中心線才落在格子正中（偶數格會讓針偏半格） */
+  --px-icon-pin: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='11'%20height='12'%20viewBox='0%200%2011%2012'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M3%200h5v1h-5zM2%201h1v2h-1zM8%201h1v2h-1zM3%203h1v2h-1zM7%203h1v2h-1zM1%205h3v1h-3zM7%205h3v1h-3zM0%206h1v1h-1zM10%206h1v1h-1zM0%207h11v1h-11zM4%208h1v3h-1zM6%208h1v3h-1zM5%2011h1v1h-1z'%20fill='%231F1A17'/%3E%3Cpath%20d='M3%201h5v2h-5zM4%203h3v3h-3zM1%206h9v1h-9z'%20fill='%23E23E32'/%3E%3Cpath%20d='M5%208h1v3h-1z'%20fill='%239DA7B0'/%3E%3C/svg%3E");
+  /* 回程 icon（11×10，實心剪影）：尖屋頂 → 突出的屋簷 → 縮回的牆身 → 中央門口。
+     屋簷與垂直牆面是關鍵，少了就會被讀成樹或山 */
+  --px-icon-island: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='11'%20height='10'%20viewBox='0%200%2011%2010'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M5%200h1v1h-1zM4%201h3v1h-3zM3%202h5v1h-5zM2%203h7v1h-7zM1%204h9v1h-9zM0%205h11v1h-11zM2%206h7v2h-7zM2%208h2v2h-2zM7%208h2v2h-2z'%20fill='%233D3229'/%3E%3C/svg%3E");
+  --px-icon-bell: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='9'%20height='7'%20viewBox='0%200%209%207'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M4%200h1v1h-1zM3%201h3v1h-3zM2%202h5v1h-5zM2%203h5v1h-5zM1%204h7v1h-7zM0%205h9v1h-9zM4%206h1v1h-1z'%20fill='%233D3229'/%3E%3C/svg%3E");
+  /* 13×7 實心向下三角形：奶油內裡外包一圈墨邊 */
+  --px-triangle: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='13'%20height='7'%20viewBox='0%200%2013%207'%20shape-rendering='crispEdges'%3E%3Cpath%20d='M0%200h13v1h-13zM1%201h11v1h-11zM2%202h9v1h-9zM3%203h7v1h-7zM4%204h5v1h-5zM5%205h3v1h-3zM6%206h1v1h-1z'%20fill='%233D3229'/%3E%3Cpath%20d='M2%201h9v1h-9zM3%202h7v1h-7zM4%203h5v1h-5zM5%204h3v1h-3zM6%205h1v1h-1z'%20fill='%23FFF8E7'/%3E%3C/svg%3E");
+}
+
+.world-hint {
+  position: absolute; transform: translate(-50%, -100%);
+  z-index: 4;   /* 高於角色（sprite.player z-index 3），走近時不被角色擋住 */
+  display: flex; align-items: center; gap: 4px;
+  background: var(--cream); background-clip: padding-box;
+  border: 6px solid transparent; border-image: var(--px-frame-cream);   /* 一格 2px：小巧的標記框 */
+  padding: 0 4px 1px;
+  filter: drop-shadow(3px 4px 0 var(--px-shadow));
+  font-family: var(--px-font); font-weight: 400;
+  font-size: 11px; color: var(--ink); white-space: nowrap;
+  pointer-events: none;
+  animation: hintFloat 2.4s ease-in-out infinite;
+  opacity: 0; transition: opacity .3s ease;
+}
+.world-hint.is-peek, .world-hint.is-near { opacity: 1; }
+/* 遠處提示：各自的 icon（告示牌＝圖釘、郵筒＝信封） */
+/* 用個別屬性而非 background 簡寫：簡寫會把 background-image 重設成 none，
+   而這條的特異性比下面的 modifier 高，icon 會整個消失 */
+.world-hint .hint-mark {
+  display: inline-block;
+  background-repeat: no-repeat; background-position: center; background-size: contain;
+}
+.hint-mark--pin { width: 16px; height: 18px; background-image: var(--px-icon-pin); }
+.hint-mark--mail { width: 18px; height: 14px; background-image: var(--px-icon-mail); }
+.world-hint .hint-full { display: none; align-items: center; gap: 4px; }
+.world-hint.is-near .hint-full { display: inline-flex; }
+.world-hint.is-near .hint-mark { display: none; }
+/* 按鍵標＝縮小版的實體鍵帽（同 --px-keycap，一格約 1.4px；slice 比例與大版一致） */
+.world-hint .key {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 21px; padding: 1px 2px 0;
+  border: 5px solid transparent;
+  border-image: var(--px-keycap) 3 fill;
+  font-family: var(--key-font); font-weight: 400; font-size: 8px; line-height: 1;
+  color: var(--key-label);
+}
+@keyframes hintFloat { 50% { transform: translate(-50%, calc(-100% - 6px)); } }
+
+/* 台詞泡泡：掛在角色／鴨子身上跟著跑，錨在頭頂上方；像素框＋指向本人的尾巴 */
+.player-speech, .duck-say {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  z-index: 4; pointer-events: none;
+  /* width:max-content 必要：shrink-to-fit 會拿 containing block（角色 sprite 僅 100px）
+     當可用寬度，泡泡會被擠成細長條 */
+  width: max-content; max-width: 190px; text-align: center;
+  background: var(--cream); background-clip: padding-box;
+  /* 像素單位統一 3px：框線（9÷3）與尾巴（24÷8）同粗細才不會像斷開 */
+  border: 9px solid transparent; border-image: var(--px-frame-cream);
+  padding: 2px 6px 3px;
+  filter: drop-shadow(3px 4px 0 var(--px-shadow));
+  font-family: var(--px-font); font-weight: 400;
+  font-size: 12px; line-height: 1.5; color: var(--ink);
+}
+.player-speech { bottom: 118px; }
+/* 角色頭上的互動提示：用世界提示那種小框（無尾巴），位置與台詞泡泡相同 */
+.player-hint {
+  position: absolute; left: 50%; bottom: 118px; transform: translateX(-50%);
+  z-index: 4; pointer-events: none; width: max-content;
+  display: flex; align-items: center; gap: 4px;
+  background: var(--cream); background-clip: padding-box;
+  border: 6px solid transparent; border-image: var(--px-frame-cream);
+  padding: 0 4px 1px;
+  filter: drop-shadow(3px 4px 0 var(--px-shadow));
+  font-family: var(--px-font); font-weight: 400;
+  font-size: 11px; color: var(--ink); white-space: nowrap;
+}
+.player-hint .key {   /* 與世界提示的鍵標同規格 */
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 21px; padding: 1px 2px 0;
+  border: 5px solid transparent; border-image: var(--px-keycap) 3 fill;
+  font-family: var(--key-font); font-weight: 400; font-size: 8px; line-height: 1;
+  color: var(--key-label);
+}
+.duck-say { bottom: 54px; font-size: 11px; }   /* 鴨子矮很多，泡泡跟著壓低 */
+.player-speech::after, .duck-say::after {   /* 像素尾巴貼片：上半深入框內蓋過框線，下半伸出收尖（見 --px-tail） */
+  content: ""; position: absolute; left: 50%; bottom: -21px;
+  width: 27px; height: 21px; transform: translateX(-50%);
+  background: var(--px-tail) no-repeat center / 100% 100%;
+}
+
+
+.pixel-world {position:fixed;inset:0;pointer-events:none;z-index:5}
+.pixel-anchor {position:absolute;left:0;top:0;pointer-events:none}
+.pixel-anchor .world-hint {left:0;top:0}
+.pixel-anchor .world-hint.is-peek,.pixel-anchor .world-hint.is-near {pointer-events:auto;cursor:pointer}
+.pixel-anchor .player-speech,.pixel-anchor .player-hint,.pixel-anchor .duck-say {left:0;bottom:0;transform:translate(-50%,-15px)}
+.pixel-anchor .player-hint {pointer-events:auto;cursor:pointer}
+.ui-layer .popup-mask {z-index:25}
+.popup-card {outline:none;max-height:85vh;overflow:auto}
+.popup-card h2 {margin-top:0}
+.popup-card .primary {margin-top:18px;background:var(--yellow);color:var(--ink);border-radius:0;border:6px solid transparent;border-image:var(--px-frame-yellow);background-clip:padding-box;filter:drop-shadow(2px 3px 0 var(--px-shadow))}
+.menu-item button {border:0;background:none;padding:0;color:inherit;text-align:left;font:inherit;cursor:pointer;display:flex;align-items:center;gap:7px;width:100%}
+.route-message:not(:empty) {z-index:6;border-radius:0;background:var(--cream);background-clip:padding-box;border:6px solid transparent;border-image:var(--px-frame-cream);filter:drop-shadow(3px 4px 0 var(--px-shadow));box-shadow:none}
+@media(prefers-reduced-motion:reduce){.world-hint{animation:none}}
+
+.dock-arrow {
+  position: absolute; z-index: 1; cursor: pointer;   /* 可點：走過去並下橋進「關於我」*/
+  width: 39px; height: 21px;
+  background: var(--px-triangle) no-repeat center / 100% 100%;
+  filter: drop-shadow(2px 3px 0 var(--px-shadow));
+  animation: dockBob 1.5s ease-in-out infinite;
+}
+@keyframes dockBob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+
+.pixel-world .dock-arrow {pointer-events:auto;border:0;padding:0;background-color:transparent;min-width:44px;min-height:32px;background-size:39px 21px;background-repeat:no-repeat;background-position:center}
+
+/* 小島提示至少與選單的 17px 文字、23px 圖示同等清楚。 */
+.island-app .world-hint,.island-app .player-hint{font-size:17px;gap:7px;padding:4px 8px;max-width:calc(100vw - 24px)}
+.island-app .world-hint .hint-full{gap:7px}
+.island-app .hint-mark--pin{width:24px;height:27px}
+.island-app .hint-mark--mail{width:30px;height:24px}
+.island-app .world-hint .key,.island-app .player-hint .key{font-size:17px;min-width:34px;min-height:34px;padding:2px 4px}
+.island-app .player-speech,.island-app .duck-say{font-size:17px;line-height:1.65;max-width:min(300px,calc(100vw - 32px));padding:7px 10px}
+.island-app .route-message{font-size:17px;line-height:1.6;text-align:center;width:max-content;max-width:calc(100vw - 32px);padding:6px 12px}
+.island-app .popup-card{font-size:17px;max-width:min(620px,92vw);padding:28px 30px}
+.island-app .popup-card h2{font-size:26px;line-height:1.5;padding-right:42px}
+.island-app .popup-card p{font-size:18px;line-height:1.9}
+.island-app .popup-card .primary{font-size:17px;line-height:1.5;padding:12px 20px}
+.island-app .popup-close{width:42px;height:42px;font-size:28px}
+.island-app .keycap,.island-app .keycap--key,.island-app .keypad-or{font-size:17px}
+.island-app .help-grid{gap:20px}
+@media(max-width:540px){
+  .island-app .popup-card{padding:20px 16px;max-height:88svh}
+  .island-app .popup-card h2{font-size:24px}
+  .island-app .keypad-pair{gap:12px}
+  .island-app .keypad-row{gap:4px}
+  .island-app .player-hint{white-space:normal}
+}

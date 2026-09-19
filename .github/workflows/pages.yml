@@ -23,18 +23,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 組出跟 start-vivi.command 一樣的站台結構：
-      # 根目錄放主頁與關於我，/island/ 指向打包好的 dist
-      - name: Assemble site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: Codex/package-lock.json
+      - name: Build current site
+        working-directory: Codex
         run: |
-          mkdir _site
-          cp index.html index_v1.html _site/
-          cp -R img _site/img
-          cp -R island/dist _site/island
+          npm ci
+          npm run build
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: Codex/dist
       - id: deployment
         uses: actions/deploy-pages@v4
