@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import content from './content/professional.html?raw'
-import './professional.css'
 
 // 保持原始內容的引用穩定，避免載入狀態更新時重建時間軸 DOM。
 const pageMarkup = {__html:content}

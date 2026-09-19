@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { createRoot } from 'react-dom/client'
 import WalkingLoader from './ui/WalkingLoader.jsx'
 import './welcome.css'
+// 介紹頁樣式隨入口載入，避免正式建置的條件式動態載入遺漏 CSS。
+import './professional.css'
 import './style.css'
 import './ui/ui.css'
 import './ui/pixel.css'
