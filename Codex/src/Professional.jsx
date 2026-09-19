@@ -1,3 +1,5 @@
+import { fadeToInk } from './ui/iris.js'
+import { isMobilePresentation } from './mobile.js'
 import { sitePath } from './routes.js'
 import { useEffect, useRef } from 'react'
 import content from './content/professional.html?raw'
@@ -7,6 +9,23 @@ const pageMarkup = {__html:content.replace('href="__ISLAND_URL__"', `href="${sit
 
 export default function Professional(){
   const page = useRef(null)
+  useEffect(()=>{
+    let leaving=false
+    const enter=async e=>{
+      const link=e.target.closest('a.pro-island')
+      if(!link||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return
+      e.preventDefault()
+      if(leaving)return
+      leaving=true
+      await fadeToInk(450)
+      sessionStorage.setItem('vivi-island-entry','bridge')
+      if(isMobilePresentation())window.dispatchEvent(new CustomEvent('site-navigate',{detail:{url:link.href}}))
+      else window.location.assign(link.href)
+    }
+    page.current.addEventListener('click',enter)
+    const root=page.current
+    return()=>root.removeEventListener('click',enter)
+  },[])
   useEffect(()=>{
     // 頁面為延後載入；掛載後再定位跨頁導覽的區塊。
     const section=window.location.hash.slice(1)

@@ -1,10 +1,10 @@
-const GREETING='Hi 我是陳盈臻 Vivi，陪你和你的團隊把 AI 真的用起來'
+export const GREETING='Hi 我是陳盈臻 Vivi，陪你和你的團隊把 AI 真的用起來'
 const IDLE_LINES=['要不要去郵筒那邊看看？','AI 不會取代你，會用 AI 的人才會。','走累了嗎？按 Shift 可以用跑的喔。','佈告欄有我的新消息～']
 export const PLAYER_HINTS={duck:'聽鴨子在說什麼',services:'看服務和課程'}
 const DUCK_LINES=['這隻鴨子只出一張嘴','牠說牠也想學 AI','呱的意思是：先搞清楚問題再選工具','牠是本島唯一不用打卡的員工']
 // 時序沿用 pixel 版；距離改用目前 3D 世界的公尺座標。
-export function createPixelHints(points){
-  let time=0,greeted=false,say=null,sayUntil=0,owner=null,idleSaying=false,idle=0,idleIndex=0,cooldown=0
+export function createPixelHints(points,{greeting=true}={}){
+  let time=0,greeted=!greeting,say=null,sayUntil=0,owner=null,idleSaying=false,idle=0,idleIndex=0,cooldown=0
   let walkingIdle=Infinity,awake=false,hintTime=0,hintOn=false,peek=null,suppress=null,sampleTime=0
   const ids=['about','contact'],visited={about:0,contact:0},previous={about:Infinity,contact:Infinity}
   const speak=(line,duration)=>{say=line;sayUntil=time+duration}

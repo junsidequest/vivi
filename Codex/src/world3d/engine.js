@@ -36,7 +36,7 @@ function disposeTree(root) {
   geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose())
 }
 
-export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition, onRoute, onProgress = () => {}, onExitStart = () => {} }) {
+export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition, onRoute, onProgress = () => {}, onExitStart = () => {}, startOnBridge=false }) {
   const mobile=isMobilePresentation()
   let updateMobileShadows
   let renderer
@@ -71,10 +71,11 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   }
   let disposed = false, ready = false, paused = false, frame = 0, last = 0
   let navigation, placeFeet, mixer, action, island, route = null, routeId = null, nearby = null
-  let heading = 0, travelled = 0, speed = 0, lastLift = 0, idleTime = 0
+  let heading = startOnBridge?Math.PI:0, travelled = 0, speed = 0, lastLift = 0, idleTime = 0
   let idleHead, idleChest, idleHeadPose, idleChestPose
   let seats=[], seatedPose, sitting=null, routeSeat=null, seatCooldown=0
-  const position = { x: 0, z: 1.5 }, joystick = { x: 0, z: 0, run: false }, keys = new Set()
+  let introLocked=true,entrance=null
+  const position = { x: 0, z: startOnBridge?7.05:1.5 }, joystick = { x: 0, z: 0, run: false }, keys = new Set()
   const bridgeExit=createBridgeExit(PLACES.dock.stand.z)
   function beginBridgeExit(){
     if(!bridgeExit.start(position))return
@@ -120,7 +121,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
       mixer = new T.AnimationMixer(model); action = mixer.clipAction(walk); action.play(); action.setEffectiveWeight(0)
     }
     idleHead=model.getObjectByName('Head');idleChest=model.getObjectByName('Spine02')
-    avatar.position.set(0, 0, 0); avatar.rotation.set(0, 0, 0)
+    avatar.position.set(0, 0, 0); avatar.rotation.set(0, heading, 0)
     const body = measureAvatar(avatar, mixer, action); placeFeet = createFootPlacement(avatar); seatedPose=createSeatedPose(avatar)
     return body
   })
@@ -167,7 +168,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   const observer = new ResizeObserver(resize); observer.observe(host); resize()
   const isMovingKey = code => /^(Arrow(Up|Down|Left|Right)|Key[WASD]|Shift(Left|Right))$/.test(code)
   function keydown(event) {
-    if(bridgeExit.active){if(isMovingKey(event.code))event.preventDefault();return}
+    if(bridgeExit.active||introLocked){if(isMovingKey(event.code))event.preventDefault();return}
     if (/^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(event.target.tagName)) return
     if (isMovingKey(event.code)) { event.preventDefault(); keys.add(event.code) }
     if (event.code === 'KeyE' && !event.repeat && nearby && !paused) onOpen(nearby)
@@ -194,7 +195,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   }
   const pointerleave=()=>setHover(null)
   const pointermove=event=>{
-    if(!ready||paused||bridgeExit.active){setHover(null);return}
+    if(!ready||paused||bridgeExit.active||introLocked){setHover(null);return}
     const now=performance.now();if(now-lastHover<45)return;lastHover=now
     const rect=host.getBoundingClientRect()
     pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1)
@@ -206,7 +207,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   const pointerdown = event => { if(event.button!==0)return; pointerStart = { x: event.clientX, y: event.clientY }; renderer.domElement.focus() }
   const pointerup = event => {
     const start=pointerStart;pointerStart=null
-    if (!ready || paused || bridgeExit.active || event.button!==0 || !start || Math.hypot(event.clientX-start.x,event.clientY-start.y)>8) return
+    if (!ready || paused || bridgeExit.active || introLocked || event.button!==0 || !start || Math.hypot(event.clientX-start.x,event.clientY-start.y)>8) return
     const rect=host.getBoundingClientRect()
     pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1)
     ray.setFromCamera(pointer,camera)
@@ -240,7 +241,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   renderer.domElement.addEventListener('pointermove',pointermove);renderer.domElement.addEventListener('pointerleave',pointerleave);
   renderer.domElement.addEventListener('pointerdown', pointerdown); renderer.domElement.addEventListener('pointerup', pointerup)
   function travel(id) {
-    if (!ready || paused || bridgeExit.active || !PLACES[id]) return
+    if (!ready || paused || bridgeExit.active || introLocked || !PLACES[id]) return
     arrivalTarget=null;setHover(null);standUp();routeSeat=null
     const path = navigation.findRoute(routeOrigin(), PLACES[id].stand)
     if (!path) { onRoute('這個方向暫時走不通，換個位置試試。'); return }
@@ -281,11 +282,19 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
         }
       }
     }
+    if(ready&&!paused&&entrance){
+      if(position.z>1.5){
+        distance=Math.min(position.z-1.5,1.7*dt);position.z-=distance;heading=Math.PI
+      }else{
+        heading=0
+        if(Math.abs(Math.atan2(Math.sin(avatar.rotation.y),Math.cos(avatar.rotation.y)))<.025){const done=entrance;entrance=null;done()}
+      }
+    }
     if(ready&&!paused&&bridgeExit.active){
       const step=bridgeExit.advance(position,dt);distance=step.distance;heading=0
       if(step.complete)onOpen('dock')
     }
-    if (ready && !paused && !sitting && !bridgeExit.active) {
+    if (ready && !paused && !sitting && !bridgeExit.active && !introLocked) {
       const previousZ=position.z
       let dx = (keys.has('KeyD') || keys.has('ArrowRight') ? 1 : 0) - (keys.has('KeyA') || keys.has('ArrowLeft') ? 1 : 0) + joystick.x
       let dz = (keys.has('KeyS') || keys.has('ArrowDown') ? 1 : 0) - (keys.has('KeyW') || keys.has('ArrowUp') ? 1 : 0) + joystick.z
@@ -385,7 +394,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     if(destination.visible)destination.scale.setScalar(1+Math.sin(now*.006)*.08)
     if(hovered&&hoverComposer)hoverComposer.render(dt)
     else renderer.render(scene, camera)
-    if (ready) onPosition({ avatar: project([position.x, avatar.position.y + 1.4, position.z]), places: Object.fromEntries(Object.entries(PLACES).map(([id, p]) => [id, project(p.point)])), x: position.x, z: position.z, y: avatar.position.y, clearance: FOOT_CLEARANCE, dt, moving: distance>.00001, autoWalking: Boolean(route)||bridgeExit.active })
+    if (ready) onPosition({ avatar: project([position.x, avatar.position.y + 1.4, position.z]), places: Object.fromEntries(Object.entries(PLACES).map(([id, p]) => [id, project(p.point)])), x: position.x, z: position.z, y: avatar.position.y, clearance: FOOT_CLEARANCE, dt, moving: distance>.00001, autoWalking: Boolean(route)||bridgeExit.active||Boolean(entrance) })
     frame = requestAnimationFrame(tick)
   }
   frame = requestAnimationFrame(tick)
@@ -393,8 +402,10 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   renderer.domElement.addEventListener('webglcontextlost', lost)
   return {
     travel,
+    startEntrance(){return new Promise(resolve=>{entrance=resolve;paused=false})},
+    unlockIntro(){introLocked=false;blur()},
     freezeFrame() { cancelAnimationFrame(frame) },
-    setJoystick(x, z, run = false) { if(bridgeExit.active)return;Object.assign(joystick, { x, z, run }) },
+    setJoystick(x, z, run = false) { if(bridgeExit.active||introLocked)return;Object.assign(joystick, { x, z, run }) },
     setPaused(value) { paused = value; if (value) {blur();speed=0;setHover(null)} },
     dispose() {
       disposed = true; cancelAnimationFrame(frame); observer.disconnect()

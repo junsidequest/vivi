@@ -6,8 +6,8 @@ import { createWorld, PLACES } from './world3d/engine.js'
 import { MenuPanel } from './ui/MenuPanel.jsx'
 import { SpeechBubble } from './ui/SpeechBubble.jsx'
 import { useGame } from './game/store.js'
-import { createPixelHints, PLAYER_HINTS } from './ui/pixelHints.js'
-import { closeIris, disposeIris } from './ui/iris.js'
+import { createPixelHints, PLAYER_HINTS, GREETING } from './ui/pixelHints.js'
+import { closeIris, openIris, disposeIris } from './ui/iris.js'
 
 const CONTENT = {
   about: { kicker: 'ABOUT VIVI', title: '把 AI，帶進你的日常。', text: '嗨，我是陳盈臻 Vivi，也有人叫我大師姐。我不是工程師，卻把 AI 真的用進了工作裡。現在，我陪非技術背景的團隊跨出第一步。', section: 'about', link: '多認識我一點' },
@@ -52,6 +52,9 @@ function Dialog({ id, onClose, onRead }) {
 }
 export default function App({externalLoading=false,pageVisible=true,onLoadReady,onLoadProgress,onLoadError}) {
   const host=useRef(),world=useRef(),speech=useRef(),markers=useRef({}),duck=useRef(),stats=useRef(),hints=useRef()
+  const [fromBridge]=useState(()=>{const bridge=sessionStorage.getItem('vivi-island-entry')==='bridge';sessionStorage.removeItem('vivi-island-entry');return bridge})
+  const [intro,setIntro]=useState('waiting'),introRef=useRef('waiting'),greetingTimer=useRef()
+  introRef.current=intro
   const [exiting,setExiting]=useState(false)
   const [status,setStatus]=useState('loading'),[route,setRoute]=useState(''),[progress,setProgress]=useState(0)
   const [hint,setHint]=useState({peek:null,approach:null,suppress:null})
@@ -60,7 +63,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
   const touch=useRef({origin:null}),knob=useRef(),dockArrow=useRef(),playerScreen=useRef({x:0,y:0}),transitioning=useRef(false)
   useEffect(()=>{
     useGame.setState({activePopup:null,room:'island',aboutSection:null,say:null,nearbyId:null})
-    hints.current=createPixelHints(Object.fromEntries(Object.entries(PLACES).map(([id,p])=>[id,p.stand])))
+    hints.current=createPixelHints(Object.fromEntries(Object.entries(PLACES).map(([id,p])=>[id,p.stand])),{greeting:false})
     let lastHint='',disposed=false,readyTimer
     const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches
     const enterLanding=async(section='about')=>{
@@ -84,6 +87,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
     }
     const open=id=>{if(id==='dock'){void enterLanding('offers');return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{
+      startOnBridge:fromBridge,
       onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');if(onLoadError)onLoadError();else onLoadReady?.()},
       onExitStart:()=>setExiting(true),onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
       onPosition:({avatar,places,x,y,z,dt,moving,autoWalking})=>{
@@ -93,6 +97,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
         for(const [id,point] of Object.entries(places))if(markers.current[id])markers.current[id].style.transform=`translate(${point.x}px,${point.y}px)`
         if(duck.current)duck.current.style.transform=`translate(${places.duck.x}px,${places.duck.y}px)`
         if(stats.current)stats.current.textContent=`x ${x.toFixed(2)} · z ${z.toFixed(2)} · 腳底 ${y.toFixed(3)} m`
+        if(introRef.current!=='done')return
         const st=useGame.getState()
         const next=hints.current.tick({dt,moving,x,z,autoWalking,near:st.nearbyId,paused:Boolean(st.activePopup||st.room==='about')})
         if(next.say!==st.say)st.setSay(next.say)
@@ -103,17 +108,36 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
     const walk=e=>{useGame.getState().closePopup();hints.current.suppress(e.detail.id);world.current.travel(e.detail.id)}
     const enter=e=>{if(e.detail?.professional){void enterLanding(null)}else{void enterLanding(e.detail?.section||'about')}}
     window.addEventListener('walk-to',walk);window.addEventListener('enter-about',enter)
-    return()=>{clearTimeout(readyTimer);disposed=true;transitioning.current=false;disposeIris();world.current?.dispose();window.removeEventListener('walk-to',walk);window.removeEventListener('enter-about',enter)}
+    return()=>{clearTimeout(greetingTimer.current);clearTimeout(readyTimer);disposed=true;transitioning.current=false;disposeIris();world.current?.dispose();window.removeEventListener('walk-to',walk);window.removeEventListener('enter-about',enter)}
   },[])
-  useEffect(()=>{world.current?.setPaused(Boolean(dialog||room==='about'||transitioning.current))},[dialog,room])
-  const showedWelcomeHelp=useRef(false)
+  useEffect(()=>{world.current?.setPaused(Boolean(dialog||room==='about'||transitioning.current||(intro!=='done'&&intro!=='walking')))},[dialog,room,intro])
+  const startedIntro=useRef(false)
   useEffect(()=>{
-    if(status!=='ready'||!pageVisible||showedWelcomeHelp.current)return
-    showedWelcomeHelp.current=true
-    useGame.getState().openPopup('help')
-  },[status,pageVisible])
+    if(status!=='ready'||!pageVisible||startedIntro.current)return
+    startedIntro.current=true
+    let cancelled=false
+    const start=async()=>{
+      if(fromBridge){
+        const rect=host.current.getBoundingClientRect(),point=playerScreen.current
+        await openIris(point.x+rect.left,point.y+rect.top,700)
+        if(cancelled)return
+        setIntro('walking')
+        await world.current.startEntrance()
+        if(cancelled)return
+      }
+      setIntro('greeting');useGame.getState().setSay(GREETING)
+    }
+    void start()
+    return()=>{cancelled=true}
+  },[status,pageVisible,fromBridge])
+  const greetingComplete=()=>{
+    if(introRef.current!=='greeting'||greetingTimer.current)return
+    greetingTimer.current=setTimeout(()=>{
+      useGame.getState().setSay(null);setIntro('help');useGame.getState().openPopup('help')
+    },1000)
+  }
   const open=id=>{if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
-  const close=()=>useGame.getState().closePopup()
+  const close=()=>{useGame.getState().closePopup();if(intro==='help'){world.current?.unlockIntro();setIntro('done')}}
   const read=section=>window.dispatchEvent(new CustomEvent('enter-about',{detail:{section}}))
   const endTouch=()=>{touch.current.origin=null;world.current?.setJoystick(0,0);if(knob.current)knob.current.style.transform=''}
   const keyLabel=isMobilePresentation()?'A':'E'
@@ -129,14 +153,14 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
             <span className={`hint-mark hint-mark--${id==='about'?'pin':'mail'}`}/><span className="hint-full">按<span className="key">{keyLabel}</span>{id==='about'?'看佈告欄':'開信箱'}</span>
           </button>
         </div>)}
-        <div className="pixel-anchor pixel-anchor--speech" ref={speech}><SpeechBubble/>{PLAYER_HINTS[near]&&!say&&<button className="player-hint" onClick={()=>open(near)}>按<span className="key">{keyLabel}</span>{PLAYER_HINTS[near]}</button>}</div>
+        <div className="pixel-anchor pixel-anchor--speech" ref={speech}><SpeechBubble onComplete={greetingComplete}/>{PLAYER_HINTS[near]&&!say&&<button className="player-hint" onClick={()=>open(near)}>按<span className="key">{keyLabel}</span>{PLAYER_HINTS[near]}</button>}</div>
         <div className="pixel-anchor pixel-anchor--duck" ref={duck}>{near==='duck'&&<div className="duck-say">呱呱~</div>}</div>
       </div>
       <div className="route-message" role="status">{route}</div>
-      <div className="touch-controls"><div className="joystick" aria-label="移動搖桿" onPointerDown={e=>{touch.current.origin={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)}} onPointerMove={e=>{if(!touch.current.origin)return;let x=e.clientX-touch.current.origin.x,y=e.clientY-touch.current.origin.y;const length=Math.hypot(x,y),scale=Math.max(1,length/34);x/=scale;y/=scale;knob.current.style.transform=`translate(${x}px,${y}px)`;world.current?.setJoystick(x/34,y/34,length>43)}} onPointerUp={endTouch} onPointerCancel={endTouch}><span ref={knob}/></div><button className="interact-touch" disabled={!near} onClick={()=>near&&open(near)}>A</button></div>
+      <div className="touch-controls" inert={intro!=='done'}><div className="joystick" aria-label="移動搖桿" onPointerDown={e=>{touch.current.origin={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)}} onPointerMove={e=>{if(!touch.current.origin)return;let x=e.clientX-touch.current.origin.x,y=e.clientY-touch.current.origin.y;const length=Math.hypot(x,y),scale=Math.max(1,length/34);x/=scale;y/=scale;knob.current.style.transform=`translate(${x}px,${y}px)`;world.current?.setJoystick(x/34,y/34,length>43)}} onPointerUp={endTouch} onPointerCancel={endTouch}><span ref={knob}/></div><button className="interact-touch" disabled={!near} onClick={()=>near&&open(near)}>A</button></div>
     </>}
     {new URLSearchParams(location.search).has('debug')&&<output className="debug" ref={stats}/>}
     {status!=='ready'&&(!externalLoading||status==='error')&&<WalkingLoader progress={progress} error={status==='error'}/>}
-    <div className="ui-layer">{status==='ready'&&<MenuPanel/>}{dialog&&<Dialog id={dialog} onClose={close} onRead={read}/>}</div>
+    <div className="ui-layer">{status==='ready'&&intro==='done'&&<MenuPanel/>}{dialog&&<Dialog id={dialog} onClose={close} onRead={read}/>}</div>
   </main>
 }

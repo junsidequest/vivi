@@ -10,3 +10,10 @@ describe('沿用 pixel 提示時序',()=>{
  it('小屋互動提示與彈窗不被閒置語錄覆蓋',()=>{const c=setup();c.step(8);expect(c.step(40,{near:'services'}).say).toBeNull();expect(c.step(40,{paused:true}).say).toBeNull()})
  it('鴨子台詞走出互動範圍就消失',()=>{const c=setup();c.step(8);c.hints.interactDuck();expect(c.step(.1,{near:'duck'}).say).not.toBeNull();expect(c.step(.1).say).toBeNull()})
 })
+
+it('由開場流程處理招呼時，不會在教學結束後重複招呼',()=>{
+ const hints=createPixelHints(points,{greeting:false})
+ let state
+ for(let i=0;i<200;i++)state=hints.tick({dt:.01,moving:false,x:5,z:5,near:null})
+ expect(state.say).toBeNull()
+})
