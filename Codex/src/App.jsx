@@ -46,7 +46,7 @@ function Dialog({ id, onClose, onRead }) {
       <p className="help-cell--wide">左側選單可快速前往。手機可點地面或拖動搖桿，按 A 互動。</p>
     </div>:<p>{content.text}</p>}
     {content.section && <button className="primary" onClick={() => onRead(content.section)}>{content.link}<span>↗</span></button>}
-    {id === 'contact' && <a className="primary" href="mailto:thevividai@gmail.com">寫信給 Vivi<span>↗</span></a>}
+    {id === 'contact' && <button className="primary" onClick={() => onRead('connect')}>Let's Connect<span>↗</span></button>}
     {(id === 'duck' || id === 'help') && <button className="primary" onClick={onClose}>{id === 'help' ? '繼續逛逛' : '繼續散步'}<span>→</span></button>}
   </section></div>
 }
