@@ -1,3 +1,4 @@
+import { nearbyPlace, isTextInput } from './interactions.js'
 import { createBridgeExit } from './bridgeExit.js'
 import { maxFollowZ } from './cameraBounds.js'
 import { isMobilePresentation } from '../mobile.js'
@@ -17,7 +18,7 @@ import { measureAvatar, createFootPlacement } from './avatarCollision.js'
 
 export const PLACES = {
   dock: { range: 0, title: '橋尾', point: [0, .16, 7.3], stand: {x:0,z:7.05} },
-  services: { range: .6, title: '課程小屋', point: [0, 2.2, -1], stand: { x: 0, z: .4 } },
+  services: { interactionBounds:{minX:-.85,maxX:.85,minZ:-1.15,maxZ:1.05}, title: '課程小屋', point: [0, 2.2, -1], stand: { x: 0, z: .4 } },
   about: { range: 1.15, title: '認識 Vivi', point: [-2.88, 1.9, -.6], stand: { x: -2.75, z: .5 } },
   contact: { range: 1.15, title: '寄一封信', point: [1.85, 1.6, 3.18], stand: { x: .75, z: 3.25 } },
   duck: { title: '池塘小鴨', point: [4, .8, -.4], stand: { x: 2.15, z: 1.4 } },
@@ -169,9 +170,12 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   const isMovingKey = code => /^(Arrow(Up|Down|Left|Right)|Key[WASD]|Shift(Left|Right))$/.test(code)
   function keydown(event) {
     if(bridgeExit.active||introLocked){if(isMovingKey(event.code))event.preventDefault();return}
-    if (/^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(event.target.tagName)) return
+    if(isTextInput(event.target))return
+    if(event.code==='KeyE'&&!event.repeat&&nearby&&!paused){
+      event.preventDefault();event.stopImmediatePropagation();onOpen(nearby);return
+    }
+    if (/^(BUTTON|A)$/.test(event.target.tagName)) return
     if (isMovingKey(event.code)) { event.preventDefault(); keys.add(event.code) }
-    if (event.code === 'KeyE' && !event.repeat && nearby && !paused) onOpen(nearby)
   }
   const keyup = event => keys.delete(event.code)
   const blur = () => { keys.clear(); joystick.x = 0; joystick.z = 0 }
@@ -332,11 +336,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
         if(distance<step*.05){speed=0;if(route){route=null;routeId=null;destination.visible=false;onRoute('這裡有障礙物，請重新選擇落點。')}}
       }
       if(bridgeExit.shouldStart(previousZ,position))beginBridgeExit()
-      let nextNear = null, nearest = sitting?0:1.35
-      for (const [id, place] of Object.entries(PLACES)) {
-        const d = Math.hypot(position.x - place.stand.x, position.z - place.stand.z)
-        if (d < nearest && d < (place.range ?? 1.35)) { nearest = d; nextNear = id }
-      }
+      const nextNear=sitting?null:nearbyPlace(PLACES,position)
       if (nextNear !== nearby) { nearby = nextNear; onNear(nearby) }
     }
     travelled += distance
