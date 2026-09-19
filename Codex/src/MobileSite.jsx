@@ -1,8 +1,11 @@
+import Professional from './Professional.jsx'
+import Welcome from './Welcome.jsx'
 import WalkingLoader from './ui/WalkingLoader.jsx'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { currentRoute, resolveRoute, sitePath } from './routes.js'
 
-const loaders={welcome:()=>import('./Welcome.jsx'),island:()=>import('./App.jsx'),professional:()=>import('./Professional.jsx')}
+// 輕量頁面隨入口載入，避免停留小島期間部署更新後，舊雜湊分包已被移除。
+const loaders={welcome:()=>Promise.resolve({default:Welcome}),island:()=>import('./App.jsx'),professional:()=>Promise.resolve({default:Professional})}
 function PreparedPage({entry,visible,onReady,onError,onProgress}){
   const host=useRef(null)
   const ready=useCallback(()=>onReady(entry),[entry,onReady])
