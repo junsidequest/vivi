@@ -377,6 +377,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   renderer.domElement.addEventListener('webglcontextlost', lost)
   return {
     travel,
+    freezeFrame() { cancelAnimationFrame(frame) },
     setJoystick(x, z, run = false) { Object.assign(joystick, { x, z, run }) },
     setPaused(value) { paused = value; if (value) {blur();speed=0;setHover(null)} },
     dispose() {

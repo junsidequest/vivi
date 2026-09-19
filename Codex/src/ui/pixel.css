@@ -170,3 +170,7 @@
   .island-app .keypad-row{gap:4px}
   .island-app .player-hint{white-space:normal}
 }
+
+/* 位移錨點會建立各自的堆疊層，角色台詞置於鴨子泡泡之前。 */
+.pixel-anchor--duck{z-index:1}
+.pixel-anchor--speech{z-index:2}

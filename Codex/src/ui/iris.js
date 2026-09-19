@@ -7,7 +7,9 @@ let el = null, frameId = 0
 function ensure() {
   if (!el) {
     el = document.createElement('div')
-    el.style.cssText = 'position:fixed;inset:0;z-index:40;pointer-events:auto;display:none'
+    el.setAttribute('aria-hidden','true')
+    el.dataset.transition='iris'
+    el.style.cssText = 'position:fixed;inset:0;z-index:100;pointer-events:auto;display:none'
     document.body.appendChild(el)
   }
   return el
@@ -23,10 +25,12 @@ function animate(cx, cy, r0, r1, ms) {
   node.style.opacity = '1'   // fadeToInk 用過 opacity，圓形動畫前重置
   node.style.display = 'block'
   return new Promise((resolve) => {
-    const t0 = performance.now()
+    let elapsed=0,last=null
     const ease = (p) => (p < 0.5 ? 2 * p * p : 1 - ((-2 * p + 2) ** 2) / 2)
     const frame = (now) => {
-      const p = Math.min(1, (now - t0) / ms)
+      if(last!==null)elapsed+=Math.min(now-last,50)
+      last=now
+      const p = Math.min(1, elapsed / Math.max(1,ms))
       const r = r0 + (r1 - r0) * ease(p)
       const f = Math.min(FEATHER, r)   // r 收小時羽化跟著收斂，收黑的終點才會是實心黑
       node.style.background =

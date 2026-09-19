@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import content from './content/professional.html?raw'
 
 // 保持原始內容的引用穩定，避免載入狀態更新時重建時間軸 DOM。
-const pageMarkup = {__html:content.replaceAll('src="img/', `src="${sitePath('img/')}`)}
+const pageMarkup = {__html:content.replace('href="__ISLAND_URL__"', `href="${sitePath('island/')}"`).replaceAll('src="img/', `src="${sitePath('img/')}`)}
 
 export default function Professional(){
   const page = useRef(null)
@@ -40,7 +40,7 @@ export default function Professional(){
   },[])
   return <div className="professional" ref={page}>
     <a className="pro-skip" href="#about">跳至主要內容</a>
-    <header className="pro-header"><a className="pro-brand" href={sitePath('')}>Vivi Chen<span>陳盈臻</span></a><nav aria-label="主要導覽"><a href="#about">關於我</a><a href="#process">服務流程</a><a href="#offers">課程與服務</a><a href="#partners">合作夥伴</a></nav><div className="pro-header-actions"><a className="pro-contact pro-island" href={sitePath('island/')}>逛逛 Vivi 的小島</a><a className="pro-contact" href="#connect">服務諮詢</a></div></header>
+    <header className="pro-header"><a className="pro-brand" href={sitePath('')}>Vivi Chen<span>陳盈臻</span></a><nav aria-label="主要導覽"><a href="#about">關於我</a><a href="#process">服務流程</a><a href="#offers">課程與服務</a><a href="#partners">合作夥伴</a></nav><div className="pro-header-actions"><a className="pro-contact" href="#connect">服務諮詢</a></div></header>
     <main>
       <section className="pro-hero" aria-labelledby="pro-title"><div className="pro-hero-copy"><span className="pro-kicker">AI 陪跑教練 × 企業內訓</span><h1 id="pro-title">把 AI，<br/>真的用起來<span>。</span></h1><p>我幫文科與非技術背景的團隊，<br/>把 AI 真的用起來。</p><a className="pro-cta" href="#offers">看看我們能一起做的事</a><div className="pro-signature">陳盈臻 <span>Vivi Chen</span></div></div><div className="pro-hero-photo"><img src={sitePath('img/vivichen.png')} alt="AI 陪跑教練陳盈臻 Vivi" fetchPriority="high"/></div></section>
       <div className="pro-content" dangerouslySetInnerHTML={pageMarkup}/>

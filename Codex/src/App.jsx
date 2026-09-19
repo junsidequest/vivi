@@ -56,15 +56,19 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
     hints.current=createPixelHints(Object.fromEntries(Object.entries(PLACES).map(([id,p])=>[id,p.stand])))
     let lastHint='',disposed=false,readyTimer
     const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches
-    const enterLanding=async(section='about',fromDock=false)=>{
+    const enterLanding=async(section='about')=>{
       if(transitioning.current)return
       transitioning.current=true;world.current?.setPaused(true)
-      const {x,y}=playerScreen.current
-      await closeIris(x,y,reduced?1:fromDock?950:700)
+      useGame.getState().closePopup()
+      world.current?.freezeFrame()
+      const rect=host.current.getBoundingClientRect()
+      const x=Math.max(0,Math.min(innerWidth,playerScreen.current.x+rect.left))
+      const y=Math.max(0,Math.min(innerHeight,playerScreen.current.y+rect.top))
+      await closeIris(x,y,reduced?250:950)
       if(disposed)return
       window.location.assign(sitePath(`about/${section ? `#${section}` : ''}`))
     }
-    const open=id=>{if(id==='dock'){void enterLanding('offers',true);return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
+    const open=id=>{if(id==='dock'){void enterLanding('offers');return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{
       onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');onLoadReady?.()},
       onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
@@ -83,7 +87,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
       }
     })
     const walk=e=>{useGame.getState().closePopup();hints.current.suppress(e.detail.id);world.current.travel(e.detail.id)}
-    const enter=e=>{if(e.detail?.professional){void enterLanding(null,true)}else{void enterLanding(e.detail?.section||'about')}}
+    const enter=e=>{if(e.detail?.professional){void enterLanding(null)}else{void enterLanding(e.detail?.section||'about')}}
     window.addEventListener('walk-to',walk);window.addEventListener('enter-about',enter)
     return()=>{clearTimeout(readyTimer);disposed=true;transitioning.current=false;disposeIris();world.current?.dispose();window.removeEventListener('walk-to',walk);window.removeEventListener('enter-about',enter)}
   },[])
@@ -111,8 +115,8 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
             <span className={`hint-mark hint-mark--${id==='about'?'pin':'mail'}`}/><span className="hint-full">按<span className="key">{keyLabel}</span>{id==='about'?'看佈告欄':'開信箱'}</span>
           </button>
         </div>)}
-        <div className="pixel-anchor" ref={speech}><SpeechBubble/>{PLAYER_HINTS[near]&&!say&&<button className="player-hint" onClick={()=>open(near)}>按<span className="key">{keyLabel}</span>{PLAYER_HINTS[near]}</button>}</div>
-        <div className="pixel-anchor" ref={duck}>{near==='duck'&&<div className="duck-say">呱呱~</div>}</div>
+        <div className="pixel-anchor pixel-anchor--speech" ref={speech}><SpeechBubble/>{PLAYER_HINTS[near]&&!say&&<button className="player-hint" onClick={()=>open(near)}>按<span className="key">{keyLabel}</span>{PLAYER_HINTS[near]}</button>}</div>
+        <div className="pixel-anchor pixel-anchor--duck" ref={duck}>{near==='duck'&&<div className="duck-say">呱呱~</div>}</div>
       </div>
       <div className="route-message" role="status">{route}</div>
       <div className="touch-controls"><div className="joystick" aria-label="移動搖桿" onPointerDown={e=>{touch.current.origin={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)}} onPointerMove={e=>{if(!touch.current.origin)return;let x=e.clientX-touch.current.origin.x,y=e.clientY-touch.current.origin.y;const length=Math.hypot(x,y),scale=Math.max(1,length/34);x/=scale;y/=scale;knob.current.style.transform=`translate(${x}px,${y}px)`;world.current?.setJoystick(x/34,y/34,length>43)}} onPointerUp={endTouch} onPointerCancel={endTouch}><span ref={knob}/></div><button className="interact-touch" disabled={!near} onClick={()=>near&&open(near)}>A</button></div>
