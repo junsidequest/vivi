@@ -77,7 +77,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   let seats=[], seatedPose, sitting=null, routeSeat=null, seatCooldown=0
   let introLocked=true,entrance=null
   const position = { x: 0, z: startOnBridge?7.05:1.5 }, joystick = { x: 0, z: 0, run: false }, keys = new Set()
-  const bridgeExit=createBridgeExit(PLACES.dock.stand.z)
+  const bridgeExit=createBridgeExit()
   function beginBridgeExit(){
     if(!bridgeExit.start(position))return
     blur();route=null;routeId=null;routeSeat=null;arrivalTarget=null;destination.visible=false;setHover(null);nearby=null;onNear(null);heading=0

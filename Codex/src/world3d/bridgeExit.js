@@ -1,9 +1,11 @@
-// 橋尾一旦接手便不再接受操作，保留一段向前走的轉場步伐。
-export function createBridgeExit(triggerZ) {
+// 踏上橋入口就接手，持續走到橋尾才轉場。
+export const BRIDGE_ENTRY_Z=5
+export const BRIDGE_EXIT_Z=8.15
+export function createBridgeExit(triggerZ=BRIDGE_ENTRY_Z) {
   let active=false, endZ=0, finished=false
   return {
     get active(){return active},
-    start(position){if(active)return false;active=true;endZ=position.z+1.1;return true},
+    start(position){if(active)return false;active=true;endZ=Math.max(BRIDGE_EXIT_Z,position.z+1.1);return true},
     shouldStart(previousZ,position){return !active&&position.z>previousZ&&position.z>=triggerZ&&Math.abs(position.x)<.8},
     advance(position,dt){
       if(!active||finished)return {distance:0,complete:false}
