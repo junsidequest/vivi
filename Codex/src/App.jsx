@@ -1,3 +1,4 @@
+import { sitePath } from './routes.js'
 import WalkingLoader from './ui/WalkingLoader.jsx'
 import { useEffect, useRef, useState } from 'react'
 import { createWorld, PLACES } from './world3d/engine.js'
@@ -61,7 +62,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
       const {x,y}=playerScreen.current
       await closeIris(x,y,reduced?1:fromDock?950:700)
       if(disposed)return
-      window.location.assign(`?view=professional${section ? `#${section}` : ''}`)
+      window.location.assign(sitePath(`about/${section ? `#${section}` : ''}`))
     }
     const open=id=>{if(id==='dock'){void enterLanding('offers',true);return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{

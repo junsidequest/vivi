@@ -16,8 +16,8 @@ npm run dev
 ## 入口與兩種瀏覽模式
 
 - `/`：雙人物卡片入口；滑鼠懸停或鍵盤焦點切換卡片與背景。
-- `/?view=island`：原本的 3D 小島，選擇後才載入場景。
-- `/?view=professional`：黑白簡約的講師介紹頁，使用指定的真實照片。
+- `/island/`：原本的 3D 小島，選擇後才載入場景。
+- `/about/`：黑白簡約的講師介紹頁，使用指定的真實照片。
 - 小島的佈告欄與小屋對話按鈕經轉場前往黑白介紹頁；黑白頁上方可前往小島。此版本不包含舊像素介紹頁。
 
 入口元件為 `src/Welcome.jsx`、樣式為 `src/welcome.css`。黑白頁為 `src/Professional.jsx` 與 `src/professional.css`，介紹內容保存在 `src/content/professional.html`。照片為 `public/img/vivichen.png`。
@@ -70,3 +70,5 @@ npm run build
 ## GitHub Pages 部署
 
 推送 main 後，由 `.github/workflows/pages.yml` 安裝 Codex 依賴、建置並部署 `Codex/dist`。網站入口為雙卡片選擇頁，不包含舊像素介紹頁。
+
+三個入口各有獨立 HTML，可直接開啟或重新整理。GitHub Pages 專案網址會保留 `/vivi/` 前綴，例如 `/vivi/about/#offers`。舊 `?view=island` 與 `?view=professional` 連結會自動轉向新路徑並保留錨點。

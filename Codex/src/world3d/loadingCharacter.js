@@ -1,3 +1,4 @@
+import { sitePath } from '../routes.js'
 import * as T from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { createLoadingModel } from './loadingModel.js'
@@ -6,7 +7,7 @@ import { createFootPlacement } from './avatarCollision.js'
 import { createLoadingArmPose, styleLoadingAvatar } from './loadingAvatarStyle.js'
 
 let character
-const getCharacter=()=>character??=(new GLTFLoader()).loadAsync(new URL('3d/vivi-detailed.glb',document.baseURI).href).catch(error=>{character=null;throw error})
+const getCharacter=()=>character??=(new GLTFLoader()).loadAsync(sitePath('3d/vivi-detailed.glb')).catch(error=>{character=null;throw error})
 
 // 共用小島模型，套用載入專用跑步動作，透明畫布的地面對齊進度條。
 export function createLoadingCharacter(host,{onReady,onError}){

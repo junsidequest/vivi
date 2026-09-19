@@ -1,3 +1,4 @@
+import { sitePath } from '../routes.js'
 import * as T from 'three'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js'
@@ -76,7 +77,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     assetProgress.set(file,Math.max(assetProgress.get(file),value))
     onProgress([...assetProgress.values()].reduce((sum,p)=>sum+p,0)/assetProgress.size*.85)
   }
-  const load = file => loader.loadAsync(new URL(`3d/${file}`, document.baseURI).href,event=>{
+  const load = file => loader.loadAsync(sitePath(`3d/${file}`),event=>{
     if(event.lengthComputable&&event.total>0)reportAsset(file,event.loaded/event.total)
   }).then(gltf=>{reportAsset(file,1);return gltf})
   const loadIsland = load('vivi-island.glb').then(gltf => {
