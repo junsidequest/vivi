@@ -1,3 +1,4 @@
+import { createBridgeExit } from './bridgeExit.js'
 import { maxFollowZ } from './cameraBounds.js'
 import { isMobilePresentation } from '../mobile.js'
 import { createMobileShadows } from './mobileShadows.js'
@@ -35,7 +36,7 @@ function disposeTree(root) {
   geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose())
 }
 
-export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition, onRoute, onProgress = () => {} }) {
+export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition, onRoute, onProgress = () => {}, onExitStart = () => {} }) {
   const mobile=isMobilePresentation()
   let updateMobileShadows
   let renderer
@@ -74,6 +75,12 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   let idleHead, idleChest, idleHeadPose, idleChestPose
   let seats=[], seatedPose, sitting=null, routeSeat=null, seatCooldown=0
   const position = { x: 0, z: 1.5 }, joystick = { x: 0, z: 0, run: false }, keys = new Set()
+  const bridgeExit=createBridgeExit(PLACES.dock.stand.z)
+  function beginBridgeExit(){
+    if(!bridgeExit.start(position))return
+    blur();route=null;routeId=null;routeSeat=null;arrivalTarget=null;destination.visible=false;setHover(null);nearby=null;onNear(null);heading=0
+    onRoute('了解更多 Vivi 的課程與服務');onExitStart()
+  }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
   const loader = new GLTFLoader()
   const assetProgress = new Map([['vivi-island.glb',0],['vivi-detailed.glb',0]])
@@ -160,6 +167,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   const observer = new ResizeObserver(resize); observer.observe(host); resize()
   const isMovingKey = code => /^(Arrow(Up|Down|Left|Right)|Key[WASD]|Shift(Left|Right))$/.test(code)
   function keydown(event) {
+    if(bridgeExit.active){if(isMovingKey(event.code))event.preventDefault();return}
     if (/^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(event.target.tagName)) return
     if (isMovingKey(event.code)) { event.preventDefault(); keys.add(event.code) }
     if (event.code === 'KeyE' && !event.repeat && nearby && !paused) onOpen(nearby)
@@ -186,7 +194,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   }
   const pointerleave=()=>setHover(null)
   const pointermove=event=>{
-    if(!ready||paused){setHover(null);return}
+    if(!ready||paused||bridgeExit.active){setHover(null);return}
     const now=performance.now();if(now-lastHover<45)return;lastHover=now
     const rect=host.getBoundingClientRect()
     pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1)
@@ -198,7 +206,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   const pointerdown = event => { if(event.button!==0)return; pointerStart = { x: event.clientX, y: event.clientY }; renderer.domElement.focus() }
   const pointerup = event => {
     const start=pointerStart;pointerStart=null
-    if (!ready || paused || event.button!==0 || !start || Math.hypot(event.clientX-start.x,event.clientY-start.y)>8) return
+    if (!ready || paused || bridgeExit.active || event.button!==0 || !start || Math.hypot(event.clientX-start.x,event.clientY-start.y)>8) return
     const rect=host.getBoundingClientRect()
     pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1)
     ray.setFromCamera(pointer,camera)
@@ -232,7 +240,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   renderer.domElement.addEventListener('pointermove',pointermove);renderer.domElement.addEventListener('pointerleave',pointerleave);
   renderer.domElement.addEventListener('pointerdown', pointerdown); renderer.domElement.addEventListener('pointerup', pointerup)
   function travel(id) {
-    if (!ready || paused || !PLACES[id]) return
+    if (!ready || paused || bridgeExit.active || !PLACES[id]) return
     arrivalTarget=null;setHover(null);standUp();routeSeat=null
     const path = navigation.findRoute(routeOrigin(), PLACES[id].stand)
     if (!path) { onRoute('這個方向暫時走不通，換個位置試試。'); return }
@@ -273,7 +281,12 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
         }
       }
     }
-    if (ready && !paused && !sitting) {
+    if(ready&&!paused&&bridgeExit.active){
+      const step=bridgeExit.advance(position,dt);distance=step.distance;heading=0
+      if(step.complete)onOpen('dock')
+    }
+    if (ready && !paused && !sitting && !bridgeExit.active) {
+      const previousZ=position.z
       let dx = (keys.has('KeyD') || keys.has('ArrowRight') ? 1 : 0) - (keys.has('KeyA') || keys.has('ArrowLeft') ? 1 : 0) + joystick.x
       let dz = (keys.has('KeyS') || keys.has('ArrowDown') ? 1 : 0) - (keys.has('KeyW') || keys.has('ArrowUp') ? 1 : 0) + joystick.z
       const length=Math.hypot(dx,dz)
@@ -287,7 +300,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
         const next=route[0],x=next.x-position.x,z=next.z-position.z;remaining=Math.hypot(x,z)
         if(remaining<.012){
           route.shift()
-          if(!route.length){const id=routeId,seat=routeSeat;route=null;routeId=null;routeSeat=null;speed=0;destination.visible=false;onRoute('');if(seat)sitDown(seat);else if(id){if(id==='about'||id==='contact'){heading=Math.atan2(PLACES[id].point[0]-position.x,PLACES[id].point[2]-position.z);arrivalTarget=id}else onOpen(id)}}
+          if(!route.length){const id=routeId,seat=routeSeat;route=null;routeId=null;routeSeat=null;speed=0;destination.visible=false;onRoute('');if(seat)sitDown(seat);else if(id){if(id==='about'||id==='contact'){heading=Math.atan2(PLACES[id].point[0]-position.x,PLACES[id].point[2]-position.z);arrivalTarget=id}else if(id==='dock')beginBridgeExit();else onOpen(id)}}
         }else{dirX=x/remaining;dirZ=z/remaining;desiredSpeed=route.length===1?arrivalSpeed(remaining):1.25}
       }
       if(desiredSpeed>0&&!route&&seatCooldown<=0){
@@ -309,6 +322,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
         position.x=next.x;position.z=next.z
         if(distance<step*.05){speed=0;if(route){route=null;routeId=null;destination.visible=false;onRoute('這裡有障礙物，請重新選擇落點。')}}
       }
+      if(bridgeExit.shouldStart(previousZ,position))beginBridgeExit()
       let nextNear = null, nearest = sitting?0:1.35
       for (const [id, place] of Object.entries(PLACES)) {
         const d = Math.hypot(position.x - place.stand.x, position.z - place.stand.z)
@@ -371,7 +385,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     if(destination.visible)destination.scale.setScalar(1+Math.sin(now*.006)*.08)
     if(hovered&&hoverComposer)hoverComposer.render(dt)
     else renderer.render(scene, camera)
-    if (ready) onPosition({ avatar: project([position.x, avatar.position.y + 1.4, position.z]), places: Object.fromEntries(Object.entries(PLACES).map(([id, p]) => [id, project(p.point)])), x: position.x, z: position.z, y: avatar.position.y, clearance: FOOT_CLEARANCE, dt, moving: distance>.00001, autoWalking: Boolean(route) })
+    if (ready) onPosition({ avatar: project([position.x, avatar.position.y + 1.4, position.z]), places: Object.fromEntries(Object.entries(PLACES).map(([id, p]) => [id, project(p.point)])), x: position.x, z: position.z, y: avatar.position.y, clearance: FOOT_CLEARANCE, dt, moving: distance>.00001, autoWalking: Boolean(route)||bridgeExit.active })
     frame = requestAnimationFrame(tick)
   }
   frame = requestAnimationFrame(tick)
@@ -380,7 +394,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
   return {
     travel,
     freezeFrame() { cancelAnimationFrame(frame) },
-    setJoystick(x, z, run = false) { Object.assign(joystick, { x, z, run }) },
+    setJoystick(x, z, run = false) { if(bridgeExit.active)return;Object.assign(joystick, { x, z, run }) },
     setPaused(value) { paused = value; if (value) {blur();speed=0;setHover(null)} },
     dispose() {
       disposed = true; cancelAnimationFrame(frame); observer.disconnect()

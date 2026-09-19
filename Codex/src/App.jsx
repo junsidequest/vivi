@@ -52,6 +52,7 @@ function Dialog({ id, onClose, onRead }) {
 }
 export default function App({externalLoading=false,pageVisible=true,onLoadReady,onLoadProgress,onLoadError}) {
   const host=useRef(),world=useRef(),speech=useRef(),markers=useRef({}),duck=useRef(),stats=useRef(),hints=useRef()
+  const [exiting,setExiting]=useState(false)
   const [status,setStatus]=useState('loading'),[route,setRoute]=useState(''),[progress,setProgress]=useState(0)
   const [hint,setHint]=useState({peek:null,approach:null,suppress:null})
   const dialog=useGame(s=>s.activePopup),near=useGame(s=>s.nearbyId),say=useGame(s=>s.say)
@@ -84,7 +85,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
     const open=id=>{if(id==='dock'){void enterLanding('offers');return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{
       onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');if(onLoadError)onLoadError();else onLoadReady?.()},
-      onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
+      onExitStart:()=>setExiting(true),onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
       onPosition:({avatar,places,x,y,z,dt,moving,autoWalking})=>{
         playerScreen.current=avatar
         if(dockArrow.current)dockArrow.current.style.transform=`translate(${places.dock.x}px,${places.dock.y}px)`
@@ -116,7 +117,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
   const read=section=>window.dispatchEvent(new CustomEvent('enter-about',{detail:{section}}))
   const endTouch=()=>{touch.current.origin=null;world.current?.setJoystick(0,0);if(knob.current)knob.current.style.transform=''}
   const keyLabel=isMobilePresentation()?'A':'E'
-  return <main className="island-app">
+  return <main className="island-app" inert={exiting}>
     <div className="scene" ref={host}/>
     {status==='ready' && room==='island' && <>
       <div className="pixel-world">
