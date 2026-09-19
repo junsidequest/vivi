@@ -61,8 +61,8 @@ describe('整個角色的碰撞與可踩踏表面', () => {
   it('全身留在島內及碼頭內，避免身體懸在邊緣外', () => {
     expect(navigation.canWalk(0, 6.5)).toBe(true)
     expect(navigation.canWalk(.4, 6.5)).toBe(false)
-    expect(navigation.canWalk(0, 7.4)).toBe(true) // 橋樑已延伸至畫面底端
-    expect(navigation.canWalk(0, 40)).toBe(false)
+    expect(navigation.canWalk(0, 7.4)).toBe(true) // 固定橋尾前仍有可通行的橋面
+    expect(navigation.canWalk(0, 8.7)).toBe(false)
     expect(navigation.canWalk(6.2, 0)).toBe(false)
   })
   it('大步跑步仍不能跨過細燈柱或池塘', () => {

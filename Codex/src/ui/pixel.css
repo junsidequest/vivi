@@ -174,3 +174,12 @@
 /* 位移錨點會建立各自的堆疊層，角色台詞置於鴨子泡泡之前。 */
 .pixel-anchor--duck{z-index:1}
 .pixel-anchor--speech{z-index:2}
+
+/* 箭頭固定在橋尾投影上方；32px 按鈕下緣距橋尾 20px。 */
+.pixel-world .dock-arrow{height:32px;animation:none;transform:translateX(-50%);filter:none}
+/* 場景中的台詞與互動提示不使用陰影，保留選單和彈窗的陰影。 */
+.island-app .pixel-world,.island-app .pixel-world *,
+.island-app .pixel-world *::before,.island-app .pixel-world *::after,
+.island-app .route-message,.island-app .speech{
+  filter:none!important;box-shadow:none!important;text-shadow:none!important;
+}

@@ -14,7 +14,7 @@ import { prepareWalk } from './walkAnimation.js'
 import { measureAvatar, createFootPlacement } from './avatarCollision.js'
 
 export const PLACES = {
-  dock: { range: 0, title: '橋尾', point: [0, .16, 7.3], stand: {x:0,z:7.05} },
+  dock: { range: 0, title: '橋尾', point: [0, .10, 8.4475], stand: {x:0,z:7.5} },
   services: { range: .6, title: '課程小屋', point: [0, 2.2, -1], stand: { x: 0, z: .4 } },
   about: { range: 1.15, title: '認識 Vivi', point: [-2.88, 1.9, -.6], stand: { x: -2.75, z: .5 } },
   contact: { range: 1.15, title: '寄一封信', point: [1.85, 1.6, 3.18], stand: { x: .75, z: 3.25 } },

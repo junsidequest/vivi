@@ -34,14 +34,15 @@ beforeAll(async () => {
 
 describe('實際 Vivi 模型', () => {
   it('寬木板橋尾可步行抵達並保留原本橋面寬度',()=>{
-    const target={x:0,z:7.05}
+    const target={x:0,z:7.5}
     expect(navigation.canWalk(target.x,target.z)).toBe(true)
     expect(navigation.findRoute({x:0,z:1.5},target)?.length).toBeGreaterThan(0)
     const dock=island.getObjectByName('Dock')
     const box=new T.Box3().setFromObject(dock)
     expect(box.max.x-box.min.x).toBeCloseTo(1.5,2)
-    expect(box.max.z).toBeGreaterThan(30)
-    for(let z=5.1;z<=30;z+=.4)expect(navigation.canWalk(0,z)).toBe(true)
+    expect(box.max.z).toBeCloseTo(8.4475,2)
+    expect(navigation.canWalk(0,8.7)).toBe(false)
+    for(let z=5.1;z<=7.9;z+=.4)expect(navigation.canWalk(0,z)).toBe(true)
   },30000)
 
   it('動畫全身包圍範圍仍可從出生點走到佈告欄與信箱', () => {
