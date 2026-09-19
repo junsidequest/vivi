@@ -47,3 +47,13 @@
   .island-app .primary{min-height:48px}
   .island-app .menu-toggle{font-size:24px!important}
 }
+
+/* 手機提示獨立放在操作列下方，並預留兩行文字與底部安全區。 */
+.island-controls,.route-slot{display:contents}
+@media(max-width:720px),(pointer:coarse){
+  .island-app .island-controls{position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;flex-direction:column;gap:14px;pointer-events:none}
+  .island-app .touch-controls{position:static;display:flex;align-items:center;justify-content:space-between;width:100%;pointer-events:none}
+  .island-app .touch-controls>*{pointer-events:auto}
+  .island-app .route-slot{display:flex;justify-content:center;align-items:flex-start;min-height:84px;width:100%}
+  .island-app .route-message{position:static;transform:none;margin:0;max-width:100%;overflow-wrap:anywhere}
+}

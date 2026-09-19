@@ -156,8 +156,10 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
         <div className="pixel-anchor pixel-anchor--speech" ref={speech}><SpeechBubble onComplete={greetingComplete}/>{PLAYER_HINTS[near]&&!say&&<button className="player-hint" onClick={()=>open(near)}>按<span className="key">{keyLabel}</span>{PLAYER_HINTS[near]}</button>}</div>
         <div className="pixel-anchor pixel-anchor--duck" ref={duck}>{near==='duck'&&<div className="duck-say">呱呱~</div>}</div>
       </div>
-      <div className="route-message" role="status">{route}</div>
+      <div className="island-controls">
       <div className="touch-controls" inert={intro!=='done'}><div className="joystick" aria-label="移動搖桿" onPointerDown={e=>{touch.current.origin={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)}} onPointerMove={e=>{if(!touch.current.origin)return;let x=e.clientX-touch.current.origin.x,y=e.clientY-touch.current.origin.y;const length=Math.hypot(x,y),scale=Math.max(1,length/34);x/=scale;y/=scale;knob.current.style.transform=`translate(${x}px,${y}px)`;world.current?.setJoystick(x/34,y/34,length>43)}} onPointerUp={endTouch} onPointerCancel={endTouch}><span ref={knob}/></div><button className="interact-touch" disabled={!near} onClick={()=>near&&open(near)}>A</button></div>
+      <div className="route-slot"><div className="route-message" role="status">{route}</div></div>
+      </div>
     </>}
     {new URLSearchParams(location.search).has('debug')&&<output className="debug" ref={stats}/>}
     {status!=='ready'&&(!externalLoading||status==='error')&&<WalkingLoader progress={progress} error={status==='error'}/>}
