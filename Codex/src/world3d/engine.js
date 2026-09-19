@@ -1,3 +1,4 @@
+import { maxFollowZ } from './cameraBounds.js'
 import { isMobilePresentation } from '../mobile.js'
 import { createMobileShadows } from './mobileShadows.js'
 import { sitePath } from '../routes.js'
@@ -14,7 +15,7 @@ import { prepareWalk } from './walkAnimation.js'
 import { measureAvatar, createFootPlacement } from './avatarCollision.js'
 
 export const PLACES = {
-  dock: { range: 0, title: '橋尾', point: [0, .10, 8.4475], stand: {x:0,z:7.5} },
+  dock: { range: 0, title: '橋尾', point: [0, .16, 7.3], stand: {x:0,z:7.05} },
   services: { range: .6, title: '課程小屋', point: [0, 2.2, -1], stand: { x: 0, z: .4 } },
   about: { range: 1.15, title: '認識 Vivi', point: [-2.88, 1.9, -.6], stand: { x: -2.75, z: .5 } },
   contact: { range: 1.15, title: '寄一封信', point: [1.85, 1.6, 3.18], stand: { x: .75, z: 3.25 } },
@@ -358,6 +359,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
       target.lerp(desired, reduced ? 1 : 1 - Math.exp(-dt * 4))
     }
     if(ready)updateMobileShadows?.(avatar,navigation,sitting)
+    target.z=Math.min(target.z,maxFollowZ(PLACES.dock.point,target.y,camera.top,host.clientHeight))
     camera.position.copy(target).add(cameraOffset); camera.lookAt(target)
     if (island && !reduced) {
       const duck = island.getObjectByName('Duck')

@@ -87,7 +87,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
       onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
       onPosition:({avatar,places,x,y,z,dt,moving,autoWalking})=>{
         playerScreen.current=avatar
-        if(dockArrow.current)dockArrow.current.style.transform=`translate(${places.dock.x}px,${places.dock.y-52}px)`
+        if(dockArrow.current)dockArrow.current.style.transform=`translate(${places.dock.x}px,${places.dock.y}px)`
         if(speech.current)speech.current.style.transform=`translate(${avatar.x}px,${avatar.y}px)`
         for(const [id,point] of Object.entries(places))if(markers.current[id])markers.current[id].style.transform=`translate(${point.x}px,${point.y}px)`
         if(duck.current)duck.current.style.transform=`translate(${places.duck.x}px,${places.duck.y}px)`

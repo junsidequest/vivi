@@ -175,7 +175,7 @@
 .pixel-anchor--duck{z-index:1}
 .pixel-anchor--speech{z-index:2}
 
-/* 箭頭固定在橋尾投影上方；32px 按鈕下緣距橋尾 20px。 */
+/* 箭頭固定於橋上的世界座標；鏡頭下移上限保留按鈕下方 20px。 */
 .pixel-world .dock-arrow{height:32px;animation:none;transform:translateX(-50%);filter:none}
 /* 場景中的台詞與互動提示不使用陰影，保留選單和彈窗的陰影。 */
 .island-app .pixel-world,.island-app .pixel-world *,
