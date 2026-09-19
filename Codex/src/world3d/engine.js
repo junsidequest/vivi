@@ -21,7 +21,7 @@ export const PLACES = {
   services: { interactionBounds:{minX:-.85,maxX:.85,minZ:-1.15,maxZ:1.05}, title: '課程小屋', point: [0, 2.2, -1], stand: { x: 0, z: .4 } },
   about: { range: 1.15, title: '認識 Vivi', point: [-2.88, 1.9, -.6], stand: { x: -2.75, z: .5 } },
   contact: { range: 1.15, title: '寄一封信', point: [1.85, 1.6, 3.18], stand: { x: .75, z: 3.25 } },
-  duck: { title: '池塘小鴨', point: [4, .8, -.4], stand: { x: 2.15, z: 1.4 } },
+  duck: { range: .6, title: '池塘小鴨', point: [4, .8, -.4], stand: { x: 2.15, z: 1.4 } },
 }
 const FOOT_CLEARANCE = .008
 

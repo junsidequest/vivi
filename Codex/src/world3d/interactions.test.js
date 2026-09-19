@@ -15,3 +15,10 @@ describe('小屋互動',()=>{
   expect(isTextInput({tagName:'DIV',isContentEditable:true})).toBe(true)
  })
 })
+
+it('小鴨提示只在靠近池塘互動位置時出現',()=>{
+ expect(nearbyPlace(PLACES,PLACES.duck.stand)).toBe('duck')
+ expect(nearbyPlace(PLACES,{x:2.15,z:1})).toBe('duck')
+ expect(nearbyPlace(PLACES,{x:1.2,z:1.4})).not.toBe('duck')
+ expect(nearbyPlace(PLACES,{x:2.15,z:2.2})).not.toBe('duck')
+})
