@@ -89,4 +89,4 @@ npm run build
 
 手機操作區：搖桿與 A 按鈕並排，行走、座位及橋尾提示置於操作列下方，間距 14px，保留兩行提示與底部安全區空間。
 
-黑白介紹頁字體：英文字母與數字優先使用 Baloo 2，繁體中文維持 Noto Sans TC 作為 fallback。若之後要改成相近的圓潤中文字體，建議採用 OFL 1.1 的 jf open 粉圓 2.0。
+黑白介紹頁字體：英文字母與數字優先使用 Baloo 2，繁體中文使用網站自行託管的 jf open 粉圓 2.1 WOFF2，Noto Sans TC 作為 fallback。jf open 粉圓以 SIL Open Font License 1.1 授權，授權文件放在 `src/assets/fonts/jf-openhuninn-OFL.txt`。
