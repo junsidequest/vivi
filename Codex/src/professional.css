@@ -102,3 +102,38 @@
 @media(max-width:900px){.professional .offer-face{padding:25px 19px}.professional .offer-face .meta{align-items:flex-start;flex-direction:column}.professional .offer-flip{min-height:400px}.professional .offer-flip-inner{min-height:400px}}
 @media(max-width:600px){.professional .offer-flip,.professional .offer-flip-inner{min-height:590px}.professional .offer-face{padding:30px}.professional .offer-details{gap:14px}.professional .offer-details div{grid-template-columns:70px 1fr;gap:16px}.professional .offer-flip-toggle{min-height:44px;text-align:left}}
 @media(prefers-reduced-motion:reduce){.professional .offer-flip-inner{transition:none}}
+
+/* 對齊 junlearning.com 的閱讀層級：說明文 16–18px，輔助資訊不小於 14px。 */
+.professional .pro-brand span,
+.professional .career-label,
+.professional .htag,
+.professional .mq-item,
+.professional .who,
+.professional .offer-tag,
+.professional .meta,
+.professional .role,
+.professional .offer-details dt,
+.professional .offer-flip-toggle,
+.professional .v2-foot{font-size:14px}
+.professional .pro-header nav,
+.professional .pro-contact,
+.professional .pro-kicker,
+.professional .pro-cta,
+.professional .pro-signature,
+.professional .career-summary,
+.professional .trust-row h2,
+.professional .voice p,
+.professional .step p,
+.professional .offer p,
+.professional .partner p,
+.professional .offer-details dd,
+.professional .hbtn,
+.professional .pro-switch{font-size:16px}
+.professional .pro-hero-copy>p,
+.professional .v2-sub,
+.professional .about-body p,
+.professional .connect p{font-size:18px}
+.professional .career-stop p{font-size:15px}
+@media(max-width:900px) and (min-width:601px){
+  .professional .pro-header nav,.professional .pro-contact{font-size:14px}
+}
