@@ -88,8 +88,8 @@
 .professional .offer-back h3,.professional .offer-back .offer-tag{color:#fff}
 .professional .offer-back .offer-tag{opacity:.65}
 .professional .offer-back p{color:#d8d8d8}
-.professional .offer-flip:hover .offer-flip-inner,.professional .offer-flip.is-flipped .offer-flip-inner{transform:rotateY(180deg)}
-.professional .offer-flip:hover .offer-front,.professional .offer-flip.is-flipped .offer-front{pointer-events:none}
+.professional .offer-flip.is-flipped .offer-flip-inner{transform:rotateY(180deg)}
+.professional .offer-flip.is-flipped .offer-front{pointer-events:none}
 .professional .offer-course-name{margin-top:-11px!important}
 .professional .offer-details{display:grid;gap:11px;margin:0 0 24px}
 .professional .offer-details div{display:grid;grid-template-columns:52px 1fr;gap:13px;padding-top:11px;border-top:1px solid #ffffff30}
@@ -99,6 +99,9 @@
 .professional .offer-back .meta{border-color:#ffffff30;color:#bdbdbd}
 .professional .offer-flip-toggle{flex-shrink:0;padding:0;border:0;border-bottom:1px solid currentColor;background:transparent;color:inherit;font-size:11px;line-height:1.55}
 .professional .offer-flip-toggle:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.professional .offer-course-link{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;margin-top:auto;padding:14px 17px;border:1px solid #fff;border-radius:var(--button-radius);background:#fff;color:#171717;font-size:16px;font-weight:500;transition:background .2s,color .2s}
+.professional .offer-course-link::after{content:"↗";font-size:18px}
+.professional .offer-course-link:hover{background:#171717;color:#fff}
 @media(max-width:900px){.professional .offer-face{padding:25px 19px}.professional .offer-face .meta{align-items:flex-start;flex-direction:column}.professional .offer-flip{min-height:400px}.professional .offer-flip-inner{min-height:400px}}
 @media(max-width:600px){.professional .offer-flip,.professional .offer-flip-inner{min-height:590px}.professional .offer-face{padding:30px}.professional .offer-details{gap:14px}.professional .offer-details div{grid-template-columns:70px 1fr;gap:16px}.professional .offer-flip-toggle{min-height:44px;text-align:left}}
 @media(prefers-reduced-motion:reduce){.professional .offer-flip-inner{transition:none}}

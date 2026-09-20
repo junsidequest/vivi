@@ -27,20 +27,39 @@ export default function Professional(){
     return()=>root.removeEventListener('click',enter)
   },[])
   useEffect(()=>{
-    const root=page.current
-    const toggle=e=>{
-      const button=e.target.closest('.offer-flip-toggle')
-      if(!button)return
-      const card=button.closest('.offer-flip')
-      const flipped=!card.classList.contains('is-flipped')
+    const root=page.current, card=root.querySelector('.offer-flip')
+    const front=card.querySelector('.offer-front'), back=card.querySelector('.offer-back')
+    const toggle=card.querySelector('.offer-flip-toggle')
+    const touch=matchMedia('(hover: none), (pointer: coarse)')
+    const smallScreen=matchMedia('(max-width: 760px)')
+    const isMobile=()=>touch.matches||smallScreen.matches
+    const setFlipped=(flipped,{focus=false}={})=>{
       card.classList.toggle('is-flipped',flipped)
-      card.querySelectorAll('.offer-flip-toggle').forEach(control=>control.setAttribute('aria-expanded',String(flipped)))
-      card.querySelector('.offer-front').setAttribute('aria-hidden',String(flipped))
-      card.querySelector('.offer-back').setAttribute('aria-hidden',String(!flipped))
-      card.querySelector(flipped?'.offer-back .offer-flip-toggle':'.offer-front .offer-flip-toggle').focus()
+      toggle.setAttribute('aria-expanded',String(flipped))
+      front.setAttribute('aria-hidden',String(flipped))
+      back.setAttribute('aria-hidden',String(!flipped))
+      if(focus&&flipped)card.querySelector('.offer-course-link').focus({preventScroll:true})
+      if(!flipped&&back.contains(document.activeElement))document.activeElement.blur()
     }
-    root.addEventListener('click',toggle)
-    return()=>root.removeEventListener('click',toggle)
+    const enter=()=>{if(!isMobile())setFlipped(true)}
+    const click=e=>{
+      if(e.target.closest('.offer-course-link'))return
+      const button=e.target.closest('.offer-flip-toggle')
+      if(button){setFlipped(true,{focus:!isMobile()});return}
+      if(e.target.closest('.offer-flip')){if(isMobile()&&!card.classList.contains('is-flipped'))setFlipped(true);return}
+      if(card.classList.contains('is-flipped'))setFlipped(false)
+    }
+    const scroll=()=>{if(isMobile()&&card.classList.contains('is-flipped'))setFlipped(false)}
+    const key=e=>{if(e.key==='Escape'&&card.classList.contains('is-flipped'))setFlipped(false)}
+    card.addEventListener('pointerenter',enter)
+    root.addEventListener('click',click)
+    root.addEventListener('scroll',scroll,{passive:true})
+    window.addEventListener('scroll',scroll,{passive:true})
+    document.addEventListener('scroll',scroll,{passive:true,capture:true})
+    document.addEventListener('touchmove',scroll,{passive:true})
+    document.addEventListener('wheel',scroll,{passive:true})
+    root.addEventListener('keydown',key)
+    return()=>{card.removeEventListener('pointerenter',enter);root.removeEventListener('click',click);root.removeEventListener('scroll',scroll);window.removeEventListener('scroll',scroll);document.removeEventListener('scroll',scroll,true);document.removeEventListener('touchmove',scroll);document.removeEventListener('wheel',scroll);root.removeEventListener('keydown',key)}
   },[])
   useEffect(()=>{
     // 頁面為延後載入；掛載後再定位跨頁導覽的區塊。
