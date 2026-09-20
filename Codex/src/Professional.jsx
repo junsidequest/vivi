@@ -27,6 +27,22 @@ export default function Professional(){
     return()=>root.removeEventListener('click',enter)
   },[])
   useEffect(()=>{
+    const root=page.current
+    const toggle=e=>{
+      const button=e.target.closest('.offer-flip-toggle')
+      if(!button)return
+      const card=button.closest('.offer-flip')
+      const flipped=!card.classList.contains('is-flipped')
+      card.classList.toggle('is-flipped',flipped)
+      card.querySelectorAll('.offer-flip-toggle').forEach(control=>control.setAttribute('aria-expanded',String(flipped)))
+      card.querySelector('.offer-front').setAttribute('aria-hidden',String(flipped))
+      card.querySelector('.offer-back').setAttribute('aria-hidden',String(!flipped))
+      card.querySelector(flipped?'.offer-back .offer-flip-toggle':'.offer-front .offer-flip-toggle').focus()
+    }
+    root.addEventListener('click',toggle)
+    return()=>root.removeEventListener('click',toggle)
+  },[])
+  useEffect(()=>{
     // 頁面為延後載入；掛載後再定位跨頁導覽的區塊。
     const section=window.location.hash.slice(1)
     if(section) page.current.querySelectorAll('[id]').forEach(node=>{
