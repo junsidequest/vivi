@@ -11,7 +11,7 @@ import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { approachSpeed, turnTowards, arrivalSpeed } from './locomotion.js'
-import { readSeats, approachingSeat, createSeatedPose, fitSeatBacks, swingTransform } from './seating.js'
+import { readSeats, approachingSeat, createSeatedPose, fitSeatBacks, swingTransform, swingAngle } from './seating.js'
 import { createNavigation } from './navigation.js'
 import { prepareWalk } from './walkAnimation.js'
 import { measureAvatar, createFootPlacement } from './avatarCollision.js'
@@ -372,7 +372,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
       }
       avatar.position.y=lastLift
       if(sitting?.seat.motion){
-        if(sitting.mode==='idle')sitting.angle=reduced?0:Math.sin(sitting.swingClock*1.9)*.10*Math.min(1,sitting.swingClock/1.5)
+        if(sitting.mode==='idle')sitting.angle=swingAngle(sitting.swingClock,reduced)
         else if(sitting.mode!=='settle')sitting.angle=0
         const {pivot,rotation}=swingTransform(sitting.seat,sitting.angle)
         avatar.position.sub(pivot).applyQuaternion(rotation).add(pivot)

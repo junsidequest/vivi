@@ -2,10 +2,7 @@ import { useRef } from 'react'
 import './origin-button.css'
 
 // 保留連結語意，讓頁內導覽、鍵盤 Enter 與開啟新分頁維持原生行為。
-export default function OriginButton({ href, className = '', children }) {
-  const link = useRef(null)
-  const setOrigin = (event, center = false) => {
-    const node = link.current
+export function setButtonOrigin(node, event, center = false) {
     const rect = node.getBoundingClientRect()
     const width = node.clientWidth, height = node.clientHeight
     const x = center ? width / 2 : event.clientX - rect.left - node.clientLeft
@@ -17,7 +14,12 @@ export default function OriginButton({ href, className = '', children }) {
     node.style.setProperty('--origin-x', `${x}px`)
     node.style.setProperty('--origin-y', `${y}px`)
     node.style.setProperty('--origin-radius', `${radius}px`)
-  }
+}
+
+export default function OriginButton({ href, className = '', children }) {
+  const link = useRef(null)
+  const setOrigin = (event, center = false) => setButtonOrigin(link.current, event, center)
+
 
   return <a ref={link} href={href} className={`${className} origin-button`}
     onPointerEnter={event => { if (event.pointerType !== 'touch') setOrigin(event) }}

@@ -57,6 +57,12 @@ export function fitSeatBacks(avatar,pose,seats) {
   }
 }
 
+// 坐上鞦韆是主動互動；減少動態效果時縮小幅度、放慢，而非完全停住。
+export function swingAngle(elapsed, reduced = false) {
+  const time = Math.max(0, elapsed)
+  return Math.sin(time * (reduced ? 1.4 : 1.9)) * (reduced ? .06 : .10) * Math.min(1, time / 1.5)
+}
+
 export function swingTransform(seat,angle) {
   seat.motion.rotation.x=angle
   const pivot=seat.motion.parent.localToWorld(seat.motion.position.clone())

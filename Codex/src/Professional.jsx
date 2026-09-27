@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 import content from './content/professional.html?raw'
 import TestimonialMarquee from './components/ui/marquee-01.jsx'
 import ScrollGuide from './components/ui/scroll-guide.jsx'
-import OriginButton from './components/ui/origin-button.jsx'
+import OriginButton, { setButtonOrigin } from './components/ui/origin-button.jsx'
 import NavigationMenu from './components/ui/navigation-menu-05.jsx'
 import SiteFooter from './components/ui/site-footer.jsx'
 import { useProcessNumbers } from './ui/useProcessNumbers.js'
@@ -16,6 +16,21 @@ const pageMarkup = content.split('<!-- TESTIMONIAL_MARQUEE -->').map(part => ({_
 export default function Professional(){
   const page = useRef(null)
   useProcessNumbers(page)
+  useEffect(() => {
+    const buttons = page.current.querySelectorAll('.offer-course-link, .connect-ctas .pro-island')
+    const pointer = event => { if (event.pointerType !== 'touch' || event.type === 'pointerdown') setButtonOrigin(event.currentTarget, event) }
+    const focus = event => { if (event.currentTarget.matches(':focus-visible')) setButtonOrigin(event.currentTarget, event, true) }
+    buttons.forEach(button => {
+      button.addEventListener('pointerenter', pointer)
+      button.addEventListener('pointerdown', pointer)
+      button.addEventListener('focus', focus)
+    })
+    return () => buttons.forEach(button => {
+      button.removeEventListener('pointerenter', pointer)
+      button.removeEventListener('pointerdown', pointer)
+      button.removeEventListener('focus', focus)
+    })
+  }, [])
   useEffect(()=>{
     let leaving=false
     const enter=async e=>{
@@ -141,7 +156,7 @@ export default function Professional(){
     <a className="pro-skip" href="#about">跳至主要內容</a>
     <header className="pro-header"><a className="pro-brand" href={sitePath('')}>Vivi Chen<span>陳盈臻</span></a><NavigationMenu/><div className="pro-header-actions"><OriginButton className="pro-contact" href="#connect">服務諮詢</OriginButton></div></header>
     <main>
-      <section className="pro-hero" aria-labelledby="pro-title"><div className="pro-hero-copy"><span className="pro-kicker">AI 陪跑教練 × 企業內訓</span><h1 id="pro-title">把 AI 用進<br/>每天的工作中</h1><p>從企業內訓到實作陪跑，陪非技術團隊解決工作卡點，做出真正放大價值的成果</p><OriginButton className="pro-cta" href="#offers">看看我們能一起做的事</OriginButton><div className="pro-signature"><span>Vivi Chen</span>陳盈臻</div></div><div className="pro-hero-photo"><img src={sitePath('img/vivichen.png')} alt="AI 陪跑教練陳盈臻 Vivi" fetchPriority="high"/></div></section>
+      <section className="pro-hero" aria-labelledby="pro-title"><div className="pro-hero-copy"><span className="pro-kicker">AI 陪跑教練 × 企業內訓</span><h1 id="pro-title">把 AI 用進<br/>每天的工作中</h1><p>從企業內訓到實作陪跑，陪非技術團隊解決工作卡點，做出真正放大價值的成果</p><OriginButton className="pro-cta" href="#offers">看看我們能一起做的事</OriginButton></div><div className="pro-hero-photo"><img src={sitePath('img/vivichen.png')} alt="AI 陪跑教練陳盈臻 Vivi" fetchPriority="high"/></div></section>
       <ScrollGuide/>
       <div className="pro-content">
         <div dangerouslySetInnerHTML={pageMarkup[0]}/>

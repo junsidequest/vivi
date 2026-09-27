@@ -219,18 +219,35 @@
   display: block;
   font-size: inherit !important;
   line-height: 1;
-  background: linear-gradient(to right, #315b8d var(--ink-start), #dedede var(--ink-end));
+  background: linear-gradient(var(--ink-direction, to right), #315b8d var(--ink-start), #dedede var(--ink-end));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 @media (max-width: 640px), (hover: none) and (pointer: coarse) {
   .professional #process .step-no { font-size: 64px !important; margin-bottom: 0; }
+  .professional #process .step-no-glyph { --ink-direction: to bottom; }
 }
 @media (forced-colors: active) {
   .professional #process .step-no-glyph { background: none; color: CanvasText; }
 }
 
-/* 深藍卡片內的課程連結同樣維持白字，改用透明底避免白底白字。 */
-.professional .offer-back .offer-course-link{background:transparent;color:#fff}
-.professional .offer-back .offer-course-link:hover{background:#ffffff14;color:#fff}
+/* 課程按鈕沿用游標起點擴散，使用白底與深藍反色。 */
+.professional .offer-back a.offer-course-link.origin-button{background:#fff;color:#315b8d!important;border-color:#fff}
+.professional .offer-course-link.origin-button::after{content:none}
+.professional .offer-course-link.origin-button .origin-button-label,
+.professional .offer-course-link.origin-button .origin-button-fill{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%}
+.professional .offer-course-link.origin-button .origin-button-fill{background:#315b8d;color:#fff}
+
+/* 窄螢幕直接切換單欄，避免流程、服務與夥伴卡片擠成多欄。 */
+@media (max-width: 900px) {
+  .professional .steps,
+  .professional .offers,
+  .professional .partners { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .professional #process .step-no-glyph {
+    --ink-direction: to bottom;
+  }
+}
+
+.professional .connect-ctas a.pro-island.origin-button { background: #fff; color: #171717 !important; border-color: #fff; }
+.professional .connect-ctas a.pro-island.origin-button .origin-button-fill { background: #171717; color: #fff; }
