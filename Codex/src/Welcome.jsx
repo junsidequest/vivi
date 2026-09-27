@@ -16,7 +16,7 @@ export default function Welcome(){
     <div className="welcome-shell">
       <header className="welcome-header"><a href={sitePath('')} className="welcome-brand">Vivi Chen<span>陳盈臻</span></a><span className="welcome-role"><span>AI 陪跑教練</span><span className="welcome-role-divider"> · </span><span>企業內訓講師</span></span></header>
       <div className="welcome-content">
-        <section className="welcome-intro"><span className="welcome-kicker">AI 陪跑教練</span><h1>Hi 我是<br/>Vivi 陳盈臻</h1><p>陪非技術背景的團隊和企業<br/><strong>把 AI 帶進你的工作日常</strong></p></section>
+        <section className="welcome-intro"><span className="welcome-kicker">AI 陪跑教練</span><h1>Hi 我是<br/>Vivi 陳盈臻</h1><p>陪非技術背景的團隊和企業<br/>把 AI 帶進你的工作日常</p></section>
         <div className="welcome-choices" aria-label="選擇瀏覽方式">
           {choices.map(c=><a key={c.id} href={sitePath(c.id==='island'?'island/':'about/')} className={`welcome-card welcome-card--${c.id} ${active===c.id?'is-active':''}`} onPointerEnter={e=>{if(e.pointerType==='mouse'&&!isMobilePresentation())setActive(c.id)}} onPointerLeave={()=>setActive(null)} onFocus={()=>{if(!isMobilePresentation())setActive(c.id)}} onBlur={()=>setActive(null)} aria-label={c.action}>
             <div className="welcome-card-copy"><span className="welcome-card-tag">{c.label}</span><h2>{c.title}</h2><p>{c.description}</p></div>

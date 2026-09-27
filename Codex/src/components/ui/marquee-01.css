@@ -24,7 +24,6 @@
 .testimonial-card figcaption { margin-top: auto; padding-top: 16px; border-top: 1px solid #ededed; color: #777; font-size: 14px; }
 .testimonial-marquee.is-paused .testimonial-track { animation-play-state: paused; }
 @media (hover: hover) {
-  .testimonial-rows:hover .testimonial-track { animation-play-state: paused; }
   .testimonial-card:hover { border-color: #aaa; background: #fdfdfd; transform: translateY(-3px); }
 }
 @keyframes testimonial-drift { to { transform: translateX(-50%); } }
