@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest'
-import {approachSpeed,turnTowards,arrivalSpeed} from './locomotion.js'
+import {approachSpeed,turnTowards,arrivalSpeed,WALK_SPEED,RUN_SPEED} from './locomotion.js'
 describe('自然移動',()=>{
   it('起步逐步加速，停止能在有限時間內歸零',()=>{
     let speed=0
@@ -15,6 +15,11 @@ describe('自然移動',()=>{
   it('抵達前減速，不越過目標',()=>{
     expect(arrivalSpeed(0)).toBe(0)
     expect(arrivalSpeed(.02)).toBeLessThan(arrivalSpeed(.2))
-    expect(arrivalSpeed(8)).toBe(1.25)
+    expect(arrivalSpeed(8)).toBe(WALK_SPEED)
+  })
+  it('步行與跑步速度比原本稍快，仍保留清楚差異',()=>{
+    expect(WALK_SPEED).toBe(1.45)
+    expect(RUN_SPEED).toBe(2.45)
+    expect(RUN_SPEED).toBeGreaterThan(WALK_SPEED)
   })
 })

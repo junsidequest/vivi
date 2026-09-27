@@ -128,7 +128,7 @@
 .ui-layer .popup-mask {z-index:25}
 .popup-card {outline:none;max-height:85vh;overflow:auto}
 .popup-card h2 {margin-top:0}
-.popup-card .primary {margin-top:18px;background:var(--yellow);color:var(--ink);border-radius:0;border:6px solid transparent;border-image:var(--px-frame-yellow);background-clip:padding-box;filter:drop-shadow(2px 3px 0 var(--px-shadow))}
+.popup-card .primary {margin:18px auto 0;justify-content:center;text-align:center;background:var(--yellow);color:var(--ink);border-radius:0;border:6px solid transparent;border-image:var(--px-frame-yellow);background-clip:padding-box;filter:drop-shadow(2px 3px 0 var(--px-shadow))}
 .menu-item button {border:0;background:none;padding:0;color:inherit;text-align:left;font:inherit;cursor:pointer;display:flex;align-items:center;gap:7px;width:100%}
 .route-message:not(:empty) {z-index:6;border-radius:0;background:var(--cream);background-clip:padding-box;border:6px solid transparent;border-image:var(--px-frame-cream);filter:drop-shadow(3px 4px 0 var(--px-shadow));box-shadow:none}
 @media(prefers-reduced-motion:reduce){.world-hint{animation:none}}

@@ -7,7 +7,7 @@ import SiteFooter from './components/ui/site-footer.jsx'
 
 const choices = [
   {id:'island', title:'互動小島', description:'來逛逛我家', image:'img/vivi-hero.webp', alt:'穿綠色洋裝的 Vivi 角色', action:'進入小島', label:'遊戲版'},
-  {id:'professional', title:'講師與服務介紹', description:'我的經歷、課程與企業內訓服務', image:'img/vivichen.png', alt:'講師陳盈臻 Vivi 的真實照片', action:'看更多介紹', label:'專業版'},
+  {id:'professional', title:'AI 課程與合作', description:'公開課程、企業內訓、陪跑等服務項目', image:'img/vivichen.png', alt:'講師陳盈臻 Vivi 的真實照片', action:'看更多介紹', label:'專業版'},
 ]
 export default function Welcome(){
   const [active,setActive]=useState(null)
@@ -16,7 +16,15 @@ export default function Welcome(){
     <div className="welcome-shell">
       <header className="welcome-header"><a href={sitePath('')} className="welcome-brand">Vivi Chen<span>陳盈臻</span></a><span className="welcome-role"><span>AI 陪跑教練</span><span className="welcome-role-divider"> · </span><span>企業內訓講師</span></span></header>
       <div className="welcome-content">
-        <section className="welcome-intro"><span className="welcome-kicker">AI 陪跑教練</span><h1>Hi 我是<br/>Vivi 陳盈臻</h1><p>陪非技術背景的團隊和企業<br/>把 AI 帶進你的工作日常</p></section>
+        <section className="welcome-intro">
+          <h1><span className="welcome-title-line">Hi</span><span className="welcome-title-line">我是 AI 陪跑教練 Vivi</span></h1>
+          <p>陪非技術背景的團隊和企業<br/>把 AI 帶進你的工作日常</p>
+          <div className="welcome-prompt">
+            <span className="welcome-prompt-copy welcome-prompt-copy--desktop">從右邊選一種方式認識我</span>
+            <span className="welcome-prompt-copy welcome-prompt-copy--mobile">從下面選一種方式認識我</span>
+            <ArrowRight className="welcome-prompt-arrow" size={24} strokeWidth={2.5} aria-hidden="true"/>
+          </div>
+        </section>
         <div className="welcome-choices" aria-label="選擇瀏覽方式">
           {choices.map(c=><a key={c.id} href={sitePath(c.id==='island'?'island/':'about/')} className={`welcome-card welcome-card--${c.id} ${active===c.id?'is-active':''}`} onPointerEnter={e=>{if(e.pointerType==='mouse'&&!isMobilePresentation())setActive(c.id)}} onPointerLeave={()=>setActive(null)} onFocus={()=>{if(!isMobilePresentation())setActive(c.id)}} onBlur={()=>setActive(null)} aria-label={c.action}>
             <div className="welcome-card-copy"><span className="welcome-card-tag">{c.label}</span><h2>{c.title}</h2><p>{c.description}</p></div>

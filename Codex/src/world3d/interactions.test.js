@@ -16,9 +16,9 @@ describe('小屋互動',()=>{
  })
 })
 
-it('小鴨提示只在靠近池塘互動位置時出現',()=>{
- expect(nearbyPlace(PLACES,PLACES.duck.stand)).toBe('duck')
- expect(nearbyPlace(PLACES,{x:2.15,z:1})).toBe('duck')
- expect(nearbyPlace(PLACES,{x:1.2,z:1.4})).not.toBe('duck')
- expect(nearbyPlace(PLACES,{x:2.15,z:2.2})).not.toBe('duck')
+it('從池塘四周靠近都能觸發小鴨提示，離開池塘則不觸發',()=>{
+ for(const p of [{x:2,z:-.4},{x:6,z:-.4},{x:4,z:-2.2},{x:4,z:1.6},PLACES.duck.stand]){
+  expect(nearbyPlace(PLACES,p)).toBe('duck')
+ }
+ for(const p of [{x:1,z:-.4},{x:7,z:-.4},{x:4,z:2.5}])expect(nearbyPlace(PLACES,p)).not.toBe('duck')
 })

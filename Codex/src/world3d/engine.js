@@ -10,7 +10,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js'
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { approachSpeed, turnTowards, arrivalSpeed } from './locomotion.js'
+import { approachSpeed, turnTowards, arrivalSpeed, WALK_SPEED, RUN_SPEED } from './locomotion.js'
 import { readSeats, approachingSeat, createSeatedPose, fitSeatBacks, swingTransform, swingAngle } from './seating.js'
 import { createNavigation } from './navigation.js'
 import { prepareWalk } from './walkAnimation.js'
@@ -21,7 +21,7 @@ export const PLACES = {
   services: { interactionBounds:{minX:-.85,maxX:.85,minZ:-1.15,maxZ:1.05}, title: '課程小屋', point: [0, 2.2, -1], stand: { x: 0, z: .4 } },
   about: { range: 1.15, title: '認識 Vivi', point: [-2.88, 1.9, -.6], stand: { x: -2.75, z: .5 } },
   contact: { range: 1.15, title: '寄一封信', point: [1.85, 1.6, 3.18], stand: { x: .75, z: 3.25 } },
-  duck: { range: .6, title: '池塘小鴨', point: [4, .8, -.4], stand: { x: 2.15, z: 1.4 } },
+  duck: { interactionCircle:{x:4,z:-.4,radius:2.7}, title: '池塘小鴨', point: [4, .8, -.4], stand: { x: 2.15, z: 1.4 } },
 }
 const FOOT_CLEARANCE = .008
 
@@ -288,7 +288,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     }
     if(ready&&!paused&&entrance){
       if(position.z>1.5){
-        distance=Math.min(position.z-1.5,1.7*dt);position.z-=distance;heading=Math.PI
+        distance=Math.min(position.z-1.5,1.9*dt);position.z-=distance;heading=Math.PI
       }else{
         heading=0
         if(Math.abs(Math.atan2(Math.sin(avatar.rotation.y),Math.cos(avatar.rotation.y)))<.025){const done=entrance;entrance=null;done()}
@@ -307,14 +307,14 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
       if(length>.12){
         arrivalTarget=null;
         if(route)onRoute('');route=null;routeId=null;routeSeat=null;destination.visible=false
-        desiredSpeed=keys.has('ShiftLeft')||keys.has('ShiftRight')||joystick.run?2.15:1.25
+        desiredSpeed=keys.has('ShiftLeft')||keys.has('ShiftRight')||joystick.run?RUN_SPEED:WALK_SPEED
         dirX=dx/length;dirZ=dz/length
       }else if(route?.length){
         const next=route[0],x=next.x-position.x,z=next.z-position.z;remaining=Math.hypot(x,z)
         if(remaining<.012){
           route.shift()
           if(!route.length){const id=routeId,seat=routeSeat;route=null;routeId=null;routeSeat=null;speed=0;destination.visible=false;onRoute('');if(seat)sitDown(seat);else if(id){if(id==='about'||id==='contact'){heading=Math.atan2(PLACES[id].point[0]-position.x,PLACES[id].point[2]-position.z);arrivalTarget=id}else if(id==='dock')beginBridgeExit();else onOpen(id)}}
-        }else{dirX=x/remaining;dirZ=z/remaining;desiredSpeed=route.length===1?arrivalSpeed(remaining):1.25}
+        }else{dirX=x/remaining;dirZ=z/remaining;desiredSpeed=route.length===1?arrivalSpeed(remaining):WALK_SPEED}
       }
       if(desiredSpeed>0&&!route&&seatCooldown<=0){
         const seat=approachingSeat(seats,position,dirX,dirZ)

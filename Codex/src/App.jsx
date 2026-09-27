@@ -45,9 +45,9 @@ function Dialog({ id, onClose, onRead }) {
       </div></div><div className="help-cell"><span>跑步</span><span className="keycap">Shift</span></div><div className="help-cell"><span>與附近物品互動</span><span className="keycap keycap--key">E</span></div>
       <p className="help-cell--wide">左側選單可快速前往。手機可點地面或拖動搖桿，按 A 互動。</p>
     </div>:<p>{content.text}</p>}
-    {content.section && <button className="primary" onClick={() => onRead(content.section)}>{content.link}<span>↗</span></button>}
-    {id === 'contact' && <button className="primary" onClick={() => onRead('connect')}>Let's Connect<span>↗</span></button>}
-    {(id === 'duck' || id === 'help') && <button className="primary" onClick={onClose}>{id === 'help' ? '繼續逛逛' : '繼續散步'}<span>→</span></button>}
+    {content.section && <button className="primary" onClick={() => onRead(content.section)}>{content.link}</button>}
+    {id === 'contact' && <button className="primary" onClick={() => onRead('connect')}>Let's Connect</button>}
+    {(id === 'duck' || id === 'help') && <button className="primary" onClick={onClose}>{id === 'help' ? '繼續逛逛' : '繼續散步'}</button>}
   </section></div>
 }
 export default function App({externalLoading=false,pageVisible=true,onLoadReady,onLoadProgress,onLoadError}) {
