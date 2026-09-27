@@ -90,3 +90,19 @@ npm run build
 手機操作區：搖桿與 A 按鈕並排，行走、座位及橋尾提示置於操作列下方，間距 14px，保留兩行提示與底部安全區空間。
 
 黑白介紹頁字體：英文字母與數字優先使用 Baloo 2，繁體中文使用網站自行託管的 jf open 粉圓 2.1 WOFF2，Noto Sans TC 作為 fallback。jf open 粉圓以 SIL Open Font License 1.1 授權，授權文件放在 `src/assets/fonts/jf-openhuninn-OFL.txt`。
+
+## 學員見證跑馬燈
+
+`src/components/ui/marquee-01.jsx` 改編自提供的雙排 Marquee 範例，樣式在同目錄的 `marquee-01.css`，六則原始回饋集中於 `src/content/reviews.json`。保留全文及職稱、產業，不使用頭像。`Professional.jsx` 在內容標記 `TESTIMONIAL_MARQUEE` 處插入元件。
+
+上下兩排反向循環，每圈 48 秒；滑鼠停在卡片區域時暫停，移開後繼續，不顯示播放控制按鈕。離開可視區域時暫停；啟用系統「減少動態效果」時改為靜態排列，隱藏重複卡片，六則內容均可閱讀。
+
+目前專案使用 React JSX 與原生 CSS，這次整合不需要新增套件。新增 `src/components/ui` 是為了集中可重用的介面元件；既有遊戲介面仍留在 `src/ui`。此元件已將範例的 Card 與 Tailwind 樣式改寫成語意化 HTML 與獨立 CSS，不依賴 shadcn。
+
+若未來需要直接貼入原版 TSX／shadcn 元件，可先安裝 TypeScript 並設定 `tsconfig.json`（`jsx: react-jsx`、`moduleResolution: bundler`、`noEmit: true`），安裝 Tailwind CSS 的 Vite 整合套件，於 Vite plugins 加入 Tailwind 並在樣式入口匯入 Tailwind；接著將 Vite 與 TypeScript 的 `@` 別名都指向 `src`，執行 shadcn CLI 初始化，設定元件目錄 `src/components/ui` 與工具目錄 `src/lib`，再加入 Card。引入 Tailwind 的全域重設前需檢查既有頁面樣式。
+
+首頁主視覺下方的垂直捲動引導位於 `src/components/ui/scroll-guide.jsx`，樣式在同目錄 `scroll-guide.css`。僅顯示 64px 漸層細線，以 2.4 秒循環向下流動，不顯示文字；點擊可前往關於我，減少動態效果模式改為靜態漸層。使用原生 CSS，無須引入參考範例用於文字輪播的 Framer Motion。各大內容區塊以留白分隔，移除 `.v2-sec` 上緣橫線。
+
+兩個主要導覽按鈕使用 `src/components/ui/origin-button.jsx`，由參考 OriginButton 改編為 React JSX 與 CSS，不新增 Motion 依賴。保留原生錨點連結，黑框 2px，白色圓形從游標進入處展開；文字與填色同步反色，鍵盤聚焦從中心展開，減少動態效果模式直接切換顏色。
+
+頁首選單以 `.professional` 的捲動位置判斷目前區塊，學員見證歸在課程與服務；主視覺不標示選單 active；進入頁尾後保留最後一個導覽項目。判斷線位於頁首下方可視範圍的 28%，並處理高視窗無法將最後區塊捲到頂端的情況。右側鈴鐺為近期公開班捷徑，等待捲動停止後翻卡；手機由鈴鐺開啟的卡片在閱讀期間保持翻面，離開卡片可視範圍或點擊外部收起，Escape 亦可關閉。

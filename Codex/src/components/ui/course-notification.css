@@ -1,0 +1,47 @@
+.pro-course-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #626262;
+  cursor: pointer;
+  transition: color .2s;
+}
+.pro-course-bell svg { fill: transparent; transition: fill .2s; }
+.pro-course-bell:hover,
+.pro-course-bell:focus-visible { color: #171717; }
+.pro-course-bell:hover svg,
+.pro-course-bell:focus-visible svg { fill: currentColor; }
+.pro-course-bell:focus-visible { outline: 2px solid #171717; outline-offset: 4px; }
+.pro-course-bell-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #22a45d;
+}
+.pro-course-bell-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: pro-notification-ping 2.6s ease-out infinite;
+}
+@keyframes pro-notification-ping {
+  0%, 35% { transform: scale(1); opacity: .55; }
+  80%, 100% { transform: scale(2.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pro-course-bell, .pro-course-bell svg { transition: none; }
+  .pro-course-bell-dot::before { animation: none; }
+}

@@ -3,12 +3,18 @@ import { isMobilePresentation } from './mobile.js'
 import { sitePath } from './routes.js'
 import { useEffect, useRef } from 'react'
 import content from './content/professional.html?raw'
+import TestimonialMarquee from './components/ui/marquee-01.jsx'
+import ScrollGuide from './components/ui/scroll-guide.jsx'
+import OriginButton from './components/ui/origin-button.jsx'
+import NavigationMenu from './components/ui/navigation-menu-05.jsx'
+import { useProcessNumbers } from './ui/useProcessNumbers.js'
 
 // 保持原始內容的引用穩定，避免載入狀態更新時重建時間軸 DOM。
-const pageMarkup = {__html:content.replace('href="__ISLAND_URL__"', `href="${sitePath('island/')}"`).replaceAll('src="img/', `src="${sitePath('img/')}`)}
+const pageMarkup = content.split('<!-- TESTIMONIAL_MARQUEE -->').map(part => ({__html:part.replace('href="__ISLAND_URL__"', `href="${sitePath('island/')}"`).replaceAll('src="img/', `src="${sitePath('img/')}`)}))
 
 export default function Professional(){
   const page = useRef(null)
+  useProcessNumbers(page)
   useEffect(()=>{
     let leaving=false
     const enter=async e=>{
@@ -33,33 +39,71 @@ export default function Professional(){
     const touch=matchMedia('(hover: none), (pointer: coarse)')
     const smallScreen=matchMedia('(max-width: 760px)')
     const isMobile=()=>touch.matches||smallScreen.matches
-    const setFlipped=(flipped,{focus=false}={})=>{
+    const bell=root.querySelector('.pro-course-bell')
+    let revealFrame=0, revealing=false, revealedFromBell=false
+    const cancelReveal=()=>{cancelAnimationFrame(revealFrame);revealing=false}
+    const setFlipped=(flipped,{focus=false,fromBell=false}={})=>{
+      revealedFromBell=flipped&&fromBell
       card.classList.toggle('is-flipped',flipped)
       toggle.setAttribute('aria-expanded',String(flipped))
       front.setAttribute('aria-hidden',String(flipped))
       back.setAttribute('aria-hidden',String(!flipped))
+      front.inert=flipped;back.inert=!flipped
+      bell.setAttribute('aria-expanded',String(flipped))
       if(focus&&flipped)card.querySelector('.offer-course-link').focus({preventScroll:true})
       if(!flipped&&back.contains(document.activeElement))document.activeElement.blur()
     }
-    const enter=()=>{if(!isMobile())setFlipped(true)}
+    setFlipped(false)
+    const revealCourse=()=>{
+      cancelReveal()
+      setFlipped(false)
+      revealing=true
+      const keyboard=bell.matches(':focus-visible')
+      const offers=root.querySelector('#offers')
+      const header=root.querySelector('.pro-header')
+      const target=Math.max(0,Math.min(root.scrollHeight-root.clientHeight,
+        root.scrollTop+offers.getBoundingClientRect().top-header.getBoundingClientRect().bottom-16))
+      if(location.hash!=='#offers')history.pushState(null,'','#offers')
+      root.scrollTo({top:target,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})
+      const started=performance.now()
+      let lastTop=root.scrollTop, lastMovement=started
+      const finish=()=>{
+        if(!revealing)return
+        const now=performance.now()
+        if(root.scrollTop!==lastTop){lastTop=root.scrollTop;lastMovement=now}
+        if(Math.abs(root.scrollTop-target)<2&&now-lastMovement>120){revealing=false;setFlipped(true,{focus:keyboard,fromBell:true});return}
+        if(performance.now()-started>3000){cancelReveal();return}
+        revealFrame=requestAnimationFrame(finish)
+      }
+      revealFrame=requestAnimationFrame(finish)
+    }
+    const enter=()=>{if(!isMobile()&&!revealing)setFlipped(true)}
     const click=e=>{
+      if(e.target.closest('.pro-course-bell')){revealCourse();return}
+      cancelReveal()
       if(e.target.closest('.offer-course-link'))return
       const button=e.target.closest('.offer-flip-toggle')
       if(button){setFlipped(true,{focus:!isMobile()});return}
       if(e.target.closest('.offer-flip')){if(isMobile()&&!card.classList.contains('is-flipped'))setFlipped(true);return}
       if(card.classList.contains('is-flipped'))setFlipped(false)
     }
-    const scroll=()=>{if(isMobile()&&card.classList.contains('is-flipped'))setFlipped(false)}
-    const key=e=>{if(e.key==='Escape'&&card.classList.contains('is-flipped'))setFlipped(false)}
+    const scroll=()=>{
+      if(revealing||!isMobile()||!card.classList.contains('is-flipped'))return
+      const bounds=card.getBoundingClientRect()
+      if(revealedFromBell&&bounds.bottom>root.querySelector('.pro-header').getBoundingClientRect().bottom&&bounds.top<root.getBoundingClientRect().bottom)return
+      setFlipped(false)
+    }
+    const interrupt=()=>{cancelReveal();scroll()}
+    const key=e=>{if(['Escape','ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))cancelReveal();if(e.key==='Escape'&&card.classList.contains('is-flipped'))setFlipped(false)}
     card.addEventListener('pointerenter',enter)
     root.addEventListener('click',click)
     root.addEventListener('scroll',scroll,{passive:true})
     window.addEventListener('scroll',scroll,{passive:true})
     document.addEventListener('scroll',scroll,{passive:true,capture:true})
-    document.addEventListener('touchmove',scroll,{passive:true})
-    document.addEventListener('wheel',scroll,{passive:true})
+    document.addEventListener('touchmove',interrupt,{passive:true})
+    document.addEventListener('wheel',interrupt,{passive:true})
     root.addEventListener('keydown',key)
-    return()=>{card.removeEventListener('pointerenter',enter);root.removeEventListener('click',click);root.removeEventListener('scroll',scroll);window.removeEventListener('scroll',scroll);document.removeEventListener('scroll',scroll,true);document.removeEventListener('touchmove',scroll);document.removeEventListener('wheel',scroll);root.removeEventListener('keydown',key)}
+    return()=>{cancelReveal();card.removeEventListener('pointerenter',enter);root.removeEventListener('click',click);root.removeEventListener('scroll',scroll);window.removeEventListener('scroll',scroll);document.removeEventListener('scroll',scroll,true);document.removeEventListener('touchmove',interrupt);document.removeEventListener('wheel',interrupt);root.removeEventListener('keydown',key)}
   },[])
   useEffect(()=>{
     // 頁面為延後載入；掛載後再定位跨頁導覽的區塊。
@@ -94,10 +138,15 @@ export default function Professional(){
   },[])
   return <div className="professional" ref={page}>
     <a className="pro-skip" href="#about">跳至主要內容</a>
-    <header className="pro-header"><a className="pro-brand" href={sitePath('')}>Vivi Chen<span>陳盈臻</span></a><nav aria-label="主要導覽"><a href="#about">關於我</a><a href="#process">服務流程</a><a href="#offers">課程與服務</a><a href="#partners">合作夥伴</a></nav><div className="pro-header-actions"><a className="pro-contact" href="#connect">服務諮詢</a></div></header>
+    <header className="pro-header"><a className="pro-brand" href={sitePath('')}>Vivi Chen<span>陳盈臻</span></a><NavigationMenu/><div className="pro-header-actions"><OriginButton className="pro-contact" href="#connect">服務諮詢</OriginButton></div></header>
     <main>
-      <section className="pro-hero" aria-labelledby="pro-title"><div className="pro-hero-copy"><span className="pro-kicker">AI 陪跑教練 × 企業內訓</span><h1 id="pro-title">把 AI，<br/>真的用起來<span>。</span></h1><p>我幫文科與非技術背景的團隊，<br/>把 AI 真的用起來。</p><a className="pro-cta" href="#offers">看看我們能一起做的事</a><div className="pro-signature">陳盈臻 <span>Vivi Chen</span></div></div><div className="pro-hero-photo"><img src={sitePath('img/vivichen.png')} alt="AI 陪跑教練陳盈臻 Vivi" fetchPriority="high"/></div></section>
-      <div className="pro-content" dangerouslySetInnerHTML={pageMarkup}/>
+      <section className="pro-hero" aria-labelledby="pro-title"><div className="pro-hero-copy"><span className="pro-kicker">AI 陪跑教練 × 企業內訓</span><h1 id="pro-title">把 AI 用進<br/>每天的工作中</h1><p>從企業內訓到實作陪跑，陪非技術團隊解決工作卡點，做出真正放大價值的成果</p><OriginButton className="pro-cta" href="#offers">看看我們能一起做的事</OriginButton><div className="pro-signature"><span>Vivi Chen</span>陳盈臻</div></div><div className="pro-hero-photo"><img src={sitePath('img/vivichen.png')} alt="AI 陪跑教練陳盈臻 Vivi" fetchPriority="high"/></div></section>
+      <ScrollGuide/>
+      <div className="pro-content">
+        <div dangerouslySetInnerHTML={pageMarkup[0]}/>
+        <TestimonialMarquee/>
+        <div dangerouslySetInnerHTML={pageMarkup[1]}/>
+      </div>
     </main>
   </div>
 }
