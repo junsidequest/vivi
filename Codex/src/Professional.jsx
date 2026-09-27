@@ -94,6 +94,7 @@ export default function Professional(){
       revealFrame=requestAnimationFrame(finish)
     }
     const enter=()=>{if(!isMobile()&&!revealing)setFlipped(true)}
+    const leave=()=>{if(!isMobile()&&!revealing)setFlipped(false)}
     const click=e=>{
       if(e.target.closest('.pro-course-bell')){revealCourse();return}
       cancelReveal()
@@ -112,6 +113,7 @@ export default function Professional(){
     const interrupt=()=>{cancelReveal();scroll()}
     const key=e=>{if(['Escape','ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))cancelReveal();if(e.key==='Escape'&&card.classList.contains('is-flipped'))setFlipped(false)}
     card.addEventListener('pointerenter',enter)
+    card.addEventListener('pointerleave',leave)
     root.addEventListener('click',click)
     root.addEventListener('scroll',scroll,{passive:true})
     window.addEventListener('scroll',scroll,{passive:true})
@@ -119,7 +121,7 @@ export default function Professional(){
     document.addEventListener('touchmove',interrupt,{passive:true})
     document.addEventListener('wheel',interrupt,{passive:true})
     root.addEventListener('keydown',key)
-    return()=>{cancelReveal();card.removeEventListener('pointerenter',enter);root.removeEventListener('click',click);root.removeEventListener('scroll',scroll);window.removeEventListener('scroll',scroll);document.removeEventListener('scroll',scroll,true);document.removeEventListener('touchmove',interrupt);document.removeEventListener('wheel',interrupt);root.removeEventListener('keydown',key)}
+    return()=>{cancelReveal();card.removeEventListener('pointerenter',enter);card.removeEventListener('pointerleave',leave);root.removeEventListener('click',click);root.removeEventListener('scroll',scroll);window.removeEventListener('scroll',scroll);document.removeEventListener('scroll',scroll,true);document.removeEventListener('touchmove',interrupt);document.removeEventListener('wheel',interrupt);root.removeEventListener('keydown',key)}
   },[])
   useEffect(()=>{
     // 頁面為延後載入；掛載後再定位跨頁導覽的區塊。
