@@ -106,3 +106,5 @@ npm run build
 兩個主要導覽按鈕使用 `src/components/ui/origin-button.jsx`，由參考 OriginButton 改編為 React JSX 與 CSS，不新增 Motion 依賴。保留原生錨點連結，黑框 2px，白色圓形從游標進入處展開；文字與填色同步反色，鍵盤聚焦從中心展開，減少動態效果模式直接切換顏色。
 
 頁首選單以 `.professional` 的捲動位置判斷目前區塊，學員見證歸在課程與服務；主視覺不標示選單 active；進入頁尾後保留最後一個導覽項目。判斷線位於頁首下方可視範圍的 28%，並處理高視窗無法將最後區塊捲到頂端的情況。右側鈴鐺為近期公開班捷徑，等待捲動停止後翻卡；手機由鈴鐺開啟的卡片在閱讀期間保持翻面，離開卡片可視範圍或點擊外部收起，Escape 亦可關閉。
+
+入口頁文案更新為「Hi 我是 Vivi 陳盈臻」，卡片為遊戲版與專業版。入口與介紹頁共用 `src/components/ui/site-footer.jsx` 及 `src/content/footer.html`，同步品牌、社群連結與版權。參考 junlearning.com 的字級層級，入口桌面輔助文字至少 14px、正文 18px，手機文字至少 18px；副標保留指定換行與第二行粗體。

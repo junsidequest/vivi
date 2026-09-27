@@ -7,6 +7,7 @@ import TestimonialMarquee from './components/ui/marquee-01.jsx'
 import ScrollGuide from './components/ui/scroll-guide.jsx'
 import OriginButton from './components/ui/origin-button.jsx'
 import NavigationMenu from './components/ui/navigation-menu-05.jsx'
+import SiteFooter from './components/ui/site-footer.jsx'
 import { useProcessNumbers } from './ui/useProcessNumbers.js'
 
 // 保持原始內容的引用穩定，避免載入狀態更新時重建時間軸 DOM。
@@ -146,6 +147,7 @@ export default function Professional(){
         <div dangerouslySetInnerHTML={pageMarkup[0]}/>
         <TestimonialMarquee/>
         <div dangerouslySetInnerHTML={pageMarkup[1]}/>
+        <SiteFooter/>
       </div>
     </main>
   </div>

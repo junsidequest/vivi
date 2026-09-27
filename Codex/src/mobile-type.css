@@ -57,3 +57,24 @@
   .island-app .route-slot{display:flex;justify-content:center;align-items:flex-start;min-height:84px;width:100%}
   .island-app .route-message{position:static;transform:none;margin:0;max-width:100%;overflow-wrap:anywhere}
 }
+
+/* 入口手機雙欄：保留可讀字級，縮短首屏留白與人物區高度。 */
+@media(max-width:640px), (hover:none) and (pointer:coarse){
+  .welcome{padding:12px}
+  .welcome-shell{padding:12px 4px 20px;min-height:calc(100svh - 24px)}
+  .welcome-header{gap:10px}
+  .welcome-content{padding:20px 0;gap:16px;flex:0}
+  .welcome .welcome-intro h1{font-size:36px!important;line-height:1.2;margin:10px 0 12px}
+  .welcome .welcome-intro p{line-height:1.65}
+  .welcome-kicker{letter-spacing:.04em}
+  .welcome-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
+  .welcome-card,.welcome-card.is-active{transform:none}
+  .welcome-card-copy{padding:12px 10px;min-height:0}
+  .welcome .welcome-card h2{font-size:22px!important;line-height:1.35;margin:12px 0 8px}
+  .welcome .welcome-card-copy p{line-height:1.55}
+  .welcome-portrait{height:clamp(160px,23svh,200px);flex-shrink:0}
+  .welcome-orbit,.welcome-card--professional .welcome-orbit{width:150px;height:150px;top:10%}
+  .welcome-card-bottom{min-height:44px;padding:10px 7px}
+  .welcome-card .welcome-action-arrow{width:18px;height:18px}
+  .welcome .v2-foot{gap:16px}
+}
