@@ -146,3 +146,6 @@
 }
 
 .welcome.welcome--island .v2-social { border-color: #171717; }
+
+/* 小島入口懸停時使用較淡的綠色整頁背景。 */
+.welcome--island { background: #e3ecdd; }
