@@ -1,0 +1,81 @@
+[
+  {
+    "source": "商業周刊",
+    "mark": "BUSINESS WEEKLY",
+    "kind": "雜誌專訪",
+    "date": "2025.06.26",
+    "title": "苦惱 AI 不懂你的痛、做白功？陪跑教練：用 AI，不要放棄懷疑心",
+    "href": "https://www.businessweekly.com.tw/archive/Article/Index?StrId=7012599",
+    "action": "閱讀網路報導",
+    "secondaryHref": "https://drive.google.com/file/d/14H0EGdApbOepZDwHlCxUptvdkNu2cD4I/view?usp=sharing",
+    "secondaryAction": "閱讀雜誌全文"
+  },
+  {
+    "source": "塞掐 Side Chat",
+    "mark": "SIDE CHAT",
+    "kind": "YouTube 訪談",
+    "date": "E387",
+    "title": "AI 陪跑教練在陪什麼？AI 落地的關鍵不在模型而在人",
+    "href": "https://www.youtube.com/watch?v=Tij-VpMURWw",
+    "action": "觀看完整訪談"
+  },
+  {
+    "source": "天下雜誌・未來城市",
+    "mark": "未來城市",
+    "kind": "Podcast 訪談",
+    "date": "EP.108",
+    "title": "不會寫程式也能開發 APP？Vibe Coding 是神技還是話術？",
+    "href": "https://futurecity.cw.com.tw/article/3746",
+    "action": "閱讀訪談精華"
+  },
+  {
+    "source": "數位時代",
+    "mark": "VIBE CODING",
+    "kind": "YouTube 專訪",
+    "title": "AI 時代必修職場技！人人都能打造產品，進化未來人才",
+    "href": "https://www.youtube.com/watch?v=TlraQ_vLmmU",
+    "action": "觀看完整訪談"
+  },
+  {
+    "source": "1111 人力銀行・亮點人物",
+    "mark": "1111",
+    "kind": "YouTube 訪談",
+    "title": "不會寫程式也能開發工具！Vivi：AI 開啟人生新篇章",
+    "href": "https://www.youtube.com/watch?v=RomLwP9uBc4",
+    "action": "觀看完整訪談"
+  },
+  {
+    "source": "數位時代",
+    "mark": "VIBE CODING",
+    "kind": "封面故事・共同主編",
+    "date": "2025.10",
+    "title": "《Vibe Coding》封面故事共同主編",
+    "href": "https://www.bnext.com.tw/author/5464",
+    "action": "查看作者專頁"
+  },
+  {
+    "source": "今周刊",
+    "mark": "BUSINESS TODAY",
+    "kind": "雜誌封面",
+    "date": "2026.03.11",
+    "title": "文科女陳盈臻教逾 30 位企業高管換腦",
+    "href": "https://www.businesstoday.com.tw/article/subscription_catalog/category/201855/post/202509030071/",
+    "action": "查看當期雜誌"
+  },
+  {
+    "source": "數位時代",
+    "mark": "BUSINESS NEXT",
+    "kind": "人物專訪",
+    "title": "文組生變身自動化達人：用 10 秒搞定 8 小時工作！與 AI 協作的關鍵究竟是什麼？",
+    "href": "https://www.bnext.com.tw/article/84417/liberal-arts-students-become-ai-automation-experts",
+    "action": "閱讀完整報導"
+  },
+  {
+    "source": "數位時代・AI 新職人",
+    "mark": "AI 新職人",
+    "kind": "YouTube 訪談",
+    "title": "不會寫程式也能當 AI 教練？她從媒體業務到授課破萬人，靠「與 AI 對話」翻轉職涯與收入",
+    "href": "https://www.youtube.com/watch?v=3UEqQ1cqn5o",
+    "action": "觀看完整訪談"
+  }
+]

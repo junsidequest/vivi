@@ -51,7 +51,7 @@ export default function Professional(){
   useEffect(()=>{
     const root=page.current, card=root.querySelector('.offer-flip')
     const front=card.querySelector('.offer-front'), back=card.querySelector('.offer-back')
-    const toggle=card.querySelector('.offer-flip-toggle')
+    const toggles=[...card.querySelectorAll('.offer-flip-toggle')]
     const touch=matchMedia('(hover: none), (pointer: coarse)')
     const smallScreen=matchMedia('(max-width: 760px)')
     const isMobile=()=>touch.matches||smallScreen.matches
@@ -61,12 +61,12 @@ export default function Professional(){
     const setFlipped=(flipped,{focus=false,fromBell=false}={})=>{
       revealedFromBell=flipped&&fromBell
       card.classList.toggle('is-flipped',flipped)
-      toggle.setAttribute('aria-expanded',String(flipped))
+      toggles.forEach(toggle=>toggle.setAttribute('aria-expanded',String(flipped)))
       front.setAttribute('aria-hidden',String(flipped))
       back.setAttribute('aria-hidden',String(!flipped))
       front.inert=flipped;back.inert=!flipped
       bell.setAttribute('aria-expanded',String(flipped))
-      if(focus&&flipped)card.querySelector('.offer-course-link').focus({preventScroll:true})
+      if(focus&&flipped)card.querySelector('.offer-back').focus({preventScroll:true})
       if(!flipped&&back.contains(document.activeElement))document.activeElement.blur()
     }
     setFlipped(false)
@@ -93,15 +93,13 @@ export default function Professional(){
       }
       revealFrame=requestAnimationFrame(finish)
     }
-    const enter=()=>{if(!isMobile()&&!revealing)setFlipped(true)}
-    const leave=()=>{if(!isMobile()&&!revealing)setFlipped(false)}
     const click=e=>{
       if(e.target.closest('.pro-course-bell')){revealCourse();return}
       cancelReveal()
-      if(e.target.closest('.offer-course-link'))return
+      if(e.target.closest('.offer-course-list a'))return
       const button=e.target.closest('.offer-flip-toggle')
-      if(button){setFlipped(true,{focus:!isMobile()});return}
-      if(e.target.closest('.offer-flip')){if(isMobile()&&!card.classList.contains('is-flipped'))setFlipped(true);return}
+      if(button){setFlipped(!button.closest('.offer-back'),{focus:!isMobile()});return}
+      if(e.target.closest('.offer-flip'))return
       if(card.classList.contains('is-flipped'))setFlipped(false)
     }
     const scroll=()=>{
@@ -112,8 +110,6 @@ export default function Professional(){
     }
     const interrupt=()=>{cancelReveal();scroll()}
     const key=e=>{if(['Escape','ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))cancelReveal();if(e.key==='Escape'&&card.classList.contains('is-flipped'))setFlipped(false)}
-    card.addEventListener('pointerenter',enter)
-    card.addEventListener('pointerleave',leave)
     root.addEventListener('click',click)
     root.addEventListener('scroll',scroll,{passive:true})
     window.addEventListener('scroll',scroll,{passive:true})
@@ -121,7 +117,7 @@ export default function Professional(){
     document.addEventListener('touchmove',interrupt,{passive:true})
     document.addEventListener('wheel',interrupt,{passive:true})
     root.addEventListener('keydown',key)
-    return()=>{cancelReveal();card.removeEventListener('pointerenter',enter);card.removeEventListener('pointerleave',leave);root.removeEventListener('click',click);root.removeEventListener('scroll',scroll);window.removeEventListener('scroll',scroll);document.removeEventListener('scroll',scroll,true);document.removeEventListener('touchmove',interrupt);document.removeEventListener('wheel',interrupt);root.removeEventListener('keydown',key)}
+    return()=>{cancelReveal();root.removeEventListener('click',click);root.removeEventListener('scroll',scroll);window.removeEventListener('scroll',scroll);document.removeEventListener('scroll',scroll,true);document.removeEventListener('touchmove',interrupt);document.removeEventListener('wheel',interrupt);root.removeEventListener('keydown',key)}
   },[])
   useEffect(()=>{
     // 頁面為延後載入；掛載後再定位跨頁導覽的區塊。
