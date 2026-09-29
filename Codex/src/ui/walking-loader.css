@@ -72,7 +72,7 @@
 .walking-loader--mobile .walking-loader-track > span { background: #111; }
 .walking-loader--mobile .walking-loader-content > button { background: #111; color: #fff; }
 
-.site-page { position: fixed; inset: 0; width: auto; height: auto; overflow: hidden; background: #fafafa; }
+.site-page { position: fixed; inset: 0; width: auto; height: auto; overflow: clip; background: #fafafa; }
 
 @keyframes loader-preparing { 50% { opacity: 1; } }
 

@@ -48,17 +48,18 @@
 .testimonial-tabs button:focus-visible { outline: 2px solid #315b8d; outline-offset: 5px; }
 
 .professional .trust-row.testimonial-media-partners {
-  margin: 46px 0 0;
+  margin: 32px 0 0;
   padding: 0;
   border-top: 0;
 }
 
 .professional .testimonial-media-partners h3 {
-  margin: 0 0 18px;
-  color: #777;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: .02em;
+  margin: 0 0 22px;
+  color: #171717;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -.02em;
 }
 
 .testimonial-panel {
@@ -67,27 +68,38 @@
   gap: 20px;
 }
 
-.testimonial-panel--students {
+.testimonial-panel--students,
+.testimonial-panel--media {
   display: block;
   overflow: hidden;
   margin-inline: calc(clamp(22px, 5vw, 72px) * -1);
   mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
 }
-.testimonial-panel--professional { grid-template-columns: minmax(0, 820px); }
-.testimonial-panel--professional .testimonial-card { max-width: 820px; }
-.testimonial-panel--media { display: block; }
+.testimonial-panel--professional { display: flex; justify-content: center; }
+.testimonial-panel--professional .testimonial-card { width: fit-content; max-width: min(720px, 100%); }
 
-.testimonial-student-row { overflow: hidden; padding-block: 5px; }
+.testimonial-student-row {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 5px clamp(22px, 5vw, 72px);
+  scroll-behavior: smooth;
+  scroll-padding-inline: clamp(22px, 5vw, 72px);
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.testimonial-student-row::-webkit-scrollbar { display: none; }
+.testimonial-student-row:focus-visible { outline: 2px solid #315b8d; outline-offset: 5px; }
 .testimonial-student-track {
   display: flex;
   width: max-content;
-  animation: testimonial-student-drift 72s linear infinite;
 }
 .testimonial-student-group { display: flex; align-items: stretch; gap: 20px; padding-right: 20px; }
 .testimonial-student-group .testimonial-card {
   width: clamp(290px, 28vw, 380px);
   flex-shrink: 0;
+  scroll-snap-align: start;
 }
 .testimonial-student-group .testimonial-card:nth-child(1) { width: clamp(420px, 42vw, 560px); }
 .testimonial-student-group .testimonial-card:nth-child(2) { width: clamp(330px, 32vw, 430px); }
@@ -97,8 +109,6 @@
 .testimonial-student-group .testimonial-card:nth-child(6),
 .testimonial-student-group .testimonial-card:nth-child(7),
 .testimonial-student-group .testimonial-card:nth-child(8) { width: clamp(270px, 24vw, 330px); }
-@keyframes testimonial-student-drift { to { transform: translateX(-50%); } }
-
 .testimonial-card {
   display: flex;
   flex-direction: column;
@@ -152,7 +162,8 @@
   gap: 20px;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
-  padding: 2px 8px 50px;
+  padding: 2px clamp(22px, 5vw, 72px) 50px;
+  scroll-padding-inline: clamp(22px, 5vw, 72px);
   scroll-behavior: smooth;
   scroll-snap-type: inline mandatory;
   scrollbar-width: none;
@@ -290,7 +301,7 @@
   font-weight: 700;
 }
 
-.media-card-action { margin-top: auto; }
+.media-card-action { align-self: flex-end; margin-top: auto; }
 
 .media-card-action span,
 .media-card-secondary span { font-size: 16px; }
@@ -307,7 +318,6 @@
 @media (hover: hover) {
   .testimonial-tabs button:hover { color: #315b8d; }
   .testimonial-card:hover { border-color: #aaa; background: #fdfdfd; }
-  .testimonial-student-row:hover .testimonial-student-track { animation-play-state: paused; }
   .media-card:hover { border-color: #8ea0b5; box-shadow: 0 18px 44px rgba(23,45,73,.1); }
   .media-card:hover .media-card-visual::after { transform: translateX(120%); }
   .media-card-main:hover .media-card-action,
@@ -317,14 +327,7 @@
 @media (max-width: 900px) {
   .testimonial-panel { grid-template-columns: minmax(0, 1fr); }
   .testimonial-panel--students { display: block; }
-  .testimonial-panel--professional .testimonial-card { max-width: none; }
-}
-
-@media (min-width: 901px) {
-  .testimonial-panel {
-    min-height: 700px;
-    align-content: start;
-  }
+  .professional .testimonial-media-partners h3 { font-size: 20px; }
 }
 
 @media (max-width: 640px) {
@@ -333,7 +336,9 @@
   .testimonial-tabs button { flex: 0 0 auto; font-size: 15px; }
   .testimonial-card { padding: 22px; }
   .testimonial-card blockquote { font-size: 15px; line-height: 1.9; }
-  .testimonial-panel--students { margin-inline: -6vw; }
+  .testimonial-panel--students,
+  .testimonial-panel--media { margin-inline: -6vw; }
+  .testimonial-student-row { padding-inline: 6vw; scroll-padding-inline: 6vw; }
   .testimonial-student-group { gap: 14px; padding-right: 14px; }
   .testimonial-student-group .testimonial-card { width: 78vw; }
   .testimonial-student-group .testimonial-card:nth-child(1) { width: 88vw; }
@@ -352,7 +357,7 @@
   .media-card-secondary { padding-inline: 20px; }
   .media-coverage-grid {
     gap: 14px;
-    margin-inline: -6vw;
+    margin-inline: 0;
     padding-inline: 6vw;
     padding-bottom: 50px;
     scroll-padding-inline: 6vw;
@@ -366,8 +371,6 @@
   .testimonial-card,
   .media-card,
   .media-card-visual::after { transition: none; }
-  .testimonial-panel--students { overflow-x: auto; mask-image: none; -webkit-mask-image: none; }
-  .testimonial-student-track { animation: none; }
-  .testimonial-student-group[aria-hidden='true'] { display: none; }
+  .testimonial-student-row { scroll-behavior: auto; }
   .media-coverage-grid { scroll-behavior: auto; }
 }

@@ -121,10 +121,16 @@ export default function Professional(){
   },[])
   useEffect(()=>{
     // 頁面為延後載入；掛載後再定位跨頁導覽的區塊。
+    const root=page.current
+    // 外層固定頁框不應參與區塊導覽；否則整頁會被推離視窗並露出底層背景。
+    if(root.parentElement)root.parentElement.scrollTop=0
     const section=window.location.hash.slice(1)
-    if(section) page.current.querySelectorAll('[id]').forEach(node=>{
-      if(node.id===section)node.scrollIntoView({behavior:'instant',block:'start'})
-    })
+    const node=section&&root.querySelector(`[id="${CSS.escape(section)}"]`)
+    if(node){
+      const padding=parseFloat(getComputedStyle(root).scrollPaddingTop)||0
+      const target=root.scrollTop+node.getBoundingClientRect().top-root.getBoundingClientRect().top-padding
+      root.scrollTo({top:Math.max(0,target),behavior:'instant'})
+    }
   },[])
   useEffect(()=>{
     const root=page.current, track=root.querySelector('.career-track')

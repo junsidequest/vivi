@@ -35,11 +35,16 @@ function ReviewCard({ review }) {
 }
 
 function StudentMarquee() {
-  return <div className="testimonial-student-row">
+  return <div
+    className="testimonial-student-row"
+    role="region"
+    aria-label="學員推薦，可左右滑動瀏覽"
+    tabIndex={0}
+  >
     <div className="testimonial-student-track">
-      {[0, 1].map(copy => <div className="testimonial-student-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+      <div className="testimonial-student-group">
         {reviews.students.map(review => <ReviewCard review={review} key={review.name}/>)}
-      </div>)}
+      </div>
     </div>
   </div>
 }
