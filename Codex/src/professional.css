@@ -63,7 +63,6 @@
 .professional .career-label{display:block;font-size:10px;letter-spacing:.12em;margin-bottom:9px}
 .professional .career-stop h4{font-size:17px;font-weight:500;line-height:1.65;margin:0;transition:color .25s}
 .professional .career-stop p{font-size:11px;line-height:1.8;margin:9px 0 0;color:inherit;transition:color .25s}
-.professional .career-stop p strong{color:inherit;font-weight:600}
 .professional .career-stop.is-reached{color:var(--career-accent)}
 .professional .career-stop.is-reached .career-dot{background:var(--career-accent);border-color:var(--career-accent);box-shadow:0 0 0 4px #315b8d12}
 @media(max-width:600px){.professional .career-timeline{padding:0 0 20px}.professional .career-summary{max-width:none}.professional .career-stop{min-height:115px}.professional .career-stop:last-child{min-height:0}}
@@ -102,6 +101,8 @@
   .professional .career-timeline{align-self:stretch;display:flex;flex-direction:column}
   .professional .career-track{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
   .professional .career-stop{min-height:0;padding:0 0 0 30px}
+  .professional .about-body>h3{transform:translateY(-6px)}
+  .professional .career-stop:last-child p{transform:translateY(8px)}
 }
 
 /* 小島入口與服務諮詢並排於頁首。 */

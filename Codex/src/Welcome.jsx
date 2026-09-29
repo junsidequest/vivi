@@ -14,7 +14,7 @@ export default function Welcome(){
   return <main className={`welcome welcome--${active || 'neutral'}`}>
     <div className="welcome-wash" aria-hidden="true"/>
     <div className="welcome-shell">
-      <header className="welcome-header"><a href={sitePath('')} className="welcome-brand">Vivi Chen<span>陳盈臻</span></a><span className="welcome-role"><span>AI 陪跑教練</span><span className="welcome-role-divider"> · </span><span>企業內訓講師</span></span></header>
+      <header className="welcome-header"><a href={sitePath('')} className="welcome-brand">Vivi Chen<span>陳盈臻</span></a><span className="welcome-role"><span>AI 應用顧問</span><span className="welcome-role-divider"> · </span><span>企業內訓</span></span></header>
       <div className="welcome-content">
         <section className="welcome-intro">
           <h1><span className="welcome-title-line">Hi</span><span className="welcome-title-line">我是 AI 陪跑教練 Vivi</span></h1>
