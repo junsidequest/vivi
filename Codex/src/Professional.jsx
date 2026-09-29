@@ -17,7 +17,7 @@ export default function Professional(){
   const page = useRef(null)
   useProcessNumbers(page)
   useEffect(() => {
-    const buttons = page.current.querySelectorAll('.offer-course-link, .connect-ctas .pro-island')
+    const buttons = page.current.querySelectorAll('.offer-course-link, .offer-consult-link, .connect-ctas .pro-island')
     const pointer = event => { if (event.pointerType !== 'touch' || event.type === 'pointerdown') setButtonOrigin(event.currentTarget, event) }
     const focus = event => { if (event.currentTarget.matches(':focus-visible')) setButtonOrigin(event.currentTarget, event, true) }
     buttons.forEach(button => {

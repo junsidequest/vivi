@@ -202,14 +202,44 @@
   .professional .mq-item { transition: none; }
 }
 
-/* 原圖 1001px 寬，實際標誌僅佔中央 361px；補償透明留白。 */
-.professional .mq-item--shumai { width: 104px; overflow: hidden; }
-.professional .mq-item--shumai img {
-  width: 277.3%;
-  max-width: none;
-  max-height: none;
-  height: auto;
-  flex-shrink: 0;
+/* 專業認證：以文字呈現，讓資格成為關於我與媒體經歷之間的信任層。 */
+.professional .credentials {
+  margin-top: 34px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.professional .credentials h2 {
+  margin: 0 0 18px;
+  color: #777;
+  font-size: 14px;
+  font-weight: 400;
+}
+.professional .credential-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.professional .credential-list li {
+  display: grid;
+  gap: 4px;
+  padding: 15px 0;
+}
+.professional .credential-list span { color: #777; font-size: 14px; }
+.professional .credential-list strong { font-size: 16px; font-weight: 500; }
+@media(max-width:900px){
+  .professional .credential-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media(max-width:600px){
+  .professional .credential-list { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 收緊首屏引導線與「關於我」標題之間的距離。 */
+.professional #about { padding-top: 70px; }
+@media(max-width:600px){
+  .professional #about { padding-top: 42px; }
 }
 
 /* 放大的流程數字：固定裁切下方 28%，字面依捲動從左至右顯色。 */
@@ -251,6 +281,34 @@
 .professional .offer-course-link.origin-button .origin-button-label,
 .professional .offer-course-link.origin-button .origin-button-fill{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%}
 .professional .offer-course-link.origin-button .origin-button-fill{background:#315b8d;color:#fff}
+
+.professional .offer-course-list {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 26px;
+  padding-left: 1.25em;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.professional .offer-course-list li { padding-left: .2em; }
+.professional .offer-course-list strong { color: #171717; font-weight: 500; }
+.professional .offer-front .meta:has(.offer-flip-toggle:only-child) { justify-content: flex-end; }
+
+/* 一對一陪跑卡片沿用首頁主按鈕的游標起點擴散效果。 */
+.professional .offers{grid-template-columns:repeat(3,minmax(0,1fr))}
+.professional .offer-consult{padding-top:32px}
+.professional .offer-consult-link.origin-button{
+  width:100%;margin-top:auto;padding:14px 17px;border-radius:var(--button-radius);
+  font-size:16px;font-weight:500;text-align:center;
+}
+.professional .offer-consult-link.origin-button .origin-button-label,
+.professional .offer-consult-link.origin-button .origin-button-fill{width:100%}
+.professional .offer .offer-copy{margin:0 0 30px}
+.professional .offer .offer-copy p{margin:0}
+.professional .offer .offer-copy p+p{margin-top:12px}
+@media(max-width:900px){.professional .offer-consult{padding-top:25px}}
+@media(max-width:600px){.professional .offer-consult{padding-top:30px}}
 
 /* 窄螢幕直接切換單欄，避免流程、服務與夥伴卡片擠成多欄。 */
 @media (max-width: 900px) {

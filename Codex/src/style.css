@@ -10,3 +10,6 @@
 .mobile-site-page.is-visible{visibility:visible;pointer-events:auto}
 .mobile-navigation-error{position:fixed;bottom:24px;left:20px;right:20px;z-index:110;background:#fff;color:#111;padding:16px;border-radius:8px;box-shadow:0 2px 16px #0002}
 .mobile-navigation-error button{margin-left:12px}
+
+/* 根層採介紹頁的中性底色；小島本身會以全螢幕場景覆蓋。 */
+:root,body,#root{background:#fafafa}

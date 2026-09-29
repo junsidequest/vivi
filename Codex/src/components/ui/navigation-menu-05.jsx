@@ -6,7 +6,7 @@ const items = [
   { title: '關於我', href: '#about' },
   { title: '課程與服務', href: '#offers' },
   { title: '服務流程', href: '#process' },
-  { title: '合作夥伴', href: '#partners' },
+  { title: '內訓洽詢', href: '#partners' },
 ]
 
 export default function NavigationMenu() {

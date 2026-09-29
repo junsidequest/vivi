@@ -19,7 +19,7 @@ const {view,redirect,canonical}=currentRoute
 if(redirect) window.location.replace(canonical)
 document.title='Vivi Chen'
 function Site(){
-  const [Page,setPage]=useState(null),[contentReady,setContentReady]=useState(false),[modelReady,setModelReady]=useState(false),[finished,setFinished]=useState(false),[failed,setFailed]=useState(false),[progress,setProgress]=useState(0)
+  const [Page,setPage]=useState(null),[contentReady,setContentReady]=useState(false),[finished,setFinished]=useState(false),[failed,setFailed]=useState(false),[progress,setProgress]=useState(0)
   const loaded=useCallback(()=>setContentReady(true),[])
   const advanced=useCallback(value=>setProgress(p=>Math.max(p,.15+value*.75)),[])
   useEffect(()=>{
@@ -33,14 +33,14 @@ function Site(){
     return ()=>{cancelled=true}
   },[])
   useEffect(()=>{
-    if(!contentReady||!modelReady)return
+    if(!contentReady)return
     setProgress(1)
     const timer=setTimeout(()=>setFinished(true),matchMedia('(prefers-reduced-motion: reduce)').matches?0:1450)
     return ()=>clearTimeout(timer)
-  },[contentReady,modelReady])
+  },[contentReady])
   return <>
     {Page&&<div className="site-page" inert={!finished}><Page externalLoading pageVisible={finished} onLoadReady={loaded} onLoadProgress={advanced}/></div>}
-    {!finished&&<WalkingLoader theme={view==='professional'?'professional':'island'} progress={progress} error={failed} label={view==='island'?'小島正在準備中':'頁面載入中'} onModelReady={()=>setModelReady(true)}/>}
+    {!finished&&<WalkingLoader theme={view==='professional'?'professional':'island'} progress={progress} error={failed}/>}
   </>
 }
 createRoot(document.getElementById('root')).render(isMobilePresentation()?<MobileSite/>:<Site/> )
