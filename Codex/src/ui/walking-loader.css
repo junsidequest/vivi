@@ -37,7 +37,7 @@
 .walking-loader:not(.is-complete):not(.has-error) .walking-loader-shape {
   animation:
     loader-arrive .55s cubic-bezier(.22, 1, .36, 1) both,
-    loader-spin 1.4s linear .55s infinite;
+    loader-spin 2.4s linear .55s infinite;
 }
 
 .walking-loader.is-complete {
@@ -106,8 +106,27 @@
 }
 
 @keyframes loader-spin {
-  from { transform: rotate(45deg) scale(1); }
-  to { transform: rotate(405deg) scale(1); }
+  0% {
+    transform: rotate(45deg) scale(1);
+    animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+  }
+  14% { transform: rotate(135deg) scale(1); }
+  25% {
+    transform: rotate(135deg) scale(1);
+    animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+  }
+  39% { transform: rotate(225deg) scale(1); }
+  50% {
+    transform: rotate(225deg) scale(1);
+    animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+  }
+  64% { transform: rotate(315deg) scale(1); }
+  75% {
+    transform: rotate(315deg) scale(1);
+    animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+  }
+  89% { transform: rotate(405deg) scale(1); }
+  100% { transform: rotate(405deg) scale(1); }
 }
 
 @keyframes loader-reveal {

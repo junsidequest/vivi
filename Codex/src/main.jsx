@@ -39,7 +39,7 @@ function Site(){
     return ()=>clearTimeout(timer)
   },[contentReady])
   return <>
-    {Page&&<div className="site-page" inert={!finished}><Page externalLoading pageVisible={finished} onLoadReady={loaded} onLoadProgress={advanced}/></div>}
+    {Page&&<div className="site-page" inert={!finished}><Page externalLoading pageVisible={finished} onLoadReady={loaded} onLoadProgress={advanced} onLoadError={()=>setFailed(true)}/></div>}
     {!finished&&<WalkingLoader theme={view} progress={progress} error={failed}/>}
   </>
 }

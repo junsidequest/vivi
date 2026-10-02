@@ -71,6 +71,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     ring.rotation.x = -Math.PI / 2; ring.scale.y = .84; ring.position.y = -.92; ripples.add(ring)
   }
   let disposed = false, ready = false, paused = false, frame = 0, last = 0
+  let readyFrameResolve = null, readyFrameRendered = false
   let navigation, placeFeet, mixer, action, island, route = null, routeId = null, nearby = null
   let heading = startOnBridge?Math.PI:0, travelled = 0, speed = 0, lastLift = 0, idleTime = 0
   let idleHead, idleChest, idleHeadPose, idleChestPose
@@ -126,13 +127,20 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     const body = measureAvatar(avatar, mixer, action); placeFeet = createFootPlacement(avatar); seatedPose=createSeatedPose(avatar)
     return body
   })
-  Promise.all([loadIsland, loadAvatar]).then(([map, body]) => {
+  Promise.all([loadIsland, loadAvatar]).then(async ([map, body]) => {
     if (disposed) return
     onProgress(.9)
     navigation = createNavigation(map, body)
     if(mobile)updateMobileShadows=createMobileShadows(scene,map)
     seats=readSeats(map);fitSeatBacks(avatar,seatedPose,seats)
-    ready = true; onReady()
+    onProgress(.94)
+    if(renderer.compileAsync)await renderer.compileAsync(scene,camera)
+    if(disposed)return
+    const firstReadyFrame=new Promise(resolve=>{readyFrameResolve=resolve})
+    ready = true
+    await firstReadyFrame
+    if(disposed)return
+    onProgress(1);onReady()
   }).catch(error => { if (!disposed) onError(error) })
 
   function sitDown(seat) {
@@ -394,6 +402,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     if(destination.visible)destination.scale.setScalar(1+Math.sin(now*.006)*.08)
     if(hovered&&hoverComposer)hoverComposer.render(dt)
     else renderer.render(scene, camera)
+    if(ready&&!readyFrameRendered){readyFrameRendered=true;readyFrameResolve?.();readyFrameResolve=null}
     if (ready) onPosition({ avatar: project([position.x, avatar.position.y + 1.4, position.z]), places: Object.fromEntries(Object.entries(PLACES).map(([id, p]) => [id, project(p.point)])), x: position.x, z: position.z, y: avatar.position.y, clearance: FOOT_CLEARANCE, dt, moving: distance>.00001, autoWalking: Boolean(route)||bridgeExit.active||Boolean(entrance) })
     frame = requestAnimationFrame(tick)
   }

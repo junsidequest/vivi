@@ -88,7 +88,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
     const open=id=>{if(id==='dock'){void enterLanding(null);return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{
       startOnBridge:fromBridge,
-      onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');if(onLoadError)onLoadError();else onLoadReady?.()},
+      onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);onLoadProgress?.(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');onLoadError?.()},
       onExitStart:()=>setExiting(true),onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
       onPosition:({avatar,places,x,y,z,dt,moving,autoWalking})=>{
         playerScreen.current=avatar
