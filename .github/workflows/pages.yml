@@ -27,12 +27,23 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: Codex/package-lock.json
+          cache-dependency-path: |
+            Codex/package-lock.json
+            v2/package-lock.json
       - name: Build current site
         working-directory: Codex
         run: |
           npm ci
           npm run build
+
+      - name: Build v2 site
+        working-directory: v2
+        run: |
+          npm ci
+          npm run build
+
+      - name: Include v2 alongside the current site
+        run: cp -R v2/dist Codex/dist/v2
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
