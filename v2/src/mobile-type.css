@@ -1,0 +1,80 @@
+/* 參考 junlearning.com 的手機內文層級：正文與操作文字至少 18px。 */
+@media(max-width:640px), (hover:none) and (pointer:coarse){
+  .welcome,.professional,.island-app,.walking-loader,.mobile-navigation-error{font-size:18px!important}
+  .welcome *,.professional *,.island-app *,.walking-loader *,.mobile-navigation-error *{font-size:18px!important}
+  .welcome h1,.professional .pro-hero h1{font-size:44px!important;line-height:1.25}
+  .welcome h1 span,.professional .pro-hero h1 span{font-size:inherit!important}
+  .welcome h2,.professional h3,.island-app h2{font-size:24px!important;line-height:1.5}
+  .professional h2{font-size:32px!important;line-height:1.35}
+  .professional .connect h2{font-size:38px!important}
+  .welcome-brand,.pro-brand{font-size:26px!important}
+  .professional .step-no{font-size:32px!important}
+  .walking-loader-status h1,.walking-loader-status>span{font-size:24px!important}
+  .welcome p,.professional p,.island-app p{line-height:1.8}
+  .welcome-role{max-width:165px;line-height:1.5}
+  .welcome-header{align-items:flex-start;flex-wrap:wrap}
+  .welcome-content{gap:28px}
+  .welcome-card-copy{padding:16px 12px;min-height:0;flex:1}
+  .welcome-card h2{white-space:normal;letter-spacing:-.04em}
+  .welcome-card-copy p{min-height:0}
+  .welcome-card-tag{padding:5px 7px}
+  .welcome-card-bottom{padding:12px 8px;gap:4px}
+  .welcome-card-bottom>span{flex-shrink:0}
+  .welcome-footer{align-items:flex-start;flex-wrap:wrap;line-height:1.6}
+  .pro-header{flex-wrap:wrap;gap:12px;padding:16px 6vw}
+  .professional .pro-header nav a{font-size:16px!important}
+  .pro-header nav{order:3;width:100%;flex-wrap:wrap;gap:12px 18px;justify-content:flex-start}
+  .pro-header-actions{margin-left:auto}
+  .pro-header-actions .pro-contact{padding:10px 12px}
+  .pro-hero-copy>p br{display:none}
+  .professional .career-stop{min-height:140px}
+  .professional .career-stop:last-child{min-height:0}
+  .professional .career-summary{line-height:1.8}
+  .professional .career-label,.professional .career-heading{line-height:1.6}
+  .professional .v2-foot{line-height:1.8}
+  .professional .connect-ctas{flex-wrap:wrap;gap:12px;padding-bottom:0;overflow:visible}
+  .professional .connect-ctas .hbtn{padding:12px 14px;max-width:100%;white-space:normal}
+  .professional .connect-ctas .pro-island{margin-left:0}
+  .professional .mq-item{height:52px}
+  .island-app .menu-item{min-height:48px}
+  .island-app .popup-card{max-height:calc(100dvh - 32px);overflow-y:auto;padding:26px 22px}
+  .island-app .popup-card h2{padding-right:28px}
+  .island-app .help-grid--mobile{display:block}
+  .island-app .help-grid--mobile .help-cell{display:block;margin:20px 0}
+  .island-app .help-grid--mobile p{margin:8px 0 0}
+  .island-app .key,.island-app .keycap{min-width:32px;min-height:32px}
+  .island-app .player-speech,.island-app .duck-say{max-width:min(320px,calc(100vw - 32px));line-height:1.7}
+  .island-app .primary{min-height:48px}
+  .island-app .menu-toggle{font-size:24px!important}
+}
+
+/* 手機提示獨立放在操作列下方，並預留兩行文字與底部安全區。 */
+.island-controls,.route-slot{display:contents}
+@media(max-width:720px),(pointer:coarse){
+  .island-app .island-controls{position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;flex-direction:column;gap:14px;pointer-events:none}
+  .island-app .touch-controls{position:static;display:flex;align-items:center;justify-content:space-between;width:100%;pointer-events:none}
+  .island-app .touch-controls>*{pointer-events:auto}
+  .island-app .route-slot{display:flex;justify-content:center;align-items:flex-start;min-height:84px;width:100%}
+  .island-app .route-message{position:static;transform:none;margin:0;max-width:100%;overflow-wrap:anywhere}
+}
+
+/* 入口手機雙欄：保留可讀字級，縮短首屏留白與人物區高度。 */
+@media(max-width:640px), (hover:none) and (pointer:coarse){
+  .welcome{padding:12px}
+  .welcome-shell{padding:12px 4px 20px;min-height:calc(100svh - 24px)}
+  .welcome-header{gap:10px}
+  .welcome-content{padding:20px 0;gap:16px;flex:0}
+  .welcome .welcome-intro h1{font-size:36px!important;line-height:1.2;margin:10px 0 12px}
+  .welcome .welcome-intro p{line-height:1.65}
+  .welcome-kicker{letter-spacing:.04em}
+  .welcome-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
+  .welcome-card,.welcome-card.is-active{transform:none}
+  .welcome-card-copy{padding:12px 10px;min-height:0}
+  .welcome .welcome-card h2{font-size:22px!important;line-height:1.35;margin:12px 0 8px}
+  .welcome .welcome-card-copy p{line-height:1.55}
+  .welcome-portrait{height:clamp(160px,23svh,200px);flex-shrink:0}
+  .welcome-orbit,.welcome-card--professional .welcome-orbit{width:150px;height:150px;top:10%}
+  .welcome-card-bottom{min-height:44px;padding:10px 7px}
+  .welcome-card .welcome-action-arrow{width:18px;height:18px}
+  .welcome .v2-foot{gap:16px}
+}

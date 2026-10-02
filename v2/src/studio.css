@@ -1,0 +1,202 @@
+/* Vivi 工作實驗室：以人物、字體與單一深色工作面板建立節奏。 */
+.studio-edition{--paper:#f8f8f6;--ink:#191a18;--muted:#62645f;--line:#d9dbd5;background:var(--paper)}
+.studio-edition .pro-header{height:88px;background:#f8f8f6ed;border-bottom-color:#191a1812}
+.studio-edition .pro-brand{font-size:43px;letter-spacing:-4px}
+.studio-edition .pro-header .pro-navigation{font-size:14px;gap:30px}
+.studio-edition a.pro-contact{font-size:14px;padding:10px 22px}
+.studio-edition .pro-hero{min-height:0;grid-template-columns:1.24fr 1fr;gap:0 8%;padding-top:68px}
+.studio-edition .pro-hero-copy{padding:34px 0 50px;align-self:center}
+.studio-edition .pro-kicker{font:500 12px/1.6 Arial,'Noto Sans TC',sans-serif;letter-spacing:1.5px;gap:12px}
+.studio-edition .pro-kicker>span:first-child{display:none}
+.studio-edition .pro-kicker .kicker-divider{display:inline-block;width:23px;height:1px;background:#9a9c96;border-radius:0}
+.studio-edition .pro-hero h1{font-size:clamp(44px,5.35vw,80px);font-weight:500;line-height:1.43;letter-spacing:-.05em;margin:38px -80px 32px 0}
+.studio-edition .hero-ai{font:italic 400 1.13em/.7 Georgia,serif;letter-spacing:-.08em;padding-right:.04em}
+.studio-edition .work-word{font-family:'Noto Serif TC',serif;font-weight:500;letter-spacing:-.09em;position:relative;padding-inline:.02em}
+.studio-edition .work-word:after{content:'';position:absolute;left:8%;right:0;bottom:.04em;height:1px;background:#a2a49d}
+.studio-edition .hero-intro{font-size:17px;line-height:2.1;max-width:32em;margin-bottom:32px}
+.studio-edition .hero-actions{gap:28px}
+.studio-edition a.pro-cta{font-size:14px;min-height:56px;padding:16px 25px}
+.studio-edition .hero-secondary{font-size:14px;min-height:44px}
+.studio-edition .hero-note{font-size:12px;letter-spacing:1px;margin:28px 0 0;display:block;color:var(--muted)}
+.studio-edition .pro-hero-visual{height:590px;min-height:0;margin:0;align-self:center;border-radius:180px 180px 8px 8px;background:radial-gradient(ellipse at 45% 20%,#fff 0,#eceee7 50%,#d6d9d0 100%);position:relative;isolation:isolate}
+.studio-edition .pro-hero-visual:after{content:'';position:absolute;inset:14px;border:1px solid #fff9;border-radius:inherit;pointer-events:none;z-index:2}
+.studio-edition .portrait-monogram{position:absolute;top:-15px;left:36px;font:italic 400 340px/.8 Georgia,serif;letter-spacing:-.15em;color:#ffffff9c;z-index:0;user-select:none}
+.studio-edition .pro-hero-photo{border-radius:inherit;min-height:0;height:100%;overflow:hidden;position:relative}
+.studio-edition .pro-hero-photo:before{display:none}
+.studio-edition .pro-hero-photo img{height:94%;width:100%;object-fit:contain;object-position:center bottom}
+.studio-edition .portrait-note{left:-34px;bottom:28px;border:0;box-shadow:none;transform:none;background:#f8f8f6f5;padding:20px 25px;backdrop-filter:blur(8px);z-index:3}
+.studio-edition .portrait-note>span{font:italic 400 36px/1.1 Georgia,serif;letter-spacing:-1.5px}
+.studio-edition .portrait-note p{font-size:11px;letter-spacing:.5px;margin-top:10px;color:var(--muted)}
+.studio-edition .hero-bottom{grid-column:1/-1;margin-top:48px;padding:28px 0 34px;align-items:flex-end;letter-spacing:0}
+.studio-edition .hero-bottom p{font-size:15px;line-height:1.9;margin:0;color:var(--muted)}
+.studio-edition .hero-bottom>span{font-size:12px;letter-spacing:1px;color:var(--muted)}
+.studio-edition .experience-strip{border-top:0;padding:26px 0 34px;margin-bottom:0}
+.studio-edition .experience-strip strong{font-weight:400;font-size:58px;letter-spacing:-3px}
+.studio-edition .experience-strip p>span{font-size:13px;max-width:8em}
+.studio-edition .experience-strip>div{font-size:18px;line-height:1.9}
+.studio-edition .experience-strip>div span{font-size:13px}
+.studio-edition .section-eyebrow{font-size:12px;letter-spacing:1.7px}
+.studio-edition .v2-zh,.studio-edition .testimonial-heading{font-size:clamp(34px,4vw,54px);font-weight:400;letter-spacing:-.045em}
+.studio-edition .v2-sub{font-size:16px}
+/* 深色工作面板是一個完整段落，互動的成果比裝飾更突出。 */
+.studio-edition .work-sketch{margin:36px calc(-1 * var(--gutter)) 20px;padding:88px var(--gutter);background:#20221f;color:#fafbf7;grid-template-columns:.75fr 1.25fr;gap:7%;position:relative;isolation:isolate}
+.studio-edition .work-sketch:before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 90% 0,#65695c26,transparent 60%);pointer-events:none}
+.studio-edition .sketch-heading h2{font-size:clamp(30px,3vw,43px);font-weight:400;line-height:1.55;letter-spacing:-.04em}
+.studio-edition .sketch-heading p{font-size:15px;line-height:2.1;color:#c2c5bc}
+.studio-edition .work-sketch .section-eyebrow{color:#c2c5bc}
+.studio-edition .sketch-board{background:none;border:0;border-radius:0;box-shadow:none;padding:0}
+.studio-edition .sketch-tabs{gap:28px;border-color:#ffffff30}
+.studio-edition .sketch-tabs button{font-size:14px;color:#c2c5bc;min-height:50px;padding-bottom:20px;justify-content:flex-start}
+.studio-edition .sketch-tabs button[aria-selected=true]{color:white}
+.studio-edition .sketch-tabs button[aria-selected=true]:after{background:white}
+.studio-edition .sketch-change{grid-template-columns:1fr 1.2fr;gap:24px;padding:30px 0 0;min-height:290px}
+.studio-edition .sketch-label{font-size:12px;letter-spacing:1px;color:#b7bcb1;margin-bottom:18px}
+.studio-edition .sketch-problem h3{font-size:21px;font-weight:400;line-height:1.85;margin-bottom:24px}
+.studio-edition .sketch-source{border:0;border-radius:0;border-bottom:1px solid #ffffff40;transform:none;padding:0 0 7px;font-size:12px;color:#c2c5bc}
+.studio-edition .sketch-solution{display:flex;flex-direction:column;border-left:1px solid #ffffff25;padding-left:25px}
+.studio-edition .sketch-solution .sketch-label{order:-2}
+.studio-edition .sketch-result{order:-1;font-size:25px;line-height:1.65;margin:0 0 26px;letter-spacing:-.035em}
+.studio-edition .sketch-solution ol{margin:0}
+.studio-edition .sketch-solution li{font-size:13px;padding:7px 0;color:#d5d8cf;line-height:1.8}
+.studio-edition .sketch-solution li:before{color:#afb6a7;font-size:11px}
+.studio-edition .sketch-example{background:#ffffff08;border:1px solid #ffffff14;color:#d1d5c9;font-size:13px;line-height:1.9;padding:16px;margin-top:25px;min-height:80px}
+.studio-edition .sketch-bottom{border-color:#ffffff30;align-items:flex-start;flex-direction:column;gap:12px;padding-top:20px}
+.studio-edition .sketch-bottom>span{font-size:11px;color:#b7bcb1}
+.studio-edition .sketch-bottom a{font-size:13px;min-height:44px;text-decoration:underline;text-decoration-color:#ffffff60;text-underline-offset:7px}
+.studio-edition .about-body p{font-size:16px;line-height:2.1}
+.studio-edition .about-body h3{font-weight:400;font-size:25px;line-height:1.65}
+.studio-edition .credential-copy>span{font-size:12px}
+.studio-edition .credential-copy strong{font-size:13px}
+.studio-edition .htag{font-size:12px}
+.studio-edition .testimonial-card{padding-top:30px}
+.studio-edition .testimonial-card figcaption{font-size:13px}
+.studio-edition .testimonial-tabs button{font-size:14px}
+.studio-edition .testimonial-heading:before{font-size:12px}
+.studio-edition #process .step h3{font-weight:400}
+.studio-edition #process .step p{font-size:16px}
+.studio-edition .connect{padding:70px 0;background:none;color:var(--ink);border-radius:0;border-block:1px solid var(--line)}
+.studio-edition .connect .section-eyebrow{color:var(--muted)}
+.studio-edition .connect h2{font-weight:400;font-size:clamp(45px,6.6vw,90px);line-height:1.35}
+.studio-edition .connect p{font-size:16px;color:var(--muted)}
+.studio-edition .connect .hbtn{background:var(--ink);color:white;border-color:var(--ink);font-size:15px;padding:16px 30px}
+.studio-edition .connect .hbtn:hover{background:transparent;color:var(--ink)}
+.studio-edition .v2-foot{padding:32px 0;font-size:12px}
+.studio-edition a.origin-button .origin-button-fill{transition:clip-path .35s var(--ease)}
+@media(max-width:1100px){
+ .studio-edition .pro-hero{gap:0 5%;padding-top:50px}
+ .studio-edition .pro-hero h1{font-size:5.35vw}
+ .studio-edition .pro-hero-visual{height:510px;border-radius:160px 160px 8px 8px}
+ .studio-edition .portrait-monogram{font-size:290px;left:20px;top:10px}
+ .studio-edition .hero-actions{gap:18px;flex-wrap:wrap}
+ .studio-edition .hero-secondary{font-size:13px}
+ .studio-edition .hero-intro{font-size:16px}
+ .studio-edition .portrait-note{left:-22px;padding:16px 20px}
+ .studio-edition .portrait-note>span{font-size:31px}
+ .studio-edition .work-sketch{grid-template-columns:1fr;gap:38px}
+ .studio-edition .sketch-heading{display:grid;grid-template-columns:1fr 1fr;gap:0 35px}
+ .studio-edition .sketch-heading .section-eyebrow{grid-column:1/-1}
+ .studio-edition .sketch-heading h2{font-size:36px;margin-bottom:0}
+ .studio-edition .sketch-heading p{align-self:end;margin:0;font-size:16px}
+ .studio-edition .sketch-change{min-height:280px;gap:40px}
+ .studio-edition .sketch-problem h3{font-size:25px}
+ .studio-edition .sketch-result{font-size:28px}
+ .studio-edition .sketch-solution li{font-size:14px}
+ .studio-edition .sketch-bottom{flex-direction:row;justify-content:space-between;align-items:center}
+}
+@media(max-width:800px){
+ .studio-edition .pro-header .pro-navigation{font-size:12px;gap:16px}
+ .studio-edition a.pro-contact{font-size:12px;padding:10px 18px}
+ .studio-edition .pro-header{height:80px}
+ .studio-edition .pro-hero h1{font-size:clamp(44px,5.65vw,48px);line-height:1.5;margin:25px -30px 24px 0}
+ .studio-edition .pro-hero-visual{height:435px;border-radius:130px 130px 6px 6px}
+ .studio-edition .portrait-monogram{font-size:240px;left:10px;top:15px}
+ .studio-edition .portrait-note{left:-12px;padding:13px 16px;bottom:20px}
+ .studio-edition .portrait-note>span{font-size:27px}
+ .studio-edition .portrait-note p{font-size:10px}
+ .studio-edition .hero-intro{font-size:15px}
+ .studio-edition .hero-actions{flex-direction:column;gap:12px;align-items:flex-start}
+ .studio-edition .hero-note{font-size:11px;letter-spacing:.3px;margin-top:22px}
+ .studio-edition .hero-bottom{margin-top:30px}
+ .studio-edition .work-sketch{padding-block:65px}
+ .studio-edition .testimonial-card blockquote{font-size:15px}
+}
+@media(max-width:700px){
+ .studio-edition .pro-header{height:78px}
+ .studio-edition .pro-header .pro-navigation{font-size:20px}
+ .studio-edition .pro-hero{grid-template-columns:1fr;padding:36px 24px 0;gap:0}
+ .studio-edition .pro-hero-copy{padding:0}
+ .studio-edition .pro-kicker{font-size:11px;letter-spacing:1px}
+ .studio-edition .pro-hero h1{font-size:clamp(34px,8.45vw,50px);line-height:1.48;margin:24px 0}
+ .studio-edition .hero-intro{font-size:16px;line-height:1.95;margin-bottom:24px}
+ .studio-edition .hero-actions{flex-direction:row;align-items:center;gap:12px 20px}
+ .studio-edition a.pro-cta{font-size:13px;padding:14px 20px;min-height:50px}
+ .studio-edition .hero-secondary{font-size:13px}
+ .studio-edition .hero-note{font-size:11px;margin-top:16px}
+ .studio-edition .pro-hero-visual{height:400px;width:90%;max-width:360px;margin:34px 0 0 auto;border-radius:160px 160px 6px 6px}
+ .studio-edition .portrait-monogram{font-size:245px;left:15px;top:15px}
+ .studio-edition .portrait-note{left:-28px;bottom:22px;padding:16px 20px}
+ .studio-edition .portrait-note>span{font-size:30px}
+ .studio-edition .portrait-note p{font-size:11px}
+ .studio-edition .hero-bottom{margin-top:30px;padding:23px 0;gap:16px;align-items:center}
+ .studio-edition .hero-bottom p{font-size:13px}
+ .studio-edition .hero-bottom>span{font-size:10px;max-width:10em;line-height:1.9}
+ .studio-edition .experience-strip{padding:27px 0}
+ .studio-edition .experience-strip strong{font-size:48px}
+ .studio-edition .experience-strip p>span{font-size:12px}
+ .studio-edition .section-eyebrow{font-size:11px;letter-spacing:1px}
+ .studio-edition .work-sketch{margin-top:20px;padding-block:55px;gap:30px}
+ .studio-edition .sketch-heading{display:block}
+ .studio-edition .sketch-heading h2{font-size:31px;margin-bottom:20px}
+ .studio-edition .sketch-heading p{font-size:15px}
+ .studio-edition .sketch-tabs{gap:15px}
+ .studio-edition .sketch-tabs button{font-size:13px;justify-content:center;min-height:50px}
+ .studio-edition .sketch-change{grid-template-columns:1fr;min-height:0;gap:26px}
+ .studio-edition .sketch-problem h3{font-size:22px;line-height:1.8;margin:0}
+ .studio-edition .sketch-source{display:none}
+ .studio-edition .sketch-solution{padding:24px 0 0;border-left:0;border-top:1px solid #ffffff25}
+ .studio-edition .sketch-result{font-size:27px;margin-bottom:22px}
+ .studio-edition .sketch-solution li{font-size:14px}
+ .studio-edition .sketch-example{font-size:13px;padding:15px;min-height:105px}
+ .studio-edition .sketch-bottom{flex-direction:column;align-items:flex-start;gap:8px}
+ .studio-edition .sketch-bottom>span{font-size:11px}
+ .studio-edition .sketch-bottom a{font-size:13px}
+ .studio-edition .v2-zh,.studio-edition .testimonial-heading{font-size:35px;line-height:1.5}
+ .studio-edition .v2-sub{font-size:15px}
+ .studio-edition .about-body h3{font-size:22px}
+ .studio-edition .about-body p{font-size:16px}
+ .studio-edition .connect{padding:42px 0}
+ .studio-edition .connect h2{font-size:42px}
+ .studio-edition .connect p{font-size:15px}
+ .studio-edition .connect .hbtn{font-size:14px;padding:14px 24px}
+ .studio-edition .testimonial-card figcaption{font-size:12px}
+ .studio-edition .testimonial-tabs{gap:18px}
+ .studio-edition .testimonial-tabs button{font-size:13px}
+ .studio-edition .v2-foot{font-size:11px}
+}
+@media(max-width:360px){
+ .studio-edition .pro-hero h1{font-size:34px}
+ .studio-edition .hero-actions{gap:10px 16px}
+ .studio-edition .hero-note{font-size:10px}
+ .studio-edition .pro-hero-visual{height:350px}
+ .studio-edition .portrait-monogram{font-size:215px}
+ .studio-edition .portrait-note{left:-22px}
+ .studio-edition .sketch-tabs button{font-size:12px}
+ .studio-edition .connect h2{font-size:36px}
+}
+@media(prefers-reduced-motion:reduce){.studio-edition a.origin-button .origin-button-fill{transition:none}}
+
+/* 所有主要章節共用同一字級；服務導語形成橫向的閱讀起點。 */
+.studio-edition .service-editorial .svc-heading{display:grid;grid-template-columns:1.1fr 1fr;gap:0 9%;max-width:none}
+.studio-edition .service-editorial .svc-eyebrow{grid-column:1/-1;font-size:12px;letter-spacing:1.7px}
+.studio-edition .service-editorial .svc-heading h2{font-size:clamp(34px,4vw,54px);font-weight:400;line-height:1.4;margin-bottom:0}
+.studio-edition .service-editorial .svc-intro{font-size:16px;align-self:end;margin-bottom:6px;max-width:440px}
+.studio-edition .service-editorial .svc-option h3{font-weight:400}
+.studio-edition .service-editorial .svc-course-heading h3{font-weight:400}
+.studio-edition .pro-hero-copy{animation:studio-arrive .6s var(--ease) both}
+.studio-edition .pro-hero-visual{animation:studio-arrive .8s var(--ease) both .08s}
+@keyframes studio-arrive{from{transform:translateY(8px)}to{transform:translateY(0)}}
+@media(max-width:700px){
+ .studio-edition .service-editorial .svc-heading{display:block}
+ .studio-edition .service-editorial .svc-heading h2{font-size:35px;line-height:1.5;margin-bottom:22px}
+ .studio-edition .service-editorial .svc-intro{font-size:16px;margin:0}
+}

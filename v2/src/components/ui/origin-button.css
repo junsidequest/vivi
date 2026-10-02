@@ -1,0 +1,45 @@
+.professional a.origin-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #171717;
+  background: #171717;
+  color: #fff !important;
+  transition: transform .15s ease;
+  --origin-x: 50%;
+  --origin-y: 50%;
+  --origin-radius: 400px;
+}
+.professional a.origin-button .origin-button-label,
+.professional a.origin-button .origin-button-fill { font-size: inherit; }
+.professional a.origin-button .origin-button-fill {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: inherit;
+  background: #fff;
+  color: #171717;
+  pointer-events: none;
+  clip-path: circle(0 at var(--origin-x) var(--origin-y));
+  transition: clip-path .5s cubic-bezier(.16, 1, .3, 1);
+}
+.professional a.origin-button:focus-visible .origin-button-fill,
+.professional a.origin-button:active .origin-button-fill {
+  clip-path: circle(var(--origin-radius) at var(--origin-x) var(--origin-y));
+}
+.professional a.origin-button:active { transform: scale(.985); }
+@media (hover: hover) {
+  .professional a.origin-button:hover .origin-button-fill {
+    clip-path: circle(var(--origin-radius) at var(--origin-x) var(--origin-y));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .professional a.origin-button,
+  .professional a.origin-button .origin-button-fill { transition: none; }
+  .professional a.origin-button:active { transform: none; }
+}
