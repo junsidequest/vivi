@@ -40,7 +40,7 @@ function Site(){
   },[contentReady])
   return <>
     {Page&&<div className="site-page" inert={!finished}><Page externalLoading pageVisible={finished} onLoadReady={loaded} onLoadProgress={advanced}/></div>}
-    {!finished&&<WalkingLoader theme={view==='professional'?'professional':'island'} progress={progress} error={failed}/>}
+    {!finished&&<WalkingLoader theme={view} progress={progress} error={failed}/>}
   </>
 }
 createRoot(document.getElementById('root')).render(isMobilePresentation()?<MobileSite/>:<Site/> )

@@ -177,7 +177,12 @@
 .professional .v2-sub,
 .professional .about-body p,
 .professional .connect p{font-size:18px}
+.professional .pro-hero-proof{display:flex;flex-wrap:wrap;align-items:center;margin:22px 0 0;color:#555;font-size:16px;line-height:1.5}
+.professional .pro-hero-proof span{display:inline-flex;align-items:baseline;gap:.3em;white-space:nowrap}
+.professional .pro-hero-proof span+span::before{content:"";width:1px;height:17px;margin:0 18px;background:#c9c9c9}
+.professional .pro-hero-proof strong{color:#315b8d;font-size:20px;font-weight:600}
 .professional .career-stop p{font-size:15px}
+@media(max-width:600px){.professional .pro-hero-proof{font-size:14px}.professional .pro-hero-proof span+span::before{margin:0 12px}.professional .pro-hero-proof strong{font-size:18px}}
 @media(max-width:900px) and (min-width:601px){
   .professional .pro-header nav,.professional .pro-contact{font-size:14px}
 }

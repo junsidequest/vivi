@@ -160,7 +160,7 @@ export default function Professional(){
     <a className="pro-skip" href="#about">跳至主要內容</a>
     <header className="pro-header"><a className="pro-brand" href={sitePath('')}>Vivi Chen<span>陳盈臻</span></a><NavigationMenu/><div className="pro-header-actions"><OriginButton className="pro-contact" href="#connect">服務諮詢</OriginButton></div></header>
     <main>
-      <section className="pro-hero" aria-labelledby="pro-title"><div className="pro-hero-copy"><span className="pro-kicker">AI 應用顧問 × 企業內訓</span><h1 id="pro-title">把 AI 用進<br/>每天的工作中</h1><p>從企業內訓到實作陪跑，陪非技術團隊解決工作卡點，做出真正放大價值的成果</p><OriginButton className="pro-cta" href="#offers">了解課程與合作方式</OriginButton></div><div className="pro-hero-photo"><img src={sitePath('img/vivichen.png')} alt="AI 陪跑教練陳盈臻 Vivi" fetchPriority="high"/></div></section>
+      <section className="pro-hero" aria-labelledby="pro-title"><div className="pro-hero-copy"><span className="pro-kicker">AI 應用顧問 × 企業內訓</span><h1 id="pro-title">把 AI 用進<br/>每天的工作中</h1><p>從企業內訓到實作陪跑，陪非技術團隊解決工作卡點，做出真正放大價值的成果</p><div className="pro-hero-proof" aria-label="課程與授課成果"><span>線上課程 <strong>10000+</strong> 學習</span><span>實體授課 <strong>1000+</strong></span></div><OriginButton className="pro-cta" href="#offers">了解課程與合作方式</OriginButton></div><div className="pro-hero-photo"><img src={sitePath('img/vivichen.png')} alt="AI 陪跑教練陳盈臻 Vivi" fetchPriority="high"/></div></section>
       <ScrollGuide/>
       <div className="pro-content">
         <div dangerouslySetInnerHTML={pageMarkup[0]}/>

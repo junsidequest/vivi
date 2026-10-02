@@ -2,7 +2,8 @@ export function resolveRoute(href) {
   const url = new URL(href)
   const path = url.pathname.replace(/index\.html$/, '')
   const match = path.match(/\/(island|about)\/?$/)
-  const base = match ? path.slice(0, match.index + 1) : path.endsWith('/') ? path : `${path}/`
+  const forcedBase = typeof window !== 'undefined' ? window.__VIVI_404_BASE__ : null
+  const base = forcedBase || (match ? path.slice(0, match.index + 1) : path.endsWith('/') ? path : `${path}/`)
   const legacy = url.searchParams.get('view')
   const view = legacy === 'island' || legacy === 'professional' ? legacy : match?.[1] === 'island' ? 'island' : match?.[1] === 'about' ? 'professional' : 'welcome'
   const target = `${base}${view === 'island' ? 'island/' : view === 'professional' ? 'about/' : ''}`
