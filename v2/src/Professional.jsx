@@ -175,7 +175,7 @@ function ServiceGuide() {
         {servicePaths.map(path => <div key={path.id} id={`service-panel-${path.id}`} role="tabpanel" aria-labelledby={`service-tab-${path.id}`} hidden={selected !== path.id} tabIndex={0} className="service-panel">
           {path.id === 'learn' ? <>
             <div className="service-story"><span className="service-caption">從一堂課開始</span><h3>學會方法<br/>帶回自己的工作</h3><p>從 AI 素養、工作流與自動化，到 AI 簡報與 Vibe Coding<br/>透過實作理解方法，再用到熟悉的工作情境</p><p className="service-proof">線上課程逾萬人學習・實體授課逾千人</p></div>
-            <div className="service-details"><CourseTabs/><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準。</p></div>
+            <div className="service-details"><CourseTabs/><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
           </> : path.id === 'coach' ? <>
             <div className="service-story"><span className="service-caption">帶著一個真實問題來</span><h3>你的工作難題<br/>我們一起拆解</h3><p>適合已經有具體需求，希望有人一起釐清方向、選擇工具，逐步做出可用成果的工作者、經理人與企業主</p><p className="service-proof">已陪跑超過 30 位高階經理人與企業主</p></div>
             <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>聊聊我的需求</OriginButton></div>
