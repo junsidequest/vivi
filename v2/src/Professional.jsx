@@ -1,5 +1,6 @@
+import tickerOutlines from './content/ticker-outlines.json'
 import { sitePath } from './routes.js'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useId } from 'react'
 import TestimonialMarquee from './components/ui/marquee-01.jsx'
 import WorkSketch from './components/WorkSketch.jsx'
 import OriginButton from './components/ui/origin-button.jsx'
@@ -55,11 +56,11 @@ const courses = {
 }
 
 const steps = [
-  { title: '現況盤點', body: '了解工作使用習慣與場景，辨識導入和使用 AI 卡關的地方。' },
-  { title: '目標確認', body: '確認導入 AI 真正想解決的問題，一起訂出具體、可衡量的目標。' },
-  { title: '深層需求挖掘', body: '不只問你們想要什麼，也協助釐清為什麼要做，找出最值得導入的環節。' },
-  { title: '客製化方案', body: '依照團隊的程度與情境，設計專屬課程和導入計畫。' },
-  { title: '手把手教學', body: '用每個人都懂的方式解釋複雜概念，帶你和你的團隊用 AI 跨出第一步。' },
+  { title: '現況盤點', body: '了解工作使用習慣與場景，辨識導入和使用 AI 卡關的地方' },
+  { title: '目標確認', body: '確認導入 AI 真正想解決的問題，一起訂出具體、可衡量的目標' },
+  { title: '深層需求挖掘', body: '不只問你們想要什麼，也協助釐清為什麼要做，找出最值得導入的環節' },
+  { title: '客製化方案', body: '依照團隊的程度與情境，設計專屬課程和導入計畫' },
+  { title: '手把手教學', body: '用每個人都懂的方式解釋複雜概念，帶你和你的團隊用 AI 跨出第一步' },
 ]
 
 const partners = [
@@ -73,6 +74,15 @@ const marqueeWords = ['把技術翻譯成人話', '把想法做成日常', 'Huma
 
 // 逐行遮罩進場；文字仍保留在同一個標題節點，讀屏器照常朗讀。
 const Line = ({ children, i = 0 }) => <span className="line" style={{ '--i': i }}><span>{children}</span></span>
+
+function OutlineTicker({ text }) {
+  const clipId = useId()
+  const glyph = tickerOutlines[text]
+  return <svg className="ticker-outline" viewBox={`0 0 ${glyph.width} 76.8`} style={{width:`${glyph.width / 64}em`}} aria-hidden="true">
+    <defs><clipPath id={clipId}><path d={glyph.path}/></clipPath></defs>
+    <path d={glyph.path} fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" vectorEffect="non-scaling-stroke" clipPath={`url(#${clipId})`}/>
+  </svg>
+}
 
 function Counter({ value }) {
   const node = useRef(null)
@@ -172,7 +182,7 @@ function ServiceGuide() {
             <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>聊聊我的需求</OriginButton></div>
           </> : <>
             <div className="service-story"><span className="service-caption">從個人試用走向團隊應用</span><h3>讓 AI 成為<br/>團隊的工作方法</h3><p>適合正在啟動 AI 導入，或希望把零散試用轉成共同流程的企業<br/>依團隊程度與既有系統，規劃內訓、實作工作坊與導入陪跑</p><p className="service-proof">企業內訓與講座超過 50 場</p></div>
-            <div className="service-details"><h4>企業內訓與導入陪跑</h4><ul className="service-scope"><li><strong>評估工具與導入方向</strong><p>依 Google／Microsoft 生態系、預算與人員程度，選擇合適的 AI 平台組合</p></li><li><strong>用部門真實情境實作</strong><p>為行政、行銷、業務等職能建立專屬 Skill 與工作流</p></li><li><strong>建立可延伸的使用規範</strong><p>釐清資料敏感度、機敏資訊分級與 AI 產出查核方式</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>討論團隊需求</OriginButton><a className="service-partner-link" href="#partners">透過培訓機構合作</a></div>
+            <div className="service-details"><h4>企業內訓與導入陪跑</h4><ul className="service-scope"><li><strong>評估工具與導入方向</strong><p>依 Google／Microsoft 生態系、預算與人員程度，選擇合適的 AI 平台組合</p></li><li><strong>用部門真實情境實作</strong><p>為行政、行銷、業務等職能建立專屬 Skill 與工作流</p></li><li><strong>建立可延伸的使用規範</strong><p>釐清資料敏感度、機敏資訊分級與 AI 產出查核方式</p></li></ul><OriginButton className="offer-cta" href="#partners">洽詢企業內訓</OriginButton></div>
           </>}
         </div>)}
       </div>
@@ -277,11 +287,11 @@ export default function Professional() {
         </ul>
       </section>
 
-      <svg className="type-filter" width="0" height="0" aria-hidden="true"><defs><filter id="glyph-outline" x="-5%" y="-15%" width="110%" height="130%" colorInterpolationFilters="sRGB"><feMorphology in="SourceAlpha" operator="dilate" radius="0.7" result="outer"/><feMorphology in="SourceAlpha" operator="erode" radius="0.7" result="inner"/><feComposite in="outer" in2="inner" operator="out"/></filter></defs></svg>
+
       <div className="ticker" aria-hidden="true">
         <div className="ticker-track">
           {[0, 1].map(copy => <div className="ticker-group" key={copy}>
-            {marqueeWords.map(word => <span key={word}><b className="ticker-word">{word}</b><i/></span>)}
+            {marqueeWords.map(word => <span key={word}><b className="ticker-word">{tickerOutlines[word] ? <OutlineTicker text={word}/> : word}</b><i/></span>)}
           </div>)}
         </div>
       </div>
@@ -292,7 +302,7 @@ export default function Professional() {
         <div className="section-head translator-heading">
           <p className="eyebrow"><span>01</span>LOST IN TRANSLATION</p>
           <h2 id="translate-title">AI 的術語<br/>我幫你<span className="serif">翻成人話</span></h2>
-          <p className="lede">工具名詞聽起來很難，但背後要解決的，<mark className="hl">都是你每天在處理的事</mark>。</p>
+          <p className="lede">工具名詞聽起來很難，但背後要解決的，<mark className="hl">都是你每天在處理的事</mark></p>
         </div>
             <div className="translator-meta" aria-hidden="true"><span>AI 專業術語</span><span className="translator-bar"><i/></span><span>翻譯成人話</span></div>
             <div className="translator-slides">{glossary.map((item, index) => <div className="translator-item" key={item.term} aria-hidden="true">
@@ -318,7 +328,7 @@ export default function Professional() {
         <p className="eyebrow about-eyebrow" id="about-title" data-reveal><span>03</span>ABOUT VIVI</p>
         <div className="about-aside">
           <div className="section-head" data-reveal>
-            <p className="lede about-hello"><img src={sitePath('img/vivichen-700.webp')} alt="" loading="lazy" width="700" height="1051"/><span>Hi 我是 Vivi 陳盈臻，<br/>也有人叫我大師姐</span></p>
+            <p className="lede about-hello"><img src={sitePath('img/vivichen-700.webp')} alt="" loading="lazy" width="700" height="1051"/><span>Hi 我是 Vivi 陳盈臻<br/>也有人叫我大師姐</span></p>
           </div>
           <div className={`work-history${historyOpen ? ' is-expanded' : ''}`}>
             <div className="history-heading"><h3>我的工作經歷</h3></div>
@@ -343,9 +353,9 @@ export default function Professional() {
           </section>
         </div>
         <div className="about-body" data-reveal>
-          <h3>從工作問題出發，<br/>讓 AI 真正為你所用。</h3>
+          <h3>從工作問題出發<br/>讓 AI 真正為你所用</h3>
           <p className="about-lead">我有 <mark className="hl">18 年媒體與廣告科技 B2B 業務經驗</mark>，服務過 <mark className="hl">450 家以上的企業與政府單位</mark>。從開發、提案、報價到長期客戶經營，每一段都親身跑過。</p>
-          <p>雖然是文組背景、至今仍看不懂程式碼，卻靠著 AI 工具與實作，<mark className="hl">打造出上百個實用工具和系統</mark>，包括自動化報表、LINE BOT、Chrome 擴充功能、資料爬蟲，甚至也能做出完整的專案管理系統。</p>
+          <p>雖然是文組背景、至今仍看不懂程式碼，卻靠著 AI 工具與實作，<mark className="hl">打造出上百個實用工具和系統</mark>，甚至也能做出完整的專案管理系統。</p>
           <p>作為非技術背景的 AI 實作者，我知道大家最容易卡在哪裡。我用聽得懂的比喻講清楚原理，從真實工作問題出題，<mark className="hl">陪你拆解需求、選對工具、當場做出成果</mark>，回到工作也能舉一反三。</p>
           <p>現在，我也陪企業從個人試用走向部門工作流：依照既有系統、預算與人員程度選擇工具，一起釐清資料分級、產出查核與 AI 導入的下一步。</p>
           <blockquote>工具會一直變，但我相信只要學會從工作問題和需求出發，你就能持續用 AI 解決問題、放大價值。</blockquote>
@@ -362,7 +372,7 @@ export default function Professional() {
             <p className="eyebrow"><span>04</span>WAYS TO WORK TOGETHER</p>
             <h2 id="offers-title">你想怎麼開始？</h2>
           </div>
-          <p className="lede">先選一個貼近你的情境，再看看適合的合作方式。</p>
+          <p className="lede">先選一個貼近你的情境，再看看適合的合作方式</p>
         </div>
         <ServiceGuide/>
 
@@ -374,7 +384,7 @@ export default function Professional() {
         <div className="section-head process-head" data-reveal>
           <p className="eyebrow"><span>06</span>THE PROCESS</p>
           <h2 id="process-title">從「我不會」<br/>走到「我做到了」</h2>
-          <p className="lede">一步一步，<mark className="hl">做得到</mark>。每個階段都先確認方向，再往下走。</p>
+          <p className="lede">一步一步，<mark className="hl">做得到</mark><br/>每個階段都先確認方向，再往下走</p>
         </div>
         <ol className="steps">
           {steps.map((step, index) => <li className="step" key={step.title}>
