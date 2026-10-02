@@ -195,9 +195,12 @@ img{max-width:100%}
 .course-list{display:grid;gap:0;animation:swap .6s var(--ease)}
 .course-list li{display:grid;gap:4px;padding:14px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.7}
 .course-list li>span{font-size:14px;color:var(--muted)}
-.course-list a{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:5px;transition:text-decoration-color .3s}
+.course-list a{text-decoration:none}
+.course-link-label{background:linear-gradient(transparent 65%,var(--highlight) 65%,var(--highlight) 92%,transparent 92%) no-repeat 50% 0/0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .25s ease}
 .course-list strong{font-weight:500}
-@media(hover:hover){.course-list a:hover{text-decoration-color:var(--ink)}}
+@media(hover:hover){.course-list a:hover .course-link-label{background-size:100% 100%}}
+.course-list a:focus-visible .course-link-label{background-size:100% 100%}
+@media(prefers-reduced-motion:reduce){.course-link-label{transition:none}}
 
 /* ── 服務流程 ── */
 .process{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,104px)}
@@ -598,3 +601,5 @@ img{max-width:100%}
 .palette-swatch--rose span{background:#FB6F92}
 @media(max-width:380px){.palette-switch{gap:0}.palette-swatch{width:40px}}
 .professional[data-palette="rose"] .step.is-lit .step-no-glyph{color:var(--accent)}
+
+.professional .sketch-result mark.hl{background-image:linear-gradient(transparent 62%,color-mix(in srgb,var(--highlight) 38%,transparent) 62%,color-mix(in srgb,var(--highlight) 38%,transparent) 92%,transparent 92%)}

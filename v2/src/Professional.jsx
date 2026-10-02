@@ -42,7 +42,6 @@ const credentials = [
 
 const courses = {
   online: [
-    { lead: '天下學習', title: '《零基礎打造專屬 AI 助理》與《Notion 實戰入門》', href: 'https://s.vivichen.ai/cwlearning' },
     { lead: '2025 Generative 生成式 AI 年會講座回放', title: '《用 AI，解鎖我的跨域新篇章》', href: 'https://live.gaiconf.com/courses/gaiconf2025' },
     { lead: 'Generative AI 社群', title: '上班族 AI 寫程式自動化', href: 'https://live.gaiconf.com/courses/14' },
     { lead: '中小企業網路大學校', title: '《AI ✕ 工作流程優化 是放大問題，還是解決問題？》', href: 'https://www.smelearning.org.tw/class.php?course=18374' },
@@ -126,7 +125,7 @@ function CourseTabs() {
     <ul id="course-panel" className="course-list" role="tabpanel" aria-labelledby={`course-tab-${tab}`} key={tab}>
       {courses[tab].map(course => <li key={course.title}>
         <span>{course.lead}</span>
-        {course.href ? <a href={course.href} target="_blank" rel="noopener">{course.title}</a> : <strong>{course.title}</strong>}
+        {course.href ? <a href={course.href} target="_blank" rel="noopener"><span className="course-link-label">{course.title}</span></a> : <strong>{course.title}</strong>}
       </li>)}
     </ul>
   </>

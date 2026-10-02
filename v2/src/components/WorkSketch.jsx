@@ -40,7 +40,7 @@ export default function WorkSketch(){
    <div id="scenario-panel" role="tabpanel" aria-labelledby={`scenario-${active}`} tabIndex={0}>
     <div className="sketch-change" key={active}>
      <div className="sketch-problem"><span className="sketch-label">現在的工作</span><ScenarioIllustration index={active}/><h3>{item.problem}</h3><span className="sketch-source">{item.source}</span></div>
-     <div className="sketch-solution"><span className="sketch-label">一起拆解之後</span><ol>{item.steps.map(step=><li key={step}>{step}</li>)}</ol><p className="sketch-result">{item.result}</p></div>
+     <div className="sketch-solution"><span className="sketch-label">一起拆解之後</span><ol>{item.steps.map(step=><li key={step}>{step}</li>)}</ol><p className="sketch-result"><mark className="hl is-in">{item.result}</mark></p></div>
     </div>
    </div>
   </div>
