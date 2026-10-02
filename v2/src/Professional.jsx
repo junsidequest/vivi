@@ -138,6 +138,15 @@ function ServiceGuide() {
     observer.observe(inner.current)
     return () => observer.disconnect()
   }, [])
+  const chooseService = id => {
+    setSelected(id)
+    if (matchMedia('(max-width: 900px)').matches) {
+      requestAnimationFrame(() => inner.current?.parentElement.scrollIntoView({
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        block: 'start',
+      }))
+    }
+  }
   const onKey = (event, index) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return
     event.preventDefault()
@@ -147,7 +156,7 @@ function ServiceGuide() {
   }
   return <div className="service-guide">
     <div className="service-choices" role="tablist" aria-label="選擇合作情境">
-      {servicePaths.map((path, index) => <button key={path.id} type="button" role="tab" id={`service-tab-${path.id}`} aria-controls={`service-panel-${path.id}`} aria-selected={selected === path.id} tabIndex={selected === path.id ? 0 : -1} onClick={() => setSelected(path.id)} onKeyDown={event => onKey(event,index)}>
+      {servicePaths.map((path, index) => <button key={path.id} type="button" role="tab" id={`service-tab-${path.id}`} aria-controls={`service-panel-${path.id}`} aria-selected={selected === path.id} tabIndex={selected === path.id ? 0 : -1} onClick={() => chooseService(path.id)} onKeyDown={event => onKey(event,index)}>
         <span className="service-choice-top"><strong>{path.title}</strong><span>{path.type}</span></span>
         <span className="service-choice-hint">{path.hint}</span>
       </button>)}
@@ -259,7 +268,6 @@ export default function Professional() {
         <figure className="hero-visual">
           <div className="hero-arch"><img src={sitePath('img/vivichen-1100.webp')} srcSet={`${sitePath('img/vivichen-700.webp')} 700w, ${sitePath('img/vivichen-1100.webp')} 1100w`} sizes="(max-width: 900px) 92vw, 520px" alt="Vivi 陳盈臻，AI 陪跑教練" fetchPriority="high" width="1100" height="1651"/></div>
           <figcaption className="hero-note"><span>Hi, I’m Vivi.</span>你的 AI 科技麻瓜好朋友</figcaption>
-          <span className="hero-side" aria-hidden="true">以人為本，讓科技剛剛好。</span>
         </figure>
         <ul className="hero-stats" aria-label="教學與業務經歷">
           {stats.map(stat => <li key={stat.label}>

@@ -367,7 +367,7 @@ img{max-width:100%}
 
 /* ── 推薦摺疊 ── */
 .testimonial-card.is-clamped blockquote{max-height:15.6em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
-.testimonial-more{align-self:flex-start;min-height:44px;margin:-14px 0 8px;padding:0;border:0;background:none;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--soft)}
+.testimonial-more{align-self:flex-end;min-height:44px;margin:-14px 0 8px;padding:0;border:0;background:none;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--soft)}
 .testimonial-panel--business .testimonial-more{align-self:flex-end}
 .professional .testimonial-panel--business blockquote :is(ol,li){padding-left:0}
 .professional .testimonial-panel--professional .testimonial-card blockquote{margin-bottom:40px}
@@ -544,3 +544,12 @@ img{max-width:100%}
 .history-tag.is-current{padding:2px 8px}
 .history-card{padding-block:10px}
 @media(min-width:901px) and (max-width:1200px){.pro-brand .brand-caption{display:none}.pro-header{gap:16px}}
+
+@media(max-width:900px){
+ .service-panel-frame{height:auto!important;scroll-margin-top:20px}
+ .professional .pro-header .pro-navigation{gap:4px;overflow-y:auto;max-height:100dvh}
+}
+@media(max-width:900px){
+ .professional .pro-header .pro-navigation{inset:0 0 auto;height:100dvh;justify-content:flex-start;padding-top:100px;padding-bottom:32px;align-items:flex-start}
+ .professional .pro-header .pro-navigation a{flex-shrink:0}
+}

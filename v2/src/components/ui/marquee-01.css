@@ -393,3 +393,10 @@
   .testimonial-panel--students .horizontal-controls,
   .testimonial-panel--media .horizontal-controls { margin-inline: 6vw; }
 }
+
+@media(max-width:640px){
+  .testimonial-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px;overflow:visible}
+  .testimonial-tabs button{min-width:0;text-align:left;padding:12px 0}
+  .horizontal-controls{flex-wrap:wrap;gap:12px}
+  .horizontal-controls>div{margin-left:auto}
+}
