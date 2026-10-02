@@ -29,7 +29,7 @@ function ReviewCard({ review }) {
   const long = reviewLength(review) > 150
   const [open, setOpen] = useState(false)
   return <figure className={`testimonial-card${long && !open ? ' is-clamped' : ''}`}>
-    <span className="testimonial-quote" aria-hidden="true">“</span>
+    <svg className="testimonial-quote" viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M3 13C3 6.5 6.5 3 12 2v4c-3 .8-4.5 2.4-4.8 5H14v11H3V13Zm16 0C19 6.5 22.5 3 28 2v4c-3 .8-4.5 2.4-4.8 5H30v11H19V13Z"/></svg>
     <ReviewBody review={review}/>
     {long && <button type="button" className="testimonial-more" aria-expanded={open} onClick={() => setOpen(value => !value)}>{open ? '收合' : '展開全文'}</button>}
     <figcaption>
@@ -98,7 +98,7 @@ function MediaCard({ item, index }) {
 }
 
 function MediaCoverage() {
-  return <HorizontalScroller className="media-coverage-grid" label="媒體報導">
+  return <HorizontalScroller className="media-coverage-grid" label="媒體報導" showControls={false}>
     {mediaCoverage.map((item, index) => <MediaCard item={item} index={index} key={`${item.source}-${item.title}`}/>)}
   </HorizontalScroller>
 }
