@@ -487,7 +487,7 @@ img{max-width:100%}
 .service-scope li{padding:18px 0;border-top:1px solid var(--line)}
 .service-scope strong{font-size:16px;font-weight:500}
 .service-scope p{margin-top:6px;font-size:14px;line-height:1.85;color:var(--muted)}
-.service-details .offer-cta{display:inline-flex;margin-top:24px}
+.service-details .offer-cta{display:flex;width:fit-content;margin-top:24px;margin-left:auto}
 .service-partner-link{display:block;width:fit-content;margin-top:18px;font-size:14px;text-decoration:underline;text-underline-offset:4px;color:var(--muted)}
 @media(max-width:900px){.service-choice-top{flex-direction:column;gap:4px}.service-choices button{padding:20px}.service-panel{grid-template-columns:1fr;gap:32px}}
 @media(max-width:640px){.service-choices{grid-template-columns:1fr;gap:8px}.service-choices button{gap:6px;padding:16px 18px}.service-choice-top{flex-direction:row;align-items:baseline}.service-choice-top strong{font-size:21px}.service-choice-hint{font-size:14px}.service-panel{padding:24px 20px}.service-story .service-proof{margin-top:20px}.service-story>p{margin-top:16px}}
@@ -602,6 +602,7 @@ img{max-width:100%}
 @media(max-width:380px){.palette-switch{gap:0}.palette-swatch{width:40px}}
 .professional[data-palette="rose"] .step.is-lit .step-no-glyph{color:var(--accent)}
 
-.professional .sketch-result mark.hl{background-image:linear-gradient(transparent 62%,color-mix(in srgb,var(--highlight) 38%,transparent) 62%,color-mix(in srgb,var(--highlight) 38%,transparent) 92%,transparent 92%)}
 
 .service-footnote{text-align:right;font-style:italic;color:#858585}
+
+.sketch-result{color:var(--highlight)}
