@@ -140,7 +140,7 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     ready = true
     await firstReadyFrame
     if(disposed)return
-    onProgress(1);onReady()
+    onProgress(.98);onReady()
   }).catch(error => { if (!disposed) onError(error) })
 
   function sitDown(seat) {
@@ -243,9 +243,16 @@ export function createWorld(host, { onReady, onError, onNear, onOpen, onPosition
     while(floor && !['Island_ground','Path_base','Stone_path','Steps','Dock'].includes(floor.name))floor=floor.parent
     const targetPoint={x:hit.point.x,z:hit.point.z}
     standUp()
-    const path=floor?navigation.findRoute(routeOrigin(),targetPoint):null
+    const origin=routeOrigin()
+    let walkTarget=targetPoint
+    let path=floor?navigation.findRoute(origin,walkTarget):null
+    if(!path&&floor){
+      const nearby=navigation.nearestWalkable(targetPoint.x,targetPoint.z,{origin})
+      const nearbyPath=nearby&&navigation.findRoute(origin,nearby)
+      if(nearbyPath){walkTarget=nearby;path=nearbyPath}
+    }
     arrivalTarget=null;route=null;routeId=null;routeSeat=null;speed=0
-    destination.position.set(targetPoint.x,navigation.surfaceHeight(targetPoint.x,targetPoint.z,.17)+.025,targetPoint.z)
+    destination.position.set(walkTarget.x,navigation.surfaceHeight(walkTarget.x,walkTarget.z,.17)+.025,walkTarget.z)
     destination.material.color.set(path?'#fff1bd':'#b87558');destination.visible=true;markerUntil=performance.now()+1800
     if(!path){onRoute('這裡無法站立，請點選空地或步道。');return}
     route=path;onRoute('');renderer.domElement.focus()

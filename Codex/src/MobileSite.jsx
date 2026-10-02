@@ -38,7 +38,7 @@ export default function MobileSite(){
   const ready=useCallback(async entry=>{
     if(entry.id!==latest.current||shownRef.current?.id===entry.id)return
     // 小島資源完成後保留菱形展開的最後一段，避免手機版在過場中途直接切掉。
-    if(entry.view==='island'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)await new Promise(resolve=>setTimeout(resolve,1350))
+    if(entry.view==='island'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)await new Promise(resolve=>setTimeout(resolve,1900))
     if(entry.id!==latest.current)return
     // 新頁完成後才播放原有的小島圓形轉場，不在準備期間收黑。
     if(entry.beforeReveal)await entry.beforeReveal()

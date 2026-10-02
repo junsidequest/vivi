@@ -30,14 +30,17 @@
   height: 68px;
   border-radius: 3px;
   background: var(--loader-reveal);
-  transform: rotate(45deg) scale(.72);
+  transform: translate3d(0, 0, 0) rotate(45deg) scale(.72);
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  contain: layout paint;
   will-change: transform;
 }
 
 .walking-loader:not(.is-complete):not(.has-error) .walking-loader-shape {
   animation:
-    loader-arrive .55s cubic-bezier(.22, 1, .36, 1) both,
-    loader-spin 2.4s linear .55s infinite;
+    loader-arrive .38s cubic-bezier(.22, 1, .36, 1) both,
+    loader-spin 3.8s linear infinite;
 }
 
 .walking-loader.is-complete {
@@ -101,37 +104,37 @@
 .site-page { position: fixed; inset: 0; width: auto; height: auto; overflow: clip; background: #fafafa; }
 
 @keyframes loader-arrive {
-  from { transform: rotate(45deg) scale(.35); opacity: 0; }
-  to { transform: rotate(45deg) scale(1); opacity: 1; }
+  from { scale: .35; opacity: 0; }
+  to { scale: 1; opacity: 1; }
 }
 
 @keyframes loader-spin {
   0% {
-    transform: rotate(45deg) scale(1);
+    transform: translateZ(0) rotate(45deg) scale(1);
     animation-timing-function: cubic-bezier(.4, 0, .2, 1);
   }
-  14% { transform: rotate(135deg) scale(1); }
+  14.4737% { transform: translateZ(0) rotate(135deg) scale(1); }
   25% {
-    transform: rotate(135deg) scale(1);
+    transform: translateZ(0) rotate(135deg) scale(1);
     animation-timing-function: cubic-bezier(.4, 0, .2, 1);
   }
-  39% { transform: rotate(225deg) scale(1); }
+  39.4737% { transform: translateZ(0) rotate(225deg) scale(1); }
   50% {
-    transform: rotate(225deg) scale(1);
+    transform: translateZ(0) rotate(225deg) scale(1);
     animation-timing-function: cubic-bezier(.4, 0, .2, 1);
   }
-  64% { transform: rotate(315deg) scale(1); }
+  514.4737% { transform: translateZ(0) rotate(315deg) scale(1); }
   75% {
-    transform: rotate(315deg) scale(1);
+    transform: translateZ(0) rotate(315deg) scale(1);
     animation-timing-function: cubic-bezier(.4, 0, .2, 1);
   }
-  89% { transform: rotate(405deg) scale(1); }
-  100% { transform: rotate(405deg) scale(1); }
+  89.4737% { transform: translateZ(0) rotate(405deg) scale(1); }
+  100% { transform: translateZ(0) rotate(405deg) scale(1); }
 }
 
 @keyframes loader-reveal {
-  from { transform: rotate(45deg) scale(1); }
-  to { transform: rotate(180deg) scale(80); }
+  from { transform: translate3d(0, 0, 0) rotate(45deg) scale(1); }
+  to { transform: translate3d(0, 0, 0) rotate(180deg) scale(80); }
 }
 
 @keyframes loader-fade-out {

@@ -35,7 +35,7 @@ function Site(){
   useEffect(()=>{
     if(!contentReady)return
     setProgress(1)
-    const timer=setTimeout(()=>setFinished(true),matchMedia('(prefers-reduced-motion: reduce)').matches?0:1450)
+    const timer=setTimeout(()=>setFinished(true),matchMedia('(prefers-reduced-motion: reduce)').matches?0:2300)
     return ()=>clearTimeout(timer)
   },[contentReady])
   return <>

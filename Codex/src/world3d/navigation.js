@@ -129,6 +129,26 @@ export function createNavigation(root, { radius = 0.5, height = 1.4, profile, fo
     return true
   }
 
+  // 點到障礙物邊緣的可見地面時，將角色中心微調到最近的安全落點。
+  // 以角色目前所在側優先，避免池塘或牆面把落點吸到障礙物另一側。
+  function nearestWalkable(x,z,{maxDistance=.75,origin=null}={}){
+    if(canWalk(x,z))return{x,z}
+    const angleCount=24,step=.08
+    for(let radius=step;radius<=maxDistance+1e-6;radius+=step){
+      const candidates=[]
+      for(let i=0;i<angleCount;i++){
+        const angle=i*Math.PI*2/angleCount
+        const point={x:x+Math.cos(angle)*radius,z:z+Math.sin(angle)*radius}
+        if(canWalk(point.x,point.z))candidates.push(point)
+      }
+      if(candidates.length){
+        if(origin)candidates.sort((a,b)=>Math.hypot(a.x-origin.x,a.z-origin.z)-Math.hypot(b.x-origin.x,b.z-origin.z))
+        return candidates[0]
+      }
+    }
+    return null
+  }
+
   // 鍵盤、搖桿、跑步和自動尋路共用掃掠檢查，不會因步幅大而跳過薄燈柱。
   function move(start, dx, dz, { assist = false } = {}) {
     const next = { ...start }
@@ -187,5 +207,5 @@ export function createNavigation(root, { radius = 0.5, height = 1.4, profile, fo
     }
     return null
   }
-  return { canWalk, move, findRoute, clearSegment, surfaceHeight, radius: bodyRadius, height, footRadius }
+  return { canWalk, move, findRoute, clearSegment, nearestWalkable, surfaceHeight, radius: bodyRadius, height, footRadius }
 }

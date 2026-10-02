@@ -72,6 +72,15 @@ describe('整個角色的碰撞與可踩踏表面', () => {
     expect(navigation.canWalk(next.x + .05, next.z)).toBe(false)
     expect(navigation.canWalk(next.x, next.z)).toBe(true)
   })
+  it('點到池塘邊緣草地時，會微調到同側最近的安全落點',()=>{
+    const origin={x:0,z:1.5},clicked={x:2.15,z:-.4}
+    expect(navigation.canWalk(clicked.x,clicked.z)).toBe(false)
+    const target=navigation.nearestWalkable(clicked.x,clicked.z,{origin})
+    expect(target).not.toBeNull()
+    expect(Math.hypot(target.x-clicked.x,target.z-clicked.z)).toBeLessThanOrEqual(.75)
+    expect(target.x).toBeLessThan(clicked.x)
+    expect(navigation.findRoute(origin,target)?.length).toBeGreaterThan(0)
+  })
   it('自動尋路每一段都保留身體寬度，不會切過轉角', () => {
     for (const target of [{ x: -2.75, z: .5 }, { x: .75, z: 3.25 }]) {
       const start = { x: .07, z: 6.43 }

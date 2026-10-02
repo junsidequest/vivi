@@ -52,6 +52,7 @@ function Dialog({ id, onClose, onRead }) {
 }
 export default function App({externalLoading=false,pageVisible=true,onLoadReady,onLoadProgress,onLoadError}) {
   const host=useRef(),world=useRef(),speech=useRef(),markers=useRef({}),duck=useRef(),stats=useRef(),hints=useRef()
+  const loadingStartedAt=useRef(performance.now())
   const [fromBridge]=useState(()=>{const bridge=sessionStorage.getItem('vivi-island-entry')==='bridge';sessionStorage.removeItem('vivi-island-entry');return bridge})
   const [intro,setIntro]=useState('waiting'),introRef=useRef('waiting'),greetingTimer=useRef()
   introRef.current=intro
@@ -88,7 +89,10 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
     const open=id=>{if(id==='dock'){void enterLanding(null);return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{
       startOnBridge:fromBridge,
-      onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{setProgress(1);onLoadProgress?.(1);readyTimer=setTimeout(()=>{setStatus('ready');onLoadReady?.()},350)},onError:error=>{console.error(error);setStatus('error');onLoadError?.()},
+      onProgress:value=>{setProgress(value);onLoadProgress?.(value)},onReady:()=>{
+        const delay=reduced?0:Math.max(350,1100-(performance.now()-loadingStartedAt.current))
+        readyTimer=setTimeout(()=>{setProgress(1);onLoadProgress?.(1);setStatus('ready');onLoadReady?.()},delay)
+      },onError:error=>{console.error(error);setStatus('error');onLoadError?.()},
       onExitStart:()=>setExiting(true),onNear:id=>useGame.getState().setNearbyId(id),onOpen:open,onRoute:setRoute,
       onPosition:({avatar,places,x,y,z,dt,moving,autoWalking})=>{
         playerScreen.current=avatar
