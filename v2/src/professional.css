@@ -204,6 +204,7 @@ img{max-width:100%}
 
 /* ── 服務流程 ── */
 .process{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,104px)}
+.process.band{padding-top:clamp(48px,5.5vw,88px)}
 .process-head{align-self:start;position:sticky;top:calc(var(--header) + 24px);margin:0}
 .steps{border-bottom:1px solid var(--line)}
 .step{display:grid;grid-template-columns:clamp(88px,10vw,150px) minmax(0,1fr);gap:24px;align-items:start;padding:clamp(28px,3vw,44px) 0;border-top:1px solid var(--line)}

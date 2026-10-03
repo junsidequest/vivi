@@ -29,7 +29,7 @@ function ReviewCard({ review }) {
   const long = reviewLength(review) > 150
   const [open, setOpen] = useState(false)
   return <figure className={`testimonial-card${long && !open ? ' is-clamped' : ''}`}>
-    <svg className="testimonial-quote" viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M3 13C3 6.5 6.5 3 12 2v4c-3 .8-4.5 2.4-4.8 5H14v11H3V13Zm16 0C19 6.5 22.5 3 28 2v4c-3 .8-4.5 2.4-4.8 5H30v11H19V13Z"/></svg>
+    <svg className="testimonial-quote" viewBox="3 0 32 24" fill="currentColor" aria-hidden="true"><path d="M3 13C3 6.5 6.5 3 12 2v4c-3 .8-4.5 2.4-4.8 5H14v11H3V13Zm16 0C19 6.5 22.5 3 28 2v4c-3 .8-4.5 2.4-4.8 5H30v11H19V13Z"/></svg>
     <ReviewBody review={review}/>
     {long && <button type="button" className="testimonial-more" aria-expanded={open} onClick={() => setOpen(value => !value)}>{open ? '收合' : '展開全文'}</button>}
     <figcaption>
@@ -81,8 +81,7 @@ function MediaCard({ item, index }) {
       </div>
       <div className="media-card-copy">
         <div className="media-card-meta">
-          {item.date && <span>{item.date}</span>}
-          <span className="media-card-mark">{item.mark}</span>
+          <span>{item.date || item.mark}</span>
         </div>
         <h3>{item.title}</h3>
         <span className="media-card-action">{item.action}</span>
