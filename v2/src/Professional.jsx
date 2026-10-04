@@ -67,6 +67,7 @@ const steps = [
 ]
 
 const partners = [
+  { name: 'Oceanic Innovation', role: 'AI 產品導入', body: '包含 AI Operating System、多渠道 AI 客服、LINE 群組裡的 AI 同事、會議記錄與公司大腦、AI Code Review', href: 'https://www.oceaninnov.com/', action: '產品導入洽詢' },
   { name: '天下學習中心', role: '全台最大企業內訓平台', body: '課程講師', href: 'https://www.cwlearning.com.tw/@cf1ae297-46ef-4bad-abfd-032c81dbaa9b' },
   { name: '言果學習', role: '企業內訓平台', body: '合作講師，為企業團隊設計生成式 AI 導入與實作課程', href: 'https://yanguo.com.tw/teacher/yingzhen-chen' },
   { name: '智谷網絡', role: '企業培訓機構', body: '擔任特約講師，把 AI 應用與自動化課程帶進企業內訓現場', href: 'https://www.kvalley.biz/team-member/%E9%99%B3%E7%9B%88%E8%87%BBvivi/' },
@@ -458,7 +459,7 @@ export default function Professional() {
               <span className="partner-name">{partner.name}</span>
               <span className="partner-role">{partner.role}</span>
               <span className="partner-body">{partner.body}</span>
-              <span className="partner-action">{partner.href ? '前往講師頁' : '洽詢請填表'}</span>
+              <span className="partner-action">{partner.action || (partner.href ? '前往講師頁' : '洽詢請填表')}</span>
             </>
             return <li key={partner.name} data-reveal style={{ '--d': `${index * 70}ms` }}>
               {partner.href
