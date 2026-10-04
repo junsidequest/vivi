@@ -171,9 +171,9 @@ function TeamServiceTabs() {
 }
 
 const servicePaths = [
-  { id: 'learn', title: '自己學', type: '公開課程', hint: '想先掌握方法，照自己的步調練習。' },
-  { id: 'coach', title: '一起做', type: '陪跑教練', hint: '有想解決的問題，希望有人陪我完成。' },
-  { id: 'team', title: '帶團隊', type: '企業 AI 導入', hint: '讓同事一起學會，用進實際工作流程。' },
+  { id: 'learn', title: '自己學', type: '公開課程', hint: '想先掌握方法，照自己的步調練習' },
+  { id: 'coach', title: '一起做', type: '陪跑教練', hint: '有想解決的問題，希望有人陪我完成' },
+  { id: 'team', title: '帶團隊', type: '企業 AI 導入', hint: '讓同事一起學會，用進實際工作流程' },
 ]
 
 function ServiceGuide({ selected, setSelected }) {
@@ -211,13 +211,13 @@ function ServiceGuide({ selected, setSelected }) {
       <div ref={inner}>
         {servicePaths.map(path => <div key={path.id} id={`service-panel-${path.id}`} role="tabpanel" aria-labelledby={`service-tab-${path.id}`} hidden={selected !== path.id} tabIndex={0} className="service-panel">
           {path.id === 'learn' ? <>
-            <div className="service-story"><span className="service-caption">從一堂課開始</span><h3>學會方法<br/>帶回自己的工作</h3><p>從 AI 素養、工作流與自動化，到 AI 簡報與 Vibe Coding<br/>透過實作理解方法，再用到熟悉的工作情境</p><p className="service-proof">線上課程逾萬人學習・實體授課逾千人</p></div>
-            <div className="service-details"><CourseTabs/><OriginButton className="offer-cta course-line-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取公開班開課資訊</OriginButton><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
+            <div className="service-story"><span className="service-caption">從一堂課開始</span><h3>學會方法<br/>帶回自己的工作</h3><p>從 AI 素養、工作流與自動化<br/>到 AI 簡報與 Vibe Coding<br/>透過實作理解方法，再用到熟悉的工作情境</p><p className="service-proof">線上課程逾萬人學習・實體授課逾千人</p></div>
+            <div className="service-details"><CourseTabs/><OriginButton className="offer-cta course-line-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取開課資訊</OriginButton><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
           </> : path.id === 'coach' ? <>
             <div className="service-story"><span className="service-caption">帶著一個真實問題來</span><h3>你的工作難題<br/>我們一起拆解</h3><p>適合已經有具體需求，希望有人一起釐清方向、選擇工具，逐步做出可用成果的工作者、經理人與企業主</p><p className="service-proof">已陪跑超過 30 位高階經理人與企業主</p></div>
             <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>填寫諮詢表單</OriginButton></div>
           </> : <>
-            <div className="service-story"><span className="service-caption">從個人試用走向團隊應用</span><h3>讓 AI 成為<br/>團隊的工作方法</h3><p>適合正在啟動 AI 導入，或希望把零散試用轉成共同流程的企業<br/>依團隊程度與既有系統，規劃內訓、實作工作坊與導入陪跑</p><p className="service-proof">企業內訓與講座超過 50 場</p></div>
+            <div className="service-story"><span className="service-caption">從個人使用走向團隊應用</span><h3>讓 AI 成為<br/>團隊的工作方法</h3><p>適合正在啟動 AI 導入，或希望把零散試用轉成共同流程的企業<br/>依團隊程度與既有系統，規劃內訓、實作工作坊與導入陪跑</p><p className="service-proof">企業內訓與講座超過 50 場</p></div>
             <div className="service-details"><TeamServiceTabs/></div>
           </>}
         </div>)}
@@ -304,7 +304,7 @@ export default function Professional() {
       <a className="pro-brand" href={sitePath('')} aria-label="Vivi Chen 首頁">vivi<span className="brand-dot">.</span><span className="brand-caption">陳盈臻<br/>AI WORK & LIFE</span></a>
       <NavigationMenu/>
       <div className="palette-switch" role="group" aria-label="預覽網站配色">
-        {[{id:'blue',label:'霧藍'},{id:'sage',label:'鼠尾草綠'},{id:'lilac',label:'柔紫'},{id:'rose',label:'玫瑰粉'}].map(option => <button key={option.id} type="button" className={`palette-swatch palette-swatch--${option.id}`} aria-label={`預覽${option.label}配色`} aria-pressed={palette === option.id} title={option.label} onClick={() => choosePalette(option.id)}><span aria-hidden="true"/></button>)}
+        {[{id:'blue',label:'霧藍'},{id:'sage',label:'橄欖綠'},{id:'lilac',label:'柔紫'},{id:'rose',label:'玫瑰粉'}].map(option => <button key={option.id} type="button" className={`palette-swatch palette-swatch--${option.id}`} aria-label={`預覽${option.label}配色`} aria-pressed={palette === option.id} title={option.label} onClick={() => choosePalette(option.id)}><span aria-hidden="true"/></button>)}
       </div>
     </header>
 
@@ -372,10 +372,10 @@ export default function Professional() {
       <WorkSketch/>
 
       <section className="about band" id="about" aria-labelledby="about-title">
-        <p className="eyebrow about-eyebrow" id="about-title" data-reveal><span>03</span>ABOUT VIVI</p>
+        <p className="eyebrow about-eyebrow" id="about-title"><span>03</span>ABOUT VIVI</p>
         <div className="about-aside">
           <div className="about-introduction">
-          <div className="section-head" data-reveal>
+          <div className="section-head">
             <p className="lede about-hello"><img src={sitePath('img/vivichen-700.webp')} alt="" loading="lazy" width="700" height="1051"/><span>Hi 我是 Vivi 陳盈臻<br/>也有人叫我大師姐</span></p>
           </div>
           <div className={`work-history${historyOpen ? ' is-expanded' : ''}`}>
@@ -416,7 +416,7 @@ export default function Professional() {
       </section>
 
       <section className="offers band" id="offers" aria-labelledby="offers-title">
-        <div className="section-head section-head--split" data-reveal>
+        <div className="section-head section-head--split">
           <div>
             <p className="eyebrow"><span>04</span>WAYS TO WORK TOGETHER</p>
             <h2 id="offers-title">你想怎麼開始？</h2>
@@ -430,7 +430,7 @@ export default function Professional() {
       <TestimonialMarquee/>
 
       <section className="process band" id="process" aria-labelledby="process-title">
-        <div className="section-head process-head" data-reveal>
+        <div className="section-head process-head">
           <p className="eyebrow"><span>06</span>THE PROCESS</p>
           <h2 id="process-title">從「我不會」<br/>走到「我做到了」</h2>
           <p className="lede">一步一步，<mark className="hl">做得到</mark><br/>每個階段都先確認方向，再往下走</p>
@@ -444,7 +444,7 @@ export default function Professional() {
       </section>
 
       <section className="partners band" id="partners" aria-labelledby="partners-title">
-        <div className="section-head section-head--split" data-reveal>
+        <div className="section-head section-head--split">
           <div>
             <p className="eyebrow"><span>07</span>TRAINING PARTNERS</p>
             <h2 id="partners-title">把改變帶進團隊</h2>
@@ -471,7 +471,7 @@ export default function Professional() {
       </section>
 
       <section className="connect" id="connect" aria-labelledby="connect-title">
-        <div className="connect-inner" data-reveal>
+        <div className="connect-inner">
           <p className="eyebrow eyebrow--light"><span>08</span>LET’S MAKE IT WORK.</p>
           <h2 id="connect-title">下一個可能<br/><span className="serif">從聊聊開始</span></h2>
           <p>如果你的團隊也卡在「知道 AI 重要，但不知道從哪開始」，<br/>先說說你的工作與想解決的問題，一起找到適合的起點。</p>
@@ -480,7 +480,7 @@ export default function Professional() {
               <OriginButton className="connect-cta" aria-describedby="email-guidance" href="mailto:hi@vivichen.ai">Email 聯繫</OriginButton>
               <p className="connect-email-guidance" id="email-guidance">來信請附：單位名稱、聯絡人與職稱、預計參與人數、想解決的問題或主題、希望的時間</p>
             </div>
-            <OriginButton className="connect-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取公開班開課資訊</OriginButton>
+            <OriginButton className="connect-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取開課資訊</OriginButton>
           </div>
         </div>
         <nav className="connect-routes" aria-label="依需求選擇入口" data-reveal style={{ '--d': '120ms' }}>
@@ -489,12 +489,14 @@ export default function Professional() {
           <a href="#offers" onClick={() => setSelectedService('coach')}><span>個人</span>一對一 AI 陪跑</a>
           <a href="#partners"><span>團隊</span>企業內訓與工作坊</a>
         </nav>
-        <div className="wordmark" aria-hidden="true">vivi<span>.</span></div>
+        <div className="wordmark-row">
+          <div className="wordmark" aria-hidden="true">vivi<span>.</span></div>
+          <button type="button" className="to-top" onClick={toTop} aria-label="回到頂端" title="回到頂端"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 20V4m-7 7 7-7 7 7"/></svg></button>
+        </div>
       </section>
     </main>
     <div className="footer-wrap">
       <SiteFooter/>
-      <button type="button" className="to-top" onClick={toTop}>回到頂端</button>
     </div>
   </div>
 }

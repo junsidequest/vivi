@@ -34,7 +34,7 @@ export default function WorkSketch(){
   e.preventDefault();setActive(next);e.currentTarget.parentElement.children[next].focus()
  }
  return <section className="work-sketch" id="work" aria-labelledby="work-title">
-  <div className="sketch-heading" data-reveal><p className="eyebrow eyebrow--light"><span>02</span>START HERE</p><h2 id="work-title">你卡住的地方<br/>就是我們的起點</h2><p>不必先搞懂所有工具<br/>選一個熟悉的情境，看看第一步可以怎麼走</p></div>
+  <div className="sketch-heading"><p className="eyebrow eyebrow--light"><span>02</span>START HERE</p><h2 id="work-title">你卡住的地方<br/>就是我們的起點</h2><p>不必先搞懂所有工具<br/>選一個熟悉的情境，看看第一步可以怎麼走</p></div>
   <div className="sketch-board">
    <div className="sketch-tabs" role="tablist" aria-label="選擇工作情境">{scenarios.map((s,i)=><button key={s.label} id={`scenario-${i}`} role="tab" aria-selected={i===active} aria-controls="scenario-panel" tabIndex={i===active?0:-1} onClick={()=>setActive(i)} onKeyDown={e=>changeWithKey(e,i)}>{s.label}</button>)}</div>
    <div id="scenario-panel" role="tabpanel" aria-labelledby={`scenario-${active}`} tabIndex={0}>

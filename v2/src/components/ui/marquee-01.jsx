@@ -6,10 +6,10 @@ import { sitePath } from '../../routes.js'
 import './marquee-01.css'
 
 const categories = [
+  { id: 'media', label: '媒體報導' },
   { id: 'business', label: '企業主推薦' },
   { id: 'professional', label: '專業領域推薦' },
   { id: 'students', label: '學員推薦' },
-  { id: 'media', label: '媒體報導' },
 ]
 
 function ReviewBody({ review }) {
@@ -157,7 +157,7 @@ export default function TestimonialMarquee() {
   }
 
   return <section id="voices" aria-labelledby="testimonial-heading" className="v2-sec band testimonial-marquee">
-    <div className="section-head" data-reveal><p className="eyebrow"><span>05</span>IN THEIR WORDS</p><h2 id="testimonial-heading" className="testimonial-heading">口碑推薦</h2></div>
+    <div className="section-head"><p className="eyebrow"><span>05</span>IN THEIR WORDS</p><h2 id="testimonial-heading" className="testimonial-heading">口碑推薦</h2></div>
     <div className="testimonial-tabs" role="tablist" aria-label="推薦類型">
       {categories.map((category, index) => <button
         key={category.id}
