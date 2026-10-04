@@ -20,3 +20,13 @@ node_modules/
 
 # 舊版介紹頁僅保存在本機
 /archive/v1/
+
+# 已封存的舊網站與本機預覽資料
+/archive/
+/img/
+/island/
+/index.html
+/index_v1.html
+/start-vivi.command
+/website/.versions/
+/website/shots/
