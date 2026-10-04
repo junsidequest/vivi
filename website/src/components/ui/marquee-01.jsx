@@ -13,35 +13,53 @@ const categories = [
   { id: 'students', label: '學員推薦' },
 ]
 
+function ReviewText({ text, highlights = [] }) {
+  if (!text || !highlights.length) return text
+  const matches = highlights.flatMap(phrase => {
+    const start = text.indexOf(phrase)
+    return start < 0 ? [] : [{ start, end: start + phrase.length }]
+  }).sort((a,b) => a.start - b.start)
+  const parts = []
+  let cursor = 0
+  for (const { start, end } of matches) {
+    if (start < cursor) continue
+    parts.push(text.slice(cursor, start))
+    parts.push(<mark className="review-highlight" key={start}><strong>{text.slice(start,end)}</strong></mark>)
+    cursor = end
+  }
+  parts.push(text.slice(cursor))
+  return parts
+}
+
 function ReviewBody({ review }) {
-  if (review.body) return <blockquote>{review.body}</blockquote>
+  if (review.body) return <blockquote><ReviewText text={review.body} highlights={review.highlights}/></blockquote>
 
   return <blockquote>
-    {review.paragraphs?.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+    {review.paragraphs?.map((paragraph, index) => <p key={index}><ReviewText text={paragraph} highlights={review.highlights}/></p>)}
     {review.items && <ol>
-      {review.items.map((item, index) => <li key={index}>{item}</li>)}
+      {review.items.map((item, index) => <li key={index}><ReviewText text={item} highlights={review.highlights}/></li>)}
     </ol>}
-    {review.closing && <p>{review.closing}</p>}
+    {review.closing && <p><ReviewText text={review.closing} highlights={review.highlights}/></p>}
   </blockquote>
 }
 
 const reviewLength = review => [review.body, ...(review.paragraphs || []), ...(review.items || []), review.closing].join('').length
 
-function ReviewCard({ review }) {
+function ReviewCard({ review, tailPreview = false }) {
   const long = reviewLength(review) > 150
   const [open, setOpen] = useState(false)
   return <figure className={`testimonial-card${long && !open ? ' is-clamped' : ''}`}>
     <svg className="testimonial-quote" viewBox="3 0 32 24" fill="currentColor" aria-hidden="true"><path d="M3 13C3 6.5 6.5 3 12 2v4c-3 .8-4.5 2.4-4.8 5H14v11H3V13Zm16 0C19 6.5 22.5 3 28 2v4c-3 .8-4.5 2.4-4.8 5H30v11H19V13Z"/></svg>
-    <ReviewBody review={review}/>
+    {tailPreview && long && !open ? <div className="testimonial-tail-preview"><ReviewBody review={review}/></div> : <ReviewBody review={review}/>}
     {long && <button type="button" className="testimonial-more" aria-expanded={open} onClick={() => setOpen(value => !value)}>{open ? '收合' : '展開全文'}</button>}
     <figcaption>
       <span>{review.role}</span>
-      <strong>{review.name}</strong>
+      {review.attributionType === 'organization' ? <span className="testimonial-organization">{review.name}</span> : <strong>{review.name}</strong>}
     </figcaption>
   </figure>
 }
 
-function HorizontalScroller({ children, className, label, showControls = true }) {
+function HorizontalScroller({ children, className, label, showControls = true, intro }) {
   const scroll = useRef(null)
   const [edges, setEdges] = useState({ start: true, end: false })
   useEffect(() => {
@@ -56,7 +74,7 @@ function HorizontalScroller({ children, className, label, showControls = true })
   }, [showControls])
   const move = direction => scroll.current.scrollBy({ left: direction * scroll.current.clientWidth * .8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
   return <>
-    <div className="horizontal-controls"><span>左右瀏覽更多{label}</span>{showControls && <div><button type="button" aria-label={`上一組${label}`} disabled={edges.start} onClick={() => move(-1)}>上一組</button><button type="button" aria-label={`下一組${label}`} disabled={edges.end} onClick={() => move(1)}>下一組</button></div>}</div>
+    <div className={`horizontal-controls${intro ? " has-intro" : ""}`}>{intro}<span>左右瀏覽更多{label}</span>{showControls && <div><button type="button" aria-label={`上一組${label}`} disabled={edges.start} onClick={() => move(-1)}>上一組</button><button type="button" aria-label={`下一組${label}`} disabled={edges.end} onClick={() => move(1)}>下一組</button></div>}</div>
     <div ref={scroll} className={className} role="region" aria-label={`${label}，可左右滑動瀏覽`} tabIndex={0}>{children}</div>
   </>
 }
@@ -64,7 +82,7 @@ function HorizontalScroller({ children, className, label, showControls = true })
 function StudentMarquee() {
   return <HorizontalScroller className="testimonial-student-row" label="學員推薦" showControls={false}>
     <div className="testimonial-student-track"><div className="testimonial-student-group">
-      {reviews.students.map(review => <ReviewCard review={review} key={review.name}/>)}
+      {reviews.students.map(review => <ReviewCard review={review} key={`${review.name}-${review.role}`}/>)}
     </div></div>
   </HorizontalScroller>
 }
@@ -127,7 +145,7 @@ export default function TestimonialMarquee() {
   }
 
   return <section id="voices" aria-labelledby="testimonial-heading" className="v2-sec band testimonial-marquee">
-    <div className="section-head"><p className="eyebrow"><span>05</span>IN THEIR WORDS</p><h2 id="testimonial-heading" className="testimonial-heading">口碑推薦</h2></div>
+    <div className="section-head"><p className="eyebrow"><span>05</span>IN THEIR WORDS</p><h2 id="testimonial-heading" className="testimonial-heading">口碑推薦</h2><p className="student-keywords"><span>#用淺顯易懂的比喻教學</span><span>#觸類旁通</span><span>#回去馬上就能用</span></p></div>
     <div className="testimonial-tabs" role="tablist" aria-label="推薦類型">
       {categories.map((category, index) => <button
         key={category.id}
@@ -150,7 +168,7 @@ export default function TestimonialMarquee() {
     >
       {active === 'students' && <StudentMarquee/>}
       {active === 'media' && <MediaCoverage/>}
-      {active !== 'students' && active !== 'media' && reviews[active].map(review => <ReviewCard review={review} key={review.name}/>)}
+      {active !== 'students' && active !== 'media' && reviews[active].map(review => <ReviewCard tailPreview={active === 'business'} review={review} key={`${review.name}-${review.role}`}/>)}
     </div>
     <MediaPartners/>
     <span className="testimonial-current" aria-live="polite">目前顯示：{current.label}</span>

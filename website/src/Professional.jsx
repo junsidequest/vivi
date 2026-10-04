@@ -438,7 +438,7 @@ export default function Professional() {
           <p>雖然是文組背景、至今仍看不懂程式碼，卻靠著 AI 工具與實作，<mark className="hl">打造出上百個實用工具</mark>，甚至也能做出完整的專案管理系統。</p>
           <p>作為非技術背景的 AI 實作者，我知道大家最容易卡在哪裡。我用聽得懂的比喻講清楚原理，從真實工作問題出題，<mark className="hl">陪你拆解需求、選對工具、當場做出成果</mark>，回到工作也能舉一反三。</p>
           <p>現在，我也陪企業從個人試用走向部門工作流：依照既有系統、預算與人員程度選擇工具，一起釐清資料分級、產出查核與 AI 導入的下一步。</p>
-          <blockquote>工具會一直變，但我相信只要學會從工作問題和需求出發，你就能持續用 AI 解決問題、放大價值。</blockquote>
+          <blockquote>比學會一個工具更重要的，<br/>是學會如何在變化中找到可用的答案</blockquote>
           <ul className="chips" aria-label="Vivi 的特色">
             <li>零程式背景</li><li>把技術概念翻譯成人話</li><li>你的 AI 科技麻瓜好朋友</li>
           </ul>

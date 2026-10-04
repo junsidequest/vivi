@@ -400,3 +400,16 @@
   .horizontal-controls{flex-wrap:wrap;gap:12px}
   .horizontal-controls>div{margin-left:auto}
 }
+
+.testimonial-card .review-highlight{color:inherit;background:linear-gradient(transparent 48%,var(--highlight) 48%,var(--highlight) 94%,transparent 94%);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:0 .08em}
+.testimonial-card .review-highlight strong{font-weight:700;color:inherit}
+
+.horizontal-controls.has-intro{align-items:flex-end;gap:24px;margin-bottom:28px}
+.professional .student-keywords{display:flex;flex-direction:column;gap:6px;margin:0;font-size:clamp(22px,2.2vw,30px);line-height:1.55;font-weight:700;color:var(--ink);letter-spacing:-.025em}
+.horizontal-controls.has-intro>span{flex-shrink:0;padding-bottom:6px}
+@media(max-width:640px){.horizontal-controls.has-intro{align-items:flex-start;flex-direction:column;gap:16px}.professional .student-keywords{font-size:clamp(19px,5.2vw,24px)}}
+
+.testimonial-card figcaption .testimonial-organization{color:var(--muted);font-weight:400}
+
+.professional .section-head .student-keywords{color:var(--blue-deep);margin-top:24px;flex-direction:row;flex-wrap:wrap;gap:8px 24px}
+.professional .section-head .student-keywords>span{white-space:nowrap}

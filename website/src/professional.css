@@ -703,3 +703,7 @@ img{max-width:100%}
 @media(prefers-reduced-motion:reduce){.course-notice-tag{transition:none}.course-line-notice.is-noticed .course-notice-tag{animation:none}}
 @media(min-width:901px){.professional .pro-navigation .pro-nav-last{margin-left:-10px}}
 .professional .course-line-notice.is-noticed .origin-button-fill{clip-path:circle(var(--origin-radius) at 50% 50%)}
+
+.testimonial-tail-preview{height:15.6em;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;margin:12px 0 24px;font-size:16px;-webkit-mask-image:linear-gradient(transparent,#000 28%);mask-image:linear-gradient(transparent,#000 28%)}
+.testimonial-card.is-clamped .testimonial-tail-preview blockquote{flex-shrink:0;max-height:none;overflow:visible;margin:0;-webkit-mask-image:none;mask-image:none}
+@media(max-width:640px){.testimonial-tail-preview{height:17.1em}}
