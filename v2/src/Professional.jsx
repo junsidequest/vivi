@@ -63,9 +63,9 @@ const steps = [
 ]
 
 const partners = [
-  { name: '天下學習中心', role: '全台最大企業內訓平台', body: '課程講師。' },
-  { name: '言果學習', role: '企業內訓平台', body: '合作講師，為企業團隊設計生成式 AI 導入與實作課程。', href: 'https://yanguo.com.tw/teacher/yingzhen-chen' },
-  { name: '智谷網絡', role: '企業培訓機構', body: '擔任特約講師，把 AI 應用與自動化課程帶進企業內訓現場。', href: 'https://www.kvalley.biz/team-member/%E9%99%B3%E7%9B%88%E8%87%BBvivi/' },
+  { name: '天下學習中心', role: '全台最大企業內訓平台', body: '課程講師', href: 'https://www.cwlearning.com.tw/@cf1ae297-46ef-4bad-abfd-032c81dbaa9b' },
+  { name: '言果學習', role: '企業內訓平台', body: '合作講師，為企業團隊設計生成式 AI 導入與實作課程', href: 'https://yanguo.com.tw/teacher/yingzhen-chen' },
+  { name: '智谷網絡', role: '企業培訓機構', body: '擔任特約講師，把 AI 應用與自動化課程帶進企業內訓現場', href: 'https://www.kvalley.biz/team-member/%E9%99%B3%E7%9B%88%E8%87%BBvivi/' },
 ]
 
 
@@ -436,7 +436,10 @@ export default function Professional() {
           <p className="eyebrow eyebrow--light"><span>08</span>LET’S MAKE IT WORK.</p>
           <h2 id="connect-title">下一個可能<br/><span className="serif">從聊聊開始</span></h2>
           <p>如果你的團隊也卡在「知道 AI 重要，但不知道從哪開始」，<br/>先說說你的工作與想解決的問題，一起找到適合的起點。</p>
-          <OriginButton className="connect-cta" href={FORM_URL}>填寫諮詢表單</OriginButton>
+          <div className="connect-actions">
+            <OriginButton className="connect-cta" href={FORM_URL}>填寫諮詢表單</OriginButton>
+            <OriginButton className="connect-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 官方帳號</OriginButton>
+          </div>
         </div>
         <nav className="connect-routes" aria-label="依需求選擇入口" data-reveal style={{ '--d': '120ms' }}>
           <p>不確定從哪開始？</p>

@@ -150,6 +150,7 @@
 }
 
 .testimonial-card figcaption strong { color: #121212; font-weight: 700; }
+.student-preview-note { padding-inline: var(--edge); margin-bottom: 16px; font-size: 14px; color: var(--muted); }
 .testimonial-current { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .media-coverage-grid {

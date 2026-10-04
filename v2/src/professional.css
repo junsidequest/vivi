@@ -234,6 +234,8 @@ img{max-width:100%}
 /* ── 聯絡與頁尾 ── */
 .connect{overflow:hidden;padding:clamp(110px,12vw,190px) var(--edge) 0;background:var(--ink);color:var(--paper)}
 .connect-inner{display:grid;justify-items:start}
+.connect-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:16px}
+@media(max-width:640px){.connect-actions{gap:12px}}
 .connect h2{font-size:clamp(44px,7.4vw,124px);font-weight:900;line-height:1.08;letter-spacing:-.06em}
 .connect h2 .serif{font-weight:600}
 .connect-inner>p:not(.eyebrow){max-width:34em;margin:36px 0 44px!important;font-size:17px;line-height:2;color:rgba(243,242,238,.65)}
@@ -416,7 +418,9 @@ img{max-width:100%}
 .is-loaded .hero-intro mark.hl,.professional mark.hl.is-in{background-size:100% 100%}
 .hero-intro mark.hl{transition-delay:1.4s;color:var(--ink)}
 .mq-item{color:#66655f}
-.mq-item img{filter:grayscale(1)!important;opacity:.75}
+.mq-item img{filter:grayscale(1);opacity:.75;transition:filter .3s ease,opacity .3s ease}
+@media(hover:hover){.testimonial-media-partners .mq-item:hover img{filter:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.mq-item img{transition:none}}
 
 @media(prefers-reduced-motion:reduce){.professional mark.hl{background-size:100% 100%}}
 
