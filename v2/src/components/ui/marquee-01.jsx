@@ -61,11 +61,11 @@ function HorizontalScroller({ children, className, label, showControls = true })
 }
 
 function StudentMarquee() {
-  return <><p className="student-preview-note">產業與職位為版面示範</p><HorizontalScroller className="testimonial-student-row" label="學員推薦" showControls={false}>
+  return <HorizontalScroller className="testimonial-student-row" label="學員推薦" showControls={false}>
     <div className="testimonial-student-track"><div className="testimonial-student-group">
       {reviews.students.map(review => <ReviewCard review={review} key={review.name}/>)}
     </div></div>
-  </HorizontalScroller></>
+  </HorizontalScroller>
 }
 
 function MediaCard({ item, index }) {

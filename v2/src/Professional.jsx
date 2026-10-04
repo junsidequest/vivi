@@ -491,7 +491,10 @@ export default function Professional() {
         </nav>
         <div className="wordmark-row">
           <div className="wordmark" aria-hidden="true">vivi<span>.</span></div>
-          <button type="button" className="to-top" onClick={toTop} aria-label="回到頂端" title="回到頂端"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 20V4m-7 7 7-7 7 7"/></svg></button>
+          <div className="wordmark-actions">
+            <OriginButton className="back-to-island" href={sitePath('island/')}>回到小島</OriginButton>
+            <button type="button" className="to-top" onClick={toTop} aria-label="回到頂端" title="回到頂端"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 20V4m-7 7 7-7 7 7"/></svg></button>
+          </div>
         </div>
       </section>
     </main>

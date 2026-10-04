@@ -5,7 +5,7 @@ import './client-logos.css'
 export default function ClientLogos() {
   return <section className="client-logos" aria-labelledby="clients-title">
     <div className="client-logos-heading">
-      <h3 id="clients-title"><strong className="client-logos-title">50+ 企業內訓與講座</strong>橫跨金融保險、零售通路與品牌、政府單位、媒體行銷、教育產業</h3>
+      <h3 id="clients-title"><strong className="client-logos-title">50+ 企業內訓與講座</strong>橫跨金融保險、零售通路與品牌、連鎖便利商店、政府單位、媒體影視、行銷與教育產業</h3>
     </div>
     <div className="client-logos-window" tabIndex={0} role="region" aria-label="曾授課企業與組織">
       <div className="client-logos-track">
