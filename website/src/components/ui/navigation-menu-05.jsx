@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './navigation-menu-05.css'
 import OriginButton from './origin-button.jsx'
+import CourseNotification from './course-notification.jsx'
 import { sitePath } from '../../routes.js'
 
 const items = [
@@ -11,7 +12,7 @@ const items = [
   { title: '企業內訓', href: '#partners' },
 ]
 
-export default function NavigationMenu() {
+export default function NavigationMenu({ onCourseNotice }) {
   const nav = useRef(null)
   const toggle = useRef(null)
   const [open, setOpen] = useState(false)
@@ -77,7 +78,7 @@ export default function NavigationMenu() {
     <button ref={toggle} type="button" className="nav-menu-toggle" aria-label={open ? '關閉導覽選單' : '開啟導覽選單'} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(value => !value)}><span/><span/></button>
     <nav ref={nav} id="main-navigation" className={`pro-navigation${open ? ' is-open' : ''}`} aria-label="主要導覽" onClick={event => { if (event.target.closest('a')) setOpen(false) }}>
     {items.map(item => <a key={item.href} href={item.href} aria-current={active === item.href ? 'location' : undefined}>{item.title}</a>)}
-    <OriginButton className="nav-island-button" href={sitePath('island/')}>探索小島</OriginButton>
+    <span className="pro-nav-last"><CourseNotification onClick={() => { setOpen(false); onCourseNotice?.() }}/><OriginButton className="nav-island-button" href={sitePath('island/')}>探索小島</OriginButton></span>
   </nav>
   </>
 }

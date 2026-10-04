@@ -76,7 +76,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
         const rect=host.current.getBoundingClientRect()
         const x=Math.max(0,Math.min(innerWidth,playerScreen.current.x+rect.left))
         const y=Math.max(0,Math.min(innerHeight,playerScreen.current.y+rect.top))
-        await closeIris(x,y,reduced?250:950)
+        await closeIris(x,y,reduced?250:1100)
       }
       const url=import.meta.env.DEV
         ? `${window.location.protocol}//${window.location.hostname}:8796/${section ? `#${section}` : ''}`

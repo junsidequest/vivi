@@ -689,6 +689,17 @@ img{max-width:100%}
 /* 小島入口 */
 .professional .pro-navigation a.nav-island-button{height:36px;min-height:36px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper)!important;font-size:14px;font-weight:500;letter-spacing:0;white-space:nowrap}
 .professional .pro-navigation a.nav-island-button::after{display:none}
-.professional .pro-navigation a.nav-island-button .origin-button-fill{background:#F8B8CA;color:var(--ink)}
+.professional .pro-navigation a.nav-island-button .origin-button-fill{background:var(--paper);color:var(--ink)}
 
 .hero-stats .stat-percent{align-self:flex-end;font-size:.6em;line-height:1;letter-spacing:0;margin-left:.08em;transform:translateY(-3px)}
+
+.professional .hero-actions a.origin-button .origin-button-fill{background:var(--paper);color:var(--ink)}
+
+.course-line-notice{position:relative;isolation:isolate;display:flex;justify-content:flex-end;margin-top:36px}
+.professional .course-line-notice .course-line-cta{position:relative;z-index:1;margin-top:0}
+.course-notice-tag{position:absolute;right:24px;bottom:calc(100% - 2px);padding:6px 12px;background:var(--highlight);color:var(--ink);font-size:14px;border-radius:5px;z-index:0;visibility:hidden;transform:translateY(calc(100% + 20px)) rotate(0deg);transform-origin:bottom right;pointer-events:none;transition:transform .4s ease,visibility 0s .4s}
+.course-line-notice.is-noticed .course-notice-tag,.course-line-notice:hover .course-notice-tag,.course-line-notice:focus-within .course-notice-tag{visibility:visible;transform:translateY(0) rotate(4deg);transition:transform .55s cubic-bezier(.2,1.5,.4,1),visibility 0s}
+.professional .pro-course-bell-dot{background:var(--accent)}
+@media(prefers-reduced-motion:reduce){.course-notice-tag{transition:none}.course-line-notice.is-noticed .course-notice-tag{animation:none}}
+@media(min-width:901px){.professional .pro-navigation .pro-nav-last{margin-left:-10px}}
+.professional .course-line-notice.is-noticed .origin-button-fill{clip-path:circle(var(--origin-radius) at 50% 50%)}

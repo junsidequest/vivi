@@ -177,7 +177,7 @@ const servicePaths = [
   { id: 'team', title: '帶團隊', type: '企業 AI 導入', hint: '讓同事一起學會，用進實際工作流程' },
 ]
 
-function ServiceGuide({ selected, setSelected }) {
+function ServiceGuide({ selected, setSelected, courseNotice }) {
   const inner = useRef(null)
   const [height, setHeight] = useState(null)
   useEffect(() => {
@@ -213,7 +213,7 @@ function ServiceGuide({ selected, setSelected }) {
         {servicePaths.map(path => <div key={path.id} id={`service-panel-${path.id}`} role="tabpanel" aria-labelledby={`service-tab-${path.id}`} hidden={selected !== path.id} tabIndex={0} className="service-panel">
           {path.id === 'learn' ? <>
             <div className="service-story"><span className="service-caption">從一堂課開始</span><h3>學會方法<br/>帶回自己的工作</h3><p>從 AI 素養、工作流與自動化<br/>到 AI 簡報與 Vibe Coding<br/>透過實作理解方法，再用到熟悉的工作情境</p><p className="service-proof">線上課程逾萬人學習・實體授課逾千人</p></div>
-            <div className="service-details"><CourseTabs/><OriginButton className="offer-cta course-line-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取開課資訊</OriginButton><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
+            <div className="service-details"><CourseTabs/><div id="course-line-notice" className={`course-line-notice${courseNotice ? " is-noticed" : ""}`}><span className="course-notice-tag">不錯過下一堂課</span><OriginButton className="offer-cta course-line-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取開課資訊</OriginButton></div><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
           </> : path.id === 'coach' ? <>
             <div className="service-story"><span className="service-caption">帶著一個真實問題來</span><h3>你的工作難題<br/>我們一起拆解</h3><p>適合已經有具體需求，希望有人一起釐清方向、選擇工具，逐步做出可用成果的工作者、經理人與企業主</p><p className="service-proof">已陪跑超過 30 位高階經理人與企業主</p></div>
             <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>填寫諮詢表單</OriginButton></div>
@@ -229,6 +229,47 @@ function ServiceGuide({ selected, setSelected }) {
 
 export default function Professional() {
   const [selectedService, setSelectedService] = useState('learn')
+  const [noticeRequest, setNoticeRequest] = useState(0)
+  const [courseNotice, setCourseNotice] = useState(false)
+  useEffect(() => {
+    if (!noticeRequest) return
+    setCourseNotice(false)
+    let frame = 0, clearTimer
+    const scrollTimer = setTimeout(() => {
+      const button = page.current?.querySelector('.course-line-cta')
+      if (!button) return
+      button.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+      let lastTop = button.getBoundingClientRect().top
+      let settledSince = performance.now()
+      const started = settledSince
+      const waitForArrival = now => {
+        const rect = button.getBoundingClientRect()
+        if (Math.abs(rect.top - lastTop) > .25) settledSince = now
+        lastTop = rect.top
+        const visible = rect.top >= 80 && rect.bottom <= innerHeight
+        if (visible && now - settledSince >= 300) {
+          button.focus({ preventScroll: true })
+          setCourseNotice(true)
+          clearTimer = setTimeout(() => setCourseNotice(false), 5500)
+          return
+        }
+        if (now - started < 10000) frame = requestAnimationFrame(waitForArrival)
+      }
+      frame = requestAnimationFrame(waitForArrival)
+    }, 350)
+    return () => { clearTimeout(scrollTimer); clearTimeout(clearTimer); cancelAnimationFrame(frame) }
+  }, [noticeRequest])
+  useEffect(() => {
+    if (!courseNotice) return
+    const restore = event => {
+      if (event.pointerType !== 'mouse') return
+      setCourseNotice(false)
+      const button = page.current?.querySelector('.course-line-cta')
+      if (document.activeElement === button) button.blur()
+    }
+    window.addEventListener('pointermove', restore, { passive: true })
+    return () => window.removeEventListener('pointermove', restore)
+  }, [courseNotice])
   const page = useRef(null)
   const [historyOpen, setHistoryOpen] = useState(false)
   useProcessNumbers(page)
@@ -295,7 +336,7 @@ export default function Professional() {
     <div className="scroll-progress" aria-hidden="true"/>
     <header className="pro-header">
       <a className="pro-brand" href={sitePath('')} aria-label="Vivi Chen 首頁">vivi<span className="brand-dot">.</span><span className="brand-caption">陳盈臻<br/>AI WORK & LIFE</span></a>
-      <NavigationMenu/>
+      <NavigationMenu onCourseNotice={() => { setSelectedService('learn'); setNoticeRequest(value => value + 1) }}/>
     </header>
 
     <main id="main">
@@ -413,7 +454,7 @@ export default function Professional() {
           </div>
           <p className="lede">先選一個貼近你的情境，再看看適合的合作方式</p>
         </div>
-        <ServiceGuide selected={selectedService} setSelected={setSelectedService}/>
+        <ServiceGuide selected={selectedService} setSelected={setSelectedService} courseNotice={courseNotice}/>
 
       </section>
 

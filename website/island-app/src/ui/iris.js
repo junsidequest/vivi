@@ -1,7 +1,7 @@
 // 圓形收縮轉場（iris wipe）：全螢幕暗色遮罩上開一個圓洞，動畫縮放圓半徑。
 // closeIris(cx, cy) 收黑（圓心通常在角色身上）、openIris(cx, cy) 展開，皆回傳 Promise。
 const INK = '#241c14'   // 遮罩色：偏暖的深黏土色，比純黑柔和
-const FEATHER = 150     // 圓洞邊緣羽化半寬（px）：透明→遮罩色的漸層帶，不做銳利切邊
+const FEATHER = 180     // 圓洞邊緣羽化半寬（px）：透明→遮罩色的漸層帶，不做銳利切邊
 
 let el = null, frameId = 0
 function ensure() {
@@ -26,15 +26,18 @@ function animate(cx, cy, r0, r1, ms) {
   node.style.display = 'block'
   return new Promise((resolve) => {
     let elapsed=0,last=null
-    const ease = (p) => (p < 0.5 ? 2 * p * p : 1 - ((-2 * p + 2) ** 2) / 2)
+    const ease = (p) => p * p * p * (p * (p * 6 - 15) + 10)
     const frame = (now) => {
       if(last!==null)elapsed+=Math.min(now-last,50)
       last=now
       const p = Math.min(1, elapsed / Math.max(1,ms))
       const r = r0 + (r1 - r0) * ease(p)
-      const f = Math.min(FEATHER, r)   // r 收小時羽化跟著收斂，收黑的終點才會是實心黑
-      node.style.background =
-        `radial-gradient(circle at ${cx}px ${cy}px, transparent ${Math.max(0, r - f)}px, ${INK} ${r + f}px)`
+      // 羽化寬度固定，讓最後一小圈自然漸暗，不在收尾突然縮成硬邊。
+      const stops = [0, .125, .25, .375, .5, .625, .75, .875, 1].map(t => {
+        const alpha = t * t * (3 - 2 * t)
+        return `rgba(36,28,20,${alpha}) ${r - FEATHER + 2 * FEATHER * t}px`
+      })
+      node.style.background = `radial-gradient(circle at ${cx}px ${cy}px, ${stops.join(',')})`
       if (p < 1) frameId = requestAnimationFrame(frame)
       else {
         if (r1 > 0) node.style.display = 'none'   // 完全展開後移除遮罩
@@ -45,8 +48,8 @@ function animate(cx, cy, r0, r1, ms) {
   })
 }
 
-export function closeIris(cx, cy, ms = 600) { return animate(cx, cy, fullR(cx, cy), 0, ms) }
-export function openIris(cx, cy, ms = 700) { return animate(cx, cy, 0, fullR(cx, cy), ms) }
+export function closeIris(cx, cy, ms = 600) { return animate(cx, cy, fullR(cx, cy) + FEATHER, -FEATHER, ms) }
+export function openIris(cx, cy, ms = 700) { return animate(cx, cy, -FEATHER, fullR(cx, cy) + FEATHER, ms) }
 
 // 整幕淡入/淡出（無圓圈）：黑屏與「關於我」頁之間的暗亮都用整幕漸變——
 // 進場：島上圓形收黑 → 關於我整幕變亮（fadeFromInk）
