@@ -1,3 +1,4 @@
+import MediaCoverflow from './media-coverflow.jsx'
 import { useEffect, useRef, useState } from 'react'
 import reviews from '../../content/reviews.json'
 import mediaCoverage from '../../content/media-coverage.json'
@@ -68,35 +69,8 @@ function StudentMarquee() {
   </HorizontalScroller>
 }
 
-function MediaCard({ item, index }) {
-  return <article className="media-card">
-    <a className="media-card-main" href={item.href} target="_blank" rel="noreferrer">
-      <div className="media-card-visual">
-        <span className="media-card-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-        <strong>{item.source}</strong>
-        <span className="media-card-kind">{item.kind}</span>
-      </div>
-      <div className="media-card-copy">
-        <div className="media-card-meta">
-          <span>{item.date || item.mark}</span>
-        </div>
-        <h3>{item.title}</h3>
-        <span className="media-card-action">{item.action}</span>
-      </div>
-    </a>
-    {item.secondaryHref && <a
-      className="media-card-secondary"
-      href={item.secondaryHref}
-      target="_blank"
-      rel="noreferrer"
-    >{item.secondaryAction}</a>}
-  </article>
-}
-
 function MediaCoverage() {
-  return <HorizontalScroller className="media-coverage-grid" label="媒體報導" showControls={false}>
-    {mediaCoverage.map((item, index) => <MediaCard item={item} index={index} key={`${item.source}-${item.title}`}/>)}
-  </HorizontalScroller>
+  return <MediaCoverflow items={mediaCoverage}/>
 }
 
 const partnerLogos = [
