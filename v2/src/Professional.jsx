@@ -43,6 +43,9 @@ const credentials = [
 
 const courses = {
   online: [
+    { lead: '天下學習', title: '《零基礎打造專屬AI 助理：用 Apps Script 提升職場效率》', href: 'https://www.cwlearning.com.tw/courses/84e77516-cf9e-44ab-82d0-1bfbe1c9307b' },
+    { lead: '天下學習', title: '《Notion 實戰入門：打造筆記系統到任務管理的數位整理術》', href: 'https://www.cwlearning.com.tw/courses/5503463d-0610-4bec-a22d-b00a10717e0e' },
+    { lead: '天下學習', title: '《打造AI加速器，解決90%經營難題｜頭家必學AI工具，今天學會明天翻倍》', href: 'https://www.cwlearning.com.tw/courses/f5d1a6c9-92d5-4adb-a7dd-74942dba8804' },
     { lead: '2025 Generative 生成式 AI 年會講座回放', title: '《用 AI，解鎖我的跨域新篇章》', href: 'https://live.gaiconf.com/courses/gaiconf2025' },
     { lead: 'Generative AI 社群', title: '上班族 AI 寫程式自動化', href: 'https://live.gaiconf.com/courses/14' },
     { lead: '中小企業網路大學校', title: '《AI ✕ 工作流程優化 是放大問題，還是解決問題？》', href: 'https://www.smelearning.org.tw/class.php?course=18374' },
