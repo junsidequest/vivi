@@ -1,0 +1,243 @@
+[
+  {
+    "name": "富邦人壽",
+    "file": "fubon-life.svg",
+    "artwork": {
+      "width": 482,
+      "height": 148,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 482,
+      "cropHeight": 148
+    }
+  },
+  {
+    "name": "台北富邦銀行",
+    "file": "taipei-fubon-bank.png",
+    "artwork": {
+      "width": 420,
+      "height": 65,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 419,
+      "cropHeight": 65
+    }
+  },
+  {
+    "name": "南山人壽",
+    "file": "nanshan-life.svg",
+    "artwork": {
+      "width": 600,
+      "height": 104,
+      "x": 0,
+      "y": 2,
+      "cropWidth": 600,
+      "cropHeight": 100
+    }
+  },
+  {
+    "name": "全家便利商店",
+    "file": "familymart.png",
+    "artwork": {
+      "width": 150,
+      "height": 52,
+      "x": 1,
+      "y": 1,
+      "cropWidth": 148,
+      "cropHeight": 50
+    }
+  },
+  {
+    "name": "遠東SOGO百貨",
+    "file": "sogo.png",
+    "artwork": {
+      "width": 150,
+      "height": 60,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 150,
+      "cropHeight": 60
+    }
+  },
+  {
+    "name": "宏正集團 ATEN",
+    "file": "aten.png",
+    "artwork": {
+      "width": 126,
+      "height": 70,
+      "x": 17,
+      "y": 22,
+      "cropWidth": 87,
+      "cropHeight": 25
+    }
+  },
+  {
+    "name": "遊戲橘子",
+    "file": "gamania.svg",
+    "artwork": {
+      "width": 464,
+      "height": 128,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 462,
+      "cropHeight": 128
+    }
+  },
+  {
+    "name": "衛生福利部",
+    "file": "mohw.png",
+    "artwork": {
+      "width": 584,
+      "height": 164,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 575,
+      "cropHeight": 164
+    }
+  },
+  {
+    "name": "中小企業網路大學校",
+    "file": "sme-learning.svg",
+    "artwork": {
+      "width": 960,
+      "height": 224,
+      "x": 4,
+      "y": 0,
+      "cropWidth": 954,
+      "cropHeight": 224
+    }
+  },
+  {
+    "name": "臺北市政府產業發展局",
+    "file": "taipei-doed.png",
+    "monochrome": true,
+    "artwork": {
+      "width": 260,
+      "height": 140,
+      "x": 59,
+      "y": 4,
+      "cropWidth": 142,
+      "cropHeight": 122
+    }
+  },
+  {
+    "name": "文化內容策進院",
+    "file": "taicca.svg",
+    "artwork": {
+      "width": 766,
+      "height": 190,
+      "x": 2,
+      "y": 1,
+      "cropWidth": 760,
+      "cropHeight": 186
+    }
+  },
+  {
+    "name": "財團法人中衛發展中心",
+    "file": "csd-color.png",
+    "artwork": {
+      "width": 378,
+      "height": 62,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 378,
+      "cropHeight": 62
+    }
+  },
+  {
+    "name": "台北市電腦商業同業公會",
+    "file": "tca.png",
+    "artwork": {
+      "width": 466,
+      "height": 71,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 466,
+      "cropHeight": 71
+    }
+  },
+  {
+    "name": "天下雜誌媒體集團",
+    "file": "commonwealth.svg",
+    "artwork": {
+      "width": 348,
+      "height": 128,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 348,
+      "cropHeight": 128
+    }
+  },
+  {
+    "name": "遠見領導影響力學院",
+    "file": "leaderimpact.png",
+    "artwork": {
+      "width": 351,
+      "height": 77,
+      "x": 4,
+      "y": 0,
+      "cropWidth": 346,
+      "cropHeight": 67
+    }
+  },
+  {
+    "name": "親子天下",
+    "file": "parenting.png",
+    "artwork": {
+      "width": 492,
+      "height": 168,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 492,
+      "cropHeight": 168
+    }
+  },
+  {
+    "name": "風傳媒",
+    "file": "storm.svg",
+    "artwork": {
+      "width": 624,
+      "height": 192,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 624,
+      "cropHeight": 192
+    }
+  },
+  {
+    "name": "康軒文教",
+    "file": "kanghsuan.png",
+    "artwork": {
+      "width": 300,
+      "height": 80,
+      "x": 5,
+      "y": 15,
+      "cropWidth": 289,
+      "cropHeight": 57
+    }
+  },
+  {
+    "name": "日本原生廣告 popIn",
+    "file": "popin-corporate.png",
+    "artwork": {
+      "width": 349,
+      "height": 95,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 349,
+      "cropHeight": 95
+    }
+  },
+  {
+    "name": "比石硬數位行銷",
+    "file": "bizin.png",
+    "artwork": {
+      "width": 300,
+      "height": 112,
+      "x": 0,
+      "y": 0,
+      "cropWidth": 300,
+      "cropHeight": 112
+    }
+  }
+]

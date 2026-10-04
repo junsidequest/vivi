@@ -1,0 +1,74 @@
+{
+  "bnext.png": {
+    "width": 300,
+    "height": 137,
+    "x": 11,
+    "y": 18,
+    "cropWidth": 275,
+    "cropHeight": 102
+  },
+  "businessweekly.svg": {
+    "width": 480,
+    "height": 260,
+    "x": 0,
+    "y": 0,
+    "cropWidth": 478,
+    "cropHeight": 260
+  },
+  "inside.svg": {
+    "width": 480,
+    "height": 192,
+    "x": 0,
+    "y": 0,
+    "cropWidth": 480,
+    "cropHeight": 192
+  },
+  "cheers.png": {
+    "width": 350,
+    "height": 135,
+    "x": 8,
+    "y": 7,
+    "cropWidth": 334,
+    "cropHeight": 120
+  },
+  "cw.svg": {
+    "width": 348,
+    "height": 128,
+    "x": 0,
+    "y": 0,
+    "cropWidth": 348,
+    "cropHeight": 128
+  },
+  "thenewslens.svg": {
+    "width": 3486,
+    "height": 622,
+    "x": 1,
+    "y": 0,
+    "cropWidth": 3484,
+    "cropHeight": 622
+  },
+  "ad2iction.svg": {
+    "width": 1142,
+    "height": 221,
+    "x": 0,
+    "y": 0,
+    "cropWidth": 1142,
+    "cropHeight": 221
+  },
+  "yanguo.svg": {
+    "width": 2048,
+    "height": 2048,
+    "x": 152,
+    "y": 341,
+    "cropWidth": 1741,
+    "cropHeight": 1365
+  },
+  "kvalley.png": {
+    "width": 2520,
+    "height": 646,
+    "x": 2,
+    "y": 2,
+    "cropWidth": 2499,
+    "cropHeight": 622
+  }
+}

@@ -1,0 +1,135 @@
+[
+  {
+    "name": "富邦人壽",
+    "file": "fubon-life.svg",
+    "sourceUrl": "https://www.fubon.com/life/images/logo.svg",
+    "notes": "官方網站原始透明底 SVG，無外部相依。"
+  },
+  {
+    "name": "台北富邦銀行",
+    "file": "taipei-fubon-bank.png",
+    "sourceUrl": "https://www.fubon.com/banking/common_content/images/logo.png?v=1",
+    "notes": "官方網站原始透明底 PNG，已驗證 alpha 最小 0、最大 255。"
+  },
+  {
+    "name": "南山人壽",
+    "file": "nanshan-life.svg",
+    "sourceUrl": "https://www.nanshanlife.com.tw/nanshanlife/assets/images/logo.svg",
+    "notes": "官方網站原始透明底 SVG，無外部相依。"
+  },
+  {
+    "name": "全家便利商店",
+    "file": "familymart.png",
+    "sourceUrl": "https://www.family.com.tw/Marketing/images/logo_pc_2024.png",
+    "notes": "官方網站原始透明底 PNG，已驗證 alpha 最小 0、最大 255。"
+  },
+  {
+    "name": "遠東SOGO百貨",
+    "file": "sogo.png",
+    "sourceUrl": "https://info.sogo.com.tw/Content/Home/styles/images/logo.png",
+    "notes": "官方網站原始透明底 PNG，已驗證 alpha 最小 0、最大 255。 此為遠東SOGO百貨，不是遠東百貨；待品牌名稱澄清。"
+  },
+  {
+    "name": "宏正集團 ATEN",
+    "file": "aten.png",
+    "sourceUrl": "https://www.aten.com/file/template/1/images/logo_blue.png",
+    "notes": "官方網站原始透明底 PNG，已驗證 alpha 最小 0、最大 255。"
+  },
+  {
+    "name": "遊戲橘子",
+    "file": "gamania.svg",
+    "sourceUrl": "https://www.gamania.com/",
+    "notes": "官網頁首原始內嵌 SVG 圖形與字標，依官網桌面 32px 圖形、8px 間距、20px 字標配置封裝；透明底、無外部相依、未重畫。"
+  },
+  {
+    "name": "同興實業",
+    "file": null,
+    "sourceUrl": null,
+    "notes": "待使用者確認官網及公司身分，未下載或套用候選標誌。找到候選同興實業股份有限公司 https://www.thec.tw/（食品原料與酒類；舊站 https://www.tonghsing.com.tw/），不得據此推定即為使用者客戶。"
+  },
+  {
+    "name": "衛生福利部",
+    "file": "mohw.png",
+    "sourceUrl": "https://www.mohw.gov.tw/Public/Images/202405/779240515145235692.png",
+    "notes": "官方首頁 Logo；RGBA 584×164，已驗證 alpha 0–255，透明底。"
+  },
+  {
+    "name": "中小企業網路大學校",
+    "file": "sme-learning.svg",
+    "sourceUrl": "https://smelearning.sme.gov.tw/images/template/logo-CISA.svg",
+    "notes": "官方首頁 Logo；SVG viewBox 0 0 240 56，透明底、文字均為向量路徑，無外部資產依賴；雖來源檔名含 CISA，已視覺確認內容為中小企業網路大學校。現主管機關為經濟部中小及新創企業署。"
+  },
+  {
+    "name": "臺北市政府產業發展局",
+    "file": "taipei-doed.png",
+    "sourceUrl": "https://doed.gov.taipei/Images/major_logo.png?1595816802",
+    "notes": "官方首頁 CSS 引用之 Logo；RGBA 260×140，alpha 0–255，透明底，但機關名稱為白字。適合深色底，或以 CSS brightness(0) 全標誌單色呈現。正式全稱為臺北市政府產業發展局。另查官方投資服務辦公室 carousel_02.png 為白底圖片，不採用。",
+    "monochrome": true
+  },
+  {
+    "name": "文化內容策進院",
+    "file": "taicca.svg",
+    "sourceUrl": "https://taicca.tw/ridea/npm/frontend/images/logo-bELcxx8C.svg",
+    "notes": "官方首頁 Logo；透明底 SVG 191.541×47.604，已解析 XML 並視覺確認，無外部資產依賴。"
+  },
+  {
+    "name": "財團法人中衛發展中心",
+    "file": "csd-color.png",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:中衛logo簡化版-無網址.png",
+    "notes": "早期藍紅彩色識別，2014 年由 Csd88 上傳；原檔未修改，採 CSS 透明邊界裁切顯示。作者 Csd88，CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/。目前官網使用灰色新版，此處依使用者要求採彩色版本。"
+  },
+  {
+    "name": "台北市電腦商業同業公會",
+    "file": "tca.png",
+    "sourceUrl": "https://www.tca.org.tw/images/tca_logo.png",
+    "notes": "官方首頁 Logo；RGBA 466×71，alpha 0–255，透明底。台北市電腦公會之正式名稱為台北市電腦商業同業公會。"
+  },
+  {
+    "name": "天下雜誌媒體集團",
+    "file": "commonwealth.svg",
+    "sourceUrl": "https://web.cw.com.tw/aboutus/index.html",
+    "notes": "依主代理指示沿用現有v2/public/img/logos/cw.svg；標誌為天下雜誌，官方介紹核對其媒體集團關係。原始資產下載來源未記錄，官網目前Cloudflare阻擋curl。SVG無外鏈。"
+  },
+  {
+    "name": "遠見領導影響力學院",
+    "file": "leaderimpact.png",
+    "sourceUrl": "https://leaderimpact.cwgv.com.tw/public/images/logo.png",
+    "notes": "已核對官方首頁Logo；PNG實際alpha範圍0–255。"
+  },
+  {
+    "name": "親子天下",
+    "file": "parenting.png",
+    "sourceUrl": "https://storage.googleapis.com/event-cw-com-tw/MediaKit/digital-parenting.pdf",
+    "notes": "官方 MediaKit 第1頁內嵌 Logo 原樣抽取；492×168 PNG，粉紅品牌底白字，已視覺核對為親子天下母品牌，非線上學校或有聲故事書子品牌。本檔不是透明背景，保留官方品牌矩形底色（非額外白底），未重畫或去除品牌底色。"
+  },
+  {
+    "name": "風傳媒",
+    "file": "storm.svg",
+    "sourceUrl": "https://www.storm.mg/img/logo-storm.svg",
+    "notes": "已核對官方首頁；SVG僅向量路徑與clipPath，無外鏈資源，背景透明。"
+  },
+  {
+    "name": "康軒文教",
+    "file": "kanghsuan.png",
+    "sourceUrl": "https://www.knsh.com.tw/images/logo.png",
+    "notes": "已核對官方首頁Logo；PNG實際alpha範圍0–255。"
+  },
+  {
+    "name": "日本原生廣告 popIn",
+    "file": "popin-corporate.png",
+    "sourceUrl": "https://www.popin.cc/discovery/kr/assets/images/logo_black_2x.png",
+    "notes": "官方韓文Discovery舊站頁首原生popIn企業商標，黑色透明PNG（349×95）；已驗證alpha 0–255。非Discovery DSP，未重畫或改色。頁面來源：https://www.popin.cc/discovery/kr/"
+  },
+  {
+    "name": "比石硬數位行銷",
+    "file": "bizin.png",
+    "sourceUrl": "https://www.bizin.com.tw/archive/image/weblogo/0204logo.png",
+    "notes": "已核對官方首頁Logo；PNG實際alpha範圍0–255。"
+  },
+  {
+    "name": "台灣赫特媒體",
+    "file": null,
+    "sourceUrl": "https://www.hearst.com.tw/about-us/",
+    "notes": "未查得此精確企業名；疑似台灣赫斯特媒體，但尚待使用者確認不可猜用。若確認，官網Logo資產https://www.hearst.com.tw/wp-content/uploads/2018/07/hearst-taiwan.png。"
+  }
+]

@@ -1,0 +1,35 @@
+.client-logos{min-width:0;margin-bottom:48px}
+.client-logos-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:22px}
+.client-logos-heading h3{min-width:0;font-size:17px;font-weight:500;line-height:1.8;letter-spacing:.04em}
+.client-logos-hint{flex-shrink:0;display:inline;color:var(--muted);font-size:14px}
+.client-logos-window{overflow:hidden;scrollbar-width:none;user-select:none;overscroll-behavior-x:contain}
+.client-logos-window::-webkit-scrollbar{display:none}
+.client-logos-track{display:flex;width:max-content;animation:client-logo-scroll 100s linear infinite}
+.client-logos-group{display:flex;flex:none;align-items:center;gap:64px;margin:0;padding:0 32px;list-style:none}
+.client-logo{display:flex;align-items:center;justify-content:center;flex:none;width:auto;height:88px;padding:16px 0}
+.client-logo-artwork{position:relative;flex:none;overflow:hidden;height:28px;width:calc(28px * var(--logo-ratio));aspect-ratio:var(--logo-ratio)}
+.client-logo img{position:absolute;display:block;max-width:none;max-height:none;filter:none;opacity:1;transition:filter .3s ease,opacity .3s ease}
+.client-logo span{font-size:16px;line-height:1.5;font-weight:600;text-align:center;color:var(--muted)}
+.client-logos-window:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media(hover:hover){.client-logo:hover img{filter:none;opacity:1}}
+.client-logo.client-logo--mono img{filter:brightness(0)}
+/* Restore the original emblem colors while keeping the source's white agency lettering dark. */
+.client-logo.client-logo--mono .client-logo-color{filter:none;opacity:1;clip-path:inset(0 0 45% 0)}
+@media(hover:hover){.client-logo.client-logo--mono:hover .client-logo-color{opacity:1}}
+@media(max-width:900px){
+  .client-logos{margin-bottom:36px}
+  .client-logos-heading{flex-wrap:wrap;gap:8px}
+  .client-logos-heading h3{flex-basis:100%}
+  .client-logos-hint{display:inline;margin-left:auto}
+  .client-logos-group{gap:40px;padding-inline:20px}
+  .client-logo img{filter:none;opacity:1}
+  .client-logo.client-logo--mono .client-logo-color{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  .client-logo img{transition:none}
+}
+
+.client-logos-title{display:block;margin-bottom:8px;font-size:clamp(24px,2.4vw,32px);font-weight:700;line-height:1.35;letter-spacing:.01em;color:var(--blue-deep)}
+
+@keyframes client-logo-scroll{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.client-logos-window{overflow-x:auto}.client-logos-track{animation:none}.client-logos-group[aria-hidden]{display:none}}

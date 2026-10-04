@@ -16,13 +16,13 @@ export function setButtonOrigin(node, event, center = false) {
     node.style.setProperty('--origin-radius', `${radius}px`)
 }
 
-export default function OriginButton({ href, className = '', children }) {
+export default function OriginButton({ href, className = '', children, ...props }) {
   const link = useRef(null)
   const setOrigin = (event, center = false) => setButtonOrigin(link.current, event, center)
 
 
   const external = /^https?:/.test(href)
-  return <a ref={link} href={href} className={`${className} origin-button`} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}
+  return <a {...props} ref={link} href={href} className={`${className} origin-button`} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}
     onPointerEnter={event => { if (event.pointerType !== 'touch') setOrigin(event) }}
     onPointerDown={event => setOrigin(event)}
     onFocus={event => { if (event.currentTarget.matches(':focus-visible')) setOrigin(event, true) }}>

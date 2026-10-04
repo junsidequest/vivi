@@ -458,7 +458,7 @@ img{max-width:100%}
 .certification-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}
 .certification-list li{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .certification-mark{display:flex;align-items:center;height:34px}
-.certification-mark img{display:block;max-width:92px;max-height:34px;object-fit:contain;filter:grayscale(1)}
+.certification-mark img{display:block;max-width:92px;max-height:34px;object-fit:contain}
 .certification-mark--iii img{filter:brightness(0)}
 .certification-list li>div{display:grid;gap:3px}
 .certification-list li>div>span{font-size:14px;line-height:1.5;color:var(--muted)}
@@ -615,3 +615,30 @@ img{max-width:100%}
 .service-footnote{text-align:right;font-style:italic;color:#858585}
 
 .sketch-result{color:var(--highlight)}
+
+/* Email preparation hint: stable layout on hover, always readable on touch screens. */
+.connect-actions{position:relative}
+.connect-email{display:flex;align-items:stretch}
+.connect-email-guidance{position:absolute;left:0;top:100%;width:min(440px,calc(100vw - 2 * var(--edge)));margin:0;padding:16px 0 0;font-size:15px;line-height:1.9;color:rgba(243,242,238,.74);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s}
+.connect-email:is(:hover,:focus-within) .connect-email-guidance{opacity:1;visibility:visible}
+@media(hover:none),(max-width:900px){
+  .connect-actions{padding-bottom:112px}
+  .connect-email-guidance{top:auto;bottom:0;opacity:1;visibility:visible}
+}
+@media(prefers-reduced-motion:reduce){.connect-email-guidance{transition:none}}
+.professional a.connect-cta:focus-visible{border-radius:100px}
+
+/* Match training logos using visible artwork bounds, rather than source canvas sizes. */
+.professional .testimonial-media-partners .mq-item{flex:none;padding:0 64px 0 0;height:56px}
+.professional .testimonial-media-partners .media-logo-artwork{position:relative;display:block;flex:none;overflow:hidden;height:28px;width:calc(28px * var(--logo-ratio))}
+.professional .testimonial-media-partners .media-logo-artwork img{position:absolute;display:block;max-width:none;max-height:none}
+@media(max-width:900px){
+  .professional .testimonial-media-partners .mq{overflow-x:auto;scrollbar-width:none;mask-image:none;-webkit-mask-image:none}
+  .professional .testimonial-media-partners .mq-track{display:flex;gap:0;width:max-content;animation:none}
+  .professional .testimonial-media-partners .mq-item{padding-right:40px}
+  .professional .testimonial-media-partners .mq-item[aria-hidden]{display:none}
+}
+
+.partners-intro{display:flex;width:fit-content;margin:0 0 28px;text-align:left}
+.partners-intro .translator-next-rule{flex-shrink:0}
+.partners-intro .translator-next-title{line-height:1.8}

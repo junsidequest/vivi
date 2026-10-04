@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import reviews from '../../content/reviews.json'
 import mediaCoverage from '../../content/media-coverage.json'
+import mediaLogoBounds from '../../content/media-logo-bounds.json'
 import { sitePath } from '../../routes.js'
 import './marquee-01.css'
 
@@ -112,7 +113,7 @@ const partnerLogos = [
   { file: 'ad2iction.svg', name: '艾迪英特 Ad2iction' },
   { file: 'yanguo.svg', name: '言果學習', showName: true },
   { file: 'kvalley.png', name: '智谷網絡' },
-]
+].map(partner => ({ ...partner, artwork: mediaLogoBounds[partner.file] }))
 
 function MediaPartners() {
   return <div className="trust-row testimonial-media-partners" id="trusted">
@@ -124,7 +125,14 @@ function MediaPartners() {
           aria-hidden={copy === 1 ? true : undefined}
           key={`${copy}-${partner.name}`}
         >
-          <img src={sitePath(`img/logos/${partner.file}`)} alt={copy === 0 ? partner.name : ''} loading="lazy"/>
+          <span className="media-logo-artwork" style={{ '--logo-ratio': partner.artwork.cropWidth / partner.artwork.cropHeight }}>
+            <img src={sitePath(`img/logos/${partner.file}`)} alt={copy === 0 ? partner.name : ''} decoding="async" style={{
+              width: `${partner.artwork.width / partner.artwork.cropWidth * 100}%`,
+              height: `${partner.artwork.height / partner.artwork.cropHeight * 100}%`,
+              left: `${-partner.artwork.x / partner.artwork.cropWidth * 100}%`,
+              top: `${-partner.artwork.y / partner.artwork.cropHeight * 100}%`,
+            }}/>
+          </span>
           {partner.showName && '言果學習'}
         </span>))}
       </div>

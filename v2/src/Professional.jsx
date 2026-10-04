@@ -3,6 +3,7 @@ import { sitePath } from './routes.js'
 import { useEffect, useRef, useState, useId } from 'react'
 import TestimonialMarquee from './components/ui/marquee-01.jsx'
 import WorkSketch from './components/WorkSketch.jsx'
+import ClientLogos from './components/ClientLogos.jsx'
 import OriginButton from './components/ui/origin-button.jsx'
 import NavigationMenu from './components/ui/navigation-menu-05.jsx'
 import SiteFooter from './components/ui/site-footer.jsx'
@@ -138,8 +139,7 @@ const servicePaths = [
   { id: 'team', title: '帶團隊', type: '企業 AI 導入', hint: '讓同事一起學會，用進實際工作流程。' },
 ]
 
-function ServiceGuide() {
-  const [selected, setSelected] = useState('learn')
+function ServiceGuide({ selected, setSelected }) {
   const inner = useRef(null)
   const [height, setHeight] = useState(null)
   useEffect(() => {
@@ -175,7 +175,7 @@ function ServiceGuide() {
         {servicePaths.map(path => <div key={path.id} id={`service-panel-${path.id}`} role="tabpanel" aria-labelledby={`service-tab-${path.id}`} hidden={selected !== path.id} tabIndex={0} className="service-panel">
           {path.id === 'learn' ? <>
             <div className="service-story"><span className="service-caption">從一堂課開始</span><h3>學會方法<br/>帶回自己的工作</h3><p>從 AI 素養、工作流與自動化，到 AI 簡報與 Vibe Coding<br/>透過實作理解方法，再用到熟悉的工作情境</p><p className="service-proof">線上課程逾萬人學習・實體授課逾千人</p></div>
-            <div className="service-details"><CourseTabs/><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
+            <div className="service-details"><CourseTabs/><OriginButton className="offer-cta course-line-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取公開班開課資訊</OriginButton><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
           </> : path.id === 'coach' ? <>
             <div className="service-story"><span className="service-caption">帶著一個真實問題來</span><h3>你的工作難題<br/>我們一起拆解</h3><p>適合已經有具體需求，希望有人一起釐清方向、選擇工具，逐步做出可用成果的工作者、經理人與企業主</p><p className="service-proof">已陪跑超過 30 位高階經理人與企業主</p></div>
             <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>聊聊我的需求</OriginButton></div>
@@ -190,6 +190,7 @@ function ServiceGuide() {
 }
 
 export default function Professional() {
+  const [selectedService, setSelectedService] = useState('learn')
   const page = useRef(null)
   const [historyOpen, setHistoryOpen] = useState(false)
   const [palette, setPalette] = useState(() => {
@@ -278,7 +279,7 @@ export default function Professional() {
             <Line i={0}>把 <em className="latin">AI</em> 用進</Line>
             <Line i={1}>每天的<span className="work-word">工作<svg viewBox="0 0 320 160" fill="none" aria-hidden="true" preserveAspectRatio="none"><path pathLength="1" d="M292 34C237-4 77 4 24 49C-39 105 73 159 219 137C320 122 355 60 285 28C242 9 172 12 134 20"/></svg></span>中</Line>
           </h1>
-          <p className="hero-intro">不用先變成科技高手。<br/><mark className="hl">從你熟悉的工作出發</mark>，一起讓 AI 真正派上用場。</p>
+          <p className="hero-intro">不用先變成科技高手<br/><mark className="hl">從你熟悉的工作出發</mark>，一起讓 AI 真正派上用場</p>
           <div className="hero-actions">
             <OriginButton className="pro-cta" href="#work">從我的工作開始</OriginButton>
             <a className="text-link" href="#offers">課程與合作方式</a>
@@ -385,7 +386,7 @@ export default function Professional() {
           </div>
           <p className="lede">先選一個貼近你的情境，再看看適合的合作方式</p>
         </div>
-        <ServiceGuide/>
+        <ServiceGuide selected={selectedService} setSelected={setSelectedService}/>
 
       </section>
 
@@ -411,8 +412,9 @@ export default function Professional() {
             <p className="eyebrow"><span>07</span>TRAINING PARTNERS</p>
             <h2 id="partners-title">把改變帶進團隊</h2>
           </div>
-          <p className="lede">也可以透過合作培訓機構，洽詢企業內訓</p>
         </div>
+        <ClientLogos/>
+        <div className="translator-next partners-intro"><span className="translator-next-rule" aria-hidden="true"/><span className="translator-next-title">歡迎透過合作培訓機構，洽詢企業內訓</span></div>
         <ul className="partner-list">
           {partners.map((partner, index) => {
             const inner = <>
@@ -437,15 +439,18 @@ export default function Professional() {
           <h2 id="connect-title">下一個可能<br/><span className="serif">從聊聊開始</span></h2>
           <p>如果你的團隊也卡在「知道 AI 重要，但不知道從哪開始」，<br/>先說說你的工作與想解決的問題，一起找到適合的起點。</p>
           <div className="connect-actions">
-            <OriginButton className="connect-cta" href={FORM_URL}>填寫諮詢表單</OriginButton>
-            <OriginButton className="connect-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 官方帳號</OriginButton>
+            <div className="connect-email">
+              <OriginButton className="connect-cta" aria-describedby="email-guidance" href="mailto:hi@vivichen.ai">Email 聯繫</OriginButton>
+              <p className="connect-email-guidance" id="email-guidance">來信請附：單位名稱、聯絡人與職稱、預計參與人數、想解決的問題或主題、希望的時間</p>
+            </div>
+            <OriginButton className="connect-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取公開班開課資訊</OriginButton>
           </div>
         </div>
         <nav className="connect-routes" aria-label="依需求選擇入口" data-reveal style={{ '--d': '120ms' }}>
           <p>不確定從哪開始？</p>
-          <a href={FORM_URL} target="_blank" rel="noopener"><span>個人</span>一對一 AI 陪跑</a>
+          <a href="#offers" onClick={() => setSelectedService('learn')}><span>自學</span>公開課程</a>
+          <a href="#offers" onClick={() => setSelectedService('coach')}><span>個人</span>一對一 AI 陪跑</a>
           <a href="#partners"><span>團隊</span>企業內訓與工作坊</a>
-          <a href="#offers"><span>自學</span>公開課程</a>
         </nav>
         <div className="wordmark" aria-hidden="true">vivi<span>.</span></div>
       </section>
