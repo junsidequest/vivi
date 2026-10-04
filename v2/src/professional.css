@@ -459,6 +459,10 @@ img{max-width:100%}
 .certification-list li>div{display:grid;gap:3px}
 .certification-list li>div>span{font-size:14px;line-height:1.5;color:var(--muted)}
 .certification-list strong{font-size:14px;line-height:1.65;font-weight:500;overflow-wrap:anywhere}
+@media(max-width:900px){
+  .about-aside{display:contents}
+  .about .certifications{order:1;margin-top:10px}
+}
 
 /* 文字型經歷按鈕以文字底線提示鍵盤焦點，不顯示整圈外框。 */
 .professional .history-toggle:focus-visible{outline:none;border-radius:0}

@@ -63,9 +63,9 @@ const steps = [
 ]
 
 const partners = [
-  { name: '智谷網絡', role: '企業培訓機構', body: '擔任特約講師，把 AI 應用與自動化課程帶進企業內訓現場。', href: 'https://www.kvalley.biz/team-member/%E9%99%B3%E7%9B%88%E8%87%BBvivi/' },
-  { name: '言果學習', role: '企業內訓平台', body: '合作講師，為企業團隊設計生成式 AI 導入與實作課程。', href: 'https://yanguo.com.tw/teacher/yingzhen-chen' },
   { name: '天下學習中心', role: '全台最大企業內訓平台', body: '課程講師。' },
+  { name: '言果學習', role: '企業內訓平台', body: '合作講師，為企業團隊設計生成式 AI 導入與實作課程。', href: 'https://yanguo.com.tw/teacher/yingzhen-chen' },
+  { name: '智谷網絡', role: '企業培訓機構', body: '擔任特約講師，把 AI 應用與自動化課程帶進企業內訓現場。', href: 'https://www.kvalley.biz/team-member/%E9%99%B3%E7%9B%88%E8%87%BBvivi/' },
 ]
 
 
@@ -336,6 +336,7 @@ export default function Professional() {
       <section className="about band" id="about" aria-labelledby="about-title">
         <p className="eyebrow about-eyebrow" id="about-title" data-reveal><span>03</span>ABOUT VIVI</p>
         <div className="about-aside">
+          <div className="about-introduction">
           <div className="section-head" data-reveal>
             <p className="lede about-hello"><img src={sitePath('img/vivichen-700.webp')} alt="" loading="lazy" width="700" height="1051"/><span>Hi 我是 Vivi 陳盈臻<br/>也有人叫我大師姐</span></p>
           </div>
@@ -350,6 +351,7 @@ export default function Professional() {
               </li>)}
             </ol>
             <button className="history-toggle" type="button" aria-expanded={historyOpen} aria-controls="work-history-list" onClick={() => setHistoryOpen(open => !open)}><span className="history-toggle-label">{historyOpen ? '收合經歷' : '展開完整經歷'}</span><svg className="history-toggle-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d={historyOpen ? 'M8 13V3M3 8l5-5 5 5' : 'M8 3v10M3 8l5 5 5-5'} stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
+          </div>
           </div>
           <section className="certifications" aria-labelledby="certifications-title">
             <div className="history-heading"><h3 id="certifications-title">專業認證</h3></div>
