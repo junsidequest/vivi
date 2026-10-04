@@ -38,7 +38,7 @@ const credentials = [
   { src: 'img/credentials/iii.svg', alt: '資策會', issuer: '資策會', name: '生成式 AI 能力認證', mod: 'iii' },
   { src: 'img/credentials/ipas.webp', alt: 'iPAS', issuer: '經濟部 iPAS', name: 'AI 應用規劃師' },
   { src: 'img/credentials/google.svg', alt: 'Google', issuer: 'Google for Education', name: 'Gemini Certified Educator' },
-  { src: 'img/credentials/aws-ai-practitioner-transparent.png', alt: 'AWS Certified AI Practitioner', issuer: 'AWS', name: 'Certified AI Practitioner' },
+  { src: 'img/credentials/aws-ai-practitioner-cutout.png', alt: 'AWS Certified AI Practitioner', issuer: 'AWS', name: 'Certified AI Practitioner' },
 ]
 
 const courses = {
@@ -181,10 +181,10 @@ function ServiceGuide({ selected, setSelected }) {
             <div className="service-details"><CourseTabs/><OriginButton className="offer-cta course-line-cta" href="https://line.me/R/ti/p/@026adbfw">LINE 獲取公開班開課資訊</OriginButton><p className="service-footnote">開課時間與報名資訊，以各課程平台公告為準</p></div>
           </> : path.id === 'coach' ? <>
             <div className="service-story"><span className="service-caption">帶著一個真實問題來</span><h3>你的工作難題<br/>我們一起拆解</h3><p>適合已經有具體需求，希望有人一起釐清方向、選擇工具，逐步做出可用成果的工作者、經理人與企業主</p><p className="service-proof">已陪跑超過 30 位高階經理人與企業主</p></div>
-            <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>聊聊我的需求</OriginButton></div>
+            <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>填寫諮詢表單</OriginButton></div>
           </> : <>
             <div className="service-story"><span className="service-caption">從個人試用走向團隊應用</span><h3>讓 AI 成為<br/>團隊的工作方法</h3><p>適合正在啟動 AI 導入，或希望把零散試用轉成共同流程的企業<br/>依團隊程度與既有系統，規劃內訓、實作工作坊與導入陪跑</p><p className="service-proof">企業內訓與講座超過 50 場</p></div>
-            <div className="service-details"><h4>企業內訓與導入陪跑</h4><ul className="service-scope"><li><strong>評估工具與導入方向</strong><p>依 Google／Microsoft 生態系、預算與人員程度，選擇合適的 AI 平台組合</p></li><li><strong>用部門真實情境實作</strong><p>為行政、行銷、業務等職能建立專屬 Skill 與工作流</p></li><li><strong>建立可延伸的使用規範</strong><p>釐清資料敏感度、機敏資訊分級與 AI 產出查核方式</p></li></ul><OriginButton className="offer-cta" href="#partners">洽詢企業內訓</OriginButton></div>
+            <div className="service-details"><h4>企業內訓與導入陪跑</h4><ul className="service-scope"><li><strong>評估工具與導入方向</strong><p>依 Google／Microsoft 生態系、預算與人員程度，選擇合適的 AI 平台組合</p></li><li><strong>用部門真實情境實作</strong><p>為行政、行銷、業務等職能建立專屬 Skill 與工作流</p></li><li><strong>建立可延伸的使用規範</strong><p>釐清資料敏感度、機敏資訊分級與 AI 產出查核方式</p></li></ul><OriginButton className="offer-cta" href="#partners">企業內訓洽詢</OriginButton></div>
           </>}
         </div>)}
       </div>
@@ -370,7 +370,7 @@ export default function Professional() {
         <div className="about-body" data-reveal>
           <h3>從工作問題出發<br/>讓 AI 真正為你所用</h3>
           <p className="about-lead">我有 <mark className="hl">18 年媒體與廣告科技 B2B 業務經驗</mark>，服務過 <mark className="hl">450 家以上的企業與政府單位</mark>。從開發、提案、報價到長期客戶經營，每一段都親身跑過。</p>
-          <p>雖然是文組背景、至今仍看不懂程式碼，卻靠著 AI 工具與實作，<mark className="hl">打造出上百個實用工具和系統</mark>，甚至也能做出完整的專案管理系統。</p>
+          <p>雖然是文組背景、至今仍看不懂程式碼，卻靠著 AI 工具與實作，<mark className="hl">打造出上百個實用工具</mark>，甚至也能做出完整的專案管理系統。</p>
           <p>作為非技術背景的 AI 實作者，我知道大家最容易卡在哪裡。我用聽得懂的比喻講清楚原理，從真實工作問題出題，<mark className="hl">陪你拆解需求、選對工具、當場做出成果</mark>，回到工作也能舉一反三。</p>
           <p>現在，我也陪企業從個人試用走向部門工作流：依照既有系統、預算與人員程度選擇工具，一起釐清資料分級、產出查核與 AI 導入的下一步。</p>
           <blockquote>工具會一直變，但我相信只要學會從工作問題和需求出發，你就能持續用 AI 解決問題、放大價值。</blockquote>

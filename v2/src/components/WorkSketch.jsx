@@ -1,14 +1,14 @@
 import { useState } from 'react'
 
 const scenarios = [
-  {label:'行政', problem:'每週都在複製貼上，\n報表還是做不完。', source:'散落的資料與表格', steps:['先統一資料欄位','讓 AI 協助整理與分類','把固定步驟串成工作流'], result:'把時間留給判斷，\n讓重複工作有方法。', example:'例如：整理表單資料，產出固定格式的每週摘要。'},
-  {label:'行銷', problem:'工具收藏了一堆，\n內容還是從零開始。', source:'想法、素材與品牌語氣', steps:['釐清受眾與溝通目標','整理品牌素材與範例','建立可重複使用的內容流程'], result:'從空白頁，\n走到有方向的初稿。', example:'例如：把一篇長文整理成不同平台的貼文初稿，再由你審閱。'},
-  {label:'業務', problem:'客戶資料很多，\n跟進卻總是慢一步。', source:'會議紀錄與客戶需求', steps:['定義需要保留的客戶資訊','把紀錄整理成重點與待辦','設計後續追蹤與提醒流程'], result:'把零散對話，\n變成下一步行動。', example:'例如：把會議筆記整理成需求清單、待辦事項與回覆草稿。'},
+  {label:'行政', problem:'每週都在複製貼上\n報表還是做不完', source:['散落的資料','表格','文件'], steps:['先統一資料欄位','讓 AI 協助整理與分類','把固定步驟串成工作流'], result:'把時間留給判斷\n讓重複工作有方法', example:'例如：整理表單資料，產出固定格式的每週摘要。'},
+  {label:'行銷', problem:'工具收藏了一堆\n內容還是從零開始', source:['想法','素材','品牌定位','成效數據'], steps:['釐清受眾與溝通目標','整理品牌素材與範例','建立可重複使用的內容流程'], result:'從空白頁\n走到有方向的初稿', example:'例如：把一篇長文整理成不同平台的貼文初稿，再由你審閱。'},
+  {label:'業務', problem:'客戶資料很多\n跟進卻總是慢一步', source:['會議記錄','專案文件','客戶需求'], steps:['定義需要保留的客戶資訊','把紀錄整理成重點與待辦','設計後續追蹤與提醒流程'], result:'把零散對話\n變成下一步行動', example:'例如：把會議筆記整理成需求清單、待辦事項與回覆草稿。'},
 ]
 function ScenarioIllustration({ index }) {
  const drawings = [
   <g key="reports">
-   {[{x:8,y:8,angle:-9,opacity:.45},{x:41,y:7,angle:7,opacity:.65},{x:70,y:22,angle:10,opacity:.8},{x:35,y:27,angle:-3,opacity:1}].map((sheet,i)=><g key={i} transform={`translate(${sheet.x} ${sheet.y}) rotate(${sheet.angle} 23 21)`} opacity={sheet.opacity}>
+   {[{x:8,y:8,angle:-9,opacity:.45},{x:41,y:7,angle:7,opacity:.65},{x:70,y:22,angle:10,opacity:.8},{x:35,y:27,angle:-3,opacity:1}].map((sheet,i)=><g key={i} transform={`translate(${sheet.x} ${sheet.y}) rotate(${sheet.angle} 23 21)`} strokeOpacity={sheet.opacity}>
     <rect width="46" height="42" rx="3" fill="var(--ink-2)"/>
     <path d="M6 8h34v28H6Z"/>
     <path d="M6 15h34M6 22h34M6 29h34M17 8v28M29 8v28" strokeWidth="1"/>
@@ -39,7 +39,7 @@ export default function WorkSketch(){
    <div className="sketch-tabs" role="tablist" aria-label="選擇工作情境">{scenarios.map((s,i)=><button key={s.label} id={`scenario-${i}`} role="tab" aria-selected={i===active} aria-controls="scenario-panel" tabIndex={i===active?0:-1} onClick={()=>setActive(i)} onKeyDown={e=>changeWithKey(e,i)}>{s.label}</button>)}</div>
    <div id="scenario-panel" role="tabpanel" aria-labelledby={`scenario-${active}`} tabIndex={0}>
     <div className="sketch-change" key={active}>
-     <div className="sketch-problem"><span className="sketch-label">現在的工作</span><ScenarioIllustration index={active}/><h3>{item.problem}</h3><span className="sketch-source">{item.source}</span></div>
+     <div className="sketch-problem"><span className="sketch-label">現在的工作</span><div className="sketch-materials"><ul className="sketch-sources" data-count={item.source.length} data-scenario={active} aria-label="工作素材">{item.source.map(word => <li key={word}>{word}</li>)}</ul><ScenarioIllustration index={active}/></div><h3>{item.problem}</h3></div>
      <div className="sketch-solution"><span className="sketch-label">一起拆解之後</span><ol>{item.steps.map(step=><li key={step}>{step}</li>)}</ol><p className="sketch-result">{item.result}</p></div>
     </div>
    </div>
