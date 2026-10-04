@@ -82,7 +82,7 @@ img{max-width:100%}
 .hero-note{position:absolute;left:max(-32px,calc(100% - 560px));bottom:9%;z-index:2;display:grid;gap:6px;padding:16px 22px 14px;border:1px solid var(--line);background:var(--card);box-shadow:0 18px 40px rgba(18,18,18,.08);font-size:14px;letter-spacing:.06em;transform:rotate(-5deg)}
 .hero-note span{font:italic 400 32px/1 var(--serif);letter-spacing:-.01em}
 .hero-side{position:absolute;right:calc(var(--gutter) * -.55);top:46%;writing-mode:vertical-rl;font-size:12px;letter-spacing:.3em;color:var(--muted)}
-.hero-stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);opacity:0;transition:opacity 1.2s var(--ease) .9s}
+.hero-stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);opacity:0;transition:opacity 1.2s var(--ease) .9s}
 .is-loaded .hero-stats{opacity:1}
 .hero-stats li{display:flex;flex-direction:column;gap:6px;padding:26px 0 30px}
 .hero-stats li+li{padding-left:clamp(16px,2.4vw,36px);border-left:1px solid var(--line)}
@@ -683,3 +683,5 @@ img{max-width:100%}
 .wordmark-row .to-top svg{width:32px;height:32px}
 @media(hover:hover){.wordmark-row .to-top:hover{background:var(--paper);color:var(--ink)}}
 @media(prefers-reduced-motion:reduce){.wordmark-row .to-top:hover svg{transform:none}}
+
+@media(max-width:900px){.hero-stats li:last-child{grid-column:1/-1;padding-left:0;border-left:0}}

@@ -1,4 +1,3 @@
-import Professional from './Professional.jsx'
 import Welcome from './Welcome.jsx'
 import MobileSite from './MobileSite.jsx'
 import { isMobilePresentation } from './mobile.js'
@@ -9,7 +8,6 @@ import WalkingLoader from './ui/WalkingLoader.jsx'
 import './fonts.css'
 import './welcome.css'
 // 介紹頁樣式隨入口載入，避免正式建置的條件式動態載入遺漏 CSS。
-import './professional.css'
 import './style.css'
 import './ui/ui.css'
 import './ui/pixel.css'
@@ -24,7 +22,7 @@ function Site(){
   const advanced=useCallback(value=>setProgress(p=>Math.max(p,.15+value*.75)),[])
   useEffect(()=>{
     let cancelled=false
-    const module=view==='island'?import('./App.jsx'):Promise.resolve({default:view==='professional'?Professional:Welcome})
+    const module=view==='island'?import('./App.jsx'):Promise.resolve({default:Welcome})
     module.then(result=>{
       if(cancelled)return
       setPage(()=>result.default);setProgress(p=>Math.max(p,.15))

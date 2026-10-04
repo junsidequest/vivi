@@ -16,6 +16,7 @@ const stats = [
   { value: 450, suffix: '+', label: '服務企業與政府單位' },
   { value: 10000, suffix: '+', label: '線上課程學習' },
   { value: 1000, suffix: '+', label: '實體授課學員' },
+  { value: 95, suffix: '%+', label: '講座與課程滿意度' },
 ]
 
 // 招牌段落：把常見術語翻成工作上聽得懂的說法。

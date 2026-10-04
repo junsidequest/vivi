@@ -17,3 +17,6 @@ node_modules/
 /docs/superpowers/
 # docs 裡日期開頭的檔案是本機筆記，不上公開 repo
 /docs/20*-*.md
+
+# 舊版介紹頁僅保存在本機
+/archive/v1/
