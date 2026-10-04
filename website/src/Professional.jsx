@@ -318,7 +318,7 @@ export default function Professional() {
         </figure>
         <ul className="hero-stats" aria-label="教學與業務經歷">
           {stats.map(stat => <li key={stat.label}>
-            <strong><Counter value={stat.value}/><sup>{stat.suffix}</sup></strong>
+            <strong><Counter value={stat.value}/>{stat.suffix === '%+' ? <><span className="stat-percent">%</span><sup>+</sup></> : <sup>{stat.suffix}</sup>}</strong>
             <span>{stat.label}</span>
           </li>)}
         </ul>

@@ -10,10 +10,10 @@ import { createPixelHints, PLAYER_HINTS, GREETING } from './ui/pixelHints.js'
 import { closeIris, openIris, disposeIris } from './ui/iris.js'
 
 const CONTENT = {
-  about: { kicker: 'ABOUT VIVI', title: '把 AI，帶進你的日常。', text: '嗨，我是陳盈臻 Vivi，也有人叫我大師姐。我不是工程師，卻把 AI 真的用進了工作裡。現在，我陪非技術背景的團隊跨出第一步。', section: 'about', link: '多認識我一點' },
-  services: { kicker: 'LEARN & CREATE', title: '一起把「想做」變成「做到」。', text: '從公開課程、企業陪跑到一對一諮詢，從你的真實工作出發，一步一步做出能用的成果。', section: 'offers', link: '看看課程與服務' },
+  about: { kicker: 'ABOUT VIVI', title: '把 AI，帶進你的日常', text: '嗨，我是陳盈臻 Vivi，也有人叫我大師姐。我不是工程師，卻把 AI 真的用進了工作裡。現在，我陪非技術背景的團隊跨出第一步。', section: 'about', link: 'Vivi 的專業經歷' },
+  services: { kicker: 'LEARN & CREATE', title: '一起把「想做」變成「做到」', text: '從公開課程、企業陪跑到一對一諮詢，從你的真實工作出發，一步一步做出能用的成果。', section: 'offers', link: '看看課程與服務' },
   contact: { kicker: 'SAY HELLO', title: '有個想法，想找人聊聊？', text: '如果你也卡在「知道 AI 很重要，但不知道從哪裡開始」，歡迎寫信給我。先聊聊你的日常，再一起找到值得嘗試的下一步。' },
-  duck: { kicker: 'A LITTLE BREAK', title: '呱，休息一下也很好。', text: '不用一口氣學會所有工具。先解決一個每天都會遇到的小麻煩，就已經往前走了一步。' },
+  duck: { kicker: 'A LITTLE BREAK', title: '呱，休息一下也很好', text: '不用一口氣學會所有工具。先解決一個每天都會遇到的小麻煩，就已經往前走了一步。' },
   help: { kicker: 'MAKE YOURSELF AT HOME', title: '操作說明', text: '點擊空地或步道，角色會走到你選的位置。也可以用方向鍵或 WASD 走動，按住 Shift 跑步。走近物件後按 E，或點選物件與左側快速選單，Vivi 就會走過去。點擊新的位置會改變目的地，方向鍵可隨時接手。手機可點地面或使用左下角搖桿。鏡頭會跟著你，沒有縮放或旋轉操作。' },
 }
 function Dialog({ id, onClose, onRead }) {
@@ -46,7 +46,7 @@ function Dialog({ id, onClose, onRead }) {
       <p className="help-cell--wide">左側選單可快速前往。手機可點地面或拖動搖桿，按 A 互動。</p>
     </div>:<p>{content.text}</p>}
     {content.section && <button className="primary" onClick={() => onRead(content.section)}>{content.link}</button>}
-    {id === 'contact' && <button className="primary" onClick={() => onRead('connect')}>Let's Connect</button>}
+    {id === 'contact' && <button className="primary" onClick={() => onRead('connect')}>Email 聯繫我</button>}
     {(id === 'duck' || id === 'help') && <button className="primary" onClick={onClose}>{id === 'help' ? '繼續逛逛' : '繼續散步'}</button>}
   </section></div>
 }
@@ -95,7 +95,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
       onPosition:({avatar,places,x,y,z,dt,moving,autoWalking})=>{
         playerScreen.current=avatar
         if(dockArrow.current)dockArrow.current.style.transform=`translate(${places.dock.x}px,${places.dock.y}px)`
-        if(speech.current)speech.current.style.transform=`translate(${avatar.x}px,${avatar.y}px)`
+        if(speech.current){speech.current.style.transform=`translate(${avatar.x}px,${avatar.y}px)`;speech.current.style.visibility='visible'}
         for(const [id,point] of Object.entries(places))if(markers.current[id])markers.current[id].style.transform=`translate(${point.x}px,${point.y}px)`
         if(duck.current)duck.current.style.transform=`translate(${places.duck.x}px,${places.duck.y}px)`
         if(stats.current)stats.current.textContent=`x ${x.toFixed(2)} · z ${z.toFixed(2)} · 腳底 ${y.toFixed(3)} m`
@@ -155,7 +155,7 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
             <span className={`hint-mark hint-mark--${id==='about'?'pin':'mail'}`}/><span className="hint-full">按<span className="key">{keyLabel}</span>{id==='about'?'看佈告欄':'開信箱'}</span>
           </button>
         </div>)}
-        <div className="pixel-anchor pixel-anchor--speech" ref={speech}><SpeechBubble onComplete={greetingComplete}/>{PLAYER_HINTS[near]&&!say&&<button className="player-hint" onClick={()=>open(near)}>按<span className="key">{keyLabel}</span>{PLAYER_HINTS[near]}</button>}</div>
+        <div className="pixel-anchor pixel-anchor--speech" ref={speech} style={{visibility:'hidden'}}>{pageVisible&&(intro==='greeting'||intro==='done')&&<SpeechBubble onComplete={greetingComplete}/>}{pageVisible&&intro==='done'&&PLAYER_HINTS[near]&&!say&&<button className="player-hint" onClick={()=>open(near)}>按<span className="key">{keyLabel}</span>{PLAYER_HINTS[near]}</button>}</div>
         <div className="pixel-anchor pixel-anchor--duck" ref={duck}>{near==='duck'&&<div className="duck-say">呱呱~</div>}</div>
       </div>
       <div className="island-controls">
@@ -165,6 +165,6 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
     </>}
     {new URLSearchParams(location.search).has('debug')&&<output className="debug" ref={stats}/>}
     {status!=='ready'&&(!externalLoading||status==='error')&&<WalkingLoader progress={progress} error={status==='error'}/>}
-    <div className="ui-layer">{status==='ready'&&intro==='done'&&<MenuPanel/>}{dialog&&<Dialog id={dialog} onClose={close} onRead={read}/>}</div>
+    <div className="ui-layer">{status==='ready'&&intro==='done'&&<MenuPanel/>}{pageVisible&&(intro==='help'||intro==='done')&&dialog&&<Dialog id={dialog} onClose={close} onRead={read}/>}</div>
   </main>
 }

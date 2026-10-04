@@ -155,8 +155,13 @@ export function createNavigation(root, { radius = 0.5, height = 1.4, profile, fo
     const count = Math.max(1, Math.ceil(Math.hypot(dx, dz) / 0.04))
     for (let i = 0; i < count; i++) {
       const before={...next},sx=dx/count,sz=dz/count,step=Math.hypot(sx,sz)
-      if (canWalk(next.x + sx, next.z)) next.x += sx
-      if (canWalk(next.x, next.z + sz)) next.z += sz
+      // 優先沿輸入方向移動，避免斜向狹縫的兩個軸各自被阻擋。
+      if (clearSegment(before, {x:before.x+sx,z:before.z+sz})) {
+        next.x += sx; next.z += sz
+      } else {
+        if (canWalk(next.x + sx, next.z)) next.x += sx
+        if (canWalk(next.x, next.z + sz)) next.z += sz
+      }
       if(assist && step>0 && Math.hypot(next.x-before.x,next.z-before.z)<step*.65){
         // 僅在卡住時嘗試小角度偏移；每條候選路徑仍檢查實際模型。
         for(const degrees of [30,45,60,75,90]){

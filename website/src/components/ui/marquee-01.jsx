@@ -72,12 +72,8 @@ function MediaCard({ item, index }) {
   return <article className="media-card">
     <a className="media-card-main" href={item.href} target="_blank" rel="noreferrer">
       <div className="media-card-visual">
-        {item.image
-          ? <img src={item.image} alt=""/>
-          : <>
-            <span className="media-card-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <strong>{item.source}</strong>
-          </>}
+        <span className="media-card-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <strong>{item.source}</strong>
         <span className="media-card-kind">{item.kind}</span>
       </div>
       <div className="media-card-copy">

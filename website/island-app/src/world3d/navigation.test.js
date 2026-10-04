@@ -163,3 +163,24 @@ describe('通行只依據現有模型',()=>{
     expect(createNavigation(root,body).canWalk(0,0)).toBe(false)
   })
 })
+
+it('斜向窄通道可沿通道前進，不被分軸碰撞鎖住', () => {
+  const root=new T.Group(),floor=new T.Group();floor.name='Island_ground';root.add(floor)
+  const grass=new T.MeshBasicMaterial();grass.name='grass'
+  const mesh=new T.Mesh(new T.BoxGeometry(4,.1,4),grass);mesh.position.y=-.05;floor.add(mesh)
+  for(const side of [-1,1]){
+    const wall=new T.Mesh(new T.BoxGeometry(.1,2,3),new T.MeshBasicMaterial())
+    wall.rotation.y=Math.PI/4
+    wall.position.set(side*.061/Math.SQRT2,1,-side*.061/Math.SQRT2)
+    root.add(wall)
+  }
+  const nav=createNavigation(root,{radius:.001,footRadius:.001,height:1})
+  const start={x:0,z:0},end={x:.1,z:.1}
+  expect(nav.canWalk(0,0)).toBe(true)
+  expect(nav.canWalk(.02,0)).toBe(false)
+  expect(nav.canWalk(0,.02)).toBe(false)
+  expect(nav.clearSegment(start,end)).toBe(true)
+  const moved=nav.move(start,.1,.1)
+  expect(moved.x).toBeCloseTo(.1)
+  expect(moved.z).toBeCloseTo(.1)
+})
