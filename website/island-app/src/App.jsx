@@ -78,13 +78,11 @@ export default function App({externalLoading=false,pageVisible=true,onLoadReady,
         const y=Math.max(0,Math.min(innerHeight,playerScreen.current.y+rect.top))
         await closeIris(x,y,reduced?250:950)
       }
-      const url=sitePath(`about/${section ? `#${section}` : ''}`)
-      if(isMobilePresentation()){
-        window.dispatchEvent(new CustomEvent('site-navigate',{detail:{url,beforeReveal}}))
-      }else{
-        await beforeReveal()
-        if(!disposed)window.location.assign(url)
-      }
+      const url=import.meta.env.DEV
+        ? `${window.location.protocol}//${window.location.hostname}:8796/${section ? `#${section}` : ''}`
+        : sitePath(section ? `#${section}` : '')
+      await beforeReveal()
+      if(!disposed)window.location.assign(url)
     }
     const open=id=>{if(id==='dock'){void enterLanding(null);return}if(id==='duck')hints.current.interactDuck();else useGame.getState().openPopup(id)}
     world.current=createWorld(host.current,{

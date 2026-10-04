@@ -28,26 +28,26 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: |
-            Codex/package-lock.json
-            v2/package-lock.json
-      - name: Build current site
-        working-directory: Codex
+            website/island-app/package-lock.json
+            website/package-lock.json
+      - name: Build island and legacy pages
+        working-directory: website/island-app
         run: |
           npm ci
           npm run build
 
-      - name: Build v2 site
-        working-directory: v2
+      - name: Build main website
+        working-directory: website
         run: |
           npm ci
           npm run build
 
-      - name: Include v2 alongside the current site
-        run: cp -R v2/dist Codex/dist/v2
+      - name: Use the main website as the homepage
+        run: cp -R website/dist/. website/island-app/dist/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: Codex/dist
+          path: website/island-app/dist
       - id: deployment
         uses: actions/deploy-pages@v4

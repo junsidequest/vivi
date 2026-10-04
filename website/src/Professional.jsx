@@ -230,14 +230,6 @@ export default function Professional() {
   const [selectedService, setSelectedService] = useState('learn')
   const page = useRef(null)
   const [historyOpen, setHistoryOpen] = useState(false)
-  const [palette, setPalette] = useState(() => {
-    try { const saved = localStorage.getItem('vivi-palette'); return ['blue', 'sage', 'lilac', 'rose'].includes(saved) ? saved : 'blue' }
-    catch { return 'blue' }
-  })
-  const choosePalette = value => {
-    setPalette(value)
-    try { localStorage.setItem('vivi-palette', value) } catch { /* 儲存不可用時仍可預覽。 */ }
-  }
   useProcessNumbers(page)
 
   useEffect(() => {
@@ -297,15 +289,12 @@ export default function Professional() {
 
   const toTop = () => page.current.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
 
-  return <div className="professional" data-palette={palette} ref={page}>
+  return <div className="professional" data-palette="rose" ref={page}>
     <a className="pro-skip" href="#main">跳至主要內容</a>
     <div className="scroll-progress" aria-hidden="true"/>
     <header className="pro-header">
       <a className="pro-brand" href={sitePath('')} aria-label="Vivi Chen 首頁">vivi<span className="brand-dot">.</span><span className="brand-caption">陳盈臻<br/>AI WORK & LIFE</span></a>
       <NavigationMenu/>
-      <div className="palette-switch" role="group" aria-label="預覽網站配色">
-        {[{id:'blue',label:'霧藍'},{id:'sage',label:'橄欖綠'},{id:'lilac',label:'柔紫'},{id:'rose',label:'玫瑰粉'}].map(option => <button key={option.id} type="button" className={`palette-swatch palette-swatch--${option.id}`} aria-label={`預覽${option.label}配色`} aria-pressed={palette === option.id} title={option.label} onClick={() => choosePalette(option.id)}><span aria-hidden="true"/></button>)}
-      </div>
     </header>
 
     <main id="main">

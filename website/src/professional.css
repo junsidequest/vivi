@@ -678,7 +678,7 @@ img{max-width:100%}
 .wordmark-actions{position:absolute;right:0;bottom:16px;display:flex;align-items:center;gap:10px}
 .wordmark-row .back-to-island,.wordmark-row .to-top{height:48px;border:1px solid rgba(243,242,238,.4);background:var(--ink-2);color:var(--paper)}
 .professional .wordmark-row a.back-to-island{display:flex;align-items:center;height:48px;padding:0 20px;border:1px solid var(--paper);border-radius:100px;background:var(--paper);color:var(--ink)!important;font-size:14px;font-weight:500;white-space:nowrap}
-.professional .wordmark-row a.back-to-island .origin-button-fill{background:#FB6F92;color:var(--ink)}
+.professional .wordmark-row a.back-to-island .origin-button-fill{background:#F8B8CA;color:var(--ink)}
 .wordmark-row .to-top{display:grid;place-items:center;width:48px;padding:0;border-radius:50%}
 .wordmark-row .to-top svg{width:32px;height:32px}
 @media(hover:hover){.wordmark-row .to-top:hover{background:var(--paper);color:var(--ink)}}
