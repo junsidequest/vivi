@@ -677,8 +677,8 @@ img{max-width:100%}
 .connect .wordmark-row .wordmark{margin:0;font-size:clamp(120px,26vw,470px)}
 .wordmark-actions{position:absolute;right:0;bottom:16px;display:flex;align-items:center;gap:10px}
 .wordmark-row .back-to-island,.wordmark-row .to-top{height:48px;border:1px solid rgba(243,242,238,.4);background:var(--ink-2);color:var(--paper)}
-.professional .wordmark-row a.back-to-island{display:flex;align-items:center;height:48px;padding:0 20px;border:1px solid var(--paper);border-radius:100px;background:var(--paper);color:var(--ink)!important;font-size:14px;font-weight:500;white-space:nowrap}
-.professional .wordmark-row a.back-to-island .origin-button-fill{background:#F8B8CA;color:var(--ink)}
+.professional .connect a.back-to-island{display:flex;align-items:center;height:48px;padding:0 20px;border:1px solid var(--paper);border-radius:100px;background:var(--paper);color:var(--ink)!important;font-size:14px;font-weight:500;white-space:nowrap}
+.professional .connect a.back-to-island .origin-button-fill{background:#F8B8CA;color:var(--ink)}
 .wordmark-row .to-top{display:grid;place-items:center;width:48px;padding:0;border-radius:50%}
 .wordmark-row .to-top svg{width:32px;height:32px}
 @media(hover:hover){.wordmark-row .to-top:hover{background:var(--paper);color:var(--ink)}}
@@ -711,12 +711,13 @@ img{max-width:100%}
 @media(max-width:640px){
  .service-choices{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
  .service-choices button{padding:12px 4px;min-height:48px;align-content:center;text-align:center;border-radius:12px}
+ .service-choices button:not([aria-selected=true]){background:var(--paper-2)}
  .service-choice-top{justify-content:center}
  .service-choice-top strong,.service-choice-hint{display:none}
  .service-choice-top>span{font-size:14px;line-height:1.5;white-space:nowrap}
 }
 @media(max-width:640px){
- .service-choices{position:sticky;top:calc(var(--header) + 8px);z-index:5;background:var(--paper);border-radius:12px}
+ .service-choices{position:sticky;top:calc(var(--header) + 8px);z-index:5;background:transparent;border-radius:12px}
  .is-scrolled .service-choices{top:76px}
  .service-panel-frame{scroll-margin-top:140px}
 }
@@ -736,4 +737,10 @@ img{max-width:100%}
  .professional .pro-navigation .pro-nav-last{display:block;margin:16px 0 0}
  .pro-navigation .pro-nav-last .pro-course-bell{display:none}
  .professional .pro-navigation a.nav-island-button{height:auto;min-height:56px;padding:8px 24px;font-size:clamp(26px,7vw,32px);font-weight:700;letter-spacing:-.05em}
+}
+
+.mobile-island-link{display:none}
+@media(max-width:640px){
+  .mobile-island-link{display:flex;justify-content:flex-start;margin-top:24px}
+  .professional .wordmark-row a.back-to-island{display:none}
 }

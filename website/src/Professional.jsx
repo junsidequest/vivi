@@ -523,6 +523,7 @@ export default function Professional() {
           <a href="#offers" onClick={() => setSelectedService('coach')}><span>個人</span>一對一 AI 陪跑</a>
           <a href="#partners"><span>團隊</span>企業內訓與工作坊</a>
         </nav>
+        <div className="mobile-island-link"><OriginButton className="back-to-island" href={sitePath('island/')}>回到小島</OriginButton></div>
         <div className="wordmark-row">
           <div className="wordmark" aria-hidden="true">vivi<span>.</span></div>
           <div className="wordmark-actions">
