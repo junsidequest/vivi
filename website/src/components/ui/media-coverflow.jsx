@@ -18,6 +18,8 @@ function ReportImages({ item, active }) {
 
 export default function MediaCoverflow({ items }) {
   const [position, setPosition] = useState(0)
+  const [interaction, setInteraction] = useState(0)
+  const restartAutoplay = () => setInteraction(value => value + 1)
   const frame = useRef(null)
   const drag = useRef(null)
   useEffect(() => {
@@ -38,6 +40,15 @@ export default function MediaCoverflow({ items }) {
     node.addEventListener('wheel', onWheel, { passive: false })
     return () => { node.removeEventListener('wheel', onWheel); clearTimeout(timer) }
   }, [])
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (document.hidden || drag.current || items.length < 2) return
+      const bounds = frame.current.getBoundingClientRect()
+      if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) return
+      setPosition(value => Math.round(value) + 1)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [position, interaction, items.length])
   const suppressClick = useRef(false)
   const count = items.length
   const selected = ((Math.round(position) % count) + count) % count
@@ -49,19 +60,32 @@ export default function MediaCoverflow({ items }) {
     const clickedIndex = drag.current.index
     const start = drag.current.start
     const step = drag.current.width * .75
+    const touchSwipe = drag.current.pointerType === 'touch' && drag.current.horizontal && Math.abs(moved) >= Math.min(32, drag.current.width * .1)
     drag.current = null
     suppressClick.current = Math.abs(moved) > 8
-    if (suppressClick.current) setPosition(Math.round(start - moved / step))
+    if (touchSwipe) setPosition(Math.round(start) - Math.sign(moved) * Math.max(1, Math.round(Math.abs(moved) / step)))
+    else if (suppressClick.current) setPosition(Math.round(start - moved / step))
     else if (clickedIndex !== undefined) choose(Number(clickedIndex))
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId)
   }
   const active = items[selected]
-  return <div className="media-coverflow" role="region" aria-roledescription="輪播" aria-label="媒體報導">
+  return <div className="media-coverflow" onPointerDownCapture={restartAutoplay} onPointerUpCapture={restartAutoplay} onPointerCancelCapture={restartAutoplay} onKeyDownCapture={restartAutoplay} onWheelCapture={restartAutoplay} role="region" aria-roledescription="輪播" aria-label="媒體報導">
     <div className="horizontal-controls"><span>左右瀏覽更多媒體報導</span></div>
     <div ref={frame} className="media-coverflow-frame" tabIndex={0} aria-label="使用左右方向鍵切換報導"
       onKeyDown={event => { if (['ArrowLeft','ArrowRight'].includes(event.key)) { event.preventDefault(); setPosition(value => Math.round(value) + (event.key === 'ArrowRight' ? 1 : -1)) } }}
-      onPointerDown={event => { if (event.button !== 0 || event.target.closest('a')) return; suppressClick.current = false; drag.current = { index:event.target.closest('[data-slide-index]')?.dataset.slideIndex, x:event.clientX, start:position, width:event.currentTarget.querySelector('.media-flow-card').offsetWidth } }}
-      onPointerMove={event => { if (!drag.current) return; const dx = event.clientX - drag.current.x; if (Math.abs(dx) > 8) { event.currentTarget.setPointerCapture(event.pointerId); setPosition(drag.current.start - dx / (drag.current.width * .75)) } }}
+      onPointerDown={event => { if (event.button !== 0 || event.target.closest('a')) return; suppressClick.current = false; drag.current = { index:event.target.closest('[data-slide-index]')?.dataset.slideIndex, x:event.clientX, y:event.clientY, pointerType:event.pointerType, horizontal:false, start:position, width:event.currentTarget.querySelector('.media-flow-card').offsetWidth } }}
+      onPointerMove={event => {
+        if (!drag.current) return
+        const dx = event.clientX - drag.current.x
+        const dy = event.clientY - drag.current.y
+        if (!drag.current.horizontal) {
+          if (Math.max(Math.abs(dx), Math.abs(dy)) <= 8) return
+          if (Math.abs(dy) > Math.abs(dx)) { drag.current = null; suppressClick.current = true; return }
+          drag.current.horizontal = true
+          event.currentTarget.setPointerCapture(event.pointerId)
+        }
+        setPosition(drag.current.start - dx / (drag.current.width * .75))
+      }}
       onPointerUp={finish} onPointerCancel={() => { drag.current = null; setPosition(value => Math.round(value)); suppressClick.current = true }}>
       <div className="media-coverflow-stage">
         {items.map((item,index) => {

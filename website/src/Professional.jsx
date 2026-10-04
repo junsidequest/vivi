@@ -276,12 +276,15 @@ export default function Professional() {
 
   useEffect(() => {
     const root = page.current
-    requestAnimationFrame(() => root.classList.add('is-loaded'))
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-in'); observer.unobserve(entry.target) }
-    }), { root, threshold: .12, rootMargin: '0px 0px -6% 0px' })
-    root.querySelectorAll('[data-reveal], mark.hl').forEach(node => observer.observe(node))
-    return () => observer.disconnect()
+    root.classList.add('is-loaded')
+    root.querySelectorAll('[data-reveal]').forEach(node => node.classList.add('is-in'))
+    const highlights = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-in'); highlights.unobserve(entry.target) }
+      })
+    }, { root, threshold: .2 })
+    root.querySelectorAll('mark.hl').forEach(node => highlights.observe(node))
+    return () => highlights.disconnect()
   }, [])
 
   useEffect(() => {
@@ -349,7 +352,7 @@ export default function Professional() {
           </h1>
           <p className="hero-intro">不用先變成科技高手<br/><mark className="hl">從你熟悉的工作出發</mark>，一起讓 AI 真正派上用場</p>
           <div className="hero-actions">
-            <OriginButton className="pro-cta" href="#work">從我的工作開始</OriginButton>
+            <OriginButton className="pro-cta" href="#work">AI 怎麼幫上忙</OriginButton>
             <a className="text-link" href="#offers">課程與合作方式</a>
           </div>
         </div>

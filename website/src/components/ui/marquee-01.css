@@ -395,8 +395,9 @@
 }
 
 @media(max-width:640px){
-  .testimonial-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px;overflow:visible}
-  .testimonial-tabs button{min-width:0;text-align:left;padding:12px 0}
+  .testimonial-tabs{display:flex;flex-wrap:nowrap;gap:20px;max-width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding-bottom:2px}
+  .testimonial-tabs::-webkit-scrollbar{display:none}
+  .testimonial-tabs button{flex:0 0 auto;min-width:0;white-space:nowrap;text-align:left;padding:12px 0}
   .horizontal-controls{flex-wrap:wrap;gap:12px}
   .horizontal-controls>div{margin-left:auto}
 }

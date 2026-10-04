@@ -669,7 +669,7 @@ img{max-width:100%}
 
 /* Keep scenario navigation within its card while reading on mobile. */
 @media(max-width:640px){
- .sketch-tabs{position:sticky;top:calc(var(--header) + 8px);z-index:5;background:#2C2C2B;box-shadow:0 -12px 0 8px var(--ink-2),0 8px 0 8px var(--ink-2)}
+ .sketch-tabs{position:sticky;top:calc(var(--header) + 8px);z-index:5;background:#2C2C2B;box-shadow:none}
  .is-scrolled .sketch-tabs{top:76px}
 }
 
@@ -707,3 +707,33 @@ img{max-width:100%}
 .testimonial-tail-preview{height:15.6em;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;margin:12px 0 24px;font-size:16px;-webkit-mask-image:linear-gradient(transparent,#000 28%);mask-image:linear-gradient(transparent,#000 28%)}
 .testimonial-card.is-clamped .testimonial-tail-preview blockquote{flex-shrink:0;max-height:none;overflow:visible;margin:0;-webkit-mask-image:none;mask-image:none}
 @media(max-width:640px){.testimonial-tail-preview{height:17.1em}}
+
+@media(max-width:640px){
+ .service-choices{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .service-choices button{padding:12px 4px;min-height:48px;align-content:center;text-align:center;border-radius:12px}
+ .service-choice-top{justify-content:center}
+ .service-choice-top strong,.service-choice-hint{display:none}
+ .service-choice-top>span{font-size:14px;line-height:1.5;white-space:nowrap}
+}
+@media(max-width:640px){
+ .service-choices{position:sticky;top:calc(var(--header) + 8px);z-index:5;background:var(--paper);border-radius:12px}
+ .is-scrolled .service-choices{top:76px}
+ .service-panel-frame{scroll-margin-top:140px}
+}
+
+/* 區塊與文字直接呈現，不等待捲動觸發進場。 */
+.professional [data-reveal],.professional .hero-intro,.professional .hero-actions,.professional .hero-visual,.professional .hero-stats{opacity:1;transform:none;transition:none}
+@property --highlight-opacity{syntax:"<percentage>";inherits:false;initial-value:0%}
+.professional mark.hl{--highlight-opacity:0%;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--highlight) var(--highlight-opacity),transparent) 62%,color-mix(in srgb,var(--highlight) var(--highlight-opacity),transparent) 92%,transparent 92%);background-size:100% 100%;transition:--highlight-opacity .8s ease}
+.professional mark.hl.is-in{--highlight-opacity:100%}
+@media(prefers-reduced-motion:reduce){.professional mark.hl{--highlight-opacity:100%;transition:none}}
+
+.nav-mobile-controls{display:none}
+@media(max-width:900px){
+ .nav-mobile-controls{display:flex;align-items:center;gap:8px;margin-left:auto;position:relative;z-index:2}
+ .nav-mobile-controls .nav-menu-toggle{margin-left:0}
+ .professional .pro-header .pro-navigation a{font-size:clamp(26px,7vw,32px);min-height:56px}
+ .professional .pro-navigation .pro-nav-last{display:block;margin:16px 0 0}
+ .pro-navigation .pro-nav-last .pro-course-bell{display:none}
+ .professional .pro-navigation a.nav-island-button{height:auto;min-height:56px;padding:8px 24px;font-size:clamp(26px,7vw,32px);font-weight:700;letter-spacing:-.05em}
+}
