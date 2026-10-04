@@ -43,18 +43,18 @@ const credentials = [
 
 const courses = {
   online: [
-    { lead: '天下學習', title: '《零基礎打造專屬AI 助理：用 Apps Script 提升職場效率》', href: 'https://www.cwlearning.com.tw/courses/84e77516-cf9e-44ab-82d0-1bfbe1c9307b' },
-    { lead: '天下學習', title: '《Notion 實戰入門：打造筆記系統到任務管理的數位整理術》', href: 'https://www.cwlearning.com.tw/courses/5503463d-0610-4bec-a22d-b00a10717e0e' },
-    { lead: '天下學習', title: '《打造AI加速器，解決90%經營難題｜頭家必學AI工具，今天學會明天翻倍》', href: 'https://www.cwlearning.com.tw/courses/f5d1a6c9-92d5-4adb-a7dd-74942dba8804' },
-    { lead: '2025 Generative 生成式 AI 年會講座回放', title: '《用 AI，解鎖我的跨域新篇章》', href: 'https://live.gaiconf.com/courses/gaiconf2025' },
-    { lead: 'Generative AI 社群', title: '上班族 AI 寫程式自動化', href: 'https://live.gaiconf.com/courses/14' },
-    { lead: '中小企業網路大學校', title: '《AI ✕ 工作流程優化 是放大問題，還是解決問題？》', href: 'https://www.smelearning.org.tw/class.php?course=18374' },
-    { lead: '五倍學院', title: '《用工具打造 AI 簡報工作流》', href: 'https://5xcampus.com/courses/ai-slide-flow?gad_source=1&gad_campaignid=23090853254&gbraid=0AAAAADCYj6pqQX8xvkV0Oc8INQt5fH0QI&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BZS8-AsJlEQ0LSISQKumr2-c5Zn-nbozCpMdZBHUyuLvuZdnct8vkRoCwtEQAvD_BwE' },
+    { category: 'efficiency', format: '線上課程', lead: '天下學習', title: '零基礎打造專屬 AI 助理：用 Apps Script 提升職場效率', href: 'https://www.cwlearning.com.tw/courses/84e77516-cf9e-44ab-82d0-1bfbe1c9307b' },
+    { category: 'knowledge', format: '線上課程', lead: '天下學習', title: 'Notion 實戰入門：打造筆記系統到任務管理的數位整理術', href: 'https://www.cwlearning.com.tw/courses/5503463d-0610-4bec-a22d-b00a10717e0e' },
+    { category: 'efficiency', format: '線上課程', lead: '天下學習', title: '打造 AI 加速器，解決 90% 經營難題｜頭家必學 AI 工具，今天學會明天翻倍', href: 'https://www.cwlearning.com.tw/courses/f5d1a6c9-92d5-4adb-a7dd-74942dba8804' },
+    { category: 'tools', format: '線上課程', lead: '2025 Generative 生成式 AI 年會講座回放', title: '用 AI，解鎖我的跨域新篇章', href: 'https://live.gaiconf.com/courses/gaiconf2025' },
+    { category: 'tools', format: '線上課程', lead: 'Generative AI 社群', title: '上班族 AI 寫程式自動化', href: 'https://live.gaiconf.com/courses/14' },
+    { category: 'efficiency', format: '線上課程', lead: '中小企業網路大學校', title: 'AI ✕ 工作流程優化 是放大問題，還是解決問題？', href: 'https://www.smelearning.org.tw/class.php?course=18374' },
+    { category: 'knowledge', format: '線上課程', lead: '五倍學院', title: '用工具打造 AI 簡報工作流', href: 'https://5xcampus.com/courses/ai-slide-flow?gad_source=1&gad_campaignid=23090853254&gbraid=0AAAAADCYj6pqQX8xvkV0Oc8INQt5fH0QI&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BZS8-AsJlEQ0LSISQKumr2-c5Zn-nbozCpMdZBHUyuLvuZdnct8vkRoCwtEQAvD_BwE' },
   ],
   offline: [
-    { lead: 'AI 自動化入門：打造高效省時工作模式', title: '超過八個梯次已完課，實體課程累計超過千位學員' },
-    { lead: '燒賣研究所', title: '《FDE AI 架構師實戰學程：打造第一個企業 AI 自動化流程（62H+）》', href: 'https://www.shumai.com.tw/ai_product' },
-    { lead: 'Claude 入門 － 打造 AI 工作流', title: '2026 首度招生即額滿，目前已開兩個梯次' },
+    { category: 'efficiency', format: '實體課程', lead: 'AI 自動化入門：打造高效省時工作模式', title: '超過八個梯次已完課，實體課程累計超過千位學員' },
+    { category: 'tools', format: '實體課程', lead: '燒賣研究所', title: 'FDE AI 架構師實戰學程：打造第一個企業 AI 自動化流程（62H+）', href: 'https://www.shumai.com.tw/ai_product' },
+    { category: 'tools', format: '實體課程', lead: 'Claude 入門 － 打造 AI 工作流', title: '2026 首度招生即額滿，目前已開兩個梯次' },
   ],
 }
 
@@ -113,9 +113,34 @@ function Counter({ value }) {
 }
 
 function CourseTabs() {
-  const [tab, setTab] = useState('online')
-  const tabs = [['online', '線上課程'], ['offline', '實體課程']]
+  const [tab, setTab] = useState('efficiency')
+  const tabs = [['efficiency', '工作效率'], ['knowledge', '知識管理 / 內容產出'], ['tools', '打造工具']]
+  const matchingCourses = [...courses.online, ...courses.offline].filter(course => course.category === tab)
   const key = (event, index) => {
+    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
+    event.preventDefault()
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length
+    setTab(tabs[next][0])
+    event.currentTarget.parentElement.children[next].focus()
+  }
+  return <>
+    <div className="course-tabs course-topic-tabs" role="tablist" aria-label="公開課程主題">
+      {tabs.map(([id, label], index) => <button key={id} id={`course-tab-${id}`} type="button" role="tab" aria-selected={tab === id} aria-controls="course-panel" tabIndex={tab === id ? 0 : -1} onClick={() => setTab(id)} onKeyDown={event => key(event, index)}>{label}</button>)}
+    </div>
+    <ul id="course-panel" className="course-list" role="tabpanel" aria-labelledby={`course-tab-${tab}`} key={tab}>
+      {matchingCourses.map(course => <li key={course.title}>
+        <span>{course.lead} · {course.format}</span>
+        {course.href ? <a href={course.href} target="_blank" rel="noopener"><span className="course-link-label">{course.title}</span></a> : <strong>{course.title}</strong>}
+      </li>)}
+    </ul>
+  </>
+}
+
+
+function TeamServiceTabs() {
+  const [tab, setTab] = useState('training')
+  const tabs = [['training', '企業內訓與導入陪跑'], ['consulting', 'AI 導入顧問']]
+  const onKey = (event, index) => {
     if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
     event.preventDefault()
     const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1 : 1 - index
@@ -123,18 +148,26 @@ function CourseTabs() {
     event.currentTarget.parentElement.children[next].focus()
   }
   return <>
-    <div className="course-tabs" role="tablist" aria-label="公開課程類型">
-      {tabs.map(([id, label], index) => <button key={id} id={`course-tab-${id}`} type="button" role="tab" aria-selected={tab === id} aria-controls="course-panel" tabIndex={tab === id ? 0 : -1} onClick={() => setTab(id)} onKeyDown={event => key(event, index)}>{label}</button>)}
+    <div className="course-tabs team-service-tabs" role="tablist" aria-label="企業合作類型">
+      {tabs.map(([id, label], index) => <button key={id} id={`team-tab-${id}`} type="button" role="tab" aria-selected={tab === id} aria-controls={`team-panel-${id}`} tabIndex={tab === id ? 0 : -1} onClick={() => setTab(id)} onKeyDown={event => onKey(event, index)}>{label}</button>)}
     </div>
-    <ul id="course-panel" className="course-list" role="tabpanel" aria-labelledby={`course-tab-${tab}`} key={tab}>
-      {courses[tab].map(course => <li key={course.title}>
-        <span>{course.lead}</span>
-        {course.href ? <a href={course.href} target="_blank" rel="noopener"><span className="course-link-label">{course.title}</span></a> : <strong>{course.title}</strong>}
-      </li>)}
-    </ul>
+    <div id="team-panel-training" role="tabpanel" aria-labelledby="team-tab-training" hidden={tab !== 'training'} tabIndex={0}>
+      <ul className="service-scope"><li><strong>評估工具與導入方向</strong><p>依 Google／Microsoft 生態系、預算與人員程度，選擇合適的 AI 平台組合</p></li><li><strong>用部門真實情境實作</strong><p>為行政、行銷、業務等職能建立專屬 Skill 與工作流</p></li><li><strong>建立可延伸的使用規範</strong><p>釐清資料敏感度、機敏資訊分級與 AI 產出查核方式</p></li></ul><OriginButton className="offer-cta" href="#partners">企業內訓洽詢</OriginButton>
+    </div>
+    <div id="team-panel-consulting" role="tabpanel" aria-labelledby="team-tab-consulting" hidden={tab !== 'consulting'} tabIndex={0}>
+      <p className="service-consulting-intro">適合正在評估導入企業版 AI 的企業</p>
+                <ul className="service-scope service-products">
+                  <li><strong>AI Operating System</strong></li>
+                  <li><strong>多渠道 AI 客服</strong></li>
+                  <li><strong>LINE 群組裡的 AI 同事</strong></li>
+                  <li><strong>會議記錄與公司大腦</strong></li>
+                  <li><strong>AI Code Review</strong></li>
+                </ul>
+                <OriginButton className="offer-cta" href="https://www.oceaninnov.com/">產品導入洽詢</OriginButton>
+                <p className="service-footnote">前往 Oceanic Innovation 查看更多細節</p>
+    </div>
   </>
 }
-
 
 const servicePaths = [
   { id: 'learn', title: '自己學', type: '公開課程', hint: '想先掌握方法，照自己的步調練習。' },
@@ -184,7 +217,7 @@ function ServiceGuide({ selected, setSelected }) {
             <div className="service-details"><h4>一對一 AI 陪跑</h4><ul className="service-scope"><li><strong>先看工作怎麼做</strong><p>從你的資料、步驟與卡關點開始，找到值得改善的環節</p></li><li><strong>一起做出能用的工具</strong><p>報表整理、會議紀錄、提案與報價，或自己的知識庫</p></li><li><strong>留下能持續用的方法</strong><p>陪你理解、調整與驗證，讓成果融入日常工作</p></li></ul><OriginButton className="offer-cta" href={FORM_URL}>填寫諮詢表單</OriginButton></div>
           </> : <>
             <div className="service-story"><span className="service-caption">從個人試用走向團隊應用</span><h3>讓 AI 成為<br/>團隊的工作方法</h3><p>適合正在啟動 AI 導入，或希望把零散試用轉成共同流程的企業<br/>依團隊程度與既有系統，規劃內訓、實作工作坊與導入陪跑</p><p className="service-proof">企業內訓與講座超過 50 場</p></div>
-            <div className="service-details"><h4>企業內訓與導入陪跑</h4><ul className="service-scope"><li><strong>評估工具與導入方向</strong><p>依 Google／Microsoft 生態系、預算與人員程度，選擇合適的 AI 平台組合</p></li><li><strong>用部門真實情境實作</strong><p>為行政、行銷、業務等職能建立專屬 Skill 與工作流</p></li><li><strong>建立可延伸的使用規範</strong><p>釐清資料敏感度、機敏資訊分級與 AI 產出查核方式</p></li></ul><OriginButton className="offer-cta" href="#partners">企業內訓洽詢</OriginButton></div>
+            <div className="service-details"><TeamServiceTabs/></div>
           </>}
         </div>)}
       </div>

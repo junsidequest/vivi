@@ -619,7 +619,7 @@ img{max-width:100%}
 .professional[data-palette="rose"] .step.is-lit .step-no-glyph{color:var(--accent)}
 
 
-.service-footnote{text-align:right;font-style:italic;color:#858585}
+.service-footnote{text-align:right;font-style:italic;font-synthesis:style;color:#858585}
 
 .sketch-result{color:var(--highlight)}
 
@@ -656,3 +656,12 @@ img{max-width:100%}
 .sketch-sources[data-count="4"] li:nth-child(2){top:16px;right:8%}
 .sketch-sources[data-count="4"] li:nth-child(3){top:52px;left:0;transform:rotate(-4deg)}
 .sketch-sources[data-count="4"] li:nth-child(4){top:72px;right:0;transform:rotate(5deg)}
+
+.professional .service-consulting-intro{margin:0 0 24px;font-size:16px;line-height:1.85;color:var(--muted)}
+.service-products li{padding:14px 0}
+
+.team-service-tabs button{padding:10px 12px;line-height:1.5}
+
+.course-topic-tabs button{padding:10px 8px;white-space:nowrap}
+.course-topic-tabs button:nth-child(2){flex:2}
+@media(max-width:480px){.course-topic-tabs{flex-wrap:wrap;border-radius:24px}.course-topic-tabs button:nth-child(2){white-space:normal}}
