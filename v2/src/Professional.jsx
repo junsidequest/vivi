@@ -140,7 +140,7 @@ function CourseTabs() {
 
 function TeamServiceTabs() {
   const [tab, setTab] = useState('training')
-  const tabs = [['training', '企業內訓與導入陪跑'], ['consulting', 'AI 導入顧問']]
+  const tabs = [['training', '企業內訓 / 客製化工作坊'], ['consulting', '企業級 AI Agent 導入']]
   const onKey = (event, index) => {
     if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
     event.preventDefault()
@@ -432,8 +432,8 @@ export default function Professional() {
       <section className="process band" id="process" aria-labelledby="process-title">
         <div className="section-head process-head">
           <p className="eyebrow"><span>06</span>THE PROCESS</p>
-          <h2 id="process-title">從「我不會」<br/>走到「我做到了」</h2>
-          <p className="lede">一步一步，<mark className="hl">做得到</mark><br/>每個階段都先確認方向，再往下走</p>
+          <h2 id="process-title">合作流程</h2>
+          <p className="lede">每個階段都先確認方向，再往下走</p>
         </div>
         <ol className="steps">
           {steps.map((step, index) => <li className="step" key={step.title}>
