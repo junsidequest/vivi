@@ -37,6 +37,7 @@ GitHub Actions 先建置 `island-app/` 中保留的小島與舊連結，再以�
 - `island-app/404.html` 的「回到首頁」改連 `https://vivichen.ai/`
 - 分享預覽圖 `public/og-image.jpg`（1200×630；換圖時用同檔名覆蓋即可）、`og:image`、`twitter:card=summary_large_image`
 - 結構化資料 JSON-LD（`Person` + `WebSite`，在 `index.html` 的 head）
+- `apple-touch-icon.png`（180×180，用 favicon 加白底，iPhone 加入主畫面時的圖示）
 - 小島頁 `island-app/island/index.html` 的分享預覽設定（og／twitter，共用 `og-image.jpg`）
 - 預先渲染：`npm run build` 會額外跑 SSR build 與 `scripts/prerender.mjs`，把主頁 HTML 寫進 `dist/index.html` 的 `#root`，不執行 JS 的爬蟲也讀得到內容；瀏覽器端用 `hydrateRoot` 接手（`src/main.jsx`）
 
@@ -59,3 +60,15 @@ GitHub Actions 先建置 `island-app/` 中保留的小島與舊連結，再以�
 - 新增頁面時，加進 `public/sitemap.xml`，並更新 `lastmod`
 - 各 tab（口碑推薦、課程主題）的所有 panel 都會輸出到 HTML，沒選到的用 `hidden` 隱藏；新增 tab 時請沿用這個做法，不要改回只渲染選中的那一個，否則爬蟲讀不到
 - 改元件時注意：render 階段（不在 `useEffect` 裡）不能用 `window`、`document`、`matchMedia`、`Math.random`、`Date`，否則 build 會失敗，或瀏覽器端 hydration 不一致；站內路徑一律用 `sitePath()`（輸出相對路徑）
+
+## 未來的 /blog/（尚未建立）
+
+之後會在 `https://vivichen.ai/blog/` 放文章。現在還沒有，所以**不要先放空的 /blog/ 頁面**：沒有內容的頁面對 SEO 是扣分。第一篇文章上線時，每篇都要做到：
+
+- 每篇有獨立網址（例如 `/blog/文章-slug/`），網址建議用英文或拼音
+- 內容要預先渲染或本來就是靜態 HTML，不能只靠 JS 產生（原因同主頁）
+- 每篇有自己的 `<title>`、meta description、`canonical`、og:title／og:description／og:image（可以沿用 `og-image.jpg`，有專屬封面更好）
+- 加 `BlogPosting` 結構化資料（JSON-LD），`author` 指向主頁的 `https://vivichen.ai/#person`
+- 每篇都加進 `public/sitemap.xml`；`/blog/` 列表頁也要加
+- 主頁導覽或頁尾加上「文章」連結，讓爬蟲找得到
+- 部署：GitHub Actions 目前合併主頁和小島兩個產物。blog 不論用什麼工具產生，都要輸出到最終發布目錄的 `blog/` 底下，並修改根目錄的 `.github/workflows/pages.yml`
