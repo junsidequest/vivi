@@ -35,6 +35,9 @@ GitHub Actions 先建置 `island-app/` 中保留的小島與舊連結，再以�
 - `canonical`、`og:url` 指向 `https://vivichen.ai/`（`index.html`）；小島頁 canonical 指向 `/island/`
 - `public/robots.txt`、`public/sitemap.xml`（列出 `/` 與 `/island/`）
 - `island-app/404.html` 的「回到首頁」改連 `https://vivichen.ai/`
+- 分享預覽圖 `public/og-image.jpg`（1200×630；換圖時用同檔名覆蓋即可）、`og:image`、`twitter:card=summary_large_image`
+- 結構化資料 JSON-LD（`Person` + `WebSite`，在 `index.html` 的 head）
+- 預先渲染：`npm run build` 會額外跑 SSR build 與 `scripts/prerender.mjs`，把主頁 HTML 寫進 `dist/index.html` 的 `#root`，不執行 JS 的爬蟲也讀得到內容；瀏覽器端用 `hydrateRoot` 接手（`src/main.jsx`）
 
 **上線時要做的事（依順序）**
 
@@ -53,4 +56,5 @@ GitHub Actions 先建置 `island-app/` 中保留的小島與舊連結，再以�
 **之後要更新的**
 
 - 新增頁面時，加進 `public/sitemap.xml`，並更新 `lastmod`
-- 還沒做：`og:image` 分享預覽圖、結構化資料（JSON-LD）、預先渲染（目前內容由 JS 產生，不執行 JS 的爬蟲讀不到內容）
+- 預先渲染只包含各 tab 的預設內容：口碑推薦只有「媒體報導」、課程只有「工作效率」會出現在 HTML 裡；其他 tab 的文字要點了才會渲染
+- 改元件時注意：render 階段（不在 `useEffect` 裡）不能用 `window`、`document`、`matchMedia`、`Math.random`、`Date`，否則 build 會失敗，或瀏覽器端 hydration 不一致；站內路徑一律用 `sitePath()`（輸出相對路徑）

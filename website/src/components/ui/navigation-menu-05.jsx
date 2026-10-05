@@ -33,7 +33,8 @@ export default function NavigationMenu({ onCourseNotice }) {
       document.removeEventListener('pointerdown', outside)
     }
   }, [open])
-  const [active, setActive] = useState(() => window.location.hash)
+  // 初始值與預先渲染的 HTML 一致（無選取）；下方 effect 首幀即依捲動位置／hash 更新。
+  const [active, setActive] = useState('')
   useEffect(() => {
     const root = nav.current.closest('.professional')
     const header = root.querySelector('.pro-header')
