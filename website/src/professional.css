@@ -687,9 +687,9 @@ img{max-width:100%}
 @media(max-width:900px){.hero-stats li:last-child{grid-column:1/-1;padding-left:0;border-left:0}}
 
 /* 小島入口 */
-.professional .pro-navigation a.nav-island-button{height:36px;min-height:36px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper)!important;font-size:14px;font-weight:500;letter-spacing:0;white-space:nowrap}
-.professional .pro-navigation a.nav-island-button::after{display:none}
-.professional .pro-navigation a.nav-island-button .origin-button-fill{background:var(--paper);color:var(--ink)}
+.professional .pro-header a.nav-island-button{height:36px;min-height:36px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper)!important;font-size:14px;font-weight:500;letter-spacing:0;white-space:nowrap}
+.professional .pro-header a.nav-island-button::after{display:none}
+.professional .pro-header a.nav-island-button .origin-button-fill{background:var(--paper);color:var(--ink)}
 
 .hero-stats .stat-percent{align-self:flex-end;font-size:.6em;line-height:1;letter-spacing:0;margin-left:.08em;transform:translateY(-3px)}
 
@@ -736,11 +736,18 @@ img{max-width:100%}
  .professional .pro-header .pro-navigation a{font-size:clamp(26px,7vw,32px);min-height:56px}
  .professional .pro-navigation .pro-nav-last{display:block;margin:16px 0 0}
  .pro-navigation .pro-nav-last .pro-course-bell{display:none}
- .professional .pro-navigation a.nav-island-button{height:auto;min-height:56px;padding:8px 24px;font-size:clamp(26px,7vw,32px);font-weight:700;letter-spacing:-.05em}
+ .professional .pro-navigation .pro-nav-last{display:none}
+ .professional .nav-mobile-controls a.nav-island-button{height:46px;min-height:46px;padding:0 14px;font-size:14px;font-weight:500;letter-spacing:0}
+ .nav-mobile-controls>*{flex-shrink:0}
 }
 
 .mobile-island-link{display:none}
 @media(max-width:640px){
   .mobile-island-link{display:flex;justify-content:flex-start;margin-top:24px}
   .professional .wordmark-row a.back-to-island{display:none}
+}
+
+@media(max-width:900px){
+  .professional .pro-header .pro-navigation>a{width:100%;padding-block:10px}
+  .professional .pro-header .pro-navigation>a+a{border-top:1px solid var(--line)}
 }

@@ -10,6 +10,7 @@ const items = [
   { title: '口碑推薦', href: '#voices' },
   { title: '合作流程', href: '#process' },
   { title: '企業內訓', href: '#partners' },
+  { title: '聯繫 Vivi', href: '#connect' },
 ]
 
 export default function NavigationMenu({ onCourseNotice }) {
@@ -75,7 +76,7 @@ export default function NavigationMenu({ onCourseNotice }) {
   }, [])
 
   return <>
-    <div className="nav-mobile-controls">{open && <CourseNotification onClick={() => { setOpen(false); onCourseNotice?.() }}/> }
+    <div className="nav-mobile-controls">{open && <OriginButton className="nav-island-button" href={sitePath('island/')}>探索小島</OriginButton>}{open && <CourseNotification onClick={() => { setOpen(false); onCourseNotice?.() }}/> }
     <button ref={toggle} type="button" className="nav-menu-toggle" aria-label={open ? '關閉導覽選單' : '開啟導覽選單'} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(value => !value)}><span/><span/></button></div>
     <nav ref={nav} id="main-navigation" className={`pro-navigation${open ? ' is-open' : ''}`} aria-label="主要導覽" onClick={event => { if (event.target.closest('a')) setOpen(false) }}>
     {items.map(item => <a key={item.href} href={item.href} aria-current={active === item.href ? 'location' : undefined}>{item.title}</a>)}

@@ -99,7 +99,7 @@ export default function MediaCoverflow({ items }) {
               <div className="media-flow-brand"><span>{item.kind}</span><strong>{item.source}</strong><small>{item.mark}</small></div>
               {item.image && <ReportImages item={item} active={isActive}/>}
             </div>
-            <div className="media-flow-copy"><div className="media-flow-meta"><span>{item.date || item.kind}</span>{item.image && <span className="media-flow-source">{item.source}</span>}</div><strong>{item.title}</strong>{isActive && <a className="media-flow-external" href={item.href} target="_blank" rel="noopener noreferrer">{item.action} ↗</a>}</div>
+            <div className="media-flow-copy"><div className="media-flow-meta"><span>{item.date || item.kind}</span>{item.image && <span className="media-flow-source">{item.source}</span>}</div><strong>{item.title}</strong>{isActive && <a className="media-flow-external" href={item.href} target="_blank" rel="noopener noreferrer">{item.action}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>}</div>
           </article>
         })}
       </div>
