@@ -85,7 +85,7 @@ GitHub Pages 設定應選 GitHub Actions 作為發布來源；push main 會觸�
 
 其他靜態主機請發布合併產物，支援目錄 index.html；主頁根路徑及 /island/ 應加尾端斜線。不要把所有請求都強制改寫成主頁 index.html，否則小島入口可能失效。自訂主機的 404 規則需指向提供的 404.html。
 
-換網域或 repository 名稱前，尤其檢查 `island-app/404.html`：回首頁連結目前固定為 https://junsidequest.github.io/vivi/。主要站內互連使用相對根路徑，但仍應逐一實測新部署前綴。也請檢查網站標題、Email、LINE、表單與課程連結是否符合新站需求。
+換網域或 repository 名稱前，尤其檢查 `island-app/404.html`：回首頁連結目前固定為正式網域 https://vivichen.ai/；`index.html` 的 canonical、og:url 與 `public/robots.txt`、`public/sitemap.xml` 也寫死此網域，換網域時要一起改。主要站內互連使用相對根路徑，但仍應逐一實測新部署前綴。也請檢查網站標題、Email、LINE、表單與課程連結是否符合新站需求。
 
 ## 上線檢查
 
