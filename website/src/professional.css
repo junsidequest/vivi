@@ -201,6 +201,7 @@ img{max-width:100%}
 .course-tabs button[aria-selected=true]{background:var(--blue-deep);color:#fff}
 @media(hover:hover){.course-tabs button:hover:not([aria-selected=true]){background:var(--accent-light);color:var(--ink)}}
 .course-list{display:grid;gap:0;animation:swap .6s var(--ease)}
+.course-list[hidden]{display:none}
 .course-list li{display:grid;gap:4px;padding:14px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.7}
 .course-list li>span{font-size:14px;color:var(--muted)}
 .course-list a{text-decoration:none}

@@ -117,7 +117,7 @@ function Counter({ value }) {
 function CourseTabs() {
   const [tab, setTab] = useState('efficiency')
   const tabs = [['efficiency', '工作效率'], ['knowledge', '知識管理 / 內容產出'], ['tools', '打造工具']]
-  const matchingCourses = [...courses.online, ...courses.offline].filter(course => course.category === tab)
+  const allCourses = [...courses.online, ...courses.offline]
   const key = (event, index) => {
     if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
     event.preventDefault()
@@ -127,14 +127,15 @@ function CourseTabs() {
   }
   return <>
     <div className="course-tabs course-topic-tabs" role="tablist" aria-label="公開課程主題">
-      {tabs.map(([id, label], index) => <button key={id} id={`course-tab-${id}`} type="button" role="tab" aria-selected={tab === id} aria-controls="course-panel" tabIndex={tab === id ? 0 : -1} onClick={() => setTab(id)} onKeyDown={event => key(event, index)}>{label}</button>)}
+      {tabs.map(([id, label], index) => <button key={id} id={`course-tab-${id}`} type="button" role="tab" aria-selected={tab === id} aria-controls={`course-panel-${id}`} tabIndex={tab === id ? 0 : -1} onClick={() => setTab(id)} onKeyDown={event => key(event, index)}>{label}</button>)}
     </div>
-    <ul id="course-panel" className="course-list" role="tabpanel" aria-labelledby={`course-tab-${tab}`} key={tab}>
-      {matchingCourses.map(course => <li key={course.title}>
+    {/* 三個主題都輸出到 HTML，沒選到的用 hidden 隱藏；key 讓切換時重新掛載，保留進場動畫 */}
+    {tabs.map(([id]) => <ul key={`${id}-${tab === id}`} id={`course-panel-${id}`} className="course-list" role="tabpanel" aria-labelledby={`course-tab-${id}`} hidden={tab !== id}>
+      {allCourses.filter(course => course.category === id).map(course => <li key={course.title}>
         <span>{course.lead} · {course.format}</span>
         {course.href ? <a href={course.href} target="_blank" rel="noopener"><span className="course-link-label">{course.title}</span></a> : <strong>{course.title}</strong>}
       </li>)}
-    </ul>
+    </ul>)}
   </>
 }
 

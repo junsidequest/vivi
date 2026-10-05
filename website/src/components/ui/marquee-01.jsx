@@ -159,17 +159,21 @@ export default function TestimonialMarquee() {
         onKeyDown={event => moveFocus(event, index)}
       >{category.label}</button>)}
     </div>
-    <div
-      id={`testimonial-panel-${active}`}
-      className={`testimonial-panel testimonial-panel--${active}`}
+    {/* 四個 panel 都輸出到 HTML（預先渲染時爬蟲讀得到全部推薦），沒選到的用 hidden 隱藏；
+        key 跟著是否選取變化，切換時重新掛載，保留原本「每次切換都是新的 panel」的行為。 */}
+    {categories.map(({ id }) => <div
+      key={`${id}-${active === id}`}
+      id={`testimonial-panel-${id}`}
+      className={`testimonial-panel testimonial-panel--${id}`}
       role="tabpanel"
-      aria-labelledby={`testimonial-tab-${active}`}
+      aria-labelledby={`testimonial-tab-${id}`}
       tabIndex={0}
+      hidden={active !== id}
     >
-      {active === 'students' && <StudentMarquee/>}
-      {active === 'media' && <MediaCoverage/>}
-      {active !== 'students' && active !== 'media' && reviews[active].map(review => <ReviewCard tailPreview={active === 'business'} review={review} key={`${review.name}-${review.role}`}/>)}
-    </div>
+      {id === 'students' && <StudentMarquee/>}
+      {id === 'media' && <MediaCoverage/>}
+      {id !== 'students' && id !== 'media' && reviews[id].map(review => <ReviewCard tailPreview={id === 'business'} review={review} key={`${review.name}-${review.role}`}/>)}
+    </div>)}
     <MediaPartners/>
     <span className="testimonial-current" aria-live="polite">目前顯示：{current.label}</span>
   </section>
