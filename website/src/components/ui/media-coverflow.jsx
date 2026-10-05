@@ -105,6 +105,10 @@ export default function MediaCoverflow({ items }) {
       </div>
     </div>
     <div className="media-flow-caption" aria-live="polite"><div className="media-flow-caption-top"><span className="media-flow-count">{String(selected+1).padStart(2,'0')} / {String(count).padStart(2,'0')}</span><span>{active.source}</span></div><span className="media-flow-caption-kind">{active.kind}</span></div>
+    <div className="media-flow-pagination">
+      <button type="button" className="media-flow-arrow" aria-label="上一張媒體報導" onClick={() => { restartAutoplay(); setPosition(value => Math.round(value) - 1) }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg></button>
     <div className="media-flow-dots" aria-label="選擇報導">{items.map((item,index)=><button type="button" key={item.href} aria-label={`查看第 ${index+1} 則：${item.source}`} aria-current={index===selected ? 'true':undefined} onClick={()=>choose(index)}/>)}</div>
+      <button type="button" className="media-flow-arrow" aria-label="下一張媒體報導" onClick={() => { restartAutoplay(); setPosition(value => Math.round(value) + 1) }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
 }
