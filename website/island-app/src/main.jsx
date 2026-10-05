@@ -15,7 +15,7 @@ import './mobile-type.css'
 
 const {view,redirect,canonical}=currentRoute
 if(redirect) window.location.replace(canonical)
-document.title='Vivi Chen'
+document.title='Vivi 陳盈臻'
 function Site(){
   const [Page,setPage]=useState(null),[contentReady,setContentReady]=useState(false),[finished,setFinished]=useState(false),[failed,setFailed]=useState(false),[progress,setProgress]=useState(0)
   const loaded=useCallback(()=>setContentReady(true),[])

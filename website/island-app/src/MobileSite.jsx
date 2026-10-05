@@ -43,7 +43,7 @@ export default function MobileSite(){
     if(entry.beforeReveal)await entry.beforeReveal()
     if(entry.id!==latest.current)return
     if(!entry.pop)history.pushState(null,'',entry.url)
-    document.title='Vivi Chen'
+    document.title='Vivi 陳盈臻'
     shownRef.current=entry;setShown(entry);setPending(null);setEnteringIsland(false)
     requestAnimationFrame(()=>{
       const hash=new URL(entry.url,location.origin).hash.slice(1)
